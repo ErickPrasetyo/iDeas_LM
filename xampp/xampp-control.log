@@ -1,0 +1,676 @@
+16:28:05  [main] 	Initializing Control Panel
+16:28:05  [main] 	Windows Version:  Enterprise  64-bit
+16:28:05  [main] 	XAMPP Version: 7.1.33
+16:28:05  [main] 	Control Panel Version: 3.2.4  [ Compiled: Jun 5th 2019 ]
+16:28:05  [main] 	You are not running with administrator rights! This will work for
+16:28:05  [main] 	most application stuff but whenever you do something with services
+16:28:05  [main] 	there will be a security dialogue or things will break! So think 
+16:28:05  [main] 	about running this application with administrator rights!
+16:28:05  [main] 	XAMPP Installation Directory: "c:\xampp\"
+16:28:05  [main] 	Checking for prerequisites
+16:28:07  [main] 	All prerequisites found
+16:28:07  [main] 	Initializing Modules
+16:28:07  [main] 	Starting Check-Timer
+16:28:07  [main] 	Control Panel Ready
+16:29:02  [Apache] 	Attempting to start Apache app...
+16:29:03  [Apache] 	Status change detected: running
+16:29:13  [filezilla] 	Attempting to start FileZilla app...
+16:29:14  [filezilla] 	Status change detected: running
+16:38:20  [main] 	Executing "c:\xampp\"
+17:17:09  [main] 	Deinitializing Modules
+17:17:09  [main] 	Deinitializing Control Panel
+
+19:17:50  [main] 	Initializing Control Panel
+19:17:50  [main] 	Windows Version:  Enterprise  64-bit
+19:17:50  [main] 	XAMPP Version: 7.1.33
+19:17:50  [main] 	Control Panel Version: 3.2.4  [ Compiled: Jun 5th 2019 ]
+19:17:50  [main] 	Running with Administrator rights - good!
+19:17:50  [main] 	XAMPP Installation Directory: "c:\xampp\"
+19:17:50  [main] 	Checking for prerequisites
+19:17:53  [main] 	All prerequisites found
+19:17:53  [main] 	Initializing Modules
+19:17:53  [mysql] 	XAMPP MySQL is already running on port 3306
+19:17:53  [main] 	Enabling autostart for module "Apache"
+19:17:53  [main] 	Enabling autostart for module "FileZilla"
+19:17:53  [main] 	Starting Check-Timer
+19:17:53  [main] 	Control Panel Ready
+19:17:54  [Apache] 	Autostart active: starting...
+19:17:54  [Apache] 	Attempting to start Apache app...
+19:17:54  [filezilla] 	Autostart active: starting...
+19:17:54  [filezilla] 	Attempting to start FileZilla app...
+19:17:54  [Apache] 	Status change detected: running
+19:17:54  [filezilla] 	Status change detected: running
+19:17:59  [mysql] 	Attempting to stop MySQL app...
+19:18:00  [mysql] 	Status change detected: stopped
+19:21:30  [main] 	Deinitializing Modules
+19:21:30  [main] 	Deinitializing Control Panel
+
+19:23:33  [main] 	Initializing Control Panel
+19:23:33  [main] 	Windows Version:  Enterprise  64-bit
+19:23:33  [main] 	XAMPP Version: 7.1.33
+19:23:33  [main] 	Control Panel Version: 3.2.4  [ Compiled: Jun 5th 2019 ]
+19:23:33  [main] 	You are not running with administrator rights! This will work for
+19:23:33  [main] 	most application stuff but whenever you do something with services
+19:23:33  [main] 	there will be a security dialogue or things will break! So think 
+19:23:33  [main] 	about running this application with administrator rights!
+19:23:33  [main] 	XAMPP Installation Directory: "c:\xampp\"
+19:23:33  [main] 	Checking for prerequisites
+19:23:34  [main] 	All prerequisites found
+19:23:34  [main] 	Initializing Modules
+19:23:34  [main] 	Enabling autostart for module "Apache"
+19:23:34  [main] 	Enabling autostart for module "FileZilla"
+19:23:34  [main] 	Starting Check-Timer
+19:23:34  [main] 	Control Panel Ready
+19:23:35  [Apache] 	Autostart active: starting...
+19:23:35  [Apache] 	Attempting to start Apache app...
+19:23:35  [filezilla] 	Autostart active: starting...
+19:23:35  [filezilla] 	Attempting to start FileZilla app...
+19:23:36  [Apache] 	Status change detected: running
+19:23:36  [filezilla] 	Status change detected: running
+19:26:11  [main] 	Executing "services.msc"
+19:28:31  [main] 	Deinitializing Modules
+19:28:31  [main] 	Deinitializing Control Panel
+
+13:56:07  [main] 	Initializing Control Panel
+13:56:07  [main] 	Windows Version:  Enterprise  64-bit
+13:56:07  [main] 	XAMPP Version: 7.1.33
+13:56:07  [main] 	Control Panel Version: 3.2.4  [ Compiled: Jun 5th 2019 ]
+13:56:07  [main] 	Running with Administrator rights - good!
+13:56:07  [main] 	XAMPP Installation Directory: "c:\xampp\"
+13:56:07  [main] 	Checking for prerequisites
+13:56:07  [main] 	All prerequisites found
+13:56:07  [main] 	Initializing Modules
+13:56:07  [mysql] 	XAMPP MySQL is already running on port 3306
+13:56:07  [main] 	Enabling autostart for module "Apache"
+13:56:07  [main] 	Enabling autostart for module "FileZilla"
+13:56:07  [main] 	Starting Check-Timer
+13:56:07  [main] 	Control Panel Ready
+13:56:07  [Apache] 	Autostart active: starting...
+13:56:07  [Apache] 	Attempting to start Apache app...
+13:56:07  [filezilla] 	Autostart active: starting...
+13:56:07  [filezilla] 	Attempting to start FileZilla app...
+13:56:08  [Apache] 	Status change detected: running
+13:56:08  [filezilla] 	Status change detected: running
+14:03:46  [main] 	Deinitializing Modules
+14:03:46  [main] 	Deinitializing Control Panel
+
+14:14:17  [main] 	Initializing Control Panel
+14:14:17  [main] 	Windows Version:  Enterprise  64-bit
+14:14:17  [main] 	XAMPP Version: 7.1.33
+14:14:17  [main] 	Control Panel Version: 3.2.4  [ Compiled: Jun 5th 2019 ]
+14:14:17  [main] 	You are not running with administrator rights! This will work for
+14:14:17  [main] 	most application stuff but whenever you do something with services
+14:14:17  [main] 	there will be a security dialogue or things will break! So think 
+14:14:17  [main] 	about running this application with administrator rights!
+14:14:17  [main] 	XAMPP Installation Directory: "c:\xampp\"
+14:14:18  [main] 	Checking for prerequisites
+14:14:18  [main] 	All prerequisites found
+14:14:18  [main] 	Initializing Modules
+14:14:18  [main] 	Enabling autostart for module "Apache"
+14:14:18  [main] 	Enabling autostart for module "FileZilla"
+14:14:18  [main] 	Starting Check-Timer
+14:14:18  [main] 	Control Panel Ready
+14:14:19  [Apache] 	Autostart active: starting...
+14:14:19  [Apache] 	Attempting to start Apache app...
+14:14:19  [filezilla] 	Autostart active: starting...
+14:14:19  [filezilla] 	Attempting to start FileZilla app...
+14:14:19  [Apache] 	Status change detected: running
+14:14:19  [filezilla] 	Status change detected: running
+14:14:31  [main] 	Executing "services.msc"
+14:14:39  [main] 	Executing "services.msc"
+14:21:18  [main] 	Executing "c:\xampp\"
+14:57:14  [main] 	Deinitializing Modules
+14:57:14  [main] 	Deinitializing Control Panel
+
+15:41:44  [main] 	Initializing Control Panel
+15:41:44  [main] 	Windows Version:  Enterprise  64-bit
+15:41:44  [main] 	XAMPP Version: 7.1.33
+15:41:44  [main] 	Control Panel Version: 3.2.4  [ Compiled: Jun 5th 2019 ]
+15:41:44  [main] 	You are not running with administrator rights! This will work for
+15:41:44  [main] 	most application stuff but whenever you do something with services
+15:41:44  [main] 	there will be a security dialogue or things will break! So think 
+15:41:44  [main] 	about running this application with administrator rights!
+15:41:44  [main] 	XAMPP Installation Directory: "c:\xampp\"
+15:41:44  [main] 	Checking for prerequisites
+15:41:44  [main] 	All prerequisites found
+15:41:44  [main] 	Initializing Modules
+15:41:44  [main] 	Enabling autostart for module "Apache"
+15:41:44  [main] 	Enabling autostart for module "FileZilla"
+15:41:44  [main] 	Starting Check-Timer
+15:41:44  [main] 	Control Panel Ready
+15:41:45  [Apache] 	Autostart active: starting...
+15:41:45  [Apache] 	Attempting to start Apache app...
+15:41:45  [filezilla] 	Autostart active: starting...
+15:41:45  [filezilla] 	Attempting to start FileZilla app...
+15:41:45  [Apache] 	Status change detected: running
+15:41:45  [filezilla] 	Status change detected: running
+16:06:21  [main] 	Deinitializing Modules
+16:06:21  [main] 	Deinitializing Control Panel
+
+16:06:46  [main] 	Initializing Control Panel
+16:06:46  [main] 	Windows Version:  Enterprise  64-bit
+16:06:46  [main] 	XAMPP Version: 7.1.33
+16:06:46  [main] 	Control Panel Version: 3.2.4  [ Compiled: Jun 5th 2019 ]
+16:06:46  [main] 	You are not running with administrator rights! This will work for
+16:06:46  [main] 	most application stuff but whenever you do something with services
+16:06:46  [main] 	there will be a security dialogue or things will break! So think 
+16:06:46  [main] 	about running this application with administrator rights!
+16:06:46  [main] 	XAMPP Installation Directory: "c:\xampp\"
+16:06:46  [main] 	Checking for prerequisites
+16:06:46  [main] 	All prerequisites found
+16:06:46  [main] 	Initializing Modules
+16:06:46  [Apache] 	XAMPP Apache is already running on port 80
+16:06:46  [Apache] 	XAMPP Apache is already running on port 443
+16:06:46  [filezilla] 	XAMPP FileZilla is already running on port 21
+16:06:46  [filezilla] 	XAMPP FileZilla is already running on port 14147
+16:06:46  [main] 	Enabling autostart for module "Apache"
+16:06:46  [main] 	Enabling autostart for module "FileZilla"
+16:06:46  [main] 	Starting Check-Timer
+16:06:46  [main] 	Control Panel Ready
+16:06:46  [Apache] 	Autostart aborted: Apache is already running
+16:06:46  [filezilla] 	Autostart aborted: FileZilla is already running
+16:07:54  [main] 	Deinitializing Modules
+16:07:54  [main] 	Deinitializing Control Panel
+
+16:11:33  [main] 	Initializing Control Panel
+16:11:33  [main] 	Windows Version:  Enterprise  64-bit
+16:11:33  [main] 	XAMPP Version: 7.1.33
+16:11:33  [main] 	Control Panel Version: 3.2.4  [ Compiled: Jun 5th 2019 ]
+16:11:33  [main] 	You are not running with administrator rights! This will work for
+16:11:33  [main] 	most application stuff but whenever you do something with services
+16:11:33  [main] 	there will be a security dialogue or things will break! So think 
+16:11:33  [main] 	about running this application with administrator rights!
+16:11:33  [main] 	XAMPP Installation Directory: "c:\xampp\"
+16:11:33  [main] 	Checking for prerequisites
+16:11:33  [main] 	All prerequisites found
+16:11:33  [main] 	Initializing Modules
+16:11:33  [main] 	Enabling autostart for module "Apache"
+16:11:33  [main] 	Enabling autostart for module "FileZilla"
+16:11:33  [main] 	Starting Check-Timer
+16:11:33  [main] 	Control Panel Ready
+16:11:34  [Apache] 	Autostart active: starting...
+16:11:34  [Apache] 	Attempting to start Apache app...
+16:11:34  [filezilla] 	Autostart active: starting...
+16:11:34  [filezilla] 	Attempting to start FileZilla app...
+16:11:35  [Apache] 	Status change detected: running
+16:11:35  [filezilla] 	Status change detected: running
+16:15:30  [main] 	Deinitializing Modules
+16:15:30  [main] 	Deinitializing Control Panel
+
+16:36:35  [main] 	Initializing Control Panel
+16:36:35  [main] 	Windows Version:  Enterprise  64-bit
+16:36:35  [main] 	XAMPP Version: 7.1.33
+16:36:35  [main] 	Control Panel Version: 3.2.4  [ Compiled: Jun 5th 2019 ]
+16:36:35  [main] 	You are not running with administrator rights! This will work for
+16:36:35  [main] 	most application stuff but whenever you do something with services
+16:36:35  [main] 	there will be a security dialogue or things will break! So think 
+16:36:35  [main] 	about running this application with administrator rights!
+16:36:35  [main] 	XAMPP Installation Directory: "c:\xampp\"
+16:36:35  [main] 	Checking for prerequisites
+16:36:35  [main] 	All prerequisites found
+16:36:35  [main] 	Initializing Modules
+16:36:35  [mysql] 	XAMPP MySQL is already running on port 3306
+16:36:35  [main] 	Enabling autostart for module "Apache"
+16:36:35  [main] 	Enabling autostart for module "FileZilla"
+16:36:35  [main] 	Starting Check-Timer
+16:36:35  [main] 	Control Panel Ready
+16:36:36  [Apache] 	Autostart active: starting...
+16:36:36  [Apache] 	Attempting to start Apache app...
+16:36:36  [filezilla] 	Autostart active: starting...
+16:36:36  [filezilla] 	Attempting to start FileZilla app...
+16:36:36  [Apache] 	Status change detected: running
+16:36:36  [filezilla] 	Status change detected: running
+16:36:56  [mysql] 	Attempting to stop MySQL app...
+16:36:56  [mysql] 	Status change detected: stopped
+16:46:00  [main] 	Deinitializing Modules
+16:46:00  [main] 	Deinitializing Control Panel
+
+16:50:57  [main] 	Initializing Control Panel
+16:50:57  [main] 	Windows Version:  Enterprise  64-bit
+16:50:57  [main] 	XAMPP Version: 7.1.33
+16:50:57  [main] 	Control Panel Version: 3.2.4  [ Compiled: Jun 5th 2019 ]
+16:50:57  [main] 	You are not running with administrator rights! This will work for
+16:50:57  [main] 	most application stuff but whenever you do something with services
+16:50:57  [main] 	there will be a security dialogue or things will break! So think 
+16:50:57  [main] 	about running this application with administrator rights!
+16:50:57  [main] 	XAMPP Installation Directory: "c:\xampp\"
+16:50:57  [main] 	Checking for prerequisites
+16:50:58  [main] 	All prerequisites found
+16:50:58  [main] 	Initializing Modules
+16:50:58  [main] 	Enabling autostart for module "Apache"
+16:50:58  [main] 	Enabling autostart for module "FileZilla"
+16:50:58  [main] 	Starting Check-Timer
+16:50:58  [main] 	Control Panel Ready
+16:50:59  [Apache] 	Autostart active: starting...
+16:50:59  [Apache] 	Attempting to start Apache app...
+16:50:59  [filezilla] 	Autostart active: starting...
+16:50:59  [filezilla] 	Attempting to start FileZilla app...
+16:51:00  [Apache] 	Status change detected: running
+16:51:00  [filezilla] 	Status change detected: running
+21:26:46  [main] 	Deinitializing Modules
+21:26:46  [main] 	Deinitializing Control Panel
+
+16:18:54  [main] 	Initializing Control Panel
+16:18:54  [main] 	Windows Version:  Enterprise  64-bit
+16:18:54  [main] 	XAMPP Version: 7.1.33
+16:18:54  [main] 	Control Panel Version: 3.2.4  [ Compiled: Jun 5th 2019 ]
+16:18:54  [main] 	You are not running with administrator rights! This will work for
+16:18:54  [main] 	most application stuff but whenever you do something with services
+16:18:54  [main] 	there will be a security dialogue or things will break! So think 
+16:18:54  [main] 	about running this application with administrator rights!
+16:18:54  [main] 	XAMPP Installation Directory: "c:\xampp\"
+16:18:54  [main] 	Checking for prerequisites
+16:19:17  [main] 	All prerequisites found
+16:19:17  [main] 	Initializing Modules
+16:19:17  [main] 	Enabling autostart for module "Apache"
+16:19:17  [main] 	Enabling autostart for module "FileZilla"
+16:19:17  [main] 	Starting Check-Timer
+16:19:17  [main] 	Control Panel Ready
+16:19:18  [Apache] 	Autostart active: starting...
+16:19:18  [Apache] 	Attempting to start Apache app...
+16:19:18  [filezilla] 	Autostart active: starting...
+16:19:18  [filezilla] 	Attempting to start FileZilla app...
+16:19:18  [Apache] 	Status change detected: running
+16:19:18  [filezilla] 	Status change detected: running
+04:02:01  [main] 	Deinitializing Modules
+04:02:01  [main] 	Deinitializing Control Panel
+
+18:24:59  [main] 	Initializing Control Panel
+18:24:59  [main] 	Windows Version:  Enterprise  64-bit
+18:24:59  [main] 	XAMPP Version: 7.1.33
+18:24:59  [main] 	Control Panel Version: 3.2.4  [ Compiled: Jun 5th 2019 ]
+18:24:59  [main] 	You are not running with administrator rights! This will work for
+18:24:59  [main] 	most application stuff but whenever you do something with services
+18:24:59  [main] 	there will be a security dialogue or things will break! So think 
+18:24:59  [main] 	about running this application with administrator rights!
+18:24:59  [main] 	XAMPP Installation Directory: "c:\xampp\"
+18:24:59  [main] 	Checking for prerequisites
+18:25:02  [main] 	All prerequisites found
+18:25:02  [main] 	Initializing Modules
+18:25:02  [main] 	Enabling autostart for module "Apache"
+18:25:02  [main] 	Enabling autostart for module "FileZilla"
+18:25:02  [main] 	Starting Check-Timer
+18:25:02  [main] 	Control Panel Ready
+18:25:02  [Apache] 	Autostart active: starting...
+18:25:02  [Apache] 	Attempting to start Apache app...
+18:25:02  [filezilla] 	Autostart active: starting...
+18:25:02  [filezilla] 	Attempting to start FileZilla app...
+18:25:03  [Apache] 	Status change detected: running
+18:25:03  [filezilla] 	Status change detected: running
+14:08:04  [main] 	Executing "services.msc"
+17:53:03  [main] 	Deinitializing Modules
+17:53:03  [main] 	Deinitializing Control Panel
+
+08:52:41  [main] 	Initializing Control Panel
+08:52:41  [main] 	Windows Version:  Enterprise  64-bit
+08:52:41  [main] 	XAMPP Version: 7.1.33
+08:52:41  [main] 	Control Panel Version: 3.2.4  [ Compiled: Jun 5th 2019 ]
+08:52:41  [main] 	You are not running with administrator rights! This will work for
+08:52:41  [main] 	most application stuff but whenever you do something with services
+08:52:41  [main] 	there will be a security dialogue or things will break! So think 
+08:52:41  [main] 	about running this application with administrator rights!
+08:52:41  [main] 	XAMPP Installation Directory: "c:\xampp\"
+08:52:41  [main] 	Checking for prerequisites
+08:52:51  [main] 	All prerequisites found
+08:52:51  [main] 	Initializing Modules
+08:52:51  [main] 	Enabling autostart for module "Apache"
+08:52:51  [main] 	Enabling autostart for module "FileZilla"
+08:52:51  [main] 	Starting Check-Timer
+08:52:51  [main] 	Control Panel Ready
+08:52:52  [Apache] 	Autostart active: starting...
+08:52:52  [Apache] 	Attempting to start Apache app...
+08:52:52  [filezilla] 	Autostart active: starting...
+08:52:52  [filezilla] 	Attempting to start FileZilla app...
+08:52:52  [Apache] 	Status change detected: running
+08:52:52  [filezilla] 	Status change detected: running
+00:52:04  [main] 	Deinitializing Modules
+00:52:04  [main] 	Deinitializing Control Panel
+
+14:12:36  [main] 	Initializing Control Panel
+14:12:36  [main] 	Windows Version:  Enterprise  64-bit
+14:12:36  [main] 	XAMPP Version: 7.1.33
+14:12:36  [main] 	Control Panel Version: 3.2.4  [ Compiled: Jun 5th 2019 ]
+14:12:36  [main] 	Running with Administrator rights - good!
+14:12:36  [main] 	XAMPP Installation Directory: "c:\xampp\"
+14:12:36  [main] 	Checking for prerequisites
+14:12:36  [main] 	All prerequisites found
+14:12:36  [main] 	Initializing Modules
+14:12:36  [main] 	Enabling autostart for module "Apache"
+14:12:36  [main] 	Enabling autostart for module "FileZilla"
+14:12:36  [main] 	Starting Check-Timer
+14:12:36  [main] 	Control Panel Ready
+14:12:36  [Apache] 	Autostart active: starting...
+14:12:36  [Apache] 	Attempting to start Apache app...
+14:12:36  [filezilla] 	Autostart active: starting...
+14:12:36  [filezilla] 	Attempting to start FileZilla app...
+14:12:37  [Apache] 	Status change detected: running
+14:12:37  [filezilla] 	Status change detected: running
+14:12:39  [Apache] 	Status change detected: stopped
+14:12:39  [Apache] 	Error: Apache shutdown unexpectedly.
+14:12:39  [Apache] 	This may be due to a blocked port, missing dependencies, 
+14:12:39  [Apache] 	improper privileges, a crash, or a shutdown by another method.
+14:12:39  [Apache] 	Press the Logs button to view error logs and check
+14:12:39  [Apache] 	the Windows Event Viewer for more clues
+14:12:39  [Apache] 	If you need more help, copy and post this
+14:12:39  [Apache] 	entire log window on the forums
+14:15:14  [Apache] 	Attempting to start Apache app...
+14:15:14  [Apache] 	Status change detected: running
+14:15:56  [Apache] 	Attempting to stop Apache (PID: 7240)
+14:15:56  [Apache] 	Attempting to stop Apache (PID: 9676)
+14:15:56  [Apache] 	Status change detected: stopped
+14:15:58  [filezilla] 	Attempting to stop FileZilla app...
+14:15:58  [filezilla] 	Status change detected: stopped
+14:16:02  [Apache] 	Attempting to start Apache app...
+14:16:02  [Apache] 	Status change detected: running
+14:16:07  [filezilla] 	Attempting to start FileZilla app...
+14:16:07  [filezilla] 	Status change detected: running
+14:16:36  [Apache] 	Attempting to stop Apache (PID: 1544)
+14:16:36  [Apache] 	Attempting to stop Apache (PID: 5752)
+14:16:37  [Apache] 	Status change detected: stopped
+14:16:38  [filezilla] 	Attempting to stop FileZilla app...
+14:16:39  [filezilla] 	Status change detected: stopped
+14:16:41  [main] 	Deinitializing Modules
+14:16:41  [main] 	Deinitializing Control Panel
+
+14:16:49  [main] 	Initializing Control Panel
+14:16:49  [main] 	Windows Version:  Enterprise  64-bit
+14:16:49  [main] 	XAMPP Version: 7.1.33
+14:16:49  [main] 	Control Panel Version: 3.2.4  [ Compiled: Jun 5th 2019 ]
+14:16:49  [main] 	You are not running with administrator rights! This will work for
+14:16:49  [main] 	most application stuff but whenever you do something with services
+14:16:49  [main] 	there will be a security dialogue or things will break! So think 
+14:16:49  [main] 	about running this application with administrator rights!
+14:16:49  [main] 	XAMPP Installation Directory: "c:\xampp\"
+14:16:49  [main] 	Checking for prerequisites
+14:16:49  [main] 	All prerequisites found
+14:16:49  [main] 	Initializing Modules
+14:16:49  [main] 	Enabling autostart for module "Apache"
+14:16:49  [main] 	Enabling autostart for module "FileZilla"
+14:16:49  [main] 	Starting Check-Timer
+14:16:49  [main] 	Control Panel Ready
+14:16:49  [Apache] 	Autostart active: starting...
+14:16:49  [Apache] 	Attempting to start Apache app...
+14:16:49  [filezilla] 	Autostart active: starting...
+14:16:49  [filezilla] 	Attempting to start FileZilla app...
+14:16:50  [Apache] 	Status change detected: running
+14:16:50  [filezilla] 	Status change detected: running
+14:18:03  [filezilla] 	Attempting to stop FileZilla app...
+14:18:03  [filezilla] 	Status change detected: stopped
+14:20:05  [Apache] 	Attempting to stop Apache (PID: 8496)
+14:20:05  [Apache] 	Attempting to stop Apache (PID: 4252)
+14:20:05  [Apache] 	Status change detected: stopped
+14:20:06  [main] 	Deinitializing Modules
+14:20:06  [main] 	Deinitializing Control Panel
+
+14:21:09  [main] 	Initializing Control Panel
+14:21:09  [main] 	Windows Version:  Enterprise  64-bit
+14:21:09  [main] 	XAMPP Version: 7.1.33
+14:21:09  [main] 	Control Panel Version: 3.2.4  [ Compiled: Jun 5th 2019 ]
+14:21:09  [main] 	You are not running with administrator rights! This will work for
+14:21:09  [main] 	most application stuff but whenever you do something with services
+14:21:09  [main] 	there will be a security dialogue or things will break! So think 
+14:21:09  [main] 	about running this application with administrator rights!
+14:21:09  [main] 	XAMPP Installation Directory: "c:\xampp\"
+14:21:09  [main] 	Checking for prerequisites
+14:21:09  [main] 	All prerequisites found
+14:21:09  [main] 	Initializing Modules
+14:21:09  [main] 	Enabling autostart for module "Apache"
+14:21:09  [main] 	Enabling autostart for module "FileZilla"
+14:21:09  [main] 	Starting Check-Timer
+14:21:09  [main] 	Control Panel Ready
+14:21:09  [Apache] 	Autostart active: starting...
+14:21:09  [Apache] 	Attempting to start Apache app...
+14:21:09  [filezilla] 	Autostart active: starting...
+14:21:09  [filezilla] 	Attempting to start FileZilla app...
+14:21:10  [Apache] 	Status change detected: running
+14:21:10  [filezilla] 	Status change detected: running
+14:23:09  [main] 	Deinitializing Modules
+14:23:09  [main] 	Deinitializing Control Panel
+
+14:28:49  [main] 	Initializing Control Panel
+14:28:49  [main] 	Windows Version:  Enterprise  64-bit
+14:28:49  [main] 	XAMPP Version: 7.1.33
+14:28:49  [main] 	Control Panel Version: 3.2.4  [ Compiled: Jun 5th 2019 ]
+14:28:49  [main] 	You are not running with administrator rights! This will work for
+14:28:49  [main] 	most application stuff but whenever you do something with services
+14:28:49  [main] 	there will be a security dialogue or things will break! So think 
+14:28:49  [main] 	about running this application with administrator rights!
+14:28:49  [main] 	XAMPP Installation Directory: "c:\xampp\"
+14:28:49  [main] 	Checking for prerequisites
+14:28:54  [main] 	All prerequisites found
+14:28:54  [main] 	Initializing Modules
+14:28:54  [main] 	Enabling autostart for module "Apache"
+14:28:54  [main] 	Enabling autostart for module "FileZilla"
+14:28:54  [main] 	Starting Check-Timer
+14:28:54  [main] 	Control Panel Ready
+14:28:54  [Apache] 	Autostart active: starting...
+14:28:54  [Apache] 	Attempting to start Apache app...
+14:28:54  [filezilla] 	Autostart active: starting...
+14:28:54  [filezilla] 	Attempting to start FileZilla app...
+14:28:55  [Apache] 	Status change detected: running
+14:28:55  [filezilla] 	Status change detected: running
+14:55:51  [main] 	Executing "services.msc"
+18:11:59  [main] 	Deinitializing Modules
+18:11:59  [main] 	Deinitializing Control Panel
+
+11:23:32  [main] 	Initializing Control Panel
+11:23:32  [main] 	Windows Version:  Enterprise  64-bit
+11:23:32  [main] 	XAMPP Version: 7.1.33
+11:23:32  [main] 	Control Panel Version: 3.2.4  [ Compiled: Jun 5th 2019 ]
+11:23:32  [main] 	You are not running with administrator rights! This will work for
+11:23:32  [main] 	most application stuff but whenever you do something with services
+11:23:32  [main] 	there will be a security dialogue or things will break! So think 
+11:23:32  [main] 	about running this application with administrator rights!
+11:23:32  [main] 	XAMPP Installation Directory: "c:\xampp\"
+11:23:32  [main] 	Checking for prerequisites
+11:23:32  [main] 	All prerequisites found
+11:23:32  [main] 	Initializing Modules
+11:23:32  [main] 	Enabling autostart for module "Apache"
+11:23:32  [main] 	Enabling autostart for module "FileZilla"
+11:23:32  [main] 	Starting Check-Timer
+11:23:32  [main] 	Control Panel Ready
+11:23:33  [Apache] 	Autostart active: starting...
+11:23:33  [Apache] 	Attempting to start Apache app...
+11:23:33  [filezilla] 	Autostart active: starting...
+11:23:33  [filezilla] 	Attempting to start FileZilla app...
+11:23:33  [Apache] 	Status change detected: running
+11:23:33  [filezilla] 	Status change detected: running
+18:13:03  [main] 	Deinitializing Modules
+18:13:03  [main] 	Deinitializing Control Panel
+
+08:58:34  [main] 	Initializing Control Panel
+08:58:34  [main] 	Windows Version:  Enterprise  64-bit
+08:58:34  [main] 	XAMPP Version: 7.1.33
+08:58:34  [main] 	Control Panel Version: 3.2.4  [ Compiled: Jun 5th 2019 ]
+08:58:34  [main] 	You are not running with administrator rights! This will work for
+08:58:34  [main] 	most application stuff but whenever you do something with services
+08:58:34  [main] 	there will be a security dialogue or things will break! So think 
+08:58:34  [main] 	about running this application with administrator rights!
+08:58:34  [main] 	XAMPP Installation Directory: "c:\xampp\"
+08:58:34  [main] 	Checking for prerequisites
+08:58:43  [main] 	All prerequisites found
+08:58:43  [main] 	Initializing Modules
+08:58:43  [main] 	Enabling autostart for module "Apache"
+08:58:43  [main] 	Enabling autostart for module "FileZilla"
+08:58:43  [main] 	Starting Check-Timer
+08:58:43  [main] 	Control Panel Ready
+08:58:44  [Apache] 	Autostart active: starting...
+08:58:44  [Apache] 	Attempting to start Apache app...
+08:58:44  [filezilla] 	Autostart active: starting...
+08:58:44  [filezilla] 	Attempting to start FileZilla app...
+08:58:45  [Apache] 	Status change detected: running
+08:58:45  [filezilla] 	Status change detected: running
+09:16:28  [main] 	Deinitializing Modules
+09:16:28  [main] 	Deinitializing Control Panel
+
+10:55:22  [main] 	Initializing Control Panel
+10:55:22  [main] 	Windows Version:  Enterprise  64-bit
+10:55:22  [main] 	XAMPP Version: 7.1.33
+10:55:22  [main] 	Control Panel Version: 3.2.4  [ Compiled: Jun 5th 2019 ]
+10:55:22  [main] 	You are not running with administrator rights! This will work for
+10:55:22  [main] 	most application stuff but whenever you do something with services
+10:55:22  [main] 	there will be a security dialogue or things will break! So think 
+10:55:22  [main] 	about running this application with administrator rights!
+10:55:22  [main] 	XAMPP Installation Directory: "c:\xampp\"
+10:55:22  [main] 	Checking for prerequisites
+10:55:26  [main] 	All prerequisites found
+10:55:26  [main] 	Initializing Modules
+10:55:26  [main] 	Enabling autostart for module "Apache"
+10:55:26  [main] 	Enabling autostart for module "FileZilla"
+10:55:26  [main] 	Starting Check-Timer
+10:55:26  [main] 	Control Panel Ready
+10:55:26  [Apache] 	Autostart active: starting...
+10:55:26  [Apache] 	Attempting to start Apache app...
+10:55:27  [filezilla] 	Autostart active: starting...
+10:55:27  [filezilla] 	Attempting to start FileZilla app...
+10:55:27  [Apache] 	Status change detected: running
+10:55:27  [filezilla] 	Status change detected: running
+14:11:33  [main] 	Deinitializing Modules
+14:11:33  [main] 	Deinitializing Control Panel
+
+09:21:22  [main] 	Initializing Control Panel
+09:21:22  [main] 	Windows Version:  Enterprise  64-bit
+09:21:22  [main] 	XAMPP Version: 7.1.33
+09:21:22  [main] 	Control Panel Version: 3.2.4  [ Compiled: Jun 5th 2019 ]
+09:21:22  [main] 	You are not running with administrator rights! This will work for
+09:21:22  [main] 	most application stuff but whenever you do something with services
+09:21:22  [main] 	there will be a security dialogue or things will break! So think 
+09:21:22  [main] 	about running this application with administrator rights!
+09:21:22  [main] 	XAMPP Installation Directory: "c:\xampp\"
+09:21:22  [main] 	Checking for prerequisites
+09:21:24  [main] 	All prerequisites found
+09:21:24  [main] 	Initializing Modules
+09:21:24  [main] 	Enabling autostart for module "Apache"
+09:21:24  [main] 	Enabling autostart for module "FileZilla"
+09:21:24  [main] 	Starting Check-Timer
+09:21:24  [main] 	Control Panel Ready
+09:21:24  [Apache] 	Autostart active: starting...
+09:21:24  [Apache] 	Attempting to start Apache app...
+09:21:24  [filezilla] 	Autostart active: starting...
+09:21:24  [filezilla] 	Attempting to start FileZilla app...
+09:21:25  [Apache] 	Status change detected: running
+09:21:25  [filezilla] 	Status change detected: running
+09:25:40  [main] 	Deinitializing Modules
+09:25:40  [main] 	Deinitializing Control Panel
+
+09:32:46  [main] 	Initializing Control Panel
+09:32:46  [main] 	Windows Version:  Enterprise  64-bit
+09:32:46  [main] 	XAMPP Version: 7.1.33
+09:32:46  [main] 	Control Panel Version: 3.2.4  [ Compiled: Jun 5th 2019 ]
+09:32:46  [main] 	You are not running with administrator rights! This will work for
+09:32:46  [main] 	most application stuff but whenever you do something with services
+09:32:46  [main] 	there will be a security dialogue or things will break! So think 
+09:32:46  [main] 	about running this application with administrator rights!
+09:32:46  [main] 	XAMPP Installation Directory: "c:\xampp\"
+09:32:46  [main] 	Checking for prerequisites
+09:32:46  [main] 	All prerequisites found
+09:32:46  [main] 	Initializing Modules
+09:32:46  [main] 	Enabling autostart for module "Apache"
+09:32:46  [main] 	Enabling autostart for module "FileZilla"
+09:32:46  [main] 	Starting Check-Timer
+09:32:46  [main] 	Control Panel Ready
+09:32:46  [Apache] 	Autostart active: starting...
+09:32:46  [Apache] 	Attempting to start Apache app...
+09:32:47  [filezilla] 	Autostart active: starting...
+09:32:47  [filezilla] 	Attempting to start FileZilla app...
+09:32:47  [Apache] 	Status change detected: running
+09:32:47  [filezilla] 	Status change detected: running
+08:10:54  [main] 	Deinitializing Modules
+08:10:54  [main] 	Deinitializing Control Panel
+
+12:21:17  [main] 	Initializing Control Panel
+12:21:17  [main] 	Windows Version:  Enterprise  64-bit
+12:21:17  [main] 	XAMPP Version: 7.1.33
+12:21:17  [main] 	Control Panel Version: 3.2.4  [ Compiled: Jun 5th 2019 ]
+12:21:17  [main] 	You are not running with administrator rights! This will work for
+12:21:17  [main] 	most application stuff but whenever you do something with services
+12:21:17  [main] 	there will be a security dialogue or things will break! So think 
+12:21:17  [main] 	about running this application with administrator rights!
+12:21:17  [main] 	XAMPP Installation Directory: "c:\xampp\"
+12:21:17  [main] 	Checking for prerequisites
+12:21:19  [main] 	All prerequisites found
+12:21:19  [main] 	Initializing Modules
+12:21:19  [main] 	Enabling autostart for module "Apache"
+12:21:19  [main] 	Enabling autostart for module "FileZilla"
+12:21:19  [main] 	Starting Check-Timer
+12:21:19  [main] 	Control Panel Ready
+12:21:20  [Apache] 	Autostart active: starting...
+12:21:20  [Apache] 	Attempting to start Apache app...
+12:21:20  [filezilla] 	Autostart active: starting...
+12:21:20  [filezilla] 	Attempting to start FileZilla app...
+12:21:21  [Apache] 	Status change detected: running
+12:21:21  [filezilla] 	Status change detected: running
+19:05:04  [main] 	Deinitializing Modules
+19:05:04  [main] 	Deinitializing Control Panel
+
+14:12:34  [main] 	Initializing Control Panel
+14:12:34  [main] 	Windows Version:  Enterprise  64-bit
+14:12:34  [main] 	XAMPP Version: 7.1.33
+14:12:34  [main] 	Control Panel Version: 3.2.4  [ Compiled: Jun 5th 2019 ]
+14:12:34  [main] 	You are not running with administrator rights! This will work for
+14:12:34  [main] 	most application stuff but whenever you do something with services
+14:12:34  [main] 	there will be a security dialogue or things will break! So think 
+14:12:34  [main] 	about running this application with administrator rights!
+14:12:34  [main] 	XAMPP Installation Directory: "c:\xampp\"
+14:12:34  [main] 	Checking for prerequisites
+14:12:35  [main] 	All prerequisites found
+14:12:35  [main] 	Initializing Modules
+14:12:35  [Apache] 	XAMPP Apache is already running on port 80
+14:12:35  [Apache] 	XAMPP Apache is already running on port 443
+14:12:35  [filezilla] 	XAMPP FileZilla is already running on port 21
+14:12:35  [filezilla] 	XAMPP FileZilla is already running on port 14147
+14:12:35  [main] 	Enabling autostart for module "Apache"
+14:12:35  [main] 	Enabling autostart for module "FileZilla"
+14:12:35  [main] 	Starting Check-Timer
+14:12:35  [main] 	Control Panel Ready
+14:12:36  [Apache] 	Autostart aborted: Apache is already running
+14:12:36  [filezilla] 	Autostart aborted: FileZilla is already running
+14:12:40  [Apache] 	Attempting to stop Apache (PID: 4076)
+14:12:40  [Apache] 	Attempting to stop Apache (PID: 6332)
+14:12:40  [Apache] 	Status change detected: stopped
+14:12:42  [filezilla] 	Attempting to stop FileZilla app...
+14:12:42  [filezilla] 	Status change detected: stopped
+14:12:45  [main] 	Deinitializing Modules
+14:12:45  [main] 	Deinitializing Control Panel
+
+15:26:26  [main] 	Initializing Control Panel
+15:26:26  [main] 	Windows Version:  Enterprise  64-bit
+15:26:26  [main] 	XAMPP Version: 7.1.33
+15:26:26  [main] 	Control Panel Version: 3.2.4  [ Compiled: Jun 5th 2019 ]
+15:26:26  [main] 	You are not running with administrator rights! This will work for
+15:26:26  [main] 	most application stuff but whenever you do something with services
+15:26:26  [main] 	there will be a security dialogue or things will break! So think 
+15:26:26  [main] 	about running this application with administrator rights!
+15:26:26  [main] 	XAMPP Installation Directory: "c:\xampp\"
+15:26:26  [main] 	Checking for prerequisites
+15:26:30  [main] 	All prerequisites found
+15:26:30  [main] 	Initializing Modules
+15:26:30  [main] 	Enabling autostart for module "Apache"
+15:26:30  [main] 	Enabling autostart for module "FileZilla"
+15:26:30  [main] 	Starting Check-Timer
+15:26:30  [main] 	Control Panel Ready
+15:26:31  [Apache] 	Autostart active: starting...
+15:26:31  [Apache] 	Attempting to start Apache app...
+15:26:31  [filezilla] 	Autostart active: starting...
+15:26:31  [filezilla] 	Attempting to start FileZilla app...
+15:26:32  [Apache] 	Status change detected: running
+15:26:32  [filezilla] 	Status change detected: running
+14:12:41  [Apache] 	Status change detected: stopped
+14:12:41  [Apache] 	Error: Apache shutdown unexpectedly.
+14:12:41  [Apache] 	This may be due to a blocked port, missing dependencies, 
+14:12:41  [Apache] 	improper privileges, a crash, or a shutdown by another method.
+14:12:41  [Apache] 	Press the Logs button to view error logs and check
+14:12:41  [Apache] 	the Windows Event Viewer for more clues
+14:12:41  [Apache] 	If you need more help, copy and post this
+14:12:41  [Apache] 	entire log window on the forums
+14:12:43  [filezilla] 	Status change detected: stopped
+14:12:43  [filezilla] 	Error: FileZilla shutdown unexpectedly.
+14:12:43  [filezilla] 	This may be due to a blocked port, missing dependencies, 
+14:12:43  [filezilla] 	improper privileges, a crash, or a shutdown by another method.
+14:12:43  [filezilla] 	Press the Logs button to view error logs and check
+14:12:43  [filezilla] 	the Windows Event Viewer for more clues
+14:12:43  [filezilla] 	If you need more help, copy and post this
+14:12:43  [filezilla] 	entire log window on the forums
+14:12:50  [main] 	Deinitializing Modules
+14:12:50  [main] 	Deinitializing Control Panel
+

@@ -1,0 +1,524 @@
+unit U_StokAwal;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, ExtCtrls,
+  DBCtrls, RzDBNav, SCStdControls, StdCtrls, SCControl, cxGraphics,
+  cxCustomData, cxStyles, cxTL, cxControls, cxInplaceContainer, cxTLData,
+  cxDBTL, cxMaskEdit, cxCheckBox, cxDBEdit, cxContainer, cxEdit, cxTextEdit,
+  cxClasses, RzCommon, RzPanel, AdvPanel, AdvAppStyler,
+  cxGridBandedTableView, cxGridTableView, AdvToolBar, AdvToolBarStylers,
+  AdvReflectionImage, ZSequence, cxCalendar, wwDialog, wwidlg,
+  cxButtonEdit, cxDropDownEdit, cxFilter, cxData, cxDataStorage, cxDBData,
+  cxGridCustomTableView, cxGridDBTableView, cxGridLevel, cxGridCustomView,
+  cxGrid, cxLookAndFeels, cxLookAndFeelPainters, dxSkinsCore,
+  dxSkinsDefaultPainters, dxSkinscxPCPainter, Menus, wwdbdatetimepicker,
+  cxButtons, cxPC, cxLabel, kbmMemTable, ADODB;
+
+type
+  TStringArray = array of string;
+  TStokAwalFrm = class(TForm)
+    dsMaster: TDataSource;
+    pnlMiddle: TSCPanel;
+    btnClose: TSCButton;
+    ATBOS: TAdvToolBarOfficeStyler;
+    SR: TcxStyleRepository;
+    cxStyle1: TcxStyle;
+    cxStyle2: TcxStyle;
+    cxStyle3: TcxStyle;
+    cxStyle4: TcxStyle;
+    cxGridTableViewStyleSheet1: TcxGridTableViewStyleSheet;
+    cxGridBandedTableViewStyleSheet1: TcxGridBandedTableViewStyleSheet;
+    AFS: TAdvFormStyler;
+    APS: TAdvPanelStyler;
+    pnlHeader: TAdvPanel;
+    lblHeader1: TLabel;
+    sq_stock: TZSequence;
+    LookItem: TwwLookupDialog;
+    qItem: TZReadOnlyQuery;
+    Master: TZQuery;
+    SCPanel1: TSCPanel;
+    RzGroupBox1: TRzGroupBox;
+    edtDatePicker: TwwDBDateTimePicker;
+    Warehouse: TZReadOnlyQuery;
+    LookWarehouse: TwwLookupDialog;
+    Warehouseid_warehouse: TStringField;
+    Warehousedescription: TStringField;
+    pgTransaction: TcxPageControl;
+    tsItem: TcxTabSheet;
+    tsImport: TcxTabSheet;
+    grdItem: TcxGrid;
+    cxGridDBTableView1: TcxGridDBTableView;
+    cxGridDBColumn1: TcxGridDBColumn;
+    cxGridDBColumn2: TcxGridDBColumn;
+    cxGridDBColumn3: TcxGridDBColumn;
+    cxGridDBColumn4: TcxGridDBColumn;
+    cxGridDBColumn5: TcxGridDBColumn;
+    cxGridDBColumn6: TcxGridDBColumn;
+    grddbtvItem: TcxGridDBTableView;
+    grddbtvItemno_nota: TcxGridDBColumn;
+    grddbtvItemdt_nota: TcxGridDBColumn;
+    grddbtvItemno_bukti: TcxGridDBColumn;
+    grddbtvItemnama_rekanan: TcxGridDBColumn;
+    grddbtvItemColumn1: TcxGridDBColumn;
+    grdItemLevel1: TcxGridLevel;
+    dsGetItem: TDataSource;
+    qGetItem: TZQuery;
+    qGetItemkd_item: TStringField;
+    qGetItemnama_item: TStringField;
+    qGetItemrasio: TFloatField;
+    qGetItemhrg_beli_karton: TFloatField;
+    qGetItemhrg_jual_karton: TFloatField;
+    qGetItemqty: TMemoField;
+    qGetItemdt_import: TDateTimeField;
+    qGetItemid_warehouse: TMemoField;
+    btnExport: TSCButton;
+    OpenDialog1: TSaveDialog;
+    btnImport: TSCButton;
+    edtWarehouse: TcxButtonEdit;
+    btnOK: TcxButton;
+    RzGroupBox2: TRzGroupBox;
+    btnGetExcel: TSCLabel;
+    cbSheetExcel: TcxComboBox;
+    btnImportExcel: TSCLabel;
+    OpenDialog2: TOpenDialog;
+    grdImport: TcxGrid;
+    cxGridDBTableView2: TcxGridDBTableView;
+    cxGridDBColumn7: TcxGridDBColumn;
+    cxGridDBColumn8: TcxGridDBColumn;
+    cxGridDBColumn9: TcxGridDBColumn;
+    cxGridDBColumn10: TcxGridDBColumn;
+    cxGridDBColumn11: TcxGridDBColumn;
+    cxGridDBColumn12: TcxGridDBColumn;
+    grddbtvImport: TcxGridDBTableView;
+    cxGridDBColumn13: TcxGridDBColumn;
+    cxGridDBColumn14: TcxGridDBColumn;
+    cxGridDBColumn15: TcxGridDBColumn;
+    cxGridDBColumn16: TcxGridDBColumn;
+    cxGridDBColumn17: TcxGridDBColumn;
+    grdlvlImport: TcxGridLevel;
+    btnSave: TSCButton;
+    Masterno_tstock: TLargeintField;
+    Masterdoc_no: TStringField;
+    Masterid_warehouse: TStringField;
+    Masterid_item: TStringField;
+    Masterqty_in: TFloatField;
+    Masterqty_ot: TFloatField;
+    Masterremarks: TStringField;
+    Mastersatuan: TStringField;
+    Masterdt_doc: TDateTimeField;
+    Masterisinput: TStringField;
+    Masterunit_price: TFloatField;
+    Masterid_trans: TStringField;
+    Masterid_cat_warehouse: TStringField;
+    memMaster: TkbmMemTable;
+    dsMemMaster: TDataSource;
+    memMasterno_tstock: TLargeintField;
+    memMasterdoc_no: TStringField;
+    memMasterid_warehouse: TStringField;
+    memMasterid_item: TStringField;
+    memMasterqty_in: TFloatField;
+    memMasterqty_ot: TFloatField;
+    memMasterremarks: TStringField;
+    memMastersatuan: TStringField;
+    memMasterdt_doc: TDateTimeField;
+    memMasterisinput: TStringField;
+    memMasterunit_price: TFloatField;
+    memMasterid_trans: TStringField;
+    memMasterid_cat_warehouse: TStringField;
+    ADOConnection1: TADOConnection;
+    ADODataSet1: TADODataSet;
+    ADODataSet1F1: TStringField;
+    ADODataSet1F2: TStringField;
+    ADODataSet1F3: TStringField;
+    ADODataSet1F4: TStringField;
+    ADODataSet1F5: TStringField;
+    kmtData: TkbmMemTable;
+    kmtDataF1: TStringField;
+    kmtDataF2: TStringField;
+    kmtDataF3: TStringField;
+    kmtDataF4: TStringField;
+    kmtDataF5: TStringField;
+    dskmtData: TDataSource;
+    memMasternama_item: TStringField;
+    qItemkd_item: TStringField;
+    qItemnama_item: TStringField;
+    qItemsatuan_jual: TStringField;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormShow(Sender: TObject);
+    procedure btnCloseClick(Sender: TObject);
+    procedure qGetItemBeforeOpen(DataSet: TDataSet);
+    procedure edtWarehousePropertiesButtonClick(Sender: TObject;
+      AButtonIndex: Integer);
+    procedure btnOKClick(Sender: TObject);
+    procedure btnExportClick(Sender: TObject);
+    procedure btnImportClick(Sender: TObject);
+    procedure tsItemShow(Sender: TObject);
+    procedure tsImportShow(Sender: TObject);
+    procedure btnGetExcelClick(Sender: TObject);
+    procedure btnImportExcelClick(Sender: TObject);
+    procedure btnSaveClick(Sender: TObject);
+  private
+    { Private declarations }
+    vtag : integer;
+    principal, vNamaFile : String;
+    procedure UpdateView;
+    procedure ConnectToExcel;
+    procedure FetchData;
+  public
+    { Public declarations }
+  end;
+
+var
+  StokAwalFrm: TStokAwalFrm;
+
+  procedure ShowForm(pNamaMenu:String; ptag : integer);
+
+implementation
+
+uses U_DM, cxGridExportLink, U_Status_Dialog, StrUtils;
+
+{$R *.dfm}
+
+function splistr(text:string): TStringArray;
+var
+  idx : integer;
+  I: Integer;
+  data : TStringArray;
+  tempdata : string;
+begin
+  SetLength(data, 3);
+  idx := 0;
+  for I := 1 to Length(text) do
+  begin
+    if(text[i] = '.') then
+    begin
+      if idx >= Length(data) then
+        SetLength(data, length(data) + 1);
+
+      data[idx] := tempdata;
+      inc(idx);
+      tempdata := '';
+    end
+    else
+    begin
+      tempdata := tempdata + text[i];
+    end;
+  end;
+
+  if idx >= Length(data) then
+    SetLength(data, length(data) + 1);
+
+  data[idx] := tempdata;
+
+  Result := data;
+end;
+
+procedure ShowForm(pNamaMenu:String; ptag : integer);
+begin
+  StokAwalFrm:= TStokAwalFrm.Create(Application);
+  StokAwalFrm.lblHeader1.Caption:= pNamaMenu;
+  StokAwalFrm.vtag:= ptag;
+  StokAwalFrm.UpdateView;
+  StokAwalFrm.edtDatePicker.DateTime:= Now;
+  StokAwalFrm.pgTransaction.ActivePageIndex:= 0;
+  StokAwalFrm.pgTransaction.HideTabs:= True;
+  StokAwalFrm.Show;
+  StokAwalFrm.RzGroupBox2.Visible:= False;
+end;
+
+
+procedure TStokAwalFrm.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  Action:= caFree
+end;
+
+procedure TStokAwalFrm.FormShow(Sender: TObject);
+begin
+  ShowWindow(Handle, SW_Maximize)
+end;
+
+procedure TStokAwalFrm.UpdateView;
+var isBrowse, isEmpty: Boolean;
+    accbrowse, accinsert, accedit, accdelete, accprint, accexport,
+    accrekening, accpreparer, accreviewer, accapprover: Boolean;
+begin
+  if Master.State=dsInactive then begin
+    btnClose.Enabled:= True;
+  end else begin
+    isBrowse := Master.State=dsBrowse;
+    isEmpty := Master.RecordCount=0;
+
+    DM.GetAccessRights(vtag, accbrowse, accinsert, accedit, accdelete, accprint,
+                       accexport);
+
+    btnClose.Enabled:= isBrowse;
+  end;
+end;
+
+procedure TStokAwalFrm.btnCloseClick(Sender: TObject);
+begin
+ if pgTransaction.ActivePageIndex=1 then begin
+    pgTransaction.ActivePageIndex:= 0;
+ end else begin
+    Close;
+ end;
+end;
+
+procedure TStokAwalFrm.qGetItemBeforeOpen(DataSet: TDataSet);
+begin
+  qGetItem.Params.ParamByName('pgudang').Value:= edtWarehouse.Text;
+end;
+
+procedure TStokAwalFrm.edtWarehousePropertiesButtonClick(Sender: TObject;
+  AButtonIndex: Integer);
+begin
+  try
+    Warehouse.Close;
+    Warehouse.Open;
+    if LookWarehouse.Execute then begin
+       edtWarehouse.Text:= Warehouseid_warehouse.AsString;
+    end;
+  except
+    on E: Exception do
+      DM.MyMsg(mmError,'Error has been encountered !',E.Message)
+  end;
+end;
+
+procedure TStokAwalFrm.btnOKClick(Sender: TObject);
+begin
+  if edtWarehouse.Text='' then
+  raise Exception.Create('Lokasi Gudang Belum di Pilih !!!');
+
+  try
+    qGetItem.Close;
+    qGetItem.Open;
+  except
+    on E: Exception do
+      DM.MyMsg(mmError,'Error has been encountered !',E.Message)
+  end;
+
+  btnExportClick(nil);
+
+end;
+
+procedure TStokAwalFrm.btnExportClick(Sender: TObject);
+var
+excel : Variant;
+appPath, ttl :string;
+begin
+  if qGetItem.RecordCount=0 then
+     Exit;
+
+  if OpenDialog1.Execute then begin
+     appPath:= ExtractFilePath(OpenDialog1.InitialDir);
+     ttl:= OpenDialog1.FileName;
+
+     if (qGetItem.Active) and (qGetItem.RecordCount>0) then begin
+       ExportGridToExcel(appPath+ttl,grdItem,true,true,true,'xls');
+     end;
+
+  end;
+end;
+
+procedure TStokAwalFrm.btnImportClick(Sender: TObject);
+begin
+  pgTransaction.ActivePageIndex:= 1;
+end;
+
+procedure TStokAwalFrm.tsItemShow(Sender: TObject);
+begin
+  RzGroupBox1.Visible:= True;
+  btnImport.Visible:= True;
+  RzGroupBox2.Visible:= False;
+  btnImport.Visible:= True;
+  btnSave.Visible:= False;
+end;
+
+procedure TStokAwalFrm.tsImportShow(Sender: TObject);
+begin
+  RzGroupBox1.Visible:= False;
+  btnImport.Visible:= False;
+  RzGroupBox2.Visible:= True;
+  btnImport.Visible:= False;
+  btnSave.Visible:= True;
+end;
+
+procedure TStokAwalFrm.ConnectToExcel;
+var strConn :  widestring;
+begin
+  strConn:='Provider=Microsoft.ACE.OLEDB.12.0;' +
+           'Data Source='+vNamaFile+';' +
+           'Extended Properties="Excel 12.0;HDR=NO;IMEX=1"';
+
+  AdoConnection1.Connected:=False;
+  AdoConnection1.ConnectionString:=strConn;
+  try
+    AdoConnection1.Open;
+
+    AdoConnection1.GetTableNames(cbSheetExcel.Properties.Items,True);
+  except
+    ShowMessage('Unable to connect to Excel, make sure the workbook ' + vNamaFile + ' exist!');
+    raise;
+  end;
+end;
+
+procedure TStokAwalFrm.FetchData;
+begin
+  if not AdoConnection1.Connected then ConnectToExcel;
+
+  ADODataSet1.Close;
+  ADODataSet1.CommandText:=  'SELECT * FROM ['+cbSheetExcel.Text+']';
+  try
+    ADODataSet1.Open;
+  except
+    ShowMessage('Unable to read data from Excel, make sure the query ' + vNamaFile + ' is meaningful!');
+    raise;
+  end;
+end;
+
+procedure TStokAwalFrm.btnGetExcelClick(Sender: TObject);
+begin
+  if ADOConnection1.Connected then ADOConnection1.Close;
+
+   if OpenDialog2.Execute then begin
+      vNamaFile:= OpenDialog2.FileName;
+      if not AdoConnection1.Connected then ConnectToExcel;
+   end;
+end;
+
+procedure TStokAwalFrm.btnImportExcelClick(Sender: TObject);
+var s : String;
+    idx : Int64;
+    sts_dlg: TfrmStatus_Dialog;
+    data : TStringArray;
+    Rasio, qtyIn, karton, lusin, biji : Double;
+    i : Integer;
+begin
+   if cbSheetExcel.Text='' then begin
+      DM.MyMsg(mmInformation,'Lokasi Sheet Data Tidak Ditemukan !!!','Pilih Dahulu Lokasi Sheet Data !!!');
+      Exit;
+   end;
+
+  ConnectToExcel;
+  FetchData;
+  memMaster.Close;
+  memMaster.Open;
+  memMaster.EmptyTable;
+  try
+
+    kmtData.Close;
+    kmtData.Open;
+    kmtData.EmptyTable;
+    kmtData.LoadFromDataSet(ADODataSet1, [mtcpoAppend]);
+    kmtData.Open;
+
+    if kmtData.RecordCount=0 then begin
+       DM.MyMsg(mmInformation,'Data Tidak Ditemukan !!!','Harap Cek Kembali Data Anda !!!');
+       Exit;
+    end;
+
+    sts_dlg:= TfrmStatus_Dialog.Create(Application);
+    sts_dlg.Reset_Progress;
+    sts_dlg.Set_Min(1);
+    sts_dlg.Set_Max(kmtData.RecordCount+1);
+    sts_dlg.Set_Status('Please wait, Execute action ...!!!');
+    sts_dlg.Show;
+
+    kmtData.First;
+    sts_dlg.Progress_It;
+    while not kmtData.Eof do begin
+
+       if kmtDataF1.AsString='Kode Item' then
+       kmtData.Next;
+
+       if kmtDataF1.AsString='' then
+       Break;
+
+       memMaster.Append;
+       memMasterno_tstock.AsLargeInt:= sq_stock.GetNextValue;
+       memMasterdoc_no.AsString:= 'STO';
+       memMasterid_warehouse.AsString:= kmtDataF4.AsString;
+       memMasterid_item.AsString:= kmtDataF1.AsString;
+       memMasterqty_ot.AsFloat:= 0;
+       memMasterremarks.AsString:= '-';
+       memMastersatuan.AsString:= 'PCS';
+       memMasterdt_doc.AsDateTime:= StrToDateTime(kmtDataF5.AsString);
+       memMasterisinput.AsString:= '1';
+       memMasterid_trans.AsString:= '608';
+       memMasternama_item.AsString:= kmtDataF2.AsString;
+
+       qtyIn:= StrToFloat(kmtDataF3.AsString);
+       memMasterqty_in.AsFloat:= qtyIn;
+
+       memMaster.Post;
+       kmtData.Next;
+       sts_dlg.Progress_It;
+    end;
+    
+    if ADOConnection1.Connected then ADOConnection1.Close;
+
+  except
+    on E: Exception do begin
+      DM.MyMsg(mmError,'Error has been encountered !',E.Message);
+    end;
+  end;
+
+  cbSheetExcel.Text:= '';
+  sts_dlg.Free;
+end;
+
+
+procedure TStokAwalFrm.btnSaveClick(Sender: TObject);
+var
+  sts_dlg: TfrmStatus_Dialog;
+begin
+  if memMaster.RecordCount=0 then
+  Exit;
+
+  Master.Close;
+  Master.Open;
+  Master.DisableControls;
+
+  sts_dlg:= TfrmStatus_Dialog.Create(Application);
+  sts_dlg.Reset_Progress;
+  sts_dlg.Set_Min(1);
+  sts_dlg.Set_Max(Master.RecordCount+1);
+  sts_dlg.Set_Status('Please wait, Execute action ...!!!');
+  sts_dlg.Show;
+
+  try
+    memMaster.First;
+    sts_dlg.Progress_It;
+    while not memMaster.Eof do begin
+      Master.Append;
+      Masterno_tstock.AsLargeInt:= memMasterno_tstock.AsLargeInt;
+      Masterdoc_no.AsString:= memMasterdoc_no.AsString;
+      Masterid_warehouse.AsString:= memMasterid_warehouse.AsString;
+      Masterid_item.AsString:= memMasterid_item.AsString;
+      Masterqty_in.AsFloat:= memMasterqty_in.AsFloat;
+      Masterqty_ot.AsFloat:= memMasterqty_ot.AsFloat;
+      Masterremarks.AsString:= memMasterremarks.AsString;
+      Mastersatuan.AsString:= memMastersatuan.AsString;
+      Masterdt_doc.AsDateTime:= memMasterdt_doc.AsDateTime;
+      Masterisinput.AsString:= memMasterisinput.AsString;
+      Masterunit_price.AsFloat:= memMasterunit_price.AsFloat;
+      Masterid_trans.AsString:= memMasterid_trans.AsString;
+      Masterid_cat_warehouse.AsString:= memMasterid_cat_warehouse.AsString;
+      Master.Post;
+      memMaster.Next;
+      sts_dlg.Progress_It;
+    end;
+
+  except
+    on E: Exception do begin
+      DM.MyMsg(mmError,'Error has been encountered !',E.Message);
+    end;
+  end;
+  Master.EnableControls;
+  sts_dlg.Free;
+end;
+
+end.

@@ -1,0 +1,1833 @@
+object TfrmImportFakturPembelianMayora: TTfrmImportFakturPembelianMayora
+  Left = 344
+  Top = 443
+  Width = 1259
+  Height = 672
+  Caption = 'Import Pembelian Mayora'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poDesktopCenter
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 13
+  object pnlTop: TAdvPanel
+    Left = 0
+    Top = 0
+    Width = 1243
+    Height = 43
+    Align = alTop
+    Color = 16640730
+    TabOrder = 0
+    UseDockManager = True
+    Version = '2.3.0.7'
+    Caption.Color = clHighlight
+    Caption.ColorTo = clNone
+    Caption.Font.Charset = DEFAULT_CHARSET
+    Caption.Font.Color = clWindowText
+    Caption.Font.Height = -11
+    Caption.Font.Name = 'MS Sans Serif'
+    Caption.Font.Style = []
+    ColorTo = 14986888
+    StatusBar.Font.Charset = DEFAULT_CHARSET
+    StatusBar.Font.Color = clWindowText
+    StatusBar.Font.Height = -11
+    StatusBar.Font.Name = 'Tahoma'
+    StatusBar.Font.Style = []
+    FullHeight = 43
+    object lblHeader: TLabel
+      Left = 12
+      Top = 9
+      Width = 337
+      Height = 27
+      Caption = 'Import Data Faktur Pembelian'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clNavy
+      Font.Height = -22
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+      Transparent = True
+    end
+  end
+  object pnlMenu: TPanel
+    Left = 0
+    Top = 43
+    Width = 1243
+    Height = 76
+    Align = alTop
+    BevelInner = bvLowered
+    Color = clWindow
+    TabOrder = 1
+    object lbltgl: TLabel
+      Left = 18
+      Top = 20
+      Width = 85
+      Height = 16
+      Caption = 'Tanggal Faktur'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lblLokasifile: TLabel
+      Left = 18
+      Top = 44
+      Width = 109
+      Height = 16
+      Caption = 'Lokasi File Extract'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lbl1: TLabel
+      Left = 144
+      Top = 20
+      Width = 4
+      Height = 16
+      Caption = ':'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lbl2: TLabel
+      Left = 144
+      Top = 44
+      Width = 4
+      Height = 16
+      Caption = ':'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lbl3: TLabel
+      Left = 574
+      Top = 44
+      Width = 59
+      Height = 16
+      Caption = 'Delimiter :'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+    end
+    object dtpStart: TwwDBDateTimePicker
+      Left = 152
+      Top = 16
+      Width = 171
+      Height = 24
+      CalendarAttributes.Font.Charset = DEFAULT_CHARSET
+      CalendarAttributes.Font.Color = clWindowText
+      CalendarAttributes.Font.Height = -11
+      CalendarAttributes.Font.Name = 'MS Sans Serif'
+      CalendarAttributes.Font.Style = []
+      Epoch = 1950
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clRed
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentFont = False
+      ShowButton = True
+      TabOrder = 0
+      DisplayFormat = 'dd mmm yyyy'
+    end
+    object edtlocation: TLMDBrowseEdit
+      Left = 152
+      Top = 40
+      Width = 405
+      Height = 21
+      Cursor = crIBeam
+      Bevel.Mode = bmWindows
+      Caret.BlinkRate = 530
+      Caret.ImageIndex = 0
+      Caret.ListIndex = 0
+      TabOrder = 1
+      OnChange = edtlocationChange
+      ReadOnly = True
+    end
+    object edtDelimiter: TcxTextEdit
+      Left = 638
+      Top = 40
+      TabOrder = 2
+      Text = '|'
+      Width = 21
+    end
+    object btnFetchData: TSCButton
+      Left = 663
+      Top = 36
+      Width = 90
+      Height = 25
+      Caption = 'Fetch Data'
+      Images = DM.ImageList1
+      ImageIndex = 0
+      RoundColor = clWindow
+      TabOrder = 3
+      OnClick = btnFetchDataClick
+    end
+    object lstFileImport: TRzFileListBox
+      Left = 760
+      Top = 6
+      Width = 257
+      Height = 65
+      ItemHeight = 18
+      Mask = '*.txt'
+      TabOrder = 4
+    end
+  end
+  object cxpgcntrl: TcxPageControl
+    Left = 0
+    Top = 119
+    Width = 1243
+    Height = 372
+    ActivePage = cxtbshtInvoice
+    Align = alClient
+    TabOrder = 2
+    ClientRectBottom = 372
+    ClientRectRight = 1243
+    ClientRectTop = 24
+    object cxtbshtInvoice: TcxTabSheet
+      Caption = 'Invoice'
+      ImageIndex = 0
+      object cxdbnvgtr1: TcxDBNavigator
+        Left = 0
+        Top = 323
+        Width = 1230
+        Height = 25
+        DataSource = dsInvoice
+        InfoPanel.Font.Charset = DEFAULT_CHARSET
+        InfoPanel.Font.Color = clDefault
+        InfoPanel.Font.Height = -11
+        InfoPanel.Font.Name = 'MS Sans Serif'
+        InfoPanel.Font.Style = []
+        Align = alBottom
+        TabOrder = 0
+      end
+      object cxgrdInvoice: TcxGrid
+        Left = 0
+        Top = 0
+        Width = 1243
+        Height = 323
+        Align = alClient
+        TabOrder = 1
+        object cxGridDBTV_invoice: TcxGridDBTableView
+          NavigatorButtons.ConfirmDelete = False
+          DataController.DataSource = dsInvoice
+          DataController.Summary.DefaultGroupSummaryItems = <>
+          DataController.Summary.FooterSummaryItems = <
+            item
+              Format = ',0'
+              Kind = skCount
+              FieldName = 'Kode_Distributor'
+              Column = cxgrdbclmnParamGridDBTV_invoiceParam
+            end>
+          DataController.Summary.SummaryGroups = <>
+          OptionsData.CancelOnExit = False
+          OptionsData.Deleting = False
+          OptionsData.DeletingConfirmation = False
+          OptionsData.Editing = False
+          OptionsData.Inserting = False
+          OptionsSelection.CellSelect = False
+          OptionsView.CellAutoHeight = True
+          OptionsView.Footer = True
+          OptionsView.GroupByBox = False
+          Styles.ContentEven = cxstyl3
+          Styles.Selection = cxstyl2
+          Styles.Header = cxstyl1
+          Styles.Indicator = cxstyl4
+          object cxgrdbclmnParamGridDBTV_invoiceParam: TcxGridDBColumn
+            DataBinding.FieldName = 'Param'
+            HeaderAlignmentHorz = taCenter
+            Options.Editing = False
+            Width = 100
+          end
+          object cxgrdbclmnParamGridDBTV_invoiceNo_dokumen: TcxGridDBColumn
+            DataBinding.FieldName = 'No_Dokumen'
+            HeaderAlignmentHorz = taCenter
+            Options.Editing = False
+            Width = 100
+          end
+          object cxgrdbclmnParamGridDBTV_invoice_tgl_kirim: TcxGridDBColumn
+            Caption = 'Tanggal_kirim'
+            DataBinding.FieldName = 'Tanggal_Kirim'
+            HeaderAlignmentHorz = taCenter
+            Options.Editing = False
+            Width = 100
+          end
+          object cxgrdbclmnParamGridDBTV_invoiceTipe: TcxGridDBColumn
+            DataBinding.FieldName = 'Tipe'
+            HeaderAlignmentHorz = taCenter
+            Options.Editing = False
+            Width = 100
+          end
+          object cxgrdbclmnParamGridDBTV_InvoiceTransaksi: TcxGridDBColumn
+            Caption = 'Tansaksi'
+            DataBinding.FieldName = 'Transaksi'
+            HeaderAlignmentHorz = taCenter
+            Options.Editing = False
+            Width = 100
+          end
+          object cxgrdbclmnParamGridDBTV_invoicetgl_dokumen: TcxGridDBColumn
+            DataBinding.FieldName = 'Tanggal_Dokumen'
+            HeaderAlignmentHorz = taCenter
+            Options.Editing = False
+            Width = 100
+          end
+          object cxgrdbclmnParamGridDBTV_invoiceNo_srt_Jalan: TcxGridDBColumn
+            DataBinding.FieldName = 'No_Surat_Jalan'
+            HeaderAlignmentHorz = taCenter
+            Options.Editing = False
+            Width = 100
+          end
+          object cxgrdbclmnParamGridDBTV_invoice_no_Mobil: TcxGridDBColumn
+            DataBinding.FieldName = 'No_Mobil'
+            HeaderAlignmentHorz = taCenter
+            Options.Editing = False
+            Width = 100
+          end
+          object cxgrdbclmnParamGridDBTV_invoiceBaris: TcxGridDBColumn
+            DataBinding.FieldName = 'Baris'
+            HeaderAlignmentHorz = taCenter
+            Options.Editing = False
+            Width = 100
+          end
+          object cxgrdbclmnParamGridDBTV_invoiceSuplier: TcxGridDBColumn
+            DataBinding.FieldName = 'Suplier'
+            HeaderAlignmentHorz = taCenter
+            Options.Editing = False
+            Width = 100
+          end
+          object cxgrdbclmnParamGridDBTV_invoiceNo_CMO: TcxGridDBColumn
+            DataBinding.FieldName = 'No_CMO'
+            HeaderAlignmentHorz = taCenter
+            Options.Editing = False
+            Width = 100
+          end
+          object cxgrdbclmnParamGridDBTV_invoiceGudang: TcxGridDBColumn
+            DataBinding.FieldName = 'Gudang'
+            HeaderAlignmentHorz = taCenter
+            Options.Editing = False
+            Width = 100
+          end
+          object cxgrdbclmnParamGridDBTV_InvoiceNo_DN: TcxGridDBColumn
+            DataBinding.FieldName = 'No_DN'
+            HeaderAlignmentHorz = taCenter
+            Options.Editing = False
+            Width = 100
+          end
+          object cxgrdbclmnParamGridDBTV_invoiceNo_Faktur: TcxGridDBColumn
+            DataBinding.FieldName = 'No_Faktur'
+            HeaderAlignmentHorz = taCenter
+            Options.Editing = False
+            Width = 100
+          end
+        end
+        object cxgrdlInvoice: TcxGridLevel
+          GridView = cxGridDBTV_invoice
+        end
+      end
+    end
+    object cxtbshtProduk: TcxTabSheet
+      Caption = 'Produk'
+      ImageIndex = 1
+      object cxdbnvgtr2: TcxDBNavigator
+        Left = 0
+        Top = 323
+        Width = 1230
+        Height = 25
+        DataSource = dsProduk
+        InfoPanel.Font.Charset = DEFAULT_CHARSET
+        InfoPanel.Font.Color = clDefault
+        InfoPanel.Font.Height = -11
+        InfoPanel.Font.Name = 'MS Sans Serif'
+        InfoPanel.Font.Style = []
+        Align = alBottom
+        TabOrder = 0
+      end
+      object cxgrdInvoiceProduk: TcxGrid
+        Left = 0
+        Top = 0
+        Width = 1243
+        Height = 323
+        Align = alClient
+        TabOrder = 1
+        object cxGridDBTableView1: TcxGridDBTableView
+          NavigatorButtons.ConfirmDelete = False
+          DataController.DataSource = dsProduk
+          DataController.Summary.DefaultGroupSummaryItems = <>
+          DataController.Summary.FooterSummaryItems = <
+            item
+              Format = ',0'
+              Kind = skCount
+              FieldName = 'Kode_Distributor'
+              Column = cxgrdbclmnParamGridproduk_Param
+            end>
+          DataController.Summary.SummaryGroups = <>
+          OptionsData.CancelOnExit = False
+          OptionsData.Deleting = False
+          OptionsData.DeletingConfirmation = False
+          OptionsData.Editing = False
+          OptionsData.Inserting = False
+          OptionsSelection.CellSelect = False
+          OptionsView.CellAutoHeight = True
+          OptionsView.Footer = True
+          OptionsView.GroupByBox = False
+          Styles.ContentEven = cxstyl3
+          Styles.Selection = cxstyl2
+          Styles.Header = cxstyl1
+          Styles.Indicator = cxstyl4
+          object cxgrdbclmnParamGridproduk_Param: TcxGridDBColumn
+            DataBinding.FieldName = 'Param'
+            HeaderAlignmentHorz = taCenter
+            Options.Editing = False
+            Width = 100
+          end
+          object cxgrdbclmnParamGridDBProduk_No_Dokumen: TcxGridDBColumn
+            DataBinding.FieldName = 'No_Dokumen'
+            HeaderAlignmentHorz = taCenter
+            Options.Editing = False
+            Width = 200
+          end
+          object cxgrdbclmnParamGridDBProduk_PCode: TcxGridDBColumn
+            DataBinding.FieldName = 'PCode'
+            HeaderAlignmentHorz = taCenter
+            Options.Editing = False
+            Width = 150
+          end
+          object cxgrdbclmnParamGridDBProdukNama_Produk: TcxGridDBColumn
+            DataBinding.FieldName = 'Nama_Produk'
+            Width = 358
+          end
+          object cxgrdbclmnParamGridDB_produk_Qty_Produk: TcxGridDBColumn
+            DataBinding.FieldName = 'Qty_Produk'
+            HeaderAlignmentHorz = taCenter
+            Options.Editing = False
+            Width = 150
+          end
+          object cxgrdbclmnParamGrid_produk_Harga: TcxGridDBColumn
+            DataBinding.FieldName = 'Harga'
+            HeaderAlignmentHorz = taCenter
+            Options.Editing = False
+            Width = 150
+          end
+        end
+        object cxGridLevel1: TcxGridLevel
+          GridView = cxGridDBTableView1
+        end
+      end
+    end
+    object cxtbshtDetail: TcxTabSheet
+      Caption = 'Detail Invoice'
+      ImageIndex = 2
+      object cxdbnvgtr3: TcxDBNavigator
+        Left = 0
+        Top = 323
+        Width = 1230
+        Height = 25
+        DataSource = dsDetailInvoice
+        InfoPanel.Font.Charset = DEFAULT_CHARSET
+        InfoPanel.Font.Color = clDefault
+        InfoPanel.Font.Height = -11
+        InfoPanel.Font.Name = 'MS Sans Serif'
+        InfoPanel.Font.Style = []
+        Align = alBottom
+        TabOrder = 0
+      end
+      object cxGrid2: TcxGrid
+        Left = 0
+        Top = 0
+        Width = 1243
+        Height = 323
+        Align = alClient
+        TabOrder = 1
+        object cxGridDBTableView2: TcxGridDBTableView
+          NavigatorButtons.ConfirmDelete = False
+          DataController.DataSource = dsDetailInvoice
+          DataController.Summary.DefaultGroupSummaryItems = <>
+          DataController.Summary.FooterSummaryItems = <
+            item
+              Format = ',0'
+              Kind = skCount
+              FieldName = 'Kode_Distributor'
+              Column = cxgrdbclmnParamGridDBNo_Dokumen
+            end>
+          DataController.Summary.SummaryGroups = <>
+          OptionsData.CancelOnExit = False
+          OptionsData.Deleting = False
+          OptionsData.DeletingConfirmation = False
+          OptionsData.Editing = False
+          OptionsData.Inserting = False
+          OptionsSelection.CellSelect = False
+          OptionsView.CellAutoHeight = True
+          OptionsView.Footer = True
+          OptionsView.GroupByBox = False
+          Styles.ContentEven = cxstyl3
+          Styles.Selection = cxstyl2
+          Styles.Header = cxstyl1
+          Styles.Indicator = cxstyl4
+          object cxgrdbclmnParamGridDBNo_Dokumen: TcxGridDBColumn
+            DataBinding.FieldName = 'No_Dokumen'
+            HeaderAlignmentHorz = taCenter
+            Options.Editing = False
+            Width = 100
+          end
+          object cxgrdbclmnParamGridDBTgl_Dokumen: TcxGridDBColumn
+            DataBinding.FieldName = 'Tanggal_Dokumen'
+            HeaderAlignmentHorz = taCenter
+            Options.Editing = False
+            Width = 100
+          end
+          object cxgrdbclmnParamGridDBNo_Srt_Jalan: TcxGridDBColumn
+            DataBinding.FieldName = 'No_Surat_Jalan'
+            HeaderAlignmentHorz = taCenter
+            Options.Editing = False
+            Width = 100
+          end
+          object cxgrdbclmnParamTgl_kirim: TcxGridDBColumn
+            DataBinding.FieldName = 'Tanggal_Kirim'
+            HeaderAlignmentHorz = taCenter
+            Options.Editing = False
+            Width = 100
+          end
+          object cxgrdbclmnParamGridDBNo_Mobil: TcxGridDBColumn
+            DataBinding.FieldName = 'No_Mobil'
+            HeaderAlignmentHorz = taCenter
+            Options.Editing = False
+            Width = 100
+          end
+          object cxgrdbclmnParamGridDBSuplier: TcxGridDBColumn
+            DataBinding.FieldName = 'Suplier'
+            HeaderAlignmentHorz = taCenter
+            Options.Editing = False
+            Width = 100
+          end
+          object cxgrdbclmnParamGridDBNo_CMO: TcxGridDBColumn
+            DataBinding.FieldName = 'No_CMO'
+            HeaderAlignmentHorz = taCenter
+            Options.Editing = False
+            Width = 100
+          end
+          object cxgrdbclmnParamGridDBUnknown1: TcxGridDBColumn
+            DataBinding.FieldName = 'kosong1'
+            Visible = False
+            HeaderAlignmentHorz = taCenter
+            Options.Editing = False
+            Width = 100
+            IsCaptionAssigned = True
+          end
+          object cxgrdbclmnParamGridDBUnknown2: TcxGridDBColumn
+            DataBinding.FieldName = 'kosong2'
+            Visible = False
+            HeaderAlignmentHorz = taCenter
+            Options.Editing = False
+            Width = 100
+            IsCaptionAssigned = True
+          end
+          object cxgrdbclmnParamGridDBPcode: TcxGridDBColumn
+            DataBinding.FieldName = 'PCode'
+            HeaderAlignmentHorz = taCenter
+            Options.Editing = False
+            Width = 100
+          end
+          object cxgrdbclmnParamGridDBNama_Produk: TcxGridDBColumn
+            DataBinding.FieldName = 'Nama_Produk'
+            HeaderAlignmentHorz = taCenter
+            Options.Editing = False
+            Width = 358
+          end
+          object cxgrdbclmnParamGridDBUnknown3: TcxGridDBColumn
+            Caption = 'Qty_Produk_Satuan'
+            DataBinding.FieldName = 'Qty_produk_satuan'
+            HeaderAlignmentHorz = taCenter
+            Options.Editing = False
+            Width = 150
+          end
+          object cxgrdbclmnParamGridDBQty_Produk: TcxGridDBColumn
+            DataBinding.FieldName = 'Qty_Produk'
+            HeaderAlignmentHorz = taCenter
+            Options.Editing = False
+            Width = 100
+          end
+          object cxgrdbclmnParamGridDBUnknown4: TcxGridDBColumn
+            Caption = 'Total_Harga'
+            DataBinding.FieldName = 'total_harga'
+            HeaderAlignmentHorz = taCenter
+            Options.Editing = False
+            Width = 150
+          end
+          object cxgrdbclmnParamGridDBUnknown5: TcxGridDBColumn
+            Caption = 'Status'
+            DataBinding.FieldName = 'status'
+            Width = 150
+          end
+        end
+        object cxGridLevel2: TcxGridLevel
+          GridView = cxGridDBTableView2
+        end
+      end
+    end
+  end
+  object pnlBottom: TPanel
+    Left = 0
+    Top = 563
+    Width = 1243
+    Height = 45
+    Align = alBottom
+    Color = 15265510
+    TabOrder = 3
+    object btnTutup: TSCButton
+      Left = 14
+      Top = 11
+      Width = 72
+      Height = 25
+      Caption = 'Tutup'
+      Images = DM.ImageList1
+      ImageIndex = 6
+      RoundColor = 15265510
+      TabOrder = 0
+      OnClick = btnTutupClick
+    end
+    object btnInvoice: TSCButton
+      Left = 176
+      Top = 11
+      Width = 72
+      Height = 25
+      Caption = 'Invoice'
+      Images = DM.ImageList1
+      ImageIndex = 6
+      RoundColor = 15265510
+      TabOrder = 1
+      Visible = False
+    end
+    object btnDetail: TSCButton
+      Left = 272
+      Top = 11
+      Width = 153
+      Height = 25
+      Caption = 'Detail Invoice'
+      Images = DM.ImageList1
+      ImageIndex = 6
+      RoundColor = 15265510
+      TabOrder = 2
+      Visible = False
+    end
+  end
+  object statbar: TStatusBar
+    Left = 0
+    Top = 608
+    Width = 1243
+    Height = 25
+    Panels = <>
+  end
+  object pnl1: TPanel
+    Left = 0
+    Top = 491
+    Width = 1243
+    Height = 72
+    Align = alBottom
+    Color = 15265510
+    TabOrder = 5
+    object lblStatus: TLabel
+      Left = 1
+      Top = 56
+      Width = 1241
+      Height = 15
+      Align = alBottom
+      Alignment = taCenter
+      Caption = 'Status Hubungan'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clRed
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object pgrsProses: TSCProgress
+      Left = 1
+      Top = 1
+      Width = 1241
+      Height = 24
+      Align = alTop
+      BorderProps.Border = sccbFlat
+      TabOrder = 0
+    end
+    object pgrsTotal: TSCProgress
+      Left = 1
+      Top = 25
+      Width = 1241
+      Height = 31
+      Align = alClient
+      BorderProps.Border = sccbFlat
+      TabOrder = 1
+    end
+  end
+  object sdfdtstOdsImport: TSdfDataSet
+    FileMustExist = True
+    ReadOnly = False
+    FieldDefs = <>
+    Delimiter = '|'
+    FirstLineAsSchema = False
+    Left = 920
+    Top = 8
+  end
+  object kbmtblInvoice: TkbmMemTable
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
+    FieldDefs = <
+      item
+        Name = 'Param'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'No_Dokumen'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'Tanggal_Kirim'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'Tipe'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'Transaksi'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'Tanggal_Dokumen'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'No_Surat_Jalan'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'No_Mobil'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'Baris'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'Suplier'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'No_CMO'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'Gudang'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'No_DN'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'No_Faktur'
+        DataType = ftString
+        Size = 20
+      end>
+    IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    FilterOptions = []
+    Version = '7.10.00 Standard Edition'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
+    Left = 772
+    Top = 9
+    object strngfldInvoiceParam: TStringField
+      FieldName = 'Param'
+    end
+    object strngfldInvoiceNo_Dokumen: TStringField
+      FieldName = 'No_Dokumen'
+    end
+    object strngfldInvoiceTanggal_Kirim: TStringField
+      FieldName = 'Tanggal_Kirim'
+    end
+    object strngfldInvoiceTipe: TStringField
+      FieldName = 'Tipe'
+    end
+    object strngfldInvoiceTransaksi: TStringField
+      FieldName = 'Transaksi'
+    end
+    object strngfldInvoiceTanggal_Dokumen: TStringField
+      FieldName = 'Tanggal_Dokumen'
+    end
+    object strngfldInvoiceNo_Surat_Jalan: TStringField
+      FieldName = 'No_Surat_Jalan'
+    end
+    object strngfldInvoiceNo_Mobil: TStringField
+      FieldName = 'No_Mobil'
+    end
+    object strngfldInvoiceBaris: TStringField
+      FieldName = 'Baris'
+    end
+    object strngfldInvoiceSuplier: TStringField
+      FieldName = 'Suplier'
+    end
+    object strngfldInvoiceNo_CMO: TStringField
+      FieldName = 'No_CMO'
+    end
+    object strngfldInvoiceGudang: TStringField
+      FieldName = 'Gudang'
+    end
+    object strngfldInvoiceNo_DN: TStringField
+      FieldName = 'No_DN'
+    end
+    object strngfldInvoiceNo_Faktur: TStringField
+      FieldName = 'No_Faktur'
+    end
+  end
+  object kbmtblProduk: TkbmMemTable
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
+    FieldDefs = <>
+    IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    FilterOptions = []
+    Version = '7.10.00 Standard Edition'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
+    Left = 804
+    Top = 9
+    object strngfldProdukParam: TStringField
+      FieldName = 'Param'
+    end
+    object strngfldProdukNo_Dokumen: TStringField
+      FieldName = 'No_Dokumen'
+    end
+    object strngfldProdukPCode: TStringField
+      FieldName = 'PCode'
+    end
+    object strngfldProdukNama_Produk: TStringField
+      DisplayWidth = 255
+      FieldName = 'Nama_Produk'
+      Size = 255
+    end
+    object strngfldProdukQty_Produk: TStringField
+      FieldName = 'Qty_Produk'
+    end
+    object strngfldProdukHarga: TStringField
+      FieldName = 'Harga'
+    end
+  end
+  object kbmtblDetailInvoice: TkbmMemTable
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
+    FieldDefs = <>
+    IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    FilterOptions = []
+    Version = '7.10.00 Standard Edition'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
+    Left = 836
+    Top = 9
+    object strngfld1: TStringField
+      FieldName = 'No_Dokumen'
+      Size = 255
+    end
+    object strngfld2: TStringField
+      FieldName = 'Tanggal_Dokumen'
+      Size = 255
+    end
+    object strngfld3: TStringField
+      FieldName = 'No_Surat_Jalan'
+      Size = 255
+    end
+    object strngfld4: TStringField
+      FieldName = 'Tanggal_Kirim'
+      Size = 255
+    end
+    object strngfld5: TStringField
+      FieldName = 'No_Mobil'
+      Size = 255
+    end
+    object strngfld6: TStringField
+      FieldName = 'Suplier'
+      Size = 255
+    end
+    object strngfld7: TStringField
+      FieldName = 'No_CMO'
+      Size = 255
+    end
+    object strngfld8: TStringField
+      FieldName = 'kosong1'
+      Size = 255
+    end
+    object strngfld9: TStringField
+      FieldName = 'kosong2'
+      Size = 255
+    end
+    object strngfld10: TStringField
+      FieldName = 'PCode'
+      Size = 255
+    end
+    object strngfld11: TStringField
+      FieldName = 'Nama_Produk'
+      Size = 255
+    end
+    object strngfld12: TStringField
+      FieldName = 'Qty_produk_satuan'
+      Size = 255
+    end
+    object strngfld13: TStringField
+      FieldName = 'Qty_Produk'
+      Size = 255
+    end
+    object strngfld14: TStringField
+      FieldName = 'total_harga'
+      Size = 255
+    end
+    object strngfld15: TStringField
+      FieldName = 'status'
+      Size = 255
+    end
+  end
+  object dsInvoice: TwwDataSource
+    DataSet = kbmtblInvoice
+    Left = 965
+    Top = 6
+  end
+  object dsProduk: TwwDataSource
+    DataSet = kbmtblProduk
+    Left = 1005
+    Top = 6
+  end
+  object dsDetailInvoice: TwwDataSource
+    DataSet = kbmtblDetailInvoice
+    Left = 1045
+    Top = 6
+  end
+  object cxstylrptrSR: TcxStyleRepository
+    Left = 734
+    Top = 11
+    PixelsPerInch = 96
+    object cxstyl1: TcxStyle
+      AssignedValues = [svColor, svFont, svTextColor]
+      Color = 7039851
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      TextColor = clWhite
+    end
+    object cxstyl2: TcxStyle
+      AssignedValues = [svColor, svFont, svTextColor]
+      Color = 14680063
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      TextColor = clBlack
+    end
+    object cxstyl3: TcxStyle
+      AssignedValues = [svColor, svFont, svTextColor]
+      Color = 15400938
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      TextColor = clBlack
+    end
+    object cxstyl4: TcxStyle
+      AssignedValues = [svColor, svFont, svTextColor]
+      Color = 15587527
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      TextColor = clBlack
+    end
+    object cxgrdtbl1: TcxGridTableViewStyleSheet
+      Styles.ContentEven = cxstyl3
+      Styles.Selection = cxstyl2
+      Styles.Header = cxstyl1
+      Styles.Indicator = cxstyl4
+      BuiltIn = True
+    end
+    object cxgrdbndtblvwstylsht1: TcxGridBandedTableViewStyleSheet
+      Styles.ContentEven = cxstyl3
+      Styles.Selection = cxstyl2
+      Styles.Indicator = cxstyl4
+      Styles.BandHeader = cxstyl1
+      BuiltIn = True
+    end
+  end
+  object sdfdtstImportDetailInv: TSdfDataSet
+    FileMustExist = True
+    ReadOnly = False
+    FieldDefs = <>
+    Delimiter = '|'
+    FirstLineAsSchema = False
+    Left = 888
+    Top = 8
+  end
+  object zqryInvoice: TZQuery
+    Connection = DM.conn
+    SQL.Strings = (
+      'select * from purchasing.po_import_mayora')
+    Params = <>
+    Left = 1088
+    Top = 8
+    object mfldInvoiceparam: TMemoField
+      FieldName = 'param'
+      BlobType = ftMemo
+    end
+    object lrgntfldInvoiceNoDokumen: TLargeintField
+      FieldName = 'No_Dokumen'
+    end
+    object dtfldInvoiceTanggal_Kirim: TDateField
+      FieldName = 'Tanggal_Kirim'
+    end
+    object mfldInvoiceTransaksi: TMemoField
+      FieldName = 'Transaksi'
+      BlobType = ftMemo
+    end
+    object dtfldInvoiceTanggal_Dokumen: TDateField
+      FieldName = 'Tanggal_Dokumen'
+    end
+    object lrgntfldInvoiceNo_Surat_Jalan: TLargeintField
+      FieldName = 'No_Surat_Jalan'
+    end
+    object mfldInvoiceNo_Mobil: TMemoField
+      FieldName = 'No_Mobil'
+      BlobType = ftMemo
+    end
+    object lrgntfldInvoiceBaris: TLargeintField
+      FieldName = 'Baris'
+    end
+    object lrgntfldInvoiceSuplier: TLargeintField
+      FieldName = 'Suplier'
+    end
+    object mfldInvoiceNo_CMO: TMemoField
+      FieldName = 'No_CMO'
+      BlobType = ftMemo
+    end
+    object lrgntfldInvoiceGudang: TLargeintField
+      FieldName = 'Gudang'
+    end
+    object mfldInvoiceNo_DN: TMemoField
+      FieldName = 'No_DN'
+      BlobType = ftMemo
+    end
+    object mfldInvoiceNoFaktur: TMemoField
+      FieldName = 'No_Faktur'
+      BlobType = ftMemo
+    end
+    object lrgntfldInvoiceTipe: TLargeintField
+      FieldName = 'Tipe'
+    end
+    object intgrfldInvoiceid: TIntegerField
+      FieldName = 'id'
+      Required = True
+    end
+  end
+  object zqryProduk: TZQuery
+    Connection = DM.conn
+    SQL.Strings = (
+      'select * from  purchasing.po_import_produk_mayora')
+    Params = <>
+    Left = 1120
+    Top = 8
+    object intgrfldProdukid: TIntegerField
+      FieldName = 'id'
+      Required = True
+    end
+    object mfldProdukPARAM: TMemoField
+      FieldName = 'PARAM'
+      BlobType = ftMemo
+    end
+    object lrgntfldProdukNo_Dokumen: TLargeintField
+      FieldName = 'No_Dokumen'
+    end
+    object lrgntfldProdukPcode: TLargeintField
+      FieldName = 'Pcode'
+    end
+    object mfldProdukNama_Produk: TMemoField
+      FieldName = 'Nama_Produk'
+      BlobType = ftMemo
+    end
+    object lrgntfldProdukHarga: TLargeintField
+      FieldName = 'Harga'
+    end
+    object lrgntfldProdukQty_Produk: TLargeintField
+      FieldName = 'Qty_Produk'
+    end
+    object lrgntfldProdukqty_produk_lusin: TLargeintField
+      FieldName = 'qty_produk_lusin'
+    end
+    object lrgntfldProdukqty_produk_biji: TLargeintField
+      FieldName = 'qty_produk_biji'
+    end
+  end
+  object zqrydetail: TZQuery
+    Connection = DM.conn
+    SQL.Strings = (
+      'select * from purchasing.po_import_detail_mayora')
+    Params = <>
+    Left = 1152
+    Top = 8
+    object lrgntfldzqrydetailid: TLargeintField
+      FieldName = 'id'
+      Required = True
+    end
+    object lrgntfld_srt_jalan: TLargeintField
+      FieldName = 'no_srt_jalan'
+    end
+    object dtfld_srt_jalan: TDateField
+      FieldName = 'tgl_srt_jalan'
+    end
+    object mfldzqrydetailnopol: TMemoField
+      FieldName = 'nopol'
+      BlobType = ftMemo
+    end
+    object lrgntfld_distributor: TLargeintField
+      FieldName = 'kode_distributor'
+    end
+    object mfld_cmo: TMemoField
+      FieldName = 'no_cmo'
+      BlobType = ftMemo
+    end
+    object lrgntfldzqrydetailpcode: TLargeintField
+      FieldName = 'pcode'
+    end
+    object mfld_produk: TMemoField
+      FieldName = 'nma_produk'
+      BlobType = ftMemo
+    end
+    object lrgntfld_terkecil: TLargeintField
+      FieldName = 'qty_terkecil'
+    end
+    object lrgntfld_pmbelian_terbesar: TLargeintField
+      FieldName = 'qty_pmbelian_terbesar'
+    end
+    object lrgntfld_harga: TLargeintField
+      FieldName = 'total_harga'
+    end
+    object mfldzqrydetailstatus: TMemoField
+      FieldName = 'status'
+      BlobType = ftMemo
+    end
+    object dtfld_penerimaan: TDateField
+      FieldName = 'tgl_penerimaan'
+    end
+    object lrgntfld_produk_lusin: TLargeintField
+      FieldName = 'qty_produk_lusin'
+    end
+    object lrgntfld_produk_biji: TLargeintField
+      FieldName = 'qty_produk_biji'
+    end
+    object mfld_penerimaan: TMemoField
+      FieldName = 'no_penerimaan'
+      BlobType = ftMemo
+    end
+  end
+  object zqrycheck: TZQuery
+    Connection = DM.conn
+    Params = <>
+    Left = 1184
+    Top = 8
+  end
+  object zqrygetponumber: TZQuery
+    Connection = DM.conn
+    SQL.Strings = (
+      'select purchasing.fn_gen_po_number(:pid_trans)')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'pid_trans'
+        ParamType = ptUnknown
+      end>
+    Left = 1216
+    Top = 8
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'pid_trans'
+        ParamType = ptUnknown
+      end>
+    object strngfld_gen_po_number: TStringField
+      FieldName = 'fn_gen_po_number'
+      ReadOnly = True
+      Size = 252
+    end
+  end
+  object zqryPO: TZQuery
+    Connection = DM.conn
+    SQL.Strings = (
+      'select * from purchasing.po')
+    Params = <>
+    Left = 680
+    Top = 8
+    object lrgntfldPOid_po: TLargeintField
+      FieldName = 'id_po'
+      Required = True
+    end
+    object strngfldPOno_po: TStringField
+      FieldName = 'no_po'
+      Size = 120
+    end
+    object dtmfldPOdt_po: TDateTimeField
+      FieldName = 'dt_po'
+      Required = True
+    end
+    object strngfldPOno_bukti: TStringField
+      FieldName = 'no_bukti'
+      Size = 120
+    end
+    object dtmfldPOdt_ins: TDateTimeField
+      FieldName = 'dt_ins'
+      Required = True
+    end
+    object dtmfldPOdt_upd: TDateTimeField
+      FieldName = 'dt_upd'
+      Required = True
+    end
+    object strngfldPOusr_ins: TStringField
+      FieldName = 'usr_ins'
+      Required = True
+      Size = 120
+    end
+    object strngfldPOusr_upd: TStringField
+      FieldName = 'usr_upd'
+      Required = True
+      Size = 120
+    end
+    object strngfldPOispost: TStringField
+      FieldName = 'ispost'
+      Required = True
+      Size = 4
+    end
+    object strngfldPOiscancel: TStringField
+      FieldName = 'iscancel'
+      Required = True
+      Size = 4
+    end
+    object strngfldPOisdelete: TStringField
+      FieldName = 'isdelete'
+      Required = True
+      Size = 4
+    end
+    object fltfldPOtotal: TFloatField
+      FieldName = 'total'
+      Required = True
+    end
+    object strngfldPOkd_rekanan: TStringField
+      FieldName = 'kd_rekanan'
+      Size = 80
+    end
+    object strngfldPOid_trans: TStringField
+      FieldName = 'id_trans'
+      Required = True
+      Size = 40
+    end
+    object strngfldPOcara_bayar: TStringField
+      FieldName = 'cara_bayar'
+      Size = 40
+    end
+    object dtmfldPOdt_jth_tempo: TDateTimeField
+      FieldName = 'dt_jth_tempo'
+    end
+    object strngfldPOdiskripsi: TStringField
+      FieldName = 'diskripsi'
+      Size = 1020
+    end
+    object fltfldPOsub_total: TFloatField
+      FieldName = 'sub_total'
+      Required = True
+    end
+    object fltfldPOdisc_rp: TFloatField
+      FieldName = 'disc_rp'
+      Required = True
+    end
+    object fltfldPOnet_n_ppn: TFloatField
+      FieldName = 'net_n_ppn'
+      Required = True
+    end
+    object strngfldPOiskirim: TStringField
+      FieldName = 'iskirim'
+      Required = True
+      Size = 4
+    end
+    object strngfldPOislunas: TStringField
+      FieldName = 'islunas'
+      Required = True
+      Size = 4
+    end
+    object dtmfldPOdt_kirim: TDateTimeField
+      FieldName = 'dt_kirim'
+    end
+    object strngfldPOid_curr: TStringField
+      FieldName = 'id_curr'
+      Size = 12
+    end
+    object fltfldPOkurs: TFloatField
+      FieldName = 'kurs'
+      Required = True
+    end
+    object strngfldPOvat_str: TStringField
+      FieldName = 'vat_str'
+      Size = 40
+    end
+    object fltfldPOvat_num: TFloatField
+      FieldName = 'vat_num'
+      Required = True
+    end
+    object intgrfldPOn_hari: TIntegerField
+      FieldName = 'n_hari'
+      Required = True
+    end
+    object strngfldPOstatus_auth: TStringField
+      FieldName = 'status_auth'
+      Size = 400
+    end
+    object strngfldPOprepared_by: TStringField
+      FieldName = 'prepared_by'
+      Size = 120
+    end
+    object dtmfldPOdt_prepared: TDateTimeField
+      FieldName = 'dt_prepared'
+    end
+    object strngfldPOapproved_by: TStringField
+      FieldName = 'approved_by'
+      Size = 120
+    end
+    object dtmfldPOdt_approved: TDateTimeField
+      FieldName = 'dt_approved'
+    end
+    object strngfldPOissubmit: TStringField
+      FieldName = 'issubmit'
+      Size = 4
+    end
+    object strngfldPOremarks: TStringField
+      FieldName = 'remarks'
+      Size = 1020
+    end
+    object strngfldPOisclosed: TStringField
+      FieldName = 'isclosed'
+      Required = True
+      Size = 4
+    end
+    object strngfldPOst_approved_1: TStringField
+      FieldName = 'st_approved_1'
+      Size = 400
+    end
+  end
+  object zqryNota: TZQuery
+    Connection = DM.conn
+    SQL.Strings = (
+      'select * from transaksi.nota')
+    Params = <>
+    Left = 648
+    Top = 8
+    object lrgntfldNotaid_nota: TLargeintField
+      FieldName = 'id_nota'
+      Required = True
+    end
+    object strngfldNotano_nota: TStringField
+      FieldName = 'no_nota'
+      Size = 120
+    end
+    object dtmfldNotadt_nota: TDateTimeField
+      FieldName = 'dt_nota'
+      Required = True
+    end
+    object strngfldNotano_bukti: TStringField
+      FieldName = 'no_bukti'
+      Size = 120
+    end
+    object dtmfldNotadt_ins: TDateTimeField
+      FieldName = 'dt_ins'
+      Required = True
+    end
+    object dtmfldNotadt_upd: TDateTimeField
+      FieldName = 'dt_upd'
+      Required = True
+    end
+    object strngfldNotausr_ins: TStringField
+      FieldName = 'usr_ins'
+      Required = True
+      Size = 120
+    end
+    object strngfldNotausr_upd: TStringField
+      FieldName = 'usr_upd'
+      Required = True
+      Size = 120
+    end
+    object strngfldNotaispost: TStringField
+      FieldName = 'ispost'
+      Required = True
+      Size = 4
+    end
+    object strngfldNotaiscancel: TStringField
+      FieldName = 'iscancel'
+      Required = True
+      Size = 4
+    end
+    object strngfldNotaisdelete: TStringField
+      FieldName = 'isdelete'
+      Required = True
+      Size = 4
+    end
+    object fltfldNotatotal: TFloatField
+      FieldName = 'total'
+      Required = True
+    end
+    object strngfldNotakd_rekanan: TStringField
+      FieldName = 'kd_rekanan'
+      Size = 80
+    end
+    object strngfldNotaid_trans: TStringField
+      FieldName = 'id_trans'
+      Required = True
+      Size = 40
+    end
+    object strngfldNotaid_rek_gl: TStringField
+      FieldName = 'id_rek_gl'
+      Size = 120
+    end
+    object strngfldNotaid_division: TStringField
+      FieldName = 'id_division'
+      Size = 48
+    end
+    object strngfldNotacara_bayar: TStringField
+      FieldName = 'cara_bayar'
+      Size = 40
+    end
+    object dtmfldNotadt_jth_tempo: TDateTimeField
+      FieldName = 'dt_jth_tempo'
+    end
+    object strngfldNotadiskripsi: TStringField
+      FieldName = 'diskripsi'
+      Size = 1020
+    end
+    object fltfldNotasub_total: TFloatField
+      FieldName = 'sub_total'
+      Required = True
+    end
+    object fltfldNotaclaim: TFloatField
+      FieldName = 'claim'
+      Required = True
+    end
+    object fltfldNotadisc_rp: TFloatField
+      FieldName = 'disc_rp'
+      Required = True
+    end
+    object fltfldNotapromo_uang: TFloatField
+      FieldName = 'promo_uang'
+      Required = True
+    end
+    object fltfldNotapromo_barang: TFloatField
+      FieldName = 'promo_barang'
+      Required = True
+    end
+    object fltfldNotanet_n_ppn: TFloatField
+      FieldName = 'net_n_ppn'
+      Required = True
+    end
+    object strngfldNotaiskirim: TStringField
+      FieldName = 'iskirim'
+      Required = True
+      Size = 4
+    end
+    object strngfldNotaislunas: TStringField
+      FieldName = 'islunas'
+      Required = True
+      Size = 4
+    end
+    object fltfldNotaretur: TFloatField
+      FieldName = 'retur'
+      Required = True
+    end
+    object strngfldNotaishpp: TStringField
+      FieldName = 'ishpp'
+      Required = True
+      Size = 4
+    end
+    object dtmfldNotadt_lunas: TDateTimeField
+      FieldName = 'dt_lunas'
+    end
+    object dtmfldNotadt_kirim: TDateTimeField
+      FieldName = 'dt_kirim'
+    end
+    object strngfldNotaisok: TStringField
+      FieldName = 'isok'
+      Required = True
+      Size = 4
+    end
+    object dtmfldNotadt_posting: TDateTimeField
+      FieldName = 'dt_posting'
+    end
+    object strngfldNotanota_diretur: TStringField
+      FieldName = 'nota_diretur'
+      Size = 120
+    end
+    object strngfldNotaid_curr: TStringField
+      FieldName = 'id_curr'
+      Size = 12
+    end
+    object fltfldNotakurs: TFloatField
+      FieldName = 'kurs'
+      Required = True
+    end
+    object strngfldNotavat_str: TStringField
+      FieldName = 'vat_str'
+      Size = 40
+    end
+    object fltfldNotavat_num: TFloatField
+      FieldName = 'vat_num'
+      Required = True
+    end
+    object strngfldNotakd_del_place: TStringField
+      FieldName = 'kd_del_place'
+    end
+    object strngfldNotano_rekap: TStringField
+      FieldName = 'no_rekap'
+      Size = 128
+    end
+    object intgrfldNotan_hari: TIntegerField
+      FieldName = 'n_hari'
+      Required = True
+    end
+    object fltfldNotaevocer: TFloatField
+      FieldName = 'evocer'
+      Required = True
+    end
+    object strngfldNotano_faktur_pajak: TStringField
+      FieldName = 'no_faktur_pajak'
+      Size = 200
+    end
+    object strngfldNotano_evocer: TStringField
+      FieldName = 'no_evocer'
+      Size = 200
+    end
+    object lrgntfldNotaid_import: TLargeintField
+      FieldName = 'id_import'
+    end
+    object strngfldNotapromo_id: TStringField
+      FieldName = 'promo_id'
+      Size = 80
+    end
+    object fltfldNotamvocer: TFloatField
+      FieldName = 'mvocer'
+      Required = True
+    end
+    object strngfldNotano_mvocer: TStringField
+      FieldName = 'no_mvocer'
+      Size = 200
+    end
+    object fltfldNotadisc_psn: TFloatField
+      FieldName = 'disc_psn'
+      Required = True
+    end
+  end
+  object zqryNotaDetail: TZQuery
+    Connection = DM.conn
+    SQL.Strings = (
+      'select * from transaksi.nota_detail')
+    Params = <>
+    Left = 608
+    Top = 8
+    object lrgntfldNotaDetailid_nota_detail: TLargeintField
+      FieldName = 'id_nota_detail'
+      Required = True
+    end
+    object lrgntfldNotaDetailid_nota: TLargeintField
+      FieldName = 'id_nota'
+      Required = True
+    end
+    object intgrfldNotaDetailnomor: TIntegerField
+      FieldName = 'nomor'
+    end
+    object strngfldNotaDetailkd_item: TStringField
+      FieldName = 'kd_item'
+      Required = True
+      Size = 200
+    end
+    object strngfldNotaDetailid_rek_gl: TStringField
+      FieldName = 'id_rek_gl'
+      Size = 120
+    end
+    object fltfldNotaDetaildisc_rp: TFloatField
+      FieldName = 'disc_rp'
+      Required = True
+    end
+    object fltfldNotaDetaildisc_psn: TFloatField
+      FieldName = 'disc_psn'
+      Required = True
+    end
+    object fltfldNotaDetailhrg_jual_karton: TFloatField
+      FieldName = 'hrg_jual_karton'
+      Required = True
+    end
+    object fltfldNotaDetailhrg_jual_lusin: TFloatField
+      FieldName = 'hrg_jual_lusin'
+      Required = True
+    end
+    object fltfldNotaDetailhrg: TFloatField
+      FieldName = 'hrg'
+      Required = True
+    end
+    object fltfldNotaDetailqty_karton: TFloatField
+      FieldName = 'qty_karton'
+      Required = True
+    end
+    object fltfldNotaDetailqty_lusin: TFloatField
+      FieldName = 'qty_lusin'
+      Required = True
+    end
+    object fltfldNotaDetailqty_biji: TFloatField
+      FieldName = 'qty_biji'
+      Required = True
+    end
+    object fltfldNotaDetailqty_total_biji: TFloatField
+      FieldName = 'qty_total_biji'
+      Required = True
+    end
+    object strngfldNotaDetaildiskripsi: TStringField
+      FieldName = 'diskripsi'
+      Size = 1020
+    end
+    object fltfldNotaDetailhrg_beli_karton: TFloatField
+      FieldName = 'hrg_beli_karton'
+      Required = True
+    end
+    object fltfldNotaDetailbiji_per_karton: TFloatField
+      FieldName = 'biji_per_karton'
+      Required = True
+    end
+    object strngfldNotaDetailispromo: TStringField
+      FieldName = 'ispromo'
+      Size = 4
+    end
+    object strngfldNotaDetailstatus: TStringField
+      FieldName = 'status'
+      Size = 4
+    end
+    object fltfldNotaDetaildisc_psn_non_promo: TFloatField
+      FieldName = 'disc_psn_non_promo'
+      Required = True
+    end
+  end
+  object zqrygetNotaId: TZQuery
+    Connection = DM.conn
+    SQL.Strings = (
+      'select nextval('#39'transaksi.sq_nota'#39')')
+    Params = <>
+    Left = 568
+    Top = 8
+    object lrgntfldNotaIdnextval: TLargeintField
+      FieldName = 'nextval'
+      ReadOnly = True
+    end
+  end
+  object zqrygetNotaDetailId: TZQuery
+    Connection = DM.conn
+    SQL.Strings = (
+      'select nextval('#39'transaksi.sq_nota_detail'#39')')
+    Params = <>
+    Left = 528
+    Top = 8
+    object lrgntfldNotaDetailIdnextval: TLargeintField
+      FieldName = 'nextval'
+      ReadOnly = True
+    end
+  end
+  object zqrytemp: TZQuery
+    Connection = DM.conn
+    Params = <>
+    Left = 488
+    Top = 8
+  end
+  object zqryMasterItem: TZQuery
+    Connection = DM.conn
+    SQL.Strings = (
+      'select * from master.item')
+    Params = <>
+    Left = 456
+    Top = 8
+    object strngfldMasterItemkd_item: TStringField
+      FieldName = 'kd_item'
+      Required = True
+      Size = 200
+    end
+    object strngfldMasterItemkd_parent: TStringField
+      FieldName = 'kd_parent'
+      Size = 200
+    end
+    object intgrfldMasterItemlvl: TIntegerField
+      FieldName = 'lvl'
+    end
+    object strngfldMasterItemisdetail: TStringField
+      FieldName = 'isdetail'
+      Size = 4
+    end
+    object strngfldMasterItemnama_item: TStringField
+      FieldName = 'nama_item'
+      Size = 1020
+    end
+    object fltfldMasterItemhrg_jual_karton: TFloatField
+      FieldName = 'hrg_jual_karton'
+      Required = True
+    end
+    object fltfldMasterItemhrg_jual_lusin: TFloatField
+      FieldName = 'hrg_jual_lusin'
+      Required = True
+    end
+    object fltfldMasterItemhrg_beli_karton: TFloatField
+      FieldName = 'hrg_beli_karton'
+      Required = True
+    end
+    object fltfldMasterItembiji_per_karton: TFloatField
+      FieldName = 'biji_per_karton'
+      Required = True
+    end
+    object fltfldMasterItemhpp: TFloatField
+      FieldName = 'hpp'
+      Required = True
+    end
+    object strngfldMasterItemusr_ins: TStringField
+      FieldName = 'usr_ins'
+      Required = True
+      Size = 120
+    end
+    object strngfldMasterItemusr_upd: TStringField
+      FieldName = 'usr_upd'
+      Required = True
+      Size = 120
+    end
+    object dtmfldMasterItemdt_ins: TDateTimeField
+      FieldName = 'dt_ins'
+      Required = True
+    end
+    object dtmfldMasterItemdt_upd: TDateTimeField
+      FieldName = 'dt_upd'
+      Required = True
+    end
+    object strngfldMasterItemisinventory: TStringField
+      FieldName = 'isinventory'
+      Required = True
+      Size = 4
+    end
+    object strngfldMasterItemisbarang_jadi: TStringField
+      FieldName = 'isbarang_jadi'
+      Required = True
+      Size = 4
+    end
+    object strngfldMasterItemkd_satuan: TStringField
+      FieldName = 'kd_satuan'
+      Size = 48
+    end
+    object strngfldMasterItemkd_satuan_beli: TStringField
+      FieldName = 'kd_satuan_beli'
+      Size = 48
+    end
+    object fltfldMasterItemrasio: TFloatField
+      FieldName = 'rasio'
+      Required = True
+    end
+    object strngfldMasterItemid_rek_persediaan: TStringField
+      FieldName = 'id_rek_persediaan'
+      Size = 120
+    end
+    object strngfldMasterItemid_rek_hpp: TStringField
+      FieldName = 'id_rek_hpp'
+      Size = 120
+    end
+    object strngfldMasterItemid_cat_item: TStringField
+      FieldName = 'id_cat_item'
+    end
+  end
+  object zqryMasterItemBku: TZQuery
+    Connection = DM.conn
+    SQL.Strings = (
+      'select * from master.item_bku')
+    Params = <>
+    Left = 424
+    Top = 8
+    object strngfldMasterItemBkukd_item: TStringField
+      FieldName = 'kd_item'
+      Required = True
+      Size = 200
+    end
+    object strngfldMasterItemBkunama_item: TStringField
+      FieldName = 'nama_item'
+      Size = 1020
+    end
+    object fltfldMasterItemBkubiji_per_karton: TFloatField
+      FieldName = 'biji_per_karton'
+    end
+    object fltfldMasterItemBkuhrg_beli_karton: TFloatField
+      FieldName = 'hrg_beli_karton'
+    end
+    object fltfldMasterItemBkuhrg_jual_karton: TFloatField
+      FieldName = 'hrg_jual_karton'
+    end
+    object fltfldMasterItemBkuhrg_jual_lusin: TFloatField
+      FieldName = 'hrg_jual_lusin'
+    end
+    object fltfldMasterItemBkuhrg_jual_biji: TFloatField
+      FieldName = 'hrg_jual_biji'
+    end
+  end
+end
