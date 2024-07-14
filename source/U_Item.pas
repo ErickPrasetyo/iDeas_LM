@@ -290,6 +290,20 @@ type
     frBarcode2: TfrxReport;
     grdDetailDBBTVColumn5: TcxGridDBColumn;
     ItemPromoqty_max: TFloatField;
+    RzLabel22: TRzLabel;
+    edtRasioLusin: TcxDBTextEdit;
+    dbtlMastercxDBTreeListColumn4: TcxDBTreeListColumn;
+    cxDBTreeList1DBTableView1Column13: TcxGridDBColumn;
+    qExportExcelrasio_karton: TFloatField;
+    qExportExcelrasio_lusin: TFloatField;
+    cxDBTreeList1DBTableView1Column14: TcxGridDBColumn;
+    RzLabel23: TRzLabel;
+    edtLokRak: TcxDBButtonEdit;
+    LookRak: TwwLookupDialog;
+    qRak: TZQuery;
+    qRakkd_rak: TStringField;
+    qRakdeskripsi: TStringField;
+    Masterlok_rak: TStringField;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure MasterNewRecord(DataSet: TDataSet);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -332,6 +346,8 @@ type
     procedure ItemPromoBeforePost(DataSet: TDataSet);
     procedure grdDetailDBBTVid_rakPropertiesEditValueChanged(
       Sender: TObject);
+    procedure edtLokRakPropertiesButtonClick(Sender: TObject;
+      AButtonIndex: Integer);
   private
     { Private declarations }
     DBMode: TDBMode;
@@ -389,6 +405,7 @@ begin
   Masterisinventory.AsString:= '1';
 //  Masterisbarang_jadi.AsString:= '0';
   Masterrasio.AsFloat:= 1;
+  Masterrasio_lusin.AsFloat:= 0;
   Masterid_cat_item.AsString:= '-';
   Masterhrg_jual.AsFloat:= 0;
   Masterhrg_beli.AsFloat:= 0;
@@ -581,6 +598,8 @@ begin
    edtSatuan.Properties.Buttons[0].Visible:= Not isBrowse;
    edtSatuanBeli.Properties.ReadOnly:= isBrowse;
    edtSatuanBeli.Properties.Buttons[0].Visible:= Not isBrowse;
+   edtLokRak.Properties.ReadOnly:= isBrowse;
+   edtLokRak.Properties.Buttons[0].Visible:= Not isBrowse;
 
    edtRekPersediaan.Properties.ReadOnly:= isBrowse;
    edtRekPersediaan.Properties.Buttons[0].Visible:= Not isBrowse;
@@ -912,6 +931,23 @@ begin
 //     grdDetailDBBTVColumn2.Properties.Buttons[0].Enabled:= False;
 //  end;
 
+end;
+
+procedure TItemFrm.edtLokRakPropertiesButtonClick(Sender: TObject;
+  AButtonIndex: Integer);
+begin
+  try
+    qRak.Close;
+    qRak.Open;
+    if LookRak.Execute then begin
+       if Master.State=dsBrowse then
+          Master.Edit;
+       Masterlok_rak.AsString:= qRakkd_rak.AsString;
+    end;
+  except
+    on E: Exception do
+      DM.MyMsg(mmError,'Error has been encountered !',E.Message)
+  end;
 end;
 
 end.

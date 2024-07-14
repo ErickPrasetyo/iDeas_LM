@@ -16,7 +16,15 @@ uses
   cxGridCustomView, cxGrid, cxPC, AdvGlowButton, AdvReflectionImage,
   cxLookAndFeels, cxLookAndFeelPainters, dxSkinsCore,
   dxSkinsDefaultPainters, dxSkinscxPCPainter, Menus, wwdbdatetimepicker,
-  cxButtons, cxButtonEdit, wwDialog, wwidlg, AdvMenus;
+  cxButtons, cxButtonEdit, wwDialog, wwidlg, AdvMenus, dxSkinBlack,
+  dxSkinBlue, dxSkinCaramel, dxSkinCoffee, dxSkinDarkRoom, dxSkinDarkSide,
+  dxSkinFoggy, dxSkinGlassOceans, dxSkiniMaginary, dxSkinLilian,
+  dxSkinLiquidSky, dxSkinLondonLiquidSky, dxSkinMcSkin, dxSkinMoneyTwins,
+  dxSkinOffice2007Black, dxSkinOffice2007Blue, dxSkinOffice2007Green,
+  dxSkinOffice2007Pink, dxSkinOffice2007Silver, dxSkinOffice2010Black,
+  dxSkinOffice2010Blue, dxSkinOffice2010Silver, dxSkinPumpkin, dxSkinSeven,
+  dxSkinSharp, dxSkinSilver, dxSkinSpringTime, dxSkinStardust,
+  dxSkinSummer2008, dxSkinValentine, dxSkinXmas2008Blue;
 
 type
   TDBMode=(dmNone,dmBrowse,dmInsert,dmEdit);
@@ -291,6 +299,9 @@ type
     qTotalUsertotal_tunai: TFloatField;
     qTotalUsertotal_debet: TFloatField;
     qTotalUsertotal_qris: TFloatField;
+    qNotajns_penjualan: TMemoField;
+    grddbtvDetailColumn2: TcxGridDBColumn;
+    Detailjns_penjualan: TStringField;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure actCloseExecute(Sender: TObject);
@@ -954,6 +965,7 @@ begin
               Detailnama_kasir.AsString:= qNotausr_upd.AsString;
               Detailnama_customer.AsString:= qNotanama_rekanan.AsString;
               Detailketerangan.AsString:= '-';
+              Detailjns_penjualan.AsString:= qNotajns_penjualan.AsString;
               Detailsub_total.AsFloat:= qNotasub_total.AsFloat;
               Detaildisc_member.AsFloat:= qNotadisc_member.AsFloat;
               Detailtotal.AsFloat:= qNotatotal.AsFloat;

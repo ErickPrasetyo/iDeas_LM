@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<application><setting><database><server_host>100.117.201.114</server_host><server_port>5432</server_port><db_name>db_lampu_merah</db_name><db_usr_name>ideas</db_usr_name><db_usr_passwd>9e969697ac</db_usr_passwd><db_office>MJKT</db_office></database><skin><style>tsOffice2003Silver</style></skin></setting></application>
+<application><setting><database><server_host>141.11.241.25</server_host><server_port>5432</server_port><db_name>db_lampu_merah</db_name><db_usr_name>ideas</db_usr_name><db_usr_passwd>9e969697ac</db_usr_passwd><db_office>MJKT</db_office></database><skin><style>tsOffice2003Silver</style></skin></setting></application>

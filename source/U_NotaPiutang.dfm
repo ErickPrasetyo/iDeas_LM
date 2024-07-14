@@ -338,7 +338,7 @@ object NotaPiutangFrm: TNotaPiutangFrm
     Top = 59
     Width = 1224
     Height = 550
-    ActivePage = tsBrowse
+    ActivePage = tsDetail
     Align = alClient
     Style = 8
     TabOrder = 3
@@ -2520,6 +2520,10 @@ object NotaPiutangFrm: TNotaPiutangFrm
     object Detaildisc_psn_non_promo: TFloatField
       FieldName = 'disc_psn_non_promo'
       Required = True
+    end
+    object Detailid_warehouse: TStringField
+      FieldName = 'id_warehouse'
+      Size = 80
     end
   end
   object dsDetail: TDataSource
@@ -15475,7 +15479,8 @@ object NotaPiutangFrm: TNotaPiutangFrm
     SQL.Strings = (
       
         'select kd_item, nama_item, hrg_beli, hrg_jual, hrg_jual_sm_grosi' +
-        'r, hrg_jual_grosir, hrg_jual_grosir_besar, satuan_jual, rasio'
+        'r, hrg_jual_grosir, hrg_jual_grosir_besar, satuan_jual, rasio, l' +
+        'ok_rak'
       'from master.item'
       'where kd_item=:pkd_item')
     Params = <
@@ -15525,6 +15530,10 @@ object NotaPiutangFrm: TNotaPiutangFrm
     object qItemrasio: TFloatField
       FieldName = 'rasio'
       Required = True
+    end
+    object qItemlok_rak: TStringField
+      FieldName = 'lok_rak'
+      Size = 200
     end
   end
   object frPOS80: TfrxReport

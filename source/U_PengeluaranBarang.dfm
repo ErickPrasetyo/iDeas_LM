@@ -1154,20 +1154,6 @@ object PengeluaranBarangFrm: TPengeluaranBarangFrm
           ParentOptionPicture = False
           ShowHint = False
           ToolBarIndex = -1
-          object AdvToolBarSeparator1: TAdvToolBarSeparator
-            Left = 382
-            Top = 2
-            Width = 10
-            Height = 23
-            LineColor = clBtnShadow
-          end
-          object AdvToolBarSeparator2: TAdvToolBarSeparator
-            Left = 569
-            Top = 2
-            Width = 10
-            Height = 23
-            LineColor = clBtnShadow
-          end
           object dbagbAddDetail: TDBAdvGlowButton
             Left = 2
             Top = 2
@@ -1470,7 +1456,7 @@ object PengeluaranBarangFrm: TPengeluaranBarangFrm
             DisableControl = [drEditing]
           end
           object btnGetItems: TSCButton
-            Left = 392
+            Left = 382
             Top = 2
             Width = 177
             Height = 25

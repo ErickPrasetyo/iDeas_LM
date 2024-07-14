@@ -18,7 +18,15 @@ uses
   cxGridCustomView, cxGrid, cxPC, AdvGlowButton, AdvReflectionImage,
   cxDBEditRepository, cxEditRepositoryItems, SCGraphicButton, SCDbNavButton,
   wwfltdlg, wwDialog, wwidlg, cxLookAndFeels, cxLookAndFeelPainters,
-  dxSkinsCore, dxSkinsDefaultPainters, dxSkinscxPCPainter;
+  dxSkinsCore, dxSkinsDefaultPainters, dxSkinscxPCPainter, dxSkinBlack,
+  dxSkinBlue, dxSkinCaramel, dxSkinCoffee, dxSkinDarkRoom, dxSkinDarkSide,
+  dxSkinFoggy, dxSkinGlassOceans, dxSkiniMaginary, dxSkinLilian,
+  dxSkinLiquidSky, dxSkinLondonLiquidSky, dxSkinMcSkin, dxSkinMoneyTwins,
+  dxSkinOffice2007Black, dxSkinOffice2007Blue, dxSkinOffice2007Green,
+  dxSkinOffice2007Pink, dxSkinOffice2007Silver, dxSkinOffice2010Black,
+  dxSkinOffice2010Blue, dxSkinOffice2010Silver, dxSkinPumpkin, dxSkinSeven,
+  dxSkinSharp, dxSkinSilver, dxSkinSpringTime, dxSkinStardust,
+  dxSkinSummer2008, dxSkinValentine, dxSkinXmas2008Blue;
 
 type
   TDBMode=(dmNone,dmBrowse,dmInsert,dmEdit);
@@ -202,7 +210,6 @@ type
     Mastervat_num: TFloatField;
     Shape5: TShape;
     Shape6: TShape;
-    Label5: TLabel;
     Label8: TLabel;
     Label7: TLabel;
     DBText1: TDBText;
@@ -309,7 +316,6 @@ type
     frxDBRekapNota: TfrxDBDataset;
     MemInfoPerusahaanprinted_by: TStringField;
     RGModeCetak: TRadioGroup;
-    edtKodeRek: TcxDBLookupComboBox;
     Detailsub_total: TFloatField;
     dsQSupplier: TDataSource;
     dsqryRekGL: TDataSource;
@@ -334,27 +340,11 @@ type
     qBrowsedt_jth_tempo: TDateTimeField;
     qBrowseno_bukti: TStringField;
     dsqBrowse: TDataSource;
-    Label14: TLabel;
-    edtNoPO: TcxDBTextEdit;
-    Label6: TLabel;
     Label10: TLabel;
     Label18: TLabel;
     Label19: TLabel;
     Masterno_rekap: TStringField;
     Mastern_hari: TIntegerField;
-    rgPayment: TcxGroupBox;
-    Label12: TLabel;
-    Label4: TLabel;
-    Label11: TLabel;
-    Label9: TLabel;
-    Label20: TLabel;
-    Label22: TLabel;
-    Label23: TLabel;
-    Label24: TLabel;
-    edtDueDate: TcxDBDateEdit;
-    edtNOBukti: TcxDBTextEdit;
-    edtCARABAYAR: TcxDBComboBox;
-    edtNhari: TcxDBSpinEdit;
     GroupBox1: TGroupBox;
     MemRemarks: TcxDBMemo;
     ER: TcxEditRepository;
@@ -367,7 +357,6 @@ type
     qBrowsetotal: TFloatField;
     grddbtvMasterdisc_rp: TcxGridDBColumn;
     grddbtvMastertotal: TcxGridDBColumn;
-    Label25: TLabel;
     Masterevocer: TFloatField;
     Masterno_faktur_pajak: TStringField;
     Masterno_evocer: TStringField;
@@ -422,6 +411,9 @@ type
     Detailstatus: TStringField;
     Detaildisc_psn_non_promo: TFloatField;
     Detailsatuan_beli: TStringField;
+    Label11: TLabel;
+    Label24: TLabel;
+    edtNOBukti: TcxDBTextEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure actCloseExecute(Sender: TObject);
@@ -640,7 +632,6 @@ begin
     btnPrint.Enabled:= not isEmpty and accprint;
 
     edtNOBukti.Properties.ReadOnly:= isBrowse;
-    edtNoPO.Properties.ReadOnly:= isBrowse;
     edtDiscount.Properties.ReadOnly:= isBrowse;
     edtVAT.Properties.ReadOnly:= isBrowse;
 
@@ -648,15 +639,15 @@ begin
     LookRekanan.Properties.Buttons[0].Visible:= not isBrowse;
 //    edtCurrency.Properties.ReadOnly:= isBrowse;
 //    edtCurrency.Properties.Buttons[0].Visible:= not isBrowse;
-    edtKodeRek.Properties.ReadOnly:= isBrowse;
-    edtKodeRek.Properties.Buttons[0].Visible:= not isBrowse;
-    edtCARABAYAR.Properties.ReadOnly:= isBrowse;
-    edtCARABAYAR.Properties.Buttons[0].Visible:= not isBrowse;
-    edtNhari.Properties.ReadOnly:= isBrowse;
+
+//    edtKodeRek.Properties.Buttons[0].Visible:= not isBrowse;
+//    edtCARABAYAR.Properties.ReadOnly:= isBrowse;
+//    edtCARABAYAR.Properties.Buttons[0].Visible:= not isBrowse;
+//    edtNhari.Properties.ReadOnly:= isBrowse;
 //    edtNhari.Properties.Buttons[0].Visible:= not isBrowse;
 
 //    edtKurs.Properties.ReadOnly:= isBrowse;
-    edtDueDate.Properties.ReadOnly:= isBrowse;
+    //edtDueDate.Properties.ReadOnly:= isBrowse;
     edtDiscount.Properties.ReadOnly:= isBrowse;
     edtDateEdit.Properties.ReadOnly:= isBrowse;
     MemRemarks.Properties.ReadOnly:= isBrowse;
@@ -938,6 +929,10 @@ begin
    Masterisok.AsString:= '0';
    Masterid_curr.AsString:= 'IDR';
    Masterevocer.AsFloat:= 0;
+   Mastercara_bayar.AsString:= 'TUNAI';
+   Masterdt_jth_tempo.AsDateTime:= Masterdt_nota.AsDateTime;
+   Mastern_hari.AsInteger:= 1;
+   Masterid_rek_gl.AsString:= '111.01';
 
 
 //   Masterprepared_by.AsString:= DM.UserConnect;
@@ -956,7 +951,7 @@ begin
   Detailhrg_beli_karton.AsFloat:= 0;
   Detailqty_karton.AsFloat:= 0;
   Detailqty_lusin.AsFloat:= 0;
-  Detailqty_biji.AsFloat:= 0;
+  Detailqty_biji.AsFloat:= 1;
   Detailqty_total_biji.AsFloat:= 0;
   Detailbiji_per_karton.AsFloat:= 0;
   Detaildisc_rp.AsFloat:= 0;

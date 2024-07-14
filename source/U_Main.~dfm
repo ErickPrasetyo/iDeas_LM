@@ -8,7 +8,7 @@ object MainFrm: TMainFrm
   Color = clWhite
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -12
+  Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   FormStyle = fsMDIForm
@@ -19,11 +19,11 @@ object MainFrm: TMainFrm
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
-  PixelsPerInch = 106
+  PixelsPerInch = 96
   TextHeight = 13
   object StatusBar: TAdvOfficeStatusBar
     Left = 0
-    Top = 593
+    Top = 597
     Width = 873
     Height = 22
     AnchorHint = False
@@ -76,7 +76,7 @@ object MainFrm: TMainFrm
         Progress.ShowBorder = False
         Progress.Stacked = False
         Style = psDate
-        Text = 'Tuesday, Aug 22, 2023'
+        Text = 'Sunday, May 19, 2024'
         TimeFormat = 'hh:mm:ss'
         Width = 150
       end
@@ -103,7 +103,7 @@ object MainFrm: TMainFrm
         Progress.ShowBorder = False
         Progress.Stacked = False
         Style = psTime
-        Text = '16:18:58'
+        Text = '16:55:47'
         TimeFormat = 'hh:mm:ss'
         Width = 60
       end
@@ -1189,6 +1189,12 @@ object MainFrm: TMainFrm
       ImageIndex = 0
       OnExecute = actLapSetoranExecute
     end
+    object actOnline: TAction
+      Category = 'Penjualan'
+      Caption = 'Online'
+      ImageIndex = 0
+      OnExecute = actOnlineExecute
+    end
   end
   object MainMenu: TAdvMainMenu
     Images = DM.IconList
@@ -1469,6 +1475,11 @@ object MainFrm: TMainFrm
       object Retail1: TMenuItem
         Tag = 601
         Action = actNotaRetail
+        GroupIndex = 1
+      end
+      object Online1: TMenuItem
+        Tag = 605
+        Action = actOnline
         GroupIndex = 1
       end
       object NotaPiutang1: TMenuItem

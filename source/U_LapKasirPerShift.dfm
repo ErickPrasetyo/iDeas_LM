@@ -1,6 +1,6 @@
 object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
-  Left = 460
-  Top = 200
+  Left = 180
+  Top = 62
   Width = 1112
   Height = 646
   Caption = 'Kasir Tunai'
@@ -8,7 +8,7 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
   Ctl3D = False
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -12
+  Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   FormStyle = fsMDIChild
@@ -19,7 +19,7 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnShow = FormShow
-  PixelsPerInch = 106
+  PixelsPerInch = 96
   TextHeight = 13
   object pnlHeader: TAdvPanel
     Left = 0
@@ -245,7 +245,7 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
   end
   object pnlNavigator: TAdvPanel
     Left = 0
-    Top = 565
+    Top = 567
     Width = 1096
     Height = 40
     Align = alBottom
@@ -611,14 +611,14 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
     Left = 0
     Top = 81
     Width = 1096
-    Height = 484
+    Height = 486
     ActivePage = tsDetail
     Align = alClient
     Style = 8
     TabOrder = 2
     OnChange = pgTransactionChange
     OnPageChanging = pgTransactionPageChanging
-    ClientRectBottom = 484
+    ClientRectBottom = 486
     ClientRectRight = 1096
     ClientRectTop = 24
     object tsBrowse: TcxTabSheet
@@ -628,7 +628,7 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
         Left = 0
         Top = 40
         Width = 1096
-        Height = 420
+        Height = 422
         Align = alClient
         TabOrder = 0
         object grddbtvMaster: TcxGridDBTableView
@@ -1190,7 +1190,7 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
           object dbagbAddDetail: TDBAdvGlowButton
             Left = 2
             Top = 2
-            Width = 71
+            Width = 73
             Height = 24
             Hint = 'Insert record'
             AutoSize = True
@@ -1239,9 +1239,9 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
             DisableControl = [drReadonly, drEditing]
           end
           object dbagbDeleteDetail: TDBAdvGlowButton
-            Left = 140
+            Left = 144
             Top = 2
-            Width = 63
+            Width = 64
             Height = 24
             Hint = 'Delete record'
             AutoSize = True
@@ -1291,9 +1291,9 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
             DisableControl = [drReadonly, drEditing, drEmpty]
           end
           object dbagbEditDetail: TDBAdvGlowButton
-            Left = 73
+            Left = 75
             Top = 2
-            Width = 67
+            Width = 69
             Height = 24
             Hint = 'Edit record'
             AutoSize = True
@@ -1342,9 +1342,9 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
             DisableControl = [drReadonly, drEditing, drEmpty]
           end
           object dbagbSaveDetail: TDBAdvGlowButton
-            Left = 203
+            Left = 208
             Top = 2
-            Width = 68
+            Width = 70
             Height = 24
             Hint = 'Post edit'
             AutoSize = True
@@ -1393,9 +1393,9 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
             DisableControl = [drNotEditing]
           end
           object dbagbCancelDetail: TDBAdvGlowButton
-            Left = 271
+            Left = 278
             Top = 2
-            Width = 56
+            Width = 57
             Height = 24
             Hint = 'Cancel edit'
             AutoSize = True
@@ -1444,9 +1444,9 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
             DisableControl = [drNotEditing]
           end
           object dbagbRefreshDetail: TDBAdvGlowButton
-            Left = 327
+            Left = 335
             Top = 2
-            Width = 68
+            Width = 70
             Height = 24
             Hint = 'Refresh data'
             AutoSize = True
@@ -1495,7 +1495,7 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
             DisableControl = [drEditing]
           end
           object btnGetItems: TSCButton
-            Left = 395
+            Left = 405
             Top = 2
             Width = 107
             Height = 23
@@ -1521,7 +1521,7 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
         Left = 0
         Top = 141
         Width = 1096
-        Height = 319
+        Height = 321
         Align = alClient
         BorderStyle = cxcbsNone
         Font.Charset = DEFAULT_CHARSET
@@ -1583,7 +1583,7 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
             Options.FilteringPopup = False
             Options.FilteringPopupMultiSelect = False
             Options.Sorting = False
-            Width = 32
+            Width = 39
           end
           object grddbtvDetailno_nota: TcxGridDBColumn
             Caption = 'No. Nota'
@@ -1598,7 +1598,7 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
             Options.FilteringPopup = False
             Options.FilteringPopupMultiSelect = False
             Options.Sorting = False
-            Width = 87
+            Width = 105
           end
           object grddbtvDetaildt_nota: TcxGridDBColumn
             Caption = 'Tanggal Nota'
@@ -1612,7 +1612,7 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
             Options.FilteringMRUItemsList = False
             Options.FilteringPopup = False
             Options.FilteringPopupMultiSelect = False
-            Width = 97
+            Width = 116
           end
           object grddbtvDetailnama_pasien: TcxGridDBColumn
             Caption = 'Coustomer'
@@ -1626,7 +1626,7 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
             Options.FilteringPopup = False
             Options.FilteringPopupMultiSelect = False
             Options.Sorting = False
-            Width = 257
+            Width = 310
           end
           object grddbtvDetailid_rekanan: TcxGridDBColumn
             Caption = 'User/Kasir'
@@ -1642,7 +1642,7 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
             Options.FilteringPopup = False
             Options.FilteringPopupMultiSelect = False
             Options.Sorting = False
-            Width = 103
+            Width = 125
           end
           object grddbtvDetailtotal_tagihan: TcxGridDBColumn
             Caption = 'Total Penjualan'
@@ -1656,14 +1656,21 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
             Options.FilteringPopup = False
             Options.FilteringPopupMultiSelect = False
             Options.Sorting = False
-            Width = 124
+            Width = 149
           end
           object grddbtvDetailColumn1: TcxGridDBColumn
             Caption = 'Jenis Pembayaran'
             DataBinding.FieldName = 'cara_bayar'
             HeaderAlignmentHorz = taCenter
             HeaderAlignmentVert = vaCenter
-            Width = 100
+            Width = 121
+          end
+          object grddbtvDetailColumn2: TcxGridDBColumn
+            Caption = 'Jenis Penjualan'
+            DataBinding.FieldName = 'jns_penjualan'
+            HeaderAlignmentHorz = taCenter
+            HeaderAlignmentVert = vaCenter
+            Width = 119
           end
         end
         object grdlvlDetail: TcxGridLevel
@@ -1748,7 +1755,7 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
   object SR: TcxStyleRepository
     Left = 409
     Top = 6
-    PixelsPerInch = 106
+    PixelsPerInch = 96
     object cxStyle1: TcxStyle
       AssignedValues = [svColor, svFont, svTextColor]
       Color = 7039851
@@ -2053,6 +2060,10 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
     object Detailid: TLargeintField
       FieldName = 'id'
       Required = True
+    end
+    object Detailjns_penjualan: TStringField
+      FieldName = 'jns_penjualan'
+      Size = 400
     end
   end
   object dsDetail: TDataSource
@@ -3915,13 +3926,16 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
     Connection = DM.conn
     BeforeOpen = qNotaBeforeOpen
     SQL.Strings = (
-      ''
-      'select a.*, b.nama_rekanan'
+      'select a.*, b.nama_rekanan,'
+      '(case when a.id_trans='#39'201'#39' then '#39'Penjualan Toko'#39
+      
+        #9#9'when a.id_trans='#39'206'#39' then '#39'Penjualan Online'#39' end) as jns_penj' +
+        'ualan'
       'from transaksi.nota a'
       'left join master.mrekanan b on b.kd_rekanan=a.kd_rekanan'
       
-        'where a.id_trans='#39'201'#39' and a.ispost='#39'1'#39' and a.isdelete='#39'0'#39' and a' +
-        '.iscancel='#39'0'#39' and a.isget='#39'0'#39' and a.shift=:pshift'
+        'where a.id_trans in ('#39'201'#39','#39'206'#39') and a.ispost='#39'1'#39' and a.isdelet' +
+        'e='#39'0'#39' and a.iscancel='#39'0'#39' and a.isget='#39'0'#39' and a.shift=:pshift'
       
         'and a.dt_nota between to_timestamp(:ptgl0,'#39'dd/mm/yyyy'#39') and to_t' +
         'imestamp(:ptgl0,'#39'dd/mm/yyyy'#39') + interval '#39'23 hours 59 min'#39
@@ -3937,7 +3951,7 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
         Name = 'ptgl0'
         ParamType = ptUnknown
       end>
-    Left = 556
+    Left = 555
     Top = 104
     ParamData = <
       item
@@ -4174,6 +4188,11 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
       FieldName = 'nama_rekanan'
       Required = True
       Size = 1020
+    end
+    object qNotajns_penjualan: TMemoField
+      FieldName = 'jns_penjualan'
+      ReadOnly = True
+      BlobType = ftMemo
     end
   end
   object qTotal: TZQuery

@@ -16,7 +16,15 @@ uses
   SCStdControls, cxGridLevel, cxGridCustomTableView, cxGridDBTableView,
   cxClasses, cxControls, cxGridCustomView, cxGrid, cxPC, AdvGlowButton,
   AdvReflectionImage, cxButtonEdit, cxLookAndFeels, cxLookAndFeelPainters,
-  dxSkinsCore, dxSkinsDefaultPainters, dxSkinscxPCPainter;
+  dxSkinsCore, dxSkinsDefaultPainters, dxSkinscxPCPainter, dxSkinBlack,
+  dxSkinBlue, dxSkinCaramel, dxSkinCoffee, dxSkinDarkRoom, dxSkinDarkSide,
+  dxSkinFoggy, dxSkinGlassOceans, dxSkiniMaginary, dxSkinLilian,
+  dxSkinLiquidSky, dxSkinLondonLiquidSky, dxSkinMcSkin, dxSkinMoneyTwins,
+  dxSkinOffice2007Black, dxSkinOffice2007Blue, dxSkinOffice2007Green,
+  dxSkinOffice2007Pink, dxSkinOffice2007Silver, dxSkinOffice2010Black,
+  dxSkinOffice2010Blue, dxSkinOffice2010Silver, dxSkinPumpkin, dxSkinSeven,
+  dxSkinSharp, dxSkinSilver, dxSkinSpringTime, dxSkinStardust,
+  dxSkinSummer2008, dxSkinValentine, dxSkinXmas2008Blue;
 
 type
   TDBMode=(dmNone,dmBrowse,dmInsert,dmEdit);
@@ -180,8 +188,6 @@ type
     cxStyle5: TcxStyle;
     Detailid_mutasi_detail: TLargeintField;
     _DB_TGL_1: TDBText;
-    AdvToolBarSeparator1: TAdvToolBarSeparator;
-    AdvToolBarSeparator2: TAdvToolBarSeparator;
     grddbtvMasterno_bukti: TcxGridDBColumn;
     Masterppn_rp: TFloatField;
     Mastertotal: TFloatField;
@@ -815,7 +821,7 @@ begin
   Detailqty_ot.AsFloat:=0;
   Detailunit_price.AsFloat:= 0;
   Detailid_warehouse2.Clear;
-  Detailid_warehouse.Value:= 'GDU';
+  Detailid_warehouse.Value:= 'GBS';
   Detailistambahan.AsString:= '0';
 
   if Detail.RecNo=0 then

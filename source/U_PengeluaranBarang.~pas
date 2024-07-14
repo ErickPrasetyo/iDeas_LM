@@ -303,12 +303,11 @@ type
     cxDBLabel2: TcxDBLabel;
     Masterkd_outlet: TStringField;
     qryPOno_nota: TStringField;
-    qryPOdt_nota: TDateTimeField;
-    qryPOnama_sales: TStringField;
-    qryPOnama_customer: TStringField;
     qryPOno_bukti: TStringField;
+    qryPOdt_nota: TDateTimeField;
+    qryPOjns_transaksi: TStringField;
+    qryPOnama_supplier: TStringField;
     qryPOkd_rekanan: TStringField;
-    qryPOid_division: TStringField;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure actCloseExecute(Sender: TObject);
@@ -1216,8 +1215,7 @@ begin
         if Master.State=dsBrowse then
            Master.Edit;
         Masterno_bukti.AsString:= qryPOno_nota.AsString;
-        Masterkd_outlet.AsString:= qryPOkd_rekanan.AsString;
-        Masterkd_rekanan.AsString:= qryPOid_division.AsString;
+        Masterkd_rekanan.AsString:= qryPOkd_rekanan.AsString;
      end;
    except
         on E: Exception do

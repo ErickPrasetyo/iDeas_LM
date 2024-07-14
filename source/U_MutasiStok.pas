@@ -315,6 +315,7 @@ type
     edtItem: TcxTextEdit;
     Label16: TLabel;
     edtqty: TcxTextEdit;
+    frPOS80: TfrxReport;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure actCloseExecute(Sender: TObject);
@@ -992,7 +993,8 @@ begin
         Detail.EnableControls
       end;
 
- frIT.ShowReport;
+      //frIT.ShowReport;
+      frPOS80.ShowReport;
 
 end;
 

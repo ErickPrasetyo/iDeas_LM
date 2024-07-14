@@ -315,6 +315,7 @@ type
     edtItem: TcxTextEdit;
     Label16: TLabel;
     edtqty: TcxTextEdit;
+    frPOS80: TfrxReport;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure actCloseExecute(Sender: TObject);
@@ -992,7 +993,8 @@ begin
         Detail.EnableControls
       end;
 
- frIT.ShowReport;
+      //frIT.ShowReport;
+      frPOS80.ShowReport;
 
 end;
 
@@ -1093,11 +1095,11 @@ procedure TMutasiStokFrm.grddbtvDetailid_itemGetPropertiesForEdit(
   Sender: TcxCustomGridTableItem; ARecord: TcxCustomGridRecord;
   var AProperties: TcxCustomEditProperties);
 begin
-    if Detail.State in [dsInsert,dsedit] then begin
-       AProperties := ER_LCB_KODE.Properties;
-    end
-    else
-       AProperties := ER_TEXT.Properties;
+//    if Detail.State in [dsInsert,dsedit] then begin
+//       AProperties := ER_LCB_KODE.Properties;
+//    end
+//    else
+//       AProperties := ER_TEXT.Properties;
 end;
 
 procedure TMutasiStokFrm.grddbtvDetaildescriptionGetPropertiesForEdit(
@@ -1394,20 +1396,13 @@ begin
         Detail.Append;
         Detailid_item.AsString:= qItemkd_item.AsString;
         Detaildescription.AsString:= qItemnama_item.AsString;
-        Detailhrg.AsFloat:= qItemhrg_beli.AsFloat;
-        Detailsatuan_beli.AsString:= qItemsatuan_jual.AsString;
-        Detailqty_biji.AsFloat:= StrToFloat(edtqty.Text);
-        Detail.Post;
-
-        Detailid_item.AsString:= LItemkd_item.AsString;
-        Detaildescription.AsString:= LItemnama_item.AsString;
         Detailistambahan.AsString:= '0';
-        Detailqty_ot.AsFloat:= 0;
-
+        Detailqty_ot.AsFloat:= StrToFloat(edtqty.Text);
+        Detailid_warehouse.AsString:= 'GDU';
+        Detailid_warehouse2.AsString:= 'RAK';
+        Detail.Post;
         edtItem.Text:='';
         edtqty.Text:='';
-
-
         edtItem.SetFocus;
      except
      end;

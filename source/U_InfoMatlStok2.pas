@@ -15,7 +15,16 @@ uses
   RzDBNav, cxContainer, cxTextEdit, cxMaskEdit, cxButtonEdit, StdCtrls,
   cxRadioGroup, wwdbdatetimepicker, RzPanel, cxButtons, SCControl,
   frxExportXLS, cxDropDownEdit, cxLookAndFeels, dxSkinsCore,
-  dxSkinsDefaultPainters, dxSkinscxPCPainter, cxGridDBBandedTableView;
+  dxSkinsDefaultPainters, dxSkinscxPCPainter, cxGridDBBandedTableView,
+  dxSkinBlack, dxSkinBlue, dxSkinCaramel, dxSkinCoffee, dxSkinDarkRoom,
+  dxSkinDarkSide, dxSkinFoggy, dxSkinGlassOceans, dxSkiniMaginary,
+  dxSkinLilian, dxSkinLiquidSky, dxSkinLondonLiquidSky, dxSkinMcSkin,
+  dxSkinMoneyTwins, dxSkinOffice2007Black, dxSkinOffice2007Blue,
+  dxSkinOffice2007Green, dxSkinOffice2007Pink, dxSkinOffice2007Silver,
+  dxSkinOffice2010Black, dxSkinOffice2010Blue, dxSkinOffice2010Silver,
+  dxSkinPumpkin, dxSkinSeven, dxSkinSharp, dxSkinSilver, dxSkinSpringTime,
+  dxSkinStardust, dxSkinSummer2008, dxSkinValentine, dxSkinXmas2008Blue,
+  ZAbstractDataset;
 
 type
   TInfoMatlStok2Frm = class(TForm)
@@ -211,6 +220,10 @@ type
     kmtMasterstok_masuk: TFloatField;
     kmtMasterstok_keluar: TFloatField;
     OpenDialog1: TSaveDialog;
+    qRak: TZQuery;
+    qRakkd_rak: TStringField;
+    qRakdeskripsi: TStringField;
+    LookRak: TwwLookupDialog;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnRefreshClick(Sender: TObject);
     procedure btnCloseClick(Sender: TObject);

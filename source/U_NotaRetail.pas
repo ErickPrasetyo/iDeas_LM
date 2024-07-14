@@ -608,6 +608,8 @@ type
     Detailketerangan: TStringField;
     grddbtvFP_DetailColumn4: TcxGridDBBandedColumn;
     frPOS80_Copy: TfrxReport;
+    qItemlok_rak: TStringField;
+    Detailid_warehouse: TStringField;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure actCloseExecute(Sender: TObject);
@@ -2448,6 +2450,7 @@ begin
           Detailhrg.AsFloat:= qItemhrg_jual.AsFloat;
           Detailsatuan_beli.AsString:= qItemsatuan_jual.AsString;
           Detailqty_biji.AsFloat:= StrToFloat(edtqty.Text);
+          Detailid_warehouse.AsString:= qItemlok_rak.AsString;
           Detaildisc_rp.AsFloat:= CheckPromoBnilai_promo.AsFloat*CheckPromoBdiv.AsFloat;
           Detail.Post;
           edtItem.Text:='';
@@ -2460,6 +2463,7 @@ begin
           Detailhrg.AsFloat:= qItemhrg_jual.AsFloat;
           Detailsatuan_beli.AsString:= qItemsatuan_jual.AsString;
           Detailqty_biji.AsFloat:= StrToFloat(edtqty.Text);
+          Detailid_warehouse.AsString:= qItemlok_rak.AsString;
           Detaildisc_rp.AsFloat:= 0;
           Detail.Post;
           edtItem.Text:='';
@@ -2476,6 +2480,7 @@ begin
           Detailhrg.AsFloat:= qItemhrg_jual.AsFloat;
           Detailsatuan_beli.AsString:= qItemsatuan_jual.AsString;
           Detailqty_biji.AsFloat:= StrToFloat(edtqty.Text);
+          Detailid_warehouse.AsString:= qItemlok_rak.AsString;
           Detaildisc_rp.AsFloat:= 0;
           Detail.Post;
 //          edtItem.Text:='';
@@ -2494,6 +2499,7 @@ begin
                 Detailqty_biji.AsFloat:= CheckPromoBqty_item_promo.AsFloat*CheckPromoBdiv.AsFloat;
 
             Detailsatuan_beli.AsString:= qItemsatuan_jual.AsString;
+            Detailid_warehouse.AsString:= qItemlok_rak.AsString;
             Detailispromo.AsString:= '1';
             Detaildisc_rp.AsFloat:= 0;
             Detailhrg.AsFloat:= 0;
@@ -2516,6 +2522,7 @@ begin
           Detailhrg.AsFloat:= qItemhrg_jual.AsFloat;
           Detailsatuan_beli.AsString:= qItemsatuan_jual.AsString;
           Detailqty_biji.AsFloat:= StrToFloat(edtqty.Text);
+          Detailid_warehouse.AsString:= qItemlok_rak.AsString;
           Detaildisc_rp.AsFloat:= 0;
           Detail.Post;
           edtItem.Text:='';

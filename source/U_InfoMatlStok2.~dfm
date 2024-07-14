@@ -1,7 +1,7 @@
 object InfoMatlStok2Frm: TInfoMatlStok2Frm
-  Left = 406
-  Top = 22
-  Width = 1382
+  Left = 115
+  Top = 15
+  Width = 1380
   Height = 754
   Caption = 'Kartu Stok Obat/ Alkes'
   Color = clBtnFace
@@ -21,7 +21,7 @@ object InfoMatlStok2Frm: TInfoMatlStok2Frm
   object SCPanel1: TSCPanel
     Left = 0
     Top = 40
-    Width = 1366
+    Width = 1364
     Height = 51
     Align = alTop
     Color = 16511984
@@ -31,7 +31,7 @@ object InfoMatlStok2Frm: TInfoMatlStok2Frm
     ParentColor = False
     TabOrder = 0
     object btnOK: TcxButton
-      Left = 598
+      Left = 552
       Top = 16
       Width = 63
       Height = 24
@@ -111,7 +111,7 @@ object InfoMatlStok2Frm: TInfoMatlStok2Frm
     object rgLOKASI: TRzGroupBox
       Left = 282
       Top = 5
-      Width = 303
+      Width = 260
       Height = 39
       Caption = 'Lokasi'
       TabOrder = 2
@@ -148,14 +148,14 @@ object InfoMatlStok2Frm: TInfoMatlStok2Frm
           end>
         Properties.OnButtonClick = EJenisPropertiesButtonClick
         TabOrder = 2
-        Width = 140
+        Width = 93
       end
     end
   end
   object pnlHeader: TAdvPanel
     Left = 0
     Top = 0
-    Width = 1366
+    Width = 1364
     Height = 40
     Align = alTop
     BevelOuter = bvNone
@@ -218,7 +218,7 @@ object InfoMatlStok2Frm: TInfoMatlStok2Frm
   object AdvPanel1: TAdvPanel
     Left = 0
     Top = 664
-    Width = 1366
+    Width = 1364
     Height = 51
     Align = alBottom
     BevelOuter = bvNone
@@ -378,7 +378,7 @@ object InfoMatlStok2Frm: TInfoMatlStok2Frm
   object grdItem: TcxGrid
     Left = 0
     Top = 91
-    Width = 1366
+    Width = 1364
     Height = 302
     Align = alTop
     Font.Charset = ANSI_CHARSET
@@ -682,14 +682,14 @@ object InfoMatlStok2Frm: TInfoMatlStok2Frm
   object pgDetail: TcxPageControl
     Left = 0
     Top = 393
-    Width = 1366
+    Width = 1364
     Height = 271
     ActivePage = cxTabSheet1
     Align = alClient
     Style = 8
     TabOrder = 6
     ClientRectBottom = 271
-    ClientRectRight = 1366
+    ClientRectRight = 1364
     ClientRectTop = 24
     object cxTabSheet1: TcxTabSheet
       Caption = 'DETAIL TRANSAKSI'
@@ -697,7 +697,7 @@ object InfoMatlStok2Frm: TInfoMatlStok2Frm
       object pnlHistory: TPanel
         Left = 0
         Top = 0
-        Width = 1366
+        Width = 1364
         Height = 247
         Align = alClient
         BevelOuter = bvNone
@@ -705,7 +705,7 @@ object InfoMatlStok2Frm: TInfoMatlStok2Frm
         object pnlHeaderMaster: TPanel
           Left = 0
           Top = 0
-          Width = 1366
+          Width = 1364
           Height = 23
           Align = alTop
           Alignment = taLeftJustify
@@ -723,7 +723,7 @@ object InfoMatlStok2Frm: TInfoMatlStok2Frm
         object grdetail: TcxGrid
           Left = 0
           Top = 23
-          Width = 1366
+          Width = 1364
           Height = 224
           Align = alClient
           Font.Charset = ANSI_CHARSET
@@ -2582,7 +2582,12 @@ object InfoMatlStok2Frm: TInfoMatlStok2Frm
       'select '
       'c.id_warehouse,'
       'c.description'
-      'from master.warehouse c')
+      'from master.warehouse c'
+      'union all'
+      'select'
+      'a.kd_rak,'
+      'a.deskripsi'
+      'from master.rak a')
     Params = <>
     Left = 551
     Top = 7
@@ -5116,5 +5121,42 @@ object InfoMatlStok2Frm: TInfoMatlStok2Frm
     Filter = '.xls'
     Left = 680
     Top = 47
+  end
+  object qRak: TZQuery
+    Connection = DM.conn
+    SQL.Strings = (
+      'select kd_rak, deskripsi'
+      'from master.rak'
+      'order by kd_rak asc')
+    Params = <>
+    Left = 778
+    Top = 8
+    object qRakkd_rak: TStringField
+      DisplayLabel = 'RAK'
+      DisplayWidth = 50
+      FieldName = 'kd_rak'
+      Required = True
+      Size = 80
+    end
+    object qRakdeskripsi: TStringField
+      FieldName = 'deskripsi'
+      Required = True
+      Visible = False
+      Size = 200
+    end
+  end
+  object LookRak: TwwLookupDialog
+    Selected.Strings = (
+      'kd_rak'#9'50'#9'RAK'#9'F')
+    GridTitleAlignment = taCenter
+    GridColor = clWhite
+    GridOptions = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgPerfectRowFit]
+    LookupTable = qRak
+    Caption = 'Lookup ITEM'
+    MaxWidth = 0
+    MaxHeight = 209
+    CharCase = ecNormal
+    Left = 807
+    Top = 7
   end
 end

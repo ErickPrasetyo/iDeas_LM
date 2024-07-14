@@ -4718,4 +4718,111 @@ object DM: TDM
       ReadOnly = True
     end
   end
+  object L_Member_Online: TZReadOnlyQuery
+    Connection = conn
+    SQL.Strings = (
+      'select * from master.member_online')
+    Params = <>
+    Left = 496
+    Top = 136
+    object L_Member_Onlinekd_member: TStringField
+      FieldName = 'kd_member'
+      Required = True
+      Size = 80
+    end
+    object L_Member_Onlinenama_member: TStringField
+      FieldName = 'nama_member'
+      Required = True
+      Size = 1020
+    end
+    object L_Member_Onlinealamat: TStringField
+      FieldName = 'alamat'
+      Required = True
+      Size = 1020
+    end
+    object L_Member_Onlinejenis_member: TStringField
+      FieldName = 'jenis_member'
+      Required = True
+      Size = 200
+    end
+    object L_Member_Onlinetelephone_gsm: TStringField
+      FieldName = 'telephone_gsm'
+      Required = True
+      Size = 400
+    end
+    object L_Member_Onlinetelephone_wa: TStringField
+      FieldName = 'telephone_wa'
+      Required = True
+      Size = 400
+    end
+    object L_Member_Onlineemail: TStringField
+      FieldName = 'email'
+      Required = True
+      Size = 400
+    end
+    object L_Member_Onlinenama_akun_bank: TStringField
+      FieldName = 'nama_akun_bank'
+      Required = True
+      Size = 400
+    end
+    object L_Member_Onlinenama_bank: TStringField
+      FieldName = 'nama_bank'
+      Required = True
+      Size = 400
+    end
+    object L_Member_Onlineno_rek_bank: TIntegerField
+      FieldName = 'no_rek_bank'
+      Required = True
+    end
+    object L_Member_Onlinedisc_member_psn: TFloatField
+      FieldName = 'disc_member_psn'
+      Required = True
+    end
+    object L_Member_Onlinedisc_member_rp: TFloatField
+      FieldName = 'disc_member_rp'
+      Required = True
+    end
+    object L_Member_Onlinemin_buy: TFloatField
+      FieldName = 'min_buy'
+      Required = True
+    end
+    object L_Member_Onlinemax_buy: TFloatField
+      FieldName = 'max_buy'
+      Required = True
+    end
+    object L_Member_Onlineid_rek_gl: TStringField
+      FieldName = 'id_rek_gl'
+      Size = 120
+    end
+    object L_Member_Onlineusr_ins: TStringField
+      FieldName = 'usr_ins'
+      Required = True
+      Size = 120
+    end
+    object L_Member_Onlineusr_upd: TStringField
+      FieldName = 'usr_upd'
+      Required = True
+      Size = 120
+    end
+    object L_Member_Onlinedt_ins: TDateTimeField
+      FieldName = 'dt_ins'
+      Required = True
+    end
+    object L_Member_Onlinedt_upd: TDateTimeField
+      FieldName = 'dt_upd'
+      Required = True
+    end
+    object L_Member_Onlineisaktif: TStringField
+      FieldName = 'isaktif'
+      Size = 4
+    end
+    object L_Member_Onlineno_refferal: TStringField
+      FieldName = 'no_refferal'
+      Size = 80
+    end
+    object L_Member_Onlinerefferal_isclaim: TStringField
+      FieldName = 'refferal_isclaim'
+      Size = 4
+    end
+  end
 end

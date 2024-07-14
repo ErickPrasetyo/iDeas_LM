@@ -18,7 +18,15 @@ uses
   cxGridCustomTableView, cxGridDBTableView, cxClasses, cxControls,
   cxGridCustomView, cxGrid, cxPC, AdvGlowButton, AdvReflectionImage,
   cxLookAndFeels, cxLookAndFeelPainters, dxSkinsCore,
-  dxSkinsDefaultPainters, dxSkinscxPCPainter, Menus;
+  dxSkinsDefaultPainters, dxSkinscxPCPainter, Menus, dxSkinBlack,
+  dxSkinBlue, dxSkinCaramel, dxSkinCoffee, dxSkinDarkRoom, dxSkinDarkSide,
+  dxSkinFoggy, dxSkinGlassOceans, dxSkiniMaginary, dxSkinLilian,
+  dxSkinLiquidSky, dxSkinLondonLiquidSky, dxSkinMcSkin, dxSkinMoneyTwins,
+  dxSkinOffice2007Black, dxSkinOffice2007Blue, dxSkinOffice2007Green,
+  dxSkinOffice2007Pink, dxSkinOffice2007Silver, dxSkinOffice2010Black,
+  dxSkinOffice2010Blue, dxSkinOffice2010Silver, dxSkinPumpkin, dxSkinSeven,
+  dxSkinSharp, dxSkinSilver, dxSkinSpringTime, dxSkinStardust,
+  dxSkinSummer2008, dxSkinValentine, dxSkinXmas2008Blue;
 
 type
   TDBMode=(dmNone,dmBrowse,dmInsert,dmEdit);
@@ -583,6 +591,8 @@ type
     MemMasterdisc_member: TStringField;
     frPOS80: TfrxReport;
     grddbtvMasterColumn1: TcxGridDBColumn;
+    qItemlok_rak: TStringField;
+    Detailid_warehouse: TStringField;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure actCloseExecute(Sender: TObject);
@@ -1719,6 +1729,7 @@ begin
         Detailhrg.AsFloat:= qItemhrg_jual.AsFloat;
         Detailsatuan_beli.AsString:= qItemsatuan_jual.AsString;
         Detailqty_biji.AsFloat:= StrToFloat(edtqty.Text);
+        Detailid_warehouse.AsString:= qItemlok_rak.AsString;
         Detail.Post;
         edtItem.Text:='';
         edtqty.Text:='';

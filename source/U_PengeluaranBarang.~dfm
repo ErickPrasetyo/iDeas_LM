@@ -1036,17 +1036,17 @@ object PengeluaranBarangFrm: TPengeluaranBarangFrm
           object Label5: TLabel
             Left = 9
             Top = 48
-            Width = 75
+            Width = 38
             Height = 13
-            Caption = 'Nama Salesman'
+            Caption = 'Supplier'
             Transparent = True
           end
           object Label7: TLabel
             Left = 10
             Top = 76
-            Width = 52
+            Width = 47
             Height = 13
-            Caption = 'Kode Sales'
+            Caption = 'No. Retur'
             Transparent = True
           end
           object edtRekanan: TwwDBLookupComboDlg
@@ -1089,7 +1089,7 @@ object PengeluaranBarangFrm: TPengeluaranBarangFrm
           object edtNoPO: TcxDBButtonEdit
             Left = 96
             Top = 44
-            DataBinding.DataField = 'kd_outlet'
+            DataBinding.DataField = 'kd_rekanan'
             DataBinding.DataSource = dsMaster
             Properties.Buttons = <
               item
@@ -1105,7 +1105,7 @@ object PengeluaranBarangFrm: TPengeluaranBarangFrm
           object cxDBLabel2: TcxDBLabel
             Left = 98
             Top = 76
-            DataBinding.DataField = 'kd_rekanan'
+            DataBinding.DataField = 'no_bukti'
             DataBinding.DataSource = dsMaster
             ParentFont = False
             Style.Font.Charset = ANSI_CHARSET
@@ -1474,7 +1474,7 @@ object PengeluaranBarangFrm: TPengeluaranBarangFrm
             Top = 2
             Width = 177
             Height = 25
-            Caption = 'Ambil Data dari Daftar Permintaan'
+            Caption = 'Ambil Data dari Daftar Retur'
             Color = 13303760
             RoundColor = 11507049
             RoundWithParentColor = False
@@ -1539,14 +1539,14 @@ object PengeluaranBarangFrm: TPengeluaranBarangFrm
             Width = 38
           end
           object grddbtvDetailColumn1: TcxGridDBColumn
-            Caption = 'NO. FAKTUR PENJUALAN'
+            Caption = 'NO. RETUR'
             DataBinding.FieldName = 'no_faktur_jual'
             HeaderAlignmentHorz = taCenter
             HeaderAlignmentVert = vaCenter
             Width = 139
           end
           object grddbtvDetailid_item: TcxGridDBColumn
-            Caption = 'KODE'
+            Caption = 'KODE ITEM'
             DataBinding.FieldName = 'id_item'
             OnGetPropertiesForEdit = grddbtvDetailid_itemGetPropertiesForEdit
             HeaderAlignmentHorz = taCenter
@@ -2448,6 +2448,8 @@ object PengeluaranBarangFrm: TPengeluaranBarangFrm
     UseFileCache = True
     ShowProgress = True
     OverwritePrompt = False
+    DataOnly = False
+    ExportEMF = True
     AsText = False
     Background = True
     FastExport = True
@@ -2481,6 +2483,7 @@ object PengeluaranBarangFrm: TPengeluaranBarangFrm
       'nama_bagian=nama_bagian'
       'nama_item=nama_item')
     DataSet = MemMaster
+    BCDToCurrency = False
     Left = 292
     Top = 10
   end
@@ -2488,10 +2491,12 @@ object PengeluaranBarangFrm: TPengeluaranBarangFrm
     UseFileCache = True
     ShowProgress = True
     OverwritePrompt = False
+    DataOnly = False
     PrintOptimized = False
     Outline = False
     Background = False
     HTMLTags = True
+    Quality = 95
     Author = 'FastReport'
     Subject = 'FastReport PDF export'
     ProtectionFlags = [ePrint, eModify, eCopy, eAnnot]
@@ -2508,6 +2513,8 @@ object PengeluaranBarangFrm: TPengeluaranBarangFrm
     UseFileCache = True
     ShowProgress = True
     OverwritePrompt = False
+    DataOnly = False
+    PictureType = gpPNG
     Wysiwyg = True
     Creator = 'FastReport'
     SuppressPageHeadersFooters = False
@@ -2533,6 +2540,7 @@ object PengeluaranBarangFrm: TPengeluaranBarangFrm
       'sub_total=sub_total'
       'qty_in=qty_in')
     DataSet = MemDetail
+    BCDToCurrency = False
     Left = 294
     Top = 40
   end
@@ -2877,7 +2885,7 @@ object PengeluaranBarangFrm: TPengeluaranBarangFrm
     Top = 80
   end
   object frIT: TfrxReport
-    Version = '4.5'
+    Version = '5.2.3'
     DotMatrixReport = False
     EngineOptions.DoublePass = True
     IniFile = '\Software\Fast Reports'
@@ -2933,6 +2941,7 @@ object PengeluaranBarangFrm: TPengeluaranBarangFrm
       ColumnPositions.Strings = (
         '0')
       object PageHeader1: TfrxPageHeader
+        FillType = ftBrush
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Height = -11
@@ -3259,6 +3268,11 @@ object PengeluaranBarangFrm: TPengeluaranBarangFrm
           Text = '12345678'
           WideBarRatio = 2.000000000000000000
           Zoom = 1.000000000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = []
         end
         object Memo1: TfrxMemoView
           Align = baCenter
@@ -3281,6 +3295,7 @@ object PengeluaranBarangFrm: TPengeluaranBarangFrm
         end
       end
       object PageFooter1: TfrxPageFooter
+        FillType = ftBrush
         Height = 117.165430000000000000
         Restrictions = [rfDontMove]
         Top = 321.260050000000000000
@@ -3524,6 +3539,7 @@ object PengeluaranBarangFrm: TPengeluaranBarangFrm
         end
       end
       object HeaderPRDetail: TfrxHeader
+        FillType = ftBrush
         Height = 26.456710000000000000
         Top = 192.756030000000000000
         Width = 699.213050000000000000
@@ -3652,6 +3668,7 @@ object PengeluaranBarangFrm: TPengeluaranBarangFrm
         end
       end
       object MasterDataPRDetail: TfrxMasterData
+        FillType = ftBrush
         Height = 18.897650000000000000
         Top = 241.889920000000000000
         Width = 699.213050000000000000
@@ -3872,6 +3889,7 @@ object PengeluaranBarangFrm: TPengeluaranBarangFrm
       'fax_perusahaan=fax_perusahaan'
       'kota_perusahaan=kota_perusahaan')
     DataSet = MemInfoPerusahaan
+    BCDToCurrency = False
     Left = 331
     Top = 71
   end
@@ -4266,8 +4284,8 @@ object PengeluaranBarangFrm: TPengeluaranBarangFrm
     Selected.Strings = (
       'no_nota'#9'20'#9'No. Faktur Penjualan'#9'F'
       'dt_nota'#9'18'#9'Tgl. Faktur'#9'F'
-      'nama_sales'#9'30'#9'Nama Sales'#9'F'
-      'nama_customer'#9'50'#9'Nama Customer'#9'F')
+      'no_bukti'#9'20'#9'no_bukti'#9'F'
+      'nama_supplier'#9'50'#9'nama_supplier'#9'F')
     GridTitleAlignment = taCenter
     GridColor = clWhite
     GridOptions = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgPerfectRowFit]
@@ -4418,13 +4436,11 @@ object PengeluaranBarangFrm: TPengeluaranBarangFrm
     Connection = DM.conn
     SQL.Strings = (
       
-        'select a.no_nota, a.no_bukti, a.dt_nota, b.description as nama_s' +
-        'ales, c.nama_rekanan as nama_customer, c.kd_rekanan, b.id_divisi' +
-        'on'
+        'select a.no_nota, a.no_bukti, a.dt_nota, a.jns_transaksi, c.nama' +
+        '_rekanan as nama_supplier, c.kd_rekanan'
       'from transaksi.nota a'
-      'left join master.mdivision b on b.id_division=a.id_division'
       'left join master.mrekanan c on c.kd_rekanan=a.kd_rekanan'
-      'where a.isdelete='#39'0'#39' and a.id_trans='#39'201'#39' and a.isget='#39'0'#39)
+      'where a.isdelete='#39'0'#39' and a.isget='#39'0'#39' and a.id_trans='#39'102'#39)
     Params = <>
     Left = 664
     Top = 116
@@ -4435,43 +4451,34 @@ object PengeluaranBarangFrm: TPengeluaranBarangFrm
       Size = 120
     end
     object qryPOdt_nota: TDateTimeField
-      Alignment = taCenter
       DisplayLabel = 'Tgl. Faktur'
       DisplayWidth = 18
       FieldName = 'dt_nota'
       Required = True
-      DisplayFormat = 'dd/mm/yyyy hh:mm'
     end
-    object qryPOnama_sales: TStringField
-      DisplayLabel = 'Nama Sales'
-      DisplayWidth = 30
-      FieldName = 'nama_sales'
-      Required = True
-      Size = 200
+    object qryPOno_bukti: TStringField
+      DisplayWidth = 20
+      FieldName = 'no_bukti'
+      Size = 120
     end
-    object qryPOnama_customer: TStringField
-      DisplayLabel = 'Nama Customer'
+    object qryPOnama_supplier: TStringField
       DisplayWidth = 50
-      FieldName = 'nama_customer'
+      FieldName = 'nama_supplier'
       Required = True
       Size = 1020
     end
-    object qryPOno_bukti: TStringField
-      FieldName = 'no_bukti'
+    object qryPOjns_transaksi: TStringField
+      DisplayLabel = 'Nama Supplier'
+      DisplayWidth = 50
+      FieldName = 'jns_transaksi'
       Visible = False
-      Size = 120
+      Size = 400
     end
     object qryPOkd_rekanan: TStringField
       FieldName = 'kd_rekanan'
       Required = True
       Visible = False
       Size = 80
-    end
-    object qryPOid_division: TStringField
-      FieldName = 'id_division'
-      Required = True
-      Visible = False
-      Size = 48
     end
   end
   object qryupdate: TZQuery
