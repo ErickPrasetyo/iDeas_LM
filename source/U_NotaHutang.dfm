@@ -1,6 +1,6 @@
 object NotaHutangFrm: TNotaHutangFrm
-  Left = 435
-  Top = 106
+  Left = 332
+  Top = 57
   Width = 1218
   Height = 642
   Caption = 'Nota Hutang'

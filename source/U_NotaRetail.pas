@@ -701,8 +701,8 @@ type
     procedure Print;
     procedure Bayar;
     procedure UpdateBayar(cara, bank, nokartu, dibayar, kembali: string);
-    function CheckPromoUang(kd_item: String): Boolean;
-    function CheckPromoBarang(kd_item: String): Boolean;
+    function CheckPromoUang(kd_item: String; qty : Double): Boolean;
+    function CheckPromoBarang(kd_item: String; qty : Double): Boolean;
 
 
   public
@@ -720,14 +720,14 @@ uses U_DM, U_Currency, U_NotaPiutang, U_BayarNotaPenjualan, Math;
 
 {$R *.dfm}
 
-function TNotaRetailFrm.CheckPromoBarang(kd_item: String): Boolean;
+function TNotaRetailFrm.CheckPromoBarang(kd_item: String; qty : Double): Boolean;
 begin
   Result := False;
   Try
     CheckPromoB.Close;
     CheckPromoB.Params.ParamByName('kd_item').Value:= kd_item;
     CheckPromoB.Params.ParamByName('jenis').Value:= 'BARANG';
-    CheckPromoB.Params.ParamByName('qty').Value:= StrToFloat(edtqty.Text);
+    CheckPromoB.Params.ParamByName('qty').Value:= qty;
     CheckPromoB.Open;
     if CheckPromoB.RecordCount>0 then
     Result:= True
@@ -736,14 +736,14 @@ begin
   end
 end;
 
-function TNotaRetailFrm.CheckPromoUang(kd_item: String): Boolean;
+function TNotaRetailFrm.CheckPromoUang(kd_item: String; qty : Double): Boolean;
 begin
   Result := False;
   Try
     CheckPromoB.Close;
     CheckPromoB.Params.ParamByName('kd_item').Value:= kd_item;
     CheckPromoB.Params.ParamByName('jenis').Value:= 'UANG';
-    CheckPromoB.Params.ParamByName('qty').Value:= StrToFloat(edtqty.Text);
+    CheckPromoB.Params.ParamByName('qty').Value:= qty;
     CheckPromoB.Open;
     if CheckPromoB.RecordCount>0 then
     Result:= True
@@ -1506,7 +1506,7 @@ end;
 
 procedure TNotaRetailFrm.DetailNewRecord(DataSet: TDataSet);
 begin
-  
+
   Detailid_nota.AsLargeInt:= Masterid_nota.AsLargeInt;
   Detailhrg.AsFloat:= 0;
 
@@ -2281,6 +2281,7 @@ begin
    Detailkd_item.AsString:= qryITEMkd_item.AsString;
    Detailhrg.AsFloat:= qryITEMhrg_jual.AsFloat;
    Detailsatuan_beli.AsString:= qryITEMsatuan_jual.AsString;
+   Detailqty_biji.AsFloat:= 1;
 end;
 
 
@@ -2293,13 +2294,87 @@ end;
 procedure TNotaRetailFrm.Detailqty_bijiChange(Sender: TField);
 begin
 
-  try
-    qCekHrg_Jual.Close;
-    qCekHrg_Jual.Open;
-    Detailhrg.AsFloat:= qCekHrg_Jualhrg.AsFloat;
-  except
+    try
+      qCekHrg_Jual.Close;
+      qCekHrg_Jual.Open;
+      Detailhrg.AsFloat:= qCekHrg_Jualhrg.AsFloat;
 
-  end;
+//      qItem.Close;
+//      qItem.Params.ParamByName('pkd_item').Value:= Detailkd_item.AsString;
+//      qItem.Open;
+//
+//        if CheckPromoUang(Detailkd_item.AsString, Detailqty_biji.AsFloat) then begin
+//           if CheckPromoBdiv.AsFloat>0 then begin
+//              Detailhrg.AsFloat:= qItemhrg_jual.AsFloat;
+//              Detailid_warehouse.AsString:= qItemlok_rak.AsString;
+//              Detaildisc_rp.AsFloat:= CheckPromoBnilai_promo.AsFloat*CheckPromoBdiv.AsFloat;
+//  //            Detail.Post;
+//  //            edtItem.Text:='';
+//  //            edtqty.Text:='';
+//  //            edtItem.SetFocus;
+//           end else begin
+//              Detailhrg.AsFloat:= qItemhrg_jual.AsFloat;
+//              Detailid_warehouse.AsString:= qItemlok_rak.AsString;
+//              Detaildisc_rp.AsFloat:= 0;
+//  //            Detail.Post;
+//  //            edtItem.Text:='';
+//  //            edtqty.Text:='';
+//  //            edtItem.SetFocus;
+//           end
+//        end
+//        else
+//        if CheckPromoBarang(Detailkd_item.AsString, Detailqty_biji.AsFloat) then begin
+//          if CheckPromoBdiv.AsFloat>0 then begin
+//              Detailhrg.AsFloat:= qItemhrg_jual.AsFloat;
+//              Detailid_warehouse.AsString:= qItemlok_rak.AsString;
+//              Detaildisc_rp.AsFloat:= 0;
+//  //            Detail.Post;
+//    //          edtItem.Text:='';
+//    //          edtqty.Text:='';
+//    //          edtItem.SetFocus;
+//
+//              CheckPromoB.First;
+//              while not CheckPromoB.Eof do begin
+//                Detail.Append;
+//                Detailkd_item.AsString:= CheckPromoBkd_item_promo.AsString;
+//                Detaildiskripsi.AsString:= CheckPromoBnama_item_promo.AsString;
+//
+//                if (CheckPromoBqty_item_promo.AsFloat*CheckPromoBdiv.AsFloat)>CheckPromoBqty_max.AsFloat then
+//                    Detailqty_biji.AsFloat:= CheckPromoBqty_max.AsFloat;
+//                if (CheckPromoBqty_item_promo.AsFloat*CheckPromoBdiv.AsFloat)<CheckPromoBqty_max.AsFloat then
+//                    Detailqty_biji.AsFloat:= CheckPromoBqty_item_promo.AsFloat*CheckPromoBdiv.AsFloat;
+//
+//                Detailsatuan_beli.AsString:= qItemsatuan_jual.AsString;
+//                Detailid_warehouse.AsString:= qItemlok_rak.AsString;
+//                Detailispromo.AsString:= '1';
+//                Detaildisc_rp.AsFloat:= 0;
+//                Detailhrg.AsFloat:= 0;
+//                Detailketerangan.AsString:= Trim('Promo Barang Dari Pembelian "'+UpperCase(qItemnama_item.AsString)+'"');
+//                Detail.Post;
+//                CheckPromoB.Next;
+//              end;
+//
+//              edtItem.Text:='';
+//              edtqty.Text:='';
+//              edtItem.SetFocus;
+//          end else begin
+//
+//          end;
+//
+//        end else begin
+//              Detailhrg.AsFloat:= qItemhrg_jual.AsFloat;
+//              Detailid_warehouse.AsString:= qItemlok_rak.AsString;
+//              Detaildisc_rp.AsFloat:= 0;
+//  //            Detail.Post;
+//  //            edtItem.Text:='';
+//  //            edtqty.Text:='';
+//  //            edtItem.SetFocus;
+//        end;
+
+
+    except
+
+    end;
 
 end;
 
@@ -2442,7 +2517,7 @@ end;
 procedure TNotaRetailFrm.edtqtyKeyPress(Sender: TObject; var Key: Char);
 begin
   if Key=#13 then begin
-    if CheckPromoUang(edtItem.Text) then begin
+    if CheckPromoUang(edtItem.Text, StrToFloat(edtqty.Text)) then begin
        if CheckPromoBdiv.AsFloat>0 then begin
           Detail.Append;
           Detailkd_item.AsString:= qItemkd_item.AsString;
@@ -2472,7 +2547,7 @@ begin
        end
     end
     else
-    if CheckPromoBarang(edtItem.Text) then begin
+    if CheckPromoBarang(edtItem.Text, StrToFloat(edtqty.Text)) then begin
       if CheckPromoBdiv.AsFloat>0 then begin
           Detail.Append;
           Detailkd_item.AsString:= qItemkd_item.AsString;

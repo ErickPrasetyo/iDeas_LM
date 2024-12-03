@@ -414,6 +414,7 @@ type
     Label11: TLabel;
     Label24: TLabel;
     edtNOBukti: TcxDBTextEdit;
+    frxPrintRetur: TfrxReport;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure actCloseExecute(Sender: TObject);
@@ -1261,7 +1262,8 @@ begin
             end;
 
 
-              frAP_A5.ShowReport
+              //frAP_A5.ShowReport
+              frxPrintRetur.ShowReport;
         end; //--------------------------------------------------- END OF CASE ITEM_INDEX=1
 
      1: begin

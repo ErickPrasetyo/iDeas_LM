@@ -1,6 +1,6 @@
 object KertasKerjaFrm: TKertasKerjaFrm
-  Left = 285
-  Top = 241
+  Left = 133
+  Top = 70
   Width = 1324
   Height = 698
   Caption = 'Kertas Kerja Stok Opname'
@@ -333,6 +333,10 @@ object KertasKerjaFrm: TKertasKerjaFrm
             end
             item
               Kind = skCount
+            end
+            item
+              Kind = skCount
+              Column = grddbtvItemno_nota
             end>
           DataController.Summary.SummaryGroups = <>
           OptionsView.DataRowHeight = 35
@@ -823,7 +827,12 @@ object KertasKerjaFrm: TKertasKerjaFrm
       'select '
       'c.id_warehouse,'
       'c.description'
-      'from master.warehouse c')
+      'from master.warehouse c'
+      'union all'
+      'select'
+      'a.kd_rak,'
+      'a.deskripsi'
+      'from master.rak a')
     Params = <>
     Left = 800
     Top = 41
@@ -864,7 +873,6 @@ object KertasKerjaFrm: TKertasKerjaFrm
   end
   object qGetItem: TZQuery
     Connection = DM.conn
-    BeforeOpen = qGetItemBeforeOpen
     SQL.Strings = (
       'select current_timestamp as dt_so, :pgudang as id_warehouse, a.*'
       'from inventory.fn_gen_kertas_kerja_so(:pgudang,:ptgl1) a'

@@ -116,7 +116,8 @@ uses
   U_KertasKerja in 'U_KertasKerja.pas' {KertasKerjaFrm},
   U_BayarNotaPenjualan in 'U_BayarNotaPenjualan.pas' {BayarNotaPenjualanFrm},
   U_ItemCheck in 'U_ItemCheck.pas' {ItemCheckFrm},
-  U_LapSetoran in 'U_LapSetoran.pas' {LapSetoranFrm};
+  U_LapSetoran in 'U_LapSetoran.pas' {LapSetoranFrm},
+  U_NotaOnline in 'U_NotaOnline.pas' {NotaOnlineFrm};
 
 {$R *.res}
 

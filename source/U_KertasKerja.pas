@@ -82,7 +82,6 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure btnCloseClick(Sender: TObject);
-    procedure qGetItemBeforeOpen(DataSet: TDataSet);
     procedure edtWarehousePropertiesButtonClick(Sender: TObject;
       AButtonIndex: Integer);
     procedure btnOKClick(Sender: TObject);
@@ -132,12 +131,6 @@ begin
   Close;
 end;
 
-procedure TKertasKerjaFrm.qGetItemBeforeOpen(DataSet: TDataSet);
-begin
-  qGetItem.Params.ParamByName('pgudang').Value:= edtWarehouse.Text;
-  qGetItem.Params.ParamByName('ptgl1').Value:= FormatDateTime('dd/mm/yyyy', edtDatePicker.DateTime);
-end;
-
 procedure TKertasKerjaFrm.edtWarehousePropertiesButtonClick(Sender: TObject;
   AButtonIndex: Integer);
 begin
@@ -158,8 +151,30 @@ begin
   if edtWarehouse.Text='' then
   raise Exception.Create('Lokasi Gudang Belum di Pilih !!!');
   try
-    qGetItem.Close;
-    qGetItem.Open;
+
+    if edtWarehouse.Text = 'GDU'  then begin
+
+        qGetItem.Close;
+        qGetItem.Params.ParamByName('pgudang').Value:= edtWarehouse.Text;
+        qGetItem.Params.ParamByName('ptgl1').Value:= FormatDateTime('dd/mm/yyyy', edtDatePicker.DateTime);
+        qGetItem.Open;
+
+    end else begin
+
+        qGetItem.Close;
+        qGetItem.SQL.Clear;
+        qGetItem.Params.Clear;
+        qGetItem.SQL.Add('select current_timestamp as dt_so, :pgudang as id_warehouse, a.* '+
+                          'from inventory.fn_gen_kertas_kerja_so(:pgudang,:ptgl1) a '+
+                            'left join master.item b on b.kd_item=a.id_item '+
+                              'where b.lok_rak=:pgudang '+
+                                'order by a.id_item');
+        qGetItem.Params.ParamByName('pgudang').Value:= edtWarehouse.Text;
+        qGetItem.Params.ParamByName('ptgl1').Value:= FormatDateTime('dd/mm/yyyy', edtDatePicker.DateTime);
+        qGetItem.Open;
+
+    end;
+
   except
     on E: Exception do
       DM.MyMsg(mmError,'Error has been encountered !',E.Message)

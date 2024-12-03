@@ -1,6 +1,6 @@
 object KertasKerjaFrm: TKertasKerjaFrm
-  Left = 285
-  Top = 241
+  Left = 103
+  Top = 44
   Width = 1324
   Height = 698
   Caption = 'Kertas Kerja Stok Opname'
@@ -20,8 +20,8 @@ object KertasKerjaFrm: TKertasKerjaFrm
   TextHeight = 13
   object pnlMiddle: TSCPanel
     Left = 0
-    Top = 610
-    Width = 1306
+    Top = 619
+    Width = 1308
     Height = 40
     Align = alBottom
     Color = 11769446
@@ -59,7 +59,7 @@ object KertasKerjaFrm: TKertasKerjaFrm
   object pnlHeader: TAdvPanel
     Left = 0
     Top = 0
-    Width = 1306
+    Width = 1308
     Height = 40
     Align = alTop
     BevelOuter = bvNone
@@ -123,7 +123,7 @@ object KertasKerjaFrm: TKertasKerjaFrm
   object SCPanel1: TSCPanel
     Left = 0
     Top = 40
-    Width = 1306
+    Width = 1308
     Height = 58
     Align = alTop
     Color = 16511984
@@ -204,14 +204,14 @@ object KertasKerjaFrm: TKertasKerjaFrm
   object pgTransaction: TcxPageControl
     Left = 0
     Top = 98
-    Width = 1306
-    Height = 512
+    Width = 1308
+    Height = 521
     ActivePage = tsItem
     Align = alClient
     Style = 8
     TabOrder = 5
-    ClientRectBottom = 512
-    ClientRectRight = 1306
+    ClientRectBottom = 521
+    ClientRectRight = 1308
     ClientRectTop = 24
     object tsItem: TcxTabSheet
       Caption = 'ITEM STOK'
@@ -219,8 +219,8 @@ object KertasKerjaFrm: TKertasKerjaFrm
       object grdItem: TcxGrid
         Left = 0
         Top = 0
-        Width = 1306
-        Height = 488
+        Width = 1308
+        Height = 497
         Align = alClient
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
@@ -333,6 +333,10 @@ object KertasKerjaFrm: TKertasKerjaFrm
             end
             item
               Kind = skCount
+            end
+            item
+              Kind = skCount
+              Column = grddbtvItemno_nota
             end>
           DataController.Summary.SummaryGroups = <>
           OptionsView.DataRowHeight = 35
@@ -689,7 +693,7 @@ object KertasKerjaFrm: TKertasKerjaFrm
   object SR: TcxStyleRepository
     Left = 472
     Top = 6
-    PixelsPerInch = 125
+    PixelsPerInch = 96
     object cxStyle1: TcxStyle
       AssignedValues = [svColor, svFont, svTextColor]
       Color = 7039851
@@ -823,7 +827,12 @@ object KertasKerjaFrm: TKertasKerjaFrm
       'select '
       'c.id_warehouse,'
       'c.description'
-      'from master.warehouse c')
+      'from master.warehouse c'
+      'union all'
+      'select'
+      'a.kd_rak,'
+      'a.deskripsi'
+      'from master.rak a')
     Params = <>
     Left = 800
     Top = 41
@@ -864,7 +873,6 @@ object KertasKerjaFrm: TKertasKerjaFrm
   end
   object qGetItem: TZQuery
     Connection = DM.conn
-    BeforeOpen = qGetItemBeforeOpen
     SQL.Strings = (
       'select current_timestamp as dt_so, :pgudang as id_warehouse, a.*'
       'from inventory.fn_gen_kertas_kerja_so(:pgudang,:ptgl1) a'

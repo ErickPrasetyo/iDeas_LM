@@ -1,6 +1,6 @@
 object NotaHutangFrm: TNotaHutangFrm
-  Left = 435
-  Top = 106
+  Left = 332
+  Top = 57
   Width = 1218
   Height = 642
   Caption = 'Nota Hutang'
@@ -3175,7 +3175,7 @@ object NotaHutangFrm: TNotaHutangFrm
     SQL.Strings = (
       'select kd_rekanan, nama_rekanan, plafon, alamat, kota '
       'from master.mrekanan'
-      'where jenis='#39'SUPPLIER'#39)
+      'where jenis='#39'SUPPLIER'#39' and is_aktif='#39'1'#39)
     Params = <>
     Left = 545
     Top = 10

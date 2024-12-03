@@ -247,8 +247,6 @@ type
     procedure grdItemDBBandedTableView1StylesGetContentStyle(
       Sender: TcxCustomGridTableView; ARecord: TcxCustomGridRecord;
       AItem: TcxCustomGridTableItem; out AStyle: TcxStyle);
-    procedure edtLokRakPropertiesButtonClick(Sender: TObject;
-      AButtonIndex: Integer);
   private
     { Private declarations }
     vjns_transaksi, vjns_gudang, vjns_item, namamenu, vGudang : string;
