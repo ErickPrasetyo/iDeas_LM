@@ -1,6 +1,6 @@
 object NotaRetailFrm: TNotaRetailFrm
-  Left = 264
-  Top = 34
+  Left = 83
+  Top = 14
   Width = 1240
   Height = 688
   Caption = 'KASIR'
@@ -1257,7 +1257,7 @@ object NotaRetailFrm: TNotaRetailFrm
         object cxGroupBox2: TcxGroupBox
           Left = 568
           Top = 11
-          Caption = 'Informasi'
+          Caption = 'Total Belanja'
           TabOrder = 5
           Transparent = True
           Height = 110
@@ -1271,6 +1271,26 @@ object NotaRetailFrm: TNotaRetailFrm
             OnKeyPress = MemRemarksKeyPress
             Height = 87
             Width = 360
+          end
+          object cxDBLabel3: TcxDBLabel
+            Left = 10
+            Top = 20
+            DataBinding.DataField = 'total'
+            DataBinding.DataSource = dsMaster
+            ParentFont = False
+            Properties.Alignment.Horz = taRightJustify
+            Properties.Alignment.Vert = taVCenter
+            Style.Font.Charset = ANSI_CHARSET
+            Style.Font.Color = clBlue
+            Style.Font.Height = -47
+            Style.Font.Name = 'Arial'
+            Style.Font.Style = [fsBold]
+            Style.IsFontAssigned = True
+            Transparent = True
+            Height = 89
+            Width = 355
+            AnchorX = 365
+            AnchorY = 65
           end
         end
       end
@@ -2058,7 +2078,7 @@ object NotaRetailFrm: TNotaRetailFrm
             Bands = <
               item
                 Caption = 'ITEM'
-                Width = 461
+                Width = 478
               end
               item
                 Width = 262
@@ -2097,9 +2117,9 @@ object NotaRetailFrm: TNotaRetailFrm
               Options.FilteringPopup = False
               Options.FilteringPopupMultiSelect = False
               Options.Sorting = False
-              Width = 102
+              Width = 145
               Position.BandIndex = 0
-              Position.ColIndex = 1
+              Position.ColIndex = 2
               Position.RowIndex = 0
             end
             object grddbtvFP_Detailnama_item: TcxGridDBBandedColumn
@@ -2114,9 +2134,9 @@ object NotaRetailFrm: TNotaRetailFrm
               Options.FilteringPopup = False
               Options.FilteringPopupMultiSelect = False
               Options.Sorting = False
-              Width = 205
+              Width = 278
               Position.BandIndex = 0
-              Position.ColIndex = 2
+              Position.ColIndex = 3
               Position.RowIndex = 0
             end
             object grddbtvFP_Detailqty_ot_biji: TcxGridDBBandedColumn
@@ -2210,6 +2230,19 @@ object NotaRetailFrm: TNotaRetailFrm
               Width = 282
               Position.BandIndex = 2
               Position.ColIndex = 3
+              Position.RowIndex = 0
+            end
+            object grddbtvFP_DetailColumn5: TcxGridDBBandedColumn
+              Caption = 'Gudang'
+              DataBinding.FieldName = 'isgudang'
+              PropertiesClassName = 'TcxCheckBoxProperties'
+              Properties.ValueChecked = '1'
+              Properties.ValueUnchecked = '0'
+              HeaderAlignmentHorz = taCenter
+              HeaderAlignmentVert = vaCenter
+              Width = 55
+              Position.BandIndex = 0
+              Position.ColIndex = 1
               Position.RowIndex = 0
             end
           end
@@ -2872,6 +2905,11 @@ object NotaRetailFrm: TNotaRetailFrm
     object Detailid_warehouse: TStringField
       FieldName = 'id_warehouse'
       Size = 80
+    end
+    object Detailisgudang: TStringField
+      FieldName = 'isgudang'
+      Required = True
+      Size = 4
     end
   end
   object dsDetail: TDataSource
@@ -17359,7 +17397,7 @@ object NotaRetailFrm: TNotaRetailFrm
     end
     object Page1: TfrxReportPage
       PaperWidth = 78.000000000000000000
-      PaperHeight = 140.000000000000000000
+      PaperHeight = 170.000000000000000000
       PaperSize = 256
       LeftMargin = 3.000000000000000000
       RightMargin = 5.000000000000000000
@@ -17371,7 +17409,7 @@ object NotaRetailFrm: TNotaRetailFrm
       object PageHeader1: TfrxPageHeader
         FillType = ftBrush
         Height = 24.795300000000000000
-        Top = 177.637910000000000000
+        Top = 268.346630000000000000
         Width = 264.567100000000000000
         object Memo9: TfrxMemoView
           Top = 3.779529999999994000
@@ -17430,7 +17468,7 @@ object NotaRetailFrm: TNotaRetailFrm
       object MasterData1: TfrxMasterData
         FillType = ftBrush
         Height = 34.015770000000010000
-        Top = 264.567100000000000000
+        Top = 355.275820000000000000
         Width = 264.567100000000000000
         DataSet = frxDBDetail
         DataSetName = 'frxDBDetail'
@@ -17592,7 +17630,7 @@ object NotaRetailFrm: TNotaRetailFrm
       object ReportSummary1: TfrxReportSummary
         FillType = ftBrush
         Height = 136.842610000000000000
-        Top = 359.055350000000000000
+        Top = 449.764070000000000000
         Width = 264.567100000000000000
         object Memo12: TfrxMemoView
           Top = 9.338590000000010000
@@ -17927,12 +17965,12 @@ object NotaRetailFrm: TNotaRetailFrm
       end
       object ReportTitle1: TfrxReportTitle
         FillType = ftBrush
-        Height = 136.063080000000000000
+        Height = 226.771800000000000000
         Top = 18.897650000000000000
         Width = 264.567100000000000000
         object Picture1: TfrxPictureView
           Align = baCenter
-          Left = 5.669294999999991000
+          Left = 5.669295000000000000
           Width = 253.228510000000000000
           Height = 56.692950000000000000
           Center = True
@@ -18846,7 +18884,7 @@ object NotaRetailFrm: TNotaRetailFrm
         end
         object Memo2: TfrxMemoView
           Align = baCenter
-          Left = 5.669294999999991000
+          Left = 5.669295000000000000
           Top = 58.149660000000000000
           Width = 253.228510000000000000
           Height = 18.897650000000000000
@@ -18874,7 +18912,7 @@ object NotaRetailFrm: TNotaRetailFrm
         end
         object Memo3: TfrxMemoView
           Left = 1.889765000000000000
-          Top = 87.385900000000010000
+          Top = 177.385900000000000000
           Width = 71.811070000000000000
           Height = 15.118120000000000000
           Font.Charset = DEFAULT_CHARSET
@@ -18888,7 +18926,7 @@ object NotaRetailFrm: TNotaRetailFrm
         end
         object Memo4: TfrxMemoView
           Left = 75.590600000000000000
-          Top = 87.385900000000010000
+          Top = 177.385900000000000000
           Width = 3.779530000000000000
           Height = 15.118120000000000000
           Font.Charset = DEFAULT_CHARSET
@@ -18903,7 +18941,7 @@ object NotaRetailFrm: TNotaRetailFrm
         end
         object Memo5: TfrxMemoView
           Left = 83.149660000000000000
-          Top = 87.385900000000010000
+          Top = 177.385900000000000000
           Width = 170.078850000000000000
           Height = 15.118120000000000000
           Font.Charset = DEFAULT_CHARSET
@@ -18922,7 +18960,7 @@ object NotaRetailFrm: TNotaRetailFrm
         end
         object Memo6: TfrxMemoView
           Left = 2.000000000000000000
-          Top = 103.283550000000000000
+          Top = 193.283550000000000000
           Width = 71.811070000000000000
           Height = 15.118110240000000000
           Font.Charset = DEFAULT_CHARSET
@@ -18936,7 +18974,7 @@ object NotaRetailFrm: TNotaRetailFrm
         end
         object Memo7: TfrxMemoView
           Left = 75.700835000000000000
-          Top = 103.283550000000000000
+          Top = 193.283550000000000000
           Width = 3.779530000000000000
           Height = 15.118110240000000000
           Font.Charset = DEFAULT_CHARSET
@@ -18951,7 +18989,7 @@ object NotaRetailFrm: TNotaRetailFrm
         end
         object Memo8: TfrxMemoView
           Left = 83.259895000000000000
-          Top = 103.283550000000000000
+          Top = 193.283550000000000000
           Width = 170.078850000000000000
           Height = 15.118110240000000000
           Font.Charset = DEFAULT_CHARSET
@@ -18965,7 +19003,7 @@ object NotaRetailFrm: TNotaRetailFrm
         end
         object Memo1: TfrxMemoView
           Left = 2.779530000000000000
-          Top = 118.504020000000000000
+          Top = 208.504020000000000000
           Width = 71.811070000000000000
           Height = 15.118110240000000000
           Font.Charset = DEFAULT_CHARSET
@@ -18979,7 +19017,7 @@ object NotaRetailFrm: TNotaRetailFrm
         end
         object Memo35: TfrxMemoView
           Left = 75.480365000000000000
-          Top = 118.504020000000000000
+          Top = 208.504020000000000000
           Width = 3.779530000000000000
           Height = 15.118110240000000000
           Font.Charset = DEFAULT_CHARSET
@@ -18994,7 +19032,7 @@ object NotaRetailFrm: TNotaRetailFrm
         end
         object Memo36: TfrxMemoView
           Left = 84.039425000000000000
-          Top = 118.504020000000000000
+          Top = 208.504020000000000000
           Width = 170.078850000000000000
           Height = 15.118110240000000000
           Font.Charset = DEFAULT_CHARSET
@@ -19005,6 +19043,26 @@ object NotaRetailFrm: TNotaRetailFrm
           Memo.UTF8 = (
             '[frxDBMaster."kasir"]')
           ParentFont = False
+        end
+        object Barcode2D1: TfrxBarcode2DView
+          Left = 83.149660000000000000
+          Top = 87.929190000000000000
+          Width = 84.000000000000000000
+          Height = 84.000000000000000000
+          BarType = bcCodeQR
+          BarProperties.Encoding = qrAuto
+          BarProperties.QuietZone = 0
+          BarProperties.ErrorLevels = ecL
+          BarProperties.PixelSize = 4
+          DataField = 'req_number'
+          DataSet = frxDBMaster
+          DataSetName = 'frxDBMaster'
+          Rotation = 0
+          ShowText = False
+          Text = '12345678'
+          Zoom = 1.000000000000000000
+          FontScaled = True
+          QuietZone = 0
         end
       end
     end

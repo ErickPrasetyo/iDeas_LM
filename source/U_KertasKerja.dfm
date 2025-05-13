@@ -1,6 +1,6 @@
 object KertasKerjaFrm: TKertasKerjaFrm
-  Left = 103
-  Top = 44
+  Left = 49
+  Top = 38
   Width = 1324
   Height = 698
   Caption = 'Kertas Kerja Stok Opname'
@@ -160,7 +160,6 @@ object KertasKerjaFrm: TKertasKerjaFrm
         ParentFont = False
         ShowButton = True
         TabOrder = 0
-        UnboundDataType = wwDTEdtDate
         DisplayFormat = 'DD MMM YYYY HH:NN:SS'
       end
       object edtWarehouse: TcxButtonEdit
@@ -874,10 +873,15 @@ object KertasKerjaFrm: TKertasKerjaFrm
   object qGetItem: TZQuery
     Connection = DM.conn
     SQL.Strings = (
-      'select current_timestamp as dt_so, :pgudang as id_warehouse, a.*'
-      'from inventory.fn_gen_kertas_kerja_so(:pgudang,:ptgl1) a'
+      'select :pdt_time as dt_so, :pgudang as id_warehouse, a.*'
+      'from inventory.fn_gen_kertas_kerja_so(:pgudang,:ptgl) a'
       'order by a.id_item')
     Params = <
+      item
+        DataType = ftUnknown
+        Name = 'pdt_time'
+        ParamType = ptUnknown
+      end
       item
         DataType = ftUnknown
         Name = 'pgudang'
@@ -885,7 +889,7 @@ object KertasKerjaFrm: TKertasKerjaFrm
       end
       item
         DataType = ftUnknown
-        Name = 'ptgl1'
+        Name = 'ptgl'
         ParamType = ptUnknown
       end>
     Left = 10
@@ -893,19 +897,19 @@ object KertasKerjaFrm: TKertasKerjaFrm
     ParamData = <
       item
         DataType = ftUnknown
+        Name = 'pdt_time'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
         Name = 'pgudang'
         ParamType = ptUnknown
       end
       item
         DataType = ftUnknown
-        Name = 'ptgl1'
+        Name = 'ptgl'
         ParamType = ptUnknown
       end>
-    object qGetItemdt_so: TDateTimeField
-      Alignment = taCenter
-      FieldName = 'dt_so'
-      ReadOnly = True
-    end
     object qGetItemid_warehouse: TMemoField
       Alignment = taCenter
       FieldName = 'id_warehouse'
@@ -936,6 +940,11 @@ object KertasKerjaFrm: TKertasKerjaFrm
       Alignment = taCenter
       FieldName = 'stok'
       ReadOnly = True
+    end
+    object qGetItemdt_so: TMemoField
+      FieldName = 'dt_so'
+      ReadOnly = True
+      BlobType = ftMemo
     end
   end
   object OpenDialog1: TSaveDialog

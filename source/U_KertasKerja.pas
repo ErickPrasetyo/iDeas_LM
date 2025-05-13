@@ -71,7 +71,6 @@ type
     OpenDialog1: TSaveDialog;
     edtWarehouse: TcxButtonEdit;
     btnOK: TcxButton;
-    qGetItemdt_so: TDateTimeField;
     qGetItemid_warehouse: TMemoField;
     qGetItemid_item: TStringField;
     qGetItemitem_name: TStringField;
@@ -79,6 +78,7 @@ type
     qGetItemrasio: TFloatField;
     qGetItemstok: TFloatField;
     grddbtvItemColumn2: TcxGridDBColumn;
+    qGetItemdt_so: TMemoField;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure btnCloseClick(Sender: TObject);
@@ -147,16 +147,22 @@ begin
 end;
 
 procedure TKertasKerjaFrm.btnOKClick(Sender: TObject);
+var
+  dt, dtTime : String;
 begin
   if edtWarehouse.Text='' then
   raise Exception.Create('Lokasi Gudang Belum di Pilih !!!');
+
+  dt:= FormatDateTime('dd/mm/yyyy', edtDatePicker.DateTime);
+  dtTime:= FormatDateTime('DD/MM/YYYY HH24:NN:SS', edtDatePicker.DateTime);
+
   try
 
     if edtWarehouse.Text = 'GDU'  then begin
 
         qGetItem.Close;
         qGetItem.Params.ParamByName('pgudang').Value:= edtWarehouse.Text;
-        qGetItem.Params.ParamByName('ptgl1').Value:= FormatDateTime('dd/mm/yyyy', edtDatePicker.DateTime);
+        qGetItem.Params.ParamByName('ptgl').Value:= dt;
         qGetItem.Open;
 
     end else begin
@@ -164,13 +170,14 @@ begin
         qGetItem.Close;
         qGetItem.SQL.Clear;
         qGetItem.Params.Clear;
-        qGetItem.SQL.Add('select current_timestamp as dt_so, :pgudang as id_warehouse, a.* '+
-                          'from inventory.fn_gen_kertas_kerja_so(:pgudang,:ptgl1) a '+
+        qGetItem.SQL.Add('select :pdt_time as dt_so, :pgudang as id_warehouse, a.* '+
+                          'from inventory.fn_gen_kertas_kerja_so(:pgudang,:ptgl) a '+
                             'left join master.item b on b.kd_item=a.id_item '+
                               'where b.lok_rak=:pgudang '+
                                 'order by a.id_item');
         qGetItem.Params.ParamByName('pgudang').Value:= edtWarehouse.Text;
-        qGetItem.Params.ParamByName('ptgl1').Value:= FormatDateTime('dd/mm/yyyy', edtDatePicker.DateTime);
+        qGetItem.Params.ParamByName('ptgl').Value:= dt;
+        qGetItem.Params.ParamByName('pdt_time').Value:= dtTime;
         qGetItem.Open;
 
     end;

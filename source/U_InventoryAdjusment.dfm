@@ -1,6 +1,6 @@
 object InventoryAdjusmentFrm: TInventoryAdjusmentFrm
-  Left = 470
-  Top = 195
+  Left = 149
+  Top = 83
   Width = 1178
   Height = 687
   Caption = 'Inventory Adjusment'
@@ -988,6 +988,7 @@ object InventoryAdjusmentFrm: TInventoryAdjusmentFrm
           Top = 82
           DataBinding.DataField = 'dt_mutasi'
           DataBinding.DataSource = dsMaster
+          Properties.Kind = ckDateTime
           Style.BorderStyle = ebsNone
           Style.Edges = [bLeft, bTop, bRight, bBottom]
           Style.Shadow = False

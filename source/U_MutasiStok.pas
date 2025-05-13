@@ -316,6 +316,24 @@ type
     Label16: TLabel;
     edtqty: TcxTextEdit;
     frPOS80: TfrxReport;
+    qPenjualan: TZReadOnlyQuery;
+    qPenjualanno_nota: TStringField;
+    qPenjualankd_item: TStringField;
+    qPenjualancolumn: TIntegerField;
+    qPenjualanqty_biji: TFloatField;
+    qPenjualancolumn_1: TMemoField;
+    qPenjualancolumn_2: TMemoField;
+    qPenjualandt_nota: TDateTimeField;
+    qPenjualancolumn_3: TMemoField;
+    qPenjualanhrg: TFloatField;
+    qPenjualancolumn_4: TMemoField;
+    qPenjualanid_trans: TStringField;
+    Masterjenis: TStringField;
+    Label7: TLabel;
+    edtJenis: TcxDBComboBox;
+    qPenjualandiskripsi: TStringField;
+    qBrowsejenis: TStringField;
+    grddbtvMasterColumn1: TcxGridDBColumn;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure actCloseExecute(Sender: TObject);
@@ -377,6 +395,7 @@ type
       var AProperties: TcxCustomEditProperties);
     procedure edtItemKeyPress(Sender: TObject; var Key: Char);
     procedure edtqtyKeyPress(Sender: TObject; var Key: Char);
+    procedure edtJenisPropertiesCloseUp(Sender: TObject);
   private
     { Private declarations }
     vjns_transaksi, vjudul: string;
@@ -756,14 +775,18 @@ begin
     Master.ApplyUpdates;
     Master.CommitUpdates;
 
-        s:= 'update transaksi.nota set isget='+QuotedStr('1');
-        s:= s+' where id_division='+QuotedStr(Masterkd_rekanan.AsString);
-        s:= s+' and isget='+QuotedStr('0');
-        qryupdate.Close;
-        qryupdate.SQL.Clear;
-        qryupdate.Params.Clear;
-        qryupdate.SQL.Add(s);
-        qryupdate.Open;
+//    if Masterjenis.AsString = 'PENGELUARAN' then begin
+//
+//        s:= 'update transaksi.nota set isgudang='+QuotedStr('1');
+//        s:= s+' where no_nota='+QuotedStr(edtItem.Text);
+//        s:= s+' and isgudang='+QuotedStr('0');
+//        qryupdate.Close;
+//        qryupdate.SQL.Clear;
+//        qryupdate.Params.Clear;
+//        qryupdate.SQL.Add(s);
+//        qryupdate.ExecSQL;
+//
+//    end;
 
     DM.CommitTransaction;
     qBrowse.Refresh;
@@ -810,7 +833,9 @@ begin
   end
 
   else if (Masterdescription.IsNull) or (Masterdescription.AsString='') then
-      raise Exception.Create('Jenis Pekerjaan Belum Diisi!');
+      raise Exception.Create('Jenis Pekerjaan Belum Diisi!')
+  else if (Masterjenis.IsNull) or (Masterjenis.AsString='') then
+      raise Exception.Create('Pilih Jenis Transaksi Dahulu!');
 
   if Master.State=dsInsert then begin
       Masterid_mutasi.AsLargeInt:= SQ.GetNextValue;
@@ -873,7 +898,7 @@ begin
     if (Detailid_warehouse.IsNull) or (Detailid_warehouse.AsString='') then
         raise Exception.Create('Gudang Asal belum diisi !')
     else
-    if (Detailid_warehouse2.IsNull) or (Detailid_warehouse2.AsString='') then
+    if ((Detailid_warehouse2.IsNull) or (Detailid_warehouse2.AsString='')) and (Masterjenis.AsString='MUTASI') then
         raise Exception.Create('Gudang Tujuan belum diisi !')
     else
     if Detailqty_ot.IsNull or (Detailqty_ot.AsFloat=0) then
@@ -1366,27 +1391,67 @@ end;
 
 procedure TMutasiStokFrm.edtItemKeyPress(Sender: TObject; var Key: Char);
 begin
-  if Key=#13 then
 
-    try
-      qItem.Close;
-      qItem.Params.ParamByName('pkd_item').Value:= edtItem.Text;
-      qItem.Open;
+  if Masterjenis.AsString = 'MUTASI' then begin
 
-      if qItem.RecordCount=0 then begin
-//        Detail.Append;
-//        Detailkd_item.AsString:= '';
-//        Detaildiskripsi.AsString:= '';
-//        Detailhrg.AsFloat:= 0;
-//        Detailsatuan_beli.AsString:= '';
-//        grddbtvFP_Detail.GetColumnByFieldName('qty').FocusWithSelection;
-      end else begin
-        edtqty.SetFocus;
+    if Key=#13 then
 
+      try
+        qItem.Close;
+        qItem.Params.ParamByName('pkd_item').Value:= edtItem.Text;
+        qItem.Open;
+
+        if qItem.RecordCount=0 then begin
+  //        Detail.Append;
+  //        Detailkd_item.AsString:= '';
+  //        Detaildiskripsi.AsString:= '';
+  //        Detailhrg.AsFloat:= 0;
+  //        Detailsatuan_beli.AsString:= '';
+  //        grddbtvFP_Detail.GetColumnByFieldName('qty').FocusWithSelection;
+        end else begin
+          edtqty.SetFocus;
+
+        end;
+
+      except
       end;
 
-    except
-    end;
+  end
+  else
+  if Masterjenis.AsString = 'PENGELUARAN' then begin
+
+    if Key=#13 then
+
+      try
+        qPenjualan.Close;
+        qPenjualan.Params.ParamByName('no_nota').Value:= edtItem.Text;
+        qPenjualan.Open;
+
+        if qPenjualan.RecordCount=0 then begin
+
+        end else begin
+          qPenjualan.First;
+          while not qPenjualan.Eof do begin
+
+            Detail.Append;
+            Detailid_item.AsString:= qPenjualankd_item.AsString;
+            Detaildescription.AsString:= qPenjualandiskripsi.AsString;
+            Detailistambahan.AsString:= '0';
+            Detailqty_ot.AsFloat:= qPenjualanqty_biji.AsFloat;
+            Detailid_warehouse.AsString:= 'GDU';
+            Detailid_warehouse2.AsString:= '';
+            Detail.Post;
+            qPenjualan.Next;
+
+          end;
+
+        end;
+
+      except
+      end;
+
+  end;
+
 end;
 
 procedure TMutasiStokFrm.edtqtyKeyPress(Sender: TObject; var Key: Char);
@@ -1406,6 +1471,11 @@ begin
         edtItem.SetFocus;
      except
      end;
+end;
+
+procedure TMutasiStokFrm.edtJenisPropertiesCloseUp(Sender: TObject);
+begin
+  edtItem.SetFocus;
 end;
 
 end.

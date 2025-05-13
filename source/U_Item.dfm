@@ -1,8 +1,8 @@
 object ItemFrm: TItemFrm
-  Left = 72
-  Top = 44
-  Width = 1210
-  Height = 616
+  Left = 222
+  Top = 185
+  Width = 1120
+  Height = 605
   Caption = 'Master Items'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -65,7 +65,7 @@ object ItemFrm: TItemFrm
   object pnlHeader: TAdvPanel
     Left = 0
     Top = 0
-    Width = 1194
+    Width = 1104
     Height = 81
     Align = alTop
     BevelOuter = bvNone
@@ -284,8 +284,8 @@ object ItemFrm: TItemFrm
   end
   object pnlNavigator: TAdvPanel
     Left = 0
-    Top = 537
-    Width = 1194
+    Top = 526
+    Width = 1104
     Height = 40
     Align = alBottom
     BevelOuter = bvNone
@@ -760,15 +760,15 @@ object ItemFrm: TItemFrm
   object pgMaster: TcxPageControl
     Left = 0
     Top = 81
-    Width = 1194
-    Height = 456
+    Width = 1104
+    Height = 445
     ActivePage = tsDetail
     Align = alClient
     Style = 8
     TabOrder = 3
     OnPageChanging = pgMasterPageChanging
-    ClientRectBottom = 456
-    ClientRectRight = 1194
+    ClientRectBottom = 445
+    ClientRectRight = 1104
     ClientRectTop = 24
     object tsBrowse: TcxTabSheet
       Caption = 'Browse'
@@ -1017,7 +1017,7 @@ object ItemFrm: TItemFrm
         Left = 0
         Top = 0
         Width = 407
-        Height = 432
+        Height = 421
         Align = alLeft
         Color = 15919073
         Ctl3D = True
@@ -1775,7 +1775,7 @@ object ItemFrm: TItemFrm
         Left = 1006
         Top = 0
         Width = 359
-        Height = 432
+        Height = 421
         Align = alLeft
         Color = 15919073
         Ctl3D = True
@@ -1805,7 +1805,7 @@ object ItemFrm: TItemFrm
           Left = 2
           Top = 32
           Width = 355
-          Height = 398
+          Height = 387
           Align = alClient
           TabOrder = 1
           object grddbtvMaster: TcxGridDBTableView
@@ -1880,7 +1880,7 @@ object ItemFrm: TItemFrm
         Left = 407
         Top = 0
         Width = 599
-        Height = 432
+        Height = 421
         Align = alLeft
         Color = 15919073
         Ctl3D = True
@@ -2214,7 +2214,7 @@ object ItemFrm: TItemFrm
           Left = 2
           Top = 62
           Width = 595
-          Height = 368
+          Height = 357
           Align = alClient
           TabOrder = 2
           object grdDetailDBTableView1: TcxGridDBTableView
@@ -3478,7 +3478,7 @@ object ItemFrm: TItemFrm
       'join transaksi.nota b on b.id_nota=a.id_nota'
       'join master.mrekanan c on c.kd_rekanan=b.kd_rekanan'
       'where a.kd_item=:pid_item and b.id_trans='#39'101'#39
-      'order by b.dt_nota'
+      'order by b.dt_nota desc'
       'limit 10')
     Params = <
       item
@@ -3572,7 +3572,7 @@ object ItemFrm: TItemFrm
       BottomMargin = 1.000000000000000000
       ColumnWidth = 29.000000000000000000
       object Barcode2D1: TfrxBarcode2DView
-        Left = 4.431818180000001000
+        Left = 4.431818180000000000
         Top = 3.818181820000000000
         Width = 72.750000000000000000
         Height = 63.000000000000000000

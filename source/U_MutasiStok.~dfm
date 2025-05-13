@@ -650,19 +650,26 @@ object MutasiStokFrm: TMutasiStokFrm
             Caption = '# Index #'
             DataBinding.FieldName = 'id_mutasi'
             HeaderAlignmentHorz = taCenter
-            Width = 68
+            Width = 83
           end
           object grddbtvMasterreq_number: TcxGridDBColumn
             Caption = 'No BON #'
             DataBinding.FieldName = 'mutasi_no'
             HeaderAlignmentHorz = taCenter
-            Width = 126
+            Width = 152
           end
           object grddbtvMasterdt_req: TcxGridDBColumn
             Caption = 'Tanggal'
             DataBinding.FieldName = 'dt_mutasi'
             HeaderAlignmentHorz = taCenter
-            Width = 135
+            Width = 164
+          end
+          object grddbtvMasterColumn1: TcxGridDBColumn
+            Caption = 'Jenis'
+            DataBinding.FieldName = 'jenis'
+            HeaderAlignmentHorz = taCenter
+            HeaderAlignmentVert = vaCenter
+            Width = 98
           end
           object grddbtvMasterno_bukti: TcxGridDBColumn
             Caption = 'Petugas'
@@ -670,14 +677,14 @@ object MutasiStokFrm: TMutasiStokFrm
             HeaderAlignmentHorz = taCenter
             HeaderAlignmentVert = vaCenter
             Options.Filtering = False
-            Width = 131
+            Width = 156
           end
           object grddbtvMasterlwarehouse: TcxGridDBColumn
             Caption = 'Keterangan'
             DataBinding.FieldName = 'remarks'
             HeaderAlignmentHorz = taCenter
             HeaderAlignmentVert = vaCenter
-            Width = 158
+            Width = 188
           end
           object grddbtvMasterusr_upd: TcxGridDBColumn
             Caption = 'User'
@@ -685,7 +692,7 @@ object MutasiStokFrm: TMutasiStokFrm
             PropertiesClassName = 'TcxLabelProperties'
             Properties.Alignment.Horz = taCenter
             HeaderAlignmentHorz = taCenter
-            Width = 103
+            Width = 122
           end
           object grddbtvMasterispost: TcxGridDBColumn
             Caption = 'Posted'
@@ -698,7 +705,7 @@ object MutasiStokFrm: TMutasiStokFrm
             HeaderAlignmentVert = vaCenter
             Options.Editing = False
             Options.Sorting = False
-            Width = 64
+            Width = 76
           end
           object grddbtvMasteriscancel: TcxGridDBColumn
             Caption = 'Batal'
@@ -711,7 +718,7 @@ object MutasiStokFrm: TMutasiStokFrm
             HeaderAlignmentVert = vaCenter
             Options.Editing = False
             Options.Sorting = False
-            Width = 73
+            Width = 87
           end
         end
         object grdlvlMaster: TcxGridLevel
@@ -1041,11 +1048,19 @@ object MutasiStokFrm: TMutasiStokFrm
             Transparent = True
           end
           object Label6: TLabel
-            Left = 9
+            Left = 8
             Top = 44
             Width = 77
             Height = 13
             Caption = 'Nama Pegawai :'
+            Transparent = True
+          end
+          object Label7: TLabel
+            Left = 9
+            Top = 69
+            Width = 72
+            Height = 13
+            Caption = 'Jenis Transaksi'
             Transparent = True
           end
           object cxDBLabel1: TcxDBLabel
@@ -1077,6 +1092,20 @@ object MutasiStokFrm: TMutasiStokFrm
             Style.BorderStyle = ebsOffice11
             Style.Shadow = False
             TabOrder = 1
+            Width = 155
+          end
+          object edtJenis: TcxDBComboBox
+            Left = 95
+            Top = 66
+            DataBinding.DataField = 'jenis'
+            DataBinding.DataSource = dsMaster
+            Properties.Items.Strings = (
+              'MUTASI'
+              'PENGELUARAN')
+            Properties.OnCloseUp = edtJenisPropertiesCloseUp
+            Style.BorderStyle = ebsOffice11
+            Style.Shadow = False
+            TabOrder = 2
             Width = 155
           end
         end
@@ -2029,6 +2058,10 @@ object MutasiStokFrm: TMutasiStokFrm
       KeyFields = 'kd_rekanan'
       Size = 100
       Lookup = True
+    end
+    object Masterjenis: TStringField
+      FieldName = 'jenis'
+      Size = 120
     end
   end
   object Detail: TZQuery
@@ -3911,7 +3944,10 @@ object MutasiStokFrm: TMutasiStokFrm
     Connection = DM.conn
     SQL.Strings = (
       'select id_warehouse, description'
-      'from master.warehouse')
+      'from master.warehouse'
+      'union all'
+      'select kd_rak, deskripsi'
+      'from master.rak')
     Params = <>
     Left = 717
     Top = 9
@@ -4082,7 +4118,7 @@ object MutasiStokFrm: TMutasiStokFrm
     SQL.Strings = (
       
         'SELECT a.id_mutasi, a.mutasi_no, a.dt_mutasi, a.usr_upd, a.ispos' +
-        't, a.iscancel, a.description, a.remarks, a.no_bukti'
+        't, a.iscancel, a.description, a.remarks, a.no_bukti, a.jenis'
       'FROM  inventory.mutasi a'
       'WHERE a.isdelete='#39'0'#39' and a.id_trans=:pid_trans'
       
@@ -4167,6 +4203,10 @@ object MutasiStokFrm: TMutasiStokFrm
     object qBrowseno_bukti: TStringField
       FieldName = 'no_bukti'
       Size = 128
+    end
+    object qBrowsejenis: TStringField
+      FieldName = 'jenis'
+      Size = 120
     end
   end
   object dsqBrowse: TDataSource
@@ -5852,6 +5892,94 @@ object MutasiStokFrm: TMutasiStokFrm
           ParentFont = False
         end
       end
+    end
+  end
+  object qPenjualan: TZReadOnlyQuery
+    Connection = DM.conn
+    SQL.Strings = (
+      'SELECT'
+      #9#9' a.no_nota,'
+      #9#9' b.kd_item,'
+      'b.diskripsi,'
+      #9#9' 0,'
+      #9#9' b.qty_biji,'
+      #9#9' '#39'-'#39',         '
+      #9#9' '#39'PCS'#39','
+      #9#9' a.dt_nota,'
+      #9#9' '#39'0'#39','
+      #9#9' b.hrg,'
+      #9#9' '#39'GDU'#39','
+      #9#9' a.id_trans'
+      #9#9'FROM transaksi.nota a'
+      #9#9'INNER JOIN transaksi.nota_detail b ON b.id_nota=a.id_nota'
+      #9#9'WHERE a.no_nota=:no_nota and b.isgudang='#39'1'#39)
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'no_nota'
+        ParamType = ptUnknown
+      end>
+    Left = 676
+    Top = 184
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'no_nota'
+        ParamType = ptUnknown
+      end>
+    object qPenjualanno_nota: TStringField
+      FieldName = 'no_nota'
+      Size = 120
+    end
+    object qPenjualankd_item: TStringField
+      FieldName = 'kd_item'
+      Required = True
+      Size = 200
+    end
+    object qPenjualancolumn: TIntegerField
+      FieldName = '?column?'
+      ReadOnly = True
+    end
+    object qPenjualanqty_biji: TFloatField
+      FieldName = 'qty_biji'
+      Required = True
+    end
+    object qPenjualancolumn_1: TMemoField
+      FieldName = '?column?_1'
+      ReadOnly = True
+      BlobType = ftMemo
+    end
+    object qPenjualancolumn_2: TMemoField
+      FieldName = '?column?_2'
+      ReadOnly = True
+      BlobType = ftMemo
+    end
+    object qPenjualandt_nota: TDateTimeField
+      FieldName = 'dt_nota'
+      Required = True
+    end
+    object qPenjualancolumn_3: TMemoField
+      FieldName = '?column?_3'
+      ReadOnly = True
+      BlobType = ftMemo
+    end
+    object qPenjualanhrg: TFloatField
+      FieldName = 'hrg'
+      Required = True
+    end
+    object qPenjualancolumn_4: TMemoField
+      FieldName = '?column?_4'
+      ReadOnly = True
+      BlobType = ftMemo
+    end
+    object qPenjualanid_trans: TStringField
+      FieldName = 'id_trans'
+      Required = True
+      Size = 40
+    end
+    object qPenjualandiskripsi: TStringField
+      FieldName = 'diskripsi'
+      Size = 1020
     end
   end
 end

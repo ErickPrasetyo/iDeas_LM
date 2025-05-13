@@ -610,6 +610,9 @@ type
     frPOS80_Copy: TfrxReport;
     qItemlok_rak: TStringField;
     Detailid_warehouse: TStringField;
+    grddbtvFP_DetailColumn5: TcxGridDBBandedColumn;
+    Detailisgudang: TStringField;
+    cxDBLabel3: TcxDBLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure actCloseExecute(Sender: TObject);
@@ -1524,6 +1527,7 @@ begin
   Detailhrg_beli_karton.AsFloat:= 0;
   Detailhrg.AsFloat:= 0;
   Detailispromo.AsString:= '0';
+  Detailisgudang.AsString:= '0';
 
   if vrek_debet<>'' then Detailid_rek_gl.AsString:= vrek_debet;
 

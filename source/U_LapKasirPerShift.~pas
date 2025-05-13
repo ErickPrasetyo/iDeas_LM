@@ -24,7 +24,7 @@ uses
   dxSkinOffice2007Pink, dxSkinOffice2007Silver, dxSkinOffice2010Black,
   dxSkinOffice2010Blue, dxSkinOffice2010Silver, dxSkinPumpkin, dxSkinSeven,
   dxSkinSharp, dxSkinSilver, dxSkinSpringTime, dxSkinStardust,
-  dxSkinSummer2008, dxSkinValentine, dxSkinXmas2008Blue;
+  dxSkinSummer2008, dxSkinValentine, dxSkinXmas2008Blue, cxDBLabel;
 
 type
   TDBMode=(dmNone,dmBrowse,dmInsert,dmEdit);
@@ -302,6 +302,14 @@ type
     qNotajns_penjualan: TMemoField;
     grddbtvDetailColumn2: TcxGridDBColumn;
     Detailjns_penjualan: TStringField;
+    AdvPanel1: TAdvPanel;
+    grddbtvDetailColumn3: TcxGridDBColumn;
+    Detailispost_detail: TStringField;
+    cxDBLabel1: TcxDBLabel;
+    Label17: TLabel;
+    Label7: TLabel;
+    cxDBLabel2: TcxDBLabel;
+    Mastertotal_unpost: TFloatField;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure actCloseExecute(Sender: TObject);
@@ -342,6 +350,7 @@ type
     vid_nota : Int64;
     DBMode: TDBMode;
     issparepart : boolean;
+    totPost, totunPost : Double;
     { Private declarations }
     procedure UpdateView;
     function CheckEditRight(var msg: string): Boolean;
@@ -647,7 +656,8 @@ begin
   end;
 
   DM.PrepareQuery(qExec);
-  s:= 'update transaksi.nota set isget='+QuotedStr('1')+' where no_nota in(select no_nota from accfin.kasir_detail where id_kasir='+IntToStr(Masterid.AsLargeInt)+')';
+  s:= 'update transaksi.nota set isget='+QuotedStr('1')+' where no_nota in(select no_nota from accfin.kasir_detail '+
+      'where id_kasir='+IntToStr(Masterid.AsLargeInt)+') and ispost_detail = '+QuotedStr('1');
   DM.ExecQuery(qExec, s);
   
   DBMode:= dmBrowse;
@@ -929,6 +939,9 @@ var dt, dt2 : TDateTime;
 begin
     Detail.Refresh;
 
+    totPost:= 0;
+    totunPost:= 0;
+
    if (Master.State<>dsBrowse) then
       Master.Post;
 
@@ -965,10 +978,21 @@ begin
               Detailnama_kasir.AsString:= qNotausr_upd.AsString;
               Detailnama_customer.AsString:= qNotanama_rekanan.AsString;
               Detailketerangan.AsString:= '-';
-              Detailjns_penjualan.AsString:= qNotajns_penjualan
+              Detailjns_penjualan.AsString:= qNotajns_penjualan.AsString;
               Detailsub_total.AsFloat:= qNotasub_total.AsFloat;
               Detaildisc_member.AsFloat:= qNotadisc_member.AsFloat;
-              Detailtotal.AsFloat:= qNotatotal.AsFloat;
+              Detailispost_detail.AsString:= qNotaispost.AsString;
+
+              if qNotaispost.AsString = '1' then begin
+                 totPost:= totPost + qNotatotal.AsFloat;
+                 Detailtotal.AsFloat:= qNotatotal.AsFloat;
+              end;
+
+              if qNotaispost.AsString = '0' then begin
+                 totunPost:= totunPost + qNotatotal.AsFloat;
+                 Detailtotal.AsFloat:= 0;
+              end;
+
               Detail.Post;
               qNota.Next;
               sts_dlg.Progress_It;
@@ -980,6 +1004,9 @@ begin
         on E: Exception do
           DM.MyMsg(mmError,'Error has been encountered !',E.Message)
       end;
+
+      Master.Edit;
+      Mastertotal_unpost.AsFloat:= totunPost;
 
 
       sts_dlg.Progress_It;

@@ -589,10 +589,13 @@ type
     Masterusr_upd: TStringField;
     Masterdisc_member: TFloatField;
     MemMasterdisc_member: TStringField;
-    frPOS80: TfrxReport;
+    frPOS80_: TfrxReport;
     grddbtvMasterColumn1: TcxGridDBColumn;
     qItemlok_rak: TStringField;
     Detailid_warehouse: TStringField;
+    grddbtvFP_DetailColumn3: TcxGridDBBandedColumn;
+    Detailisgudang: TStringField;
+    frPOS80: TfrxReport;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure actCloseExecute(Sender: TObject);
@@ -1246,7 +1249,7 @@ begin
   if Masterkd_rekanan.IsNull or (Trim(Masterkd_rekanan.AsString)='') then
      raise Exception.Create('SUPPLIER harus diisi !');
 //  else
-//  if Masterid_rek_gl.IsNull or (Trim(Masterid_rek_gl.AsString)='') then
+//  if Masterjid_rek_gl.IsNull or (Trim(Masterid_rek_gl.AsString)='') then
 //     raise Exception.Create('KODE REKENING harus diisi !');
 
   if Masterjns_transaksi.AsString = 'Faktur Penjualan' then begin
@@ -1497,6 +1500,8 @@ begin
    end;
    DBMode:= dmBrowse;
    UpdateView;
+   if DM.isSuperUser then
+      grdMaster.PopupMenu:= popPosting;
 end;
 
 procedure TNotaPiutangFrm.tsDetailShow(Sender: TObject);

@@ -611,14 +611,14 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
     Left = 0
     Top = 81
     Width = 1096
-    Height = 486
+    Height = 422
     ActivePage = tsDetail
     Align = alClient
     Style = 8
     TabOrder = 2
     OnChange = pgTransactionChange
     OnPageChanging = pgTransactionPageChanging
-    ClientRectBottom = 486
+    ClientRectBottom = 422
     ClientRectRight = 1096
     ClientRectTop = 24
     object tsBrowse: TcxTabSheet
@@ -628,7 +628,7 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
         Left = 0
         Top = 40
         Width = 1096
-        Height = 422
+        Height = 358
         Align = alClient
         TabOrder = 0
         object grddbtvMaster: TcxGridDBTableView
@@ -1521,7 +1521,7 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
         Left = 0
         Top = 141
         Width = 1096
-        Height = 321
+        Height = 257
         Align = alClient
         BorderStyle = cxcbsNone
         Font.Charset = DEFAULT_CHARSET
@@ -1672,11 +1672,137 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
             HeaderAlignmentVert = vaCenter
             Width = 119
           end
+          object grddbtvDetailColumn3: TcxGridDBColumn
+            Caption = 'Post'
+            DataBinding.FieldName = 'ispost_detail'
+            PropertiesClassName = 'TcxCheckBoxProperties'
+            Properties.ValueChecked = '1'
+            Properties.ValueUnchecked = '0'
+            HeaderAlignmentHorz = taCenter
+            HeaderAlignmentVert = vaCenter
+            Width = 50
+          end
         end
         object grdlvlDetail: TcxGridLevel
           GridView = grddbtvDetail
         end
       end
+    end
+  end
+  object AdvPanel1: TAdvPanel
+    Left = 0
+    Top = 503
+    Width = 1096
+    Height = 64
+    Align = alBottom
+    BevelOuter = bvNone
+    Color = 13616833
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = 7485192
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 5
+    UseDockManager = True
+    Version = '2.3.0.7'
+    AutoHideChildren = False
+    BorderColor = 16765615
+    Caption.Color = 12105910
+    Caption.ColorTo = 10526878
+    Caption.Font.Charset = DEFAULT_CHARSET
+    Caption.Font.Color = clWhite
+    Caption.Font.Height = -11
+    Caption.Font.Name = 'MS Sans Serif'
+    Caption.Font.Style = []
+    Caption.GradientDirection = gdVertical
+    Caption.Indent = 2
+    Caption.ShadeLight = 255
+    CollapsColor = clNone
+    CollapsDelay = 0
+    ColorTo = 12958644
+    ColorMirror = 12958644
+    ColorMirrorTo = 15527141
+    ShadowColor = clBlack
+    ShadowOffset = 0
+    StatusBar.BorderStyle = bsSingle
+    StatusBar.Font.Charset = DEFAULT_CHARSET
+    StatusBar.Font.Color = clWhite
+    StatusBar.Font.Height = -11
+    StatusBar.Font.Name = 'Tahoma'
+    StatusBar.Font.Style = []
+    StatusBar.Color = 10592158
+    StatusBar.ColorTo = 5459275
+    StatusBar.GradientDirection = gdVertical
+    Styler = APS
+    FullHeight = 40
+    object Label17: TLabel
+      Left = 672
+      Top = 12
+      Width = 118
+      Height = 14
+      Caption = 'Total Faktur Terposting'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      Transparent = True
+    end
+    object Label7: TLabel
+      Left = 673
+      Top = 36
+      Width = 136
+      Height = 14
+      Caption = 'Total Faktur Tidak Terposting'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      Transparent = True
+    end
+    object cxDBLabel1: TcxDBLabel
+      Left = 824
+      Top = 9
+      DataBinding.DataField = 'total'
+      DataBinding.DataSource = dsMaster
+      ParentFont = False
+      Properties.Alignment.Horz = taRightJustify
+      Properties.Alignment.Vert = taVCenter
+      Style.Font.Charset = ANSI_CHARSET
+      Style.Font.Color = clBlue
+      Style.Font.Height = -12
+      Style.Font.Name = 'Arial'
+      Style.Font.Style = [fsBold]
+      Style.IsFontAssigned = True
+      Transparent = True
+      Height = 21
+      Width = 127
+      AnchorX = 951
+      AnchorY = 20
+    end
+    object cxDBLabel2: TcxDBLabel
+      Left = 825
+      Top = 33
+      DataBinding.DataField = 'total_unpost'
+      DataBinding.DataSource = dsMaster
+      ParentFont = False
+      Properties.Alignment.Horz = taRightJustify
+      Properties.Alignment.Vert = taVCenter
+      Style.Font.Charset = ANSI_CHARSET
+      Style.Font.Color = clBlue
+      Style.Font.Height = -12
+      Style.Font.Name = 'Arial'
+      Style.Font.Style = [fsBold]
+      Style.IsFontAssigned = True
+      Transparent = True
+      Height = 21
+      Width = 127
+      AnchorX = 952
+      AnchorY = 44
     end
   end
   object AFS: TAdvFormStyler
@@ -1986,6 +2112,10 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
       FieldName = 'id'
       Required = True
     end
+    object Mastertotal_unpost: TFloatField
+      FieldName = 'total_unpost'
+      Required = True
+    end
   end
   object Detail: TZQuery
     Connection = DM.conn
@@ -2004,7 +2134,7 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
         Name = 'id_kasir'
         ParamType = ptUnknown
       end>
-    Left = 441
+    Left = 442
     Top = 39
     ParamData = <
       item
@@ -2064,6 +2194,9 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
     object Detailjns_penjualan: TStringField
       FieldName = 'jns_penjualan'
       Size = 400
+    end
+    object Detailispost_detail: TStringField
+      FieldName = 'ispost_detail'
     end
   end
   object dsDetail: TDataSource
@@ -3934,8 +4067,8 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
       'from transaksi.nota a'
       'left join master.mrekanan b on b.kd_rekanan=a.kd_rekanan'
       
-        'where a.id_trans in ('#39'201'#39','#39'206'#39') and a.ispost='#39'1'#39' and a.isdelet' +
-        'e='#39'0'#39' and a.iscancel='#39'0'#39' and a.isget='#39'0'#39' and a.shift=:pshift'
+        'where a.id_trans in ('#39'201'#39','#39'206'#39') and a.isdelete='#39'0'#39' and a.iscan' +
+        'cel='#39'0'#39' and a.isget='#39'0'#39' and a.shift=:pshift'
       
         'and a.dt_nota between to_timestamp(:ptgl0,'#39'dd/mm/yyyy'#39') and to_t' +
         'imestamp(:ptgl0,'#39'dd/mm/yyyy'#39') + interval '#39'23 hours 59 min'#39

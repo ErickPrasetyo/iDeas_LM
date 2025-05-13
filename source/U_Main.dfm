@@ -76,7 +76,7 @@ object MainFrm: TMainFrm
         Progress.ShowBorder = False
         Progress.Stacked = False
         Style = psDate
-        Text = 'Sunday, May 19, 2024'
+        Text = 'Wednesday, Feb 12, 2025'
         TimeFormat = 'hh:mm:ss'
         Width = 150
       end
@@ -103,7 +103,7 @@ object MainFrm: TMainFrm
         Progress.ShowBorder = False
         Progress.Stacked = False
         Style = psTime
-        Text = '16:55:47'
+        Text = '09:34:23'
         TimeFormat = 'hh:mm:ss'
         Width = 60
       end
@@ -526,7 +526,7 @@ object MainFrm: TMainFrm
   end
   object aclMain: TActionList
     Images = DM.IconList
-    Left = 434
+    Left = 435
     Top = 28
     object actDatabaseConnection: TAction
       Category = 'Application'
@@ -1195,6 +1195,12 @@ object MainFrm: TMainFrm
       ImageIndex = 0
       OnExecute = actOnlineExecute
     end
+    object actNotaRetailTouch: TAction
+      Category = 'Penjualan'
+      Caption = 'Retail Touch Screen'
+      ImageIndex = 22
+      OnExecute = actNotaRetailTouchExecute
+    end
   end
   object MainMenu: TAdvMainMenu
     Images = DM.IconList
@@ -1475,6 +1481,11 @@ object MainFrm: TMainFrm
       object Retail1: TMenuItem
         Tag = 601
         Action = actNotaRetail
+        GroupIndex = 1
+      end
+      object RetailTouchScreen1: TMenuItem
+        Tag = 606
+        Action = actNotaRetailTouch
         GroupIndex = 1
       end
       object Online1: TMenuItem

@@ -1,6 +1,6 @@
 object InventoryAdjusmentFrm: TInventoryAdjusmentFrm
-  Left = 470
-  Top = 195
+  Left = 149
+  Top = 83
   Width = 1178
   Height = 687
   Caption = 'Inventory Adjusment'
@@ -4934,6 +4934,9 @@ object InventoryAdjusmentFrm: TInventoryAdjusmentFrm
         Name = 'F5'
         DataType = ftWideString
         Size = 255
+      end
+      item
+        Name = 'F6'
       end>
     Parameters = <>
     StoreDefs = True

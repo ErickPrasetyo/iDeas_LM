@@ -26,7 +26,7 @@ uses
   dxSkinOffice2007Pink, dxSkinOffice2007Silver, dxSkinOffice2010Black,
   dxSkinOffice2010Blue, dxSkinOffice2010Silver, dxSkinPumpkin, dxSkinSeven,
   dxSkinSharp, dxSkinSilver, dxSkinSpringTime, dxSkinStardust,
-  dxSkinSummer2008, dxSkinValentine, dxSkinXmas2008Blue;
+  dxSkinSummer2008, dxSkinValentine, dxSkinXmas2008Blue, ADODB;
 
 type
   TDBMode=(dmNone,dmBrowse,dmInsert,dmEdit);
@@ -471,6 +471,64 @@ type
     qItemhrg_jual_grosir_besar: TFloatField;
     qItemsatuan_jual: TStringField;
     qItemrasio: TFloatField;
+    Shape9: TShape;
+    Shape10: TShape;
+    AdvToolBar1: TAdvToolBar;
+    lblTM: TSCLabel;
+    cbSheet: TcxComboBox;
+    SCLabel1: TSCLabel;
+    SCLabel2: TSCLabel;
+    OpenDialog1: TOpenDialog;
+    ADOConnection1: TADOConnection;
+    ADODataSet1: TADODataSet;
+    ADODataSet1F1: TStringField;
+    ADODataSet1F2: TStringField;
+    ADODataSet1F3: TStringField;
+    ADODataSet1F4: TStringField;
+    ADODataSet1F5: TStringField;
+    kmtData: TkbmMemTable;
+    kmtDataF1: TStringField;
+    kmtDataF2: TStringField;
+    kmtDataF3: TStringField;
+    kmtDataF4: TStringField;
+    kmtDataF5: TStringField;
+    dskmtData: TDataSource;
+    ZReadOnlyQuery1: TZReadOnlyQuery;
+    qryITEMid_item: TStringField;
+    qryITEMitem_name: TStringField;
+    qryITEMid_cat_item: TStringField;
+    FloatField1: TFloatField;
+    qryITEMrasio_lusin: TFloatField;
+    qryITEMstok: TFloatField;
+    qryITEMstok_str: TMemoField;
+    qryITEMhrg_beli_karton: TFloatField;
+    SaveDialog1: TSaveDialog;
+    mITEM: TZReadOnlyQuery;
+    mITEMkd_item: TStringField;
+    mITEMnama_item: TStringField;
+    mITEMsatuan_jual: TStringField;
+    cxGroupBox1: TcxGroupBox;
+    dsmITEM: TDataSource;
+    mITEMqty: TIntegerField;
+    grdItem: TcxGrid;
+    cxGridDBTableView1: TcxGridDBTableView;
+    cxGridDBColumn1: TcxGridDBColumn;
+    cxGridDBColumn2: TcxGridDBColumn;
+    cxGridDBColumn3: TcxGridDBColumn;
+    cxGridDBColumn4: TcxGridDBColumn;
+    cxGridDBColumn5: TcxGridDBColumn;
+    cxGridDBColumn6: TcxGridDBColumn;
+    grddbtvItem: TcxGridDBTableView;
+    grddbtvItemno_nota: TcxGridDBColumn;
+    grddbtvItemdt_nota: TcxGridDBColumn;
+    grddbtvItemno_bukti: TcxGridDBColumn;
+    grddbtvItemColumn1: TcxGridDBColumn;
+    grdItemLevel1: TcxGridLevel;
+    grddbtvItemColumn2: TcxGridDBColumn;
+    mITEMharga: TIntegerField;
+    grddbtvItemColumn3: TcxGridDBColumn;
+    mITEMqty_order: TIntegerField;
+    mITEMhrg_beli: TFloatField;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure actCloseExecute(Sender: TObject);
@@ -538,11 +596,14 @@ type
       AItem: TcxCustomGridTableItem; AEdit: TcxCustomEdit; var Key: Char);
     procedure edtItemKeyPress(Sender: TObject; var Key: Char);
     procedure edtqtyKeyPress(Sender: TObject; var Key: Char);
+    procedure SCLabel2Click(Sender: TObject);
+    procedure lblTMClick(Sender: TObject);
+    procedure SCLabel1Click(Sender: TObject);
 
   private
     DBMode: TDBMode;
     { Private declarations }
-    vjns_transaksi, vjudul, vrek_master, vrek_detail : string;
+    vjns_transaksi, vjudul, vrek_master, vrek_detail, vNamaFile : string;
     vtag : integer;
     vSubTotal, vDisc2, vDisc, vPPN: Double;
     procedure UpdateView;
@@ -551,6 +612,8 @@ type
     function CheckDeleteRight(var msg: string): Boolean;
     procedure CloneDetail;
     function CheckDetail(id_item: string): Boolean;
+    procedure ConnectToExcel;
+    procedure FetchData;
 
 
   public
@@ -564,7 +627,7 @@ var
 
 implementation
 
-uses U_DM, U_Currency;
+uses U_DM, U_Currency, cxGridExportLink, U_Status_Dialog, StrUtils;
 
 {$R *.dfm}
 
@@ -1759,6 +1822,153 @@ begin
         edtItem.SetFocus;
      except
      end;
+end;
+
+procedure TNotaHutangFrm.SCLabel2Click(Sender: TObject);
+var
+excel : Variant;
+appPath, ttl :string;
+begin
+  try
+    mITEM.Close;
+    mITEM.Open;
+  except
+    on E: Exception do
+      DM.MyMsg(mmError,'Error has been encountered !',E.Message)
+  end;
+
+  if mITEM.RecordCount=0 then
+     Exit;
+
+  if SaveDialog1.Execute then begin
+     appPath:= ExtractFilePath(SaveDialog1.InitialDir);
+     ttl:= SaveDialog1.FileName;
+
+     if (mITEM.Active) and (mITEM.RecordCount>0) then begin
+       ExportGridToExcel(appPath+ttl,grdItem,true,true,true,'xls');
+     end;
+
+  end;
+
+end;
+
+procedure TNotaHutangFrm.lblTMClick(Sender: TObject);
+begin
+  if ADOConnection1.Connected then ADOConnection1.Close;
+
+   if OpenDialog1.Execute then begin
+      vNamaFile:= OpenDialog1.FileName;
+      if not AdoConnection1.Connected then ConnectToExcel;
+   end;
+end;
+
+procedure TNotaHutangFrm.ConnectToExcel;
+var strConn :  widestring;
+begin
+  strConn:='Provider=Microsoft.ACE.OLEDB.12.0;' +
+           'Data Source='+vNamaFile+';' +
+           'Extended Properties="Excel 12.0;HDR=NO;IMEX=1"';
+
+  AdoConnection1.Connected:=False;
+  AdoConnection1.ConnectionString:=strConn;
+  try
+    AdoConnection1.Open;
+
+    AdoConnection1.GetTableNames(cbSheet.Properties.Items,True);
+  except
+    ShowMessage('Unable to connect to Excel, make sure the workbook ' + vNamaFile + ' exist!');
+    raise;
+  end;
+end;
+
+procedure TNotaHutangFrm.FetchData;
+begin
+  if not AdoConnection1.Connected then ConnectToExcel;
+
+  ADODataSet1.Close;
+  ADODataSet1.CommandText:=  'SELECT * FROM ['+cbSheet.Text+']';
+  try
+    ADODataSet1.Open;
+  except
+    ShowMessage('Unable to read data from Excel, make sure the query ' + vNamaFile + ' is meaningful!');
+    raise;
+  end;
+end;
+
+procedure TNotaHutangFrm.SCLabel1Click(Sender: TObject);
+var s, qtyIn, qtyOt_str : String;
+    idx : Int64;
+    sts_dlg: TfrmStatus_Dialog;
+    Rasio, qtyOt, karton, lusin, biji, skarton, slusin, sbiji : Double;
+    i : Integer;
+begin
+   if cbSheet.Text='' then begin
+      DM.MyMsg(mmInformation,'Lokasi Sheet Data Tidak Ditemukan !!!','Pilih Dahulu Lokasi Sheet Data !!!');
+      Exit;
+   end;
+
+  ConnectToExcel;
+  FetchData;
+  try
+    kmtData.Close;
+    kmtData.Open;
+    kmtData.EmptyTable;
+    kmtData.LoadFromDataSet(ADODataSet1, [mtcpoAppend]);
+//    kmtData.Filter:= 'F1='+QuotedStr(Masterid_item.AsString);
+//    kmtData.Filtered:= True;
+    kmtData.Open;
+
+    if kmtData.RecordCount=0 then begin
+       DM.MyMsg(mmInformation,'Data Tidak Ditemukan !!!','Harap Cek Kembali Data Anda !!!');
+       Exit;
+    end;
+
+    sts_dlg:= TfrmStatus_Dialog.Create(Application);
+    sts_dlg.Reset_Progress;
+    sts_dlg.Set_Min(1);
+    sts_dlg.Set_Max(kmtData.RecordCount+1);
+    sts_dlg.Set_Status('Please wait, Execute action ...!!!');
+    sts_dlg.Show;
+
+    kmtData.First;
+    sts_dlg.Progress_It;
+    while not kmtData.Eof do begin
+
+       if kmtDataF1.AsString='Kode Item' then
+       kmtData.Next;
+
+       if kmtDataF3.AsString = '0' then
+       kmtData.Next;
+
+       if kmtDataF1.AsString='' then
+       Break;
+
+       if kmtDataF3.AsString <> '0' then begin
+
+         Detail.Append;
+         Detailkd_item.AsString:= kmtDataF1.AsString;
+         Detaildiskripsi.AsString:= kmtDataF2.AsString;
+         Detailqty_biji.AsFloat:= StrToFloat(kmtDataF3.AsString);
+         Detailsatuan_beli.AsString:= kmtDataF4.AsString;
+         Detailhrg.AsFloat:= StrToFloat(kmtDataF5.AsString);
+
+         Detail.Post;
+       end;
+
+       kmtData.Next;
+       sts_dlg.Progress_It;
+    end;
+
+    if ADOConnection1.Connected then ADOConnection1.Close;
+
+  except
+    on E: Exception do begin
+      DM.MyMsg(mmError,'Error has been encountered !',E.Message);
+    end;
+  end;
+
+  cbSheet.Text:= '';
+  sts_dlg.Free;
 end;
 
 end.

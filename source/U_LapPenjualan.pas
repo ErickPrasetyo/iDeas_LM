@@ -286,6 +286,7 @@ type
     frxDBDetailPromo: TfrxDBDataset;
     frxReport1: TfrxReport;
     OpenDialog: TSaveDialog;
+    grddbtvAP_ListColumn4: TcxGridDBColumn;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnRefreshClick(Sender: TObject);
     procedure btnCloseClick(Sender: TObject);

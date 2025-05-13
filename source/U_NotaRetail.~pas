@@ -610,6 +610,9 @@ type
     frPOS80_Copy: TfrxReport;
     qItemlok_rak: TStringField;
     Detailid_warehouse: TStringField;
+    grddbtvFP_DetailColumn5: TcxGridDBBandedColumn;
+    Detailisgudang: TStringField;
+    cxDBLabel3: TcxDBLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure actCloseExecute(Sender: TObject);
@@ -1524,6 +1527,7 @@ begin
   Detailhrg_beli_karton.AsFloat:= 0;
   Detailhrg.AsFloat:= 0;
   Detailispromo.AsString:= '0';
+  Detailisgudang.AsString:= '0';
 
   if vrek_debet<>'' then Detailid_rek_gl.AsString:= vrek_debet;
 
@@ -2295,81 +2299,81 @@ procedure TNotaRetailFrm.Detailqty_bijiChange(Sender: TField);
 begin
 
     try
-  //    qCekHrg_Jual.Close;
-  //    qCekHrg_Jual.Open;
-  //    Detailhrg.AsFloat:= qCekHrg_Jualhrg.AsFloat;
+      qCekHrg_Jual.Close;
+      qCekHrg_Jual.Open;
+      Detailhrg.AsFloat:= qCekHrg_Jualhrg.AsFloat;
 
-      qItem.Close;
-      qItem.Params.ParamByName('pkd_item').Value:= Detailkd_item.AsString;
-      qItem.Open;
-
-        if CheckPromoUang(Detailkd_item.AsString, Detailqty_biji.AsFloat) then begin
-           if CheckPromoBdiv.AsFloat>0 then begin
-              Detailhrg.AsFloat:= qItemhrg_jual.AsFloat;
-              Detailid_warehouse.AsString:= qItemlok_rak.AsString;
-              Detaildisc_rp.AsFloat:= CheckPromoBnilai_promo.AsFloat*CheckPromoBdiv.AsFloat;
-  //            Detail.Post;
-  //            edtItem.Text:='';
-  //            edtqty.Text:='';
-  //            edtItem.SetFocus;
-           end else begin
-              Detailhrg.AsFloat:= qItemhrg_jual.AsFloat;
-              Detailid_warehouse.AsString:= qItemlok_rak.AsString;
-              Detaildisc_rp.AsFloat:= 0;
-  //            Detail.Post;
-  //            edtItem.Text:='';
-  //            edtqty.Text:='';
-  //            edtItem.SetFocus;
-           end
-        end
-        else
-        if CheckPromoBarang(Detailkd_item.AsString, Detailqty_biji.AsFloat) then begin
-          if CheckPromoBdiv.AsFloat>0 then begin
-              Detailhrg.AsFloat:= qItemhrg_jual.AsFloat;
-              Detailid_warehouse.AsString:= qItemlok_rak.AsString;
-              Detaildisc_rp.AsFloat:= 0;
-  //            Detail.Post;
-    //          edtItem.Text:='';
-    //          edtqty.Text:='';
-    //          edtItem.SetFocus;
-
-              CheckPromoB.First;
-              while not CheckPromoB.Eof do begin
-                Detail.Append;
-                Detailkd_item.AsString:= CheckPromoBkd_item_promo.AsString;
-                Detaildiskripsi.AsString:= CheckPromoBnama_item_promo.AsString;
-
-                if (CheckPromoBqty_item_promo.AsFloat*CheckPromoBdiv.AsFloat)>CheckPromoBqty_max.AsFloat then
-                    Detailqty_biji.AsFloat:= CheckPromoBqty_max.AsFloat;
-                if (CheckPromoBqty_item_promo.AsFloat*CheckPromoBdiv.AsFloat)<CheckPromoBqty_max.AsFloat then
-                    Detailqty_biji.AsFloat:= CheckPromoBqty_item_promo.AsFloat*CheckPromoBdiv.AsFloat;
-
-                Detailsatuan_beli.AsString:= qItemsatuan_jual.AsString;
-                Detailid_warehouse.AsString:= qItemlok_rak.AsString;
-                Detailispromo.AsString:= '1';
-                Detaildisc_rp.AsFloat:= 0;
-                Detailhrg.AsFloat:= 0;
-                Detailketerangan.AsString:= Trim('Promo Barang Dari Pembelian "'+UpperCase(qItemnama_item.AsString)+'"');
-                Detail.Post;
-                CheckPromoB.Next;
-              end;
-
-              edtItem.Text:='';
-              edtqty.Text:='';
-              edtItem.SetFocus;
-          end else begin
-
-          end;
-
-        end else begin
-              Detailhrg.AsFloat:= qItemhrg_jual.AsFloat;
-              Detailid_warehouse.AsString:= qItemlok_rak.AsString;
-              Detaildisc_rp.AsFloat:= 0;
-  //            Detail.Post;
-  //            edtItem.Text:='';
-  //            edtqty.Text:='';
-  //            edtItem.SetFocus;
-        end;
+//      qItem.Close;
+//      qItem.Params.ParamByName('pkd_item').Value:= Detailkd_item.AsString;
+//      qItem.Open;
+//
+//        if CheckPromoUang(Detailkd_item.AsString, Detailqty_biji.AsFloat) then begin
+//           if CheckPromoBdiv.AsFloat>0 then begin
+//              Detailhrg.AsFloat:= qItemhrg_jual.AsFloat;
+//              Detailid_warehouse.AsString:= qItemlok_rak.AsString;
+//              Detaildisc_rp.AsFloat:= CheckPromoBnilai_promo.AsFloat*CheckPromoBdiv.AsFloat;
+//  //            Detail.Post;
+//  //            edtItem.Text:='';
+//  //            edtqty.Text:='';
+//  //            edtItem.SetFocus;
+//           end else begin
+//              Detailhrg.AsFloat:= qItemhrg_jual.AsFloat;
+//              Detailid_warehouse.AsString:= qItemlok_rak.AsString;
+//              Detaildisc_rp.AsFloat:= 0;
+//  //            Detail.Post;
+//  //            edtItem.Text:='';
+//  //            edtqty.Text:='';
+//  //            edtItem.SetFocus;
+//           end
+//        end
+//        else
+//        if CheckPromoBarang(Detailkd_item.AsString, Detailqty_biji.AsFloat) then begin
+//          if CheckPromoBdiv.AsFloat>0 then begin
+//              Detailhrg.AsFloat:= qItemhrg_jual.AsFloat;
+//              Detailid_warehouse.AsString:= qItemlok_rak.AsString;
+//              Detaildisc_rp.AsFloat:= 0;
+//  //            Detail.Post;
+//    //          edtItem.Text:='';
+//    //          edtqty.Text:='';
+//    //          edtItem.SetFocus;
+//
+//              CheckPromoB.First;
+//              while not CheckPromoB.Eof do begin
+//                Detail.Append;
+//                Detailkd_item.AsString:= CheckPromoBkd_item_promo.AsString;
+//                Detaildiskripsi.AsString:= CheckPromoBnama_item_promo.AsString;
+//
+//                if (CheckPromoBqty_item_promo.AsFloat*CheckPromoBdiv.AsFloat)>CheckPromoBqty_max.AsFloat then
+//                    Detailqty_biji.AsFloat:= CheckPromoBqty_max.AsFloat;
+//                if (CheckPromoBqty_item_promo.AsFloat*CheckPromoBdiv.AsFloat)<CheckPromoBqty_max.AsFloat then
+//                    Detailqty_biji.AsFloat:= CheckPromoBqty_item_promo.AsFloat*CheckPromoBdiv.AsFloat;
+//
+//                Detailsatuan_beli.AsString:= qItemsatuan_jual.AsString;
+//                Detailid_warehouse.AsString:= qItemlok_rak.AsString;
+//                Detailispromo.AsString:= '1';
+//                Detaildisc_rp.AsFloat:= 0;
+//                Detailhrg.AsFloat:= 0;
+//                Detailketerangan.AsString:= Trim('Promo Barang Dari Pembelian "'+UpperCase(qItemnama_item.AsString)+'"');
+//                Detail.Post;
+//                CheckPromoB.Next;
+//              end;
+//
+//              edtItem.Text:='';
+//              edtqty.Text:='';
+//              edtItem.SetFocus;
+//          end else begin
+//
+//          end;
+//
+//        end else begin
+//              Detailhrg.AsFloat:= qItemhrg_jual.AsFloat;
+//              Detailid_warehouse.AsString:= qItemlok_rak.AsString;
+//              Detaildisc_rp.AsFloat:= 0;
+//  //            Detail.Post;
+//  //            edtItem.Text:='';
+//  //            edtqty.Text:='';
+//  //            edtItem.SetFocus;
+//        end;
 
 
     except

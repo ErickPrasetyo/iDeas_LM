@@ -1,6 +1,6 @@
 object LapPenjualanFrm: TLapPenjualanFrm
-  Left = 616
-  Top = 146
+  Left = 176
+  Top = 55
   Width = 996
   Height = 554
   Caption = 'Laporan Penjualan'
@@ -21,7 +21,7 @@ object LapPenjualanFrm: TLapPenjualanFrm
   object pnlHeader: TAdvPanel
     Left = 0
     Top = 0
-    Width = 978
+    Width = 980
     Height = 40
     Align = alTop
     BevelOuter = bvNone
@@ -83,8 +83,8 @@ object LapPenjualanFrm: TLapPenjualanFrm
   end
   object AdvPanel1: TAdvPanel
     Left = 0
-    Top = 466
-    Width = 978
+    Top = 475
+    Width = 980
     Height = 40
     Align = alBottom
     BevelOuter = bvNone
@@ -200,7 +200,7 @@ object LapPenjualanFrm: TLapPenjualanFrm
   object SCPanel3: TSCPanel
     Left = 0
     Top = 40
-    Width = 978
+    Width = 980
     Height = 40
     Align = alTop
     Bevel = sccbSoftRaised
@@ -325,13 +325,14 @@ object LapPenjualanFrm: TLapPenjualanFrm
   object pgcMaster: TcxPageControl
     Left = 0
     Top = 80
-    Width = 978
-    Height = 386
-    ActivePage = tsItemPromo
+    Width = 980
+    Height = 395
+    ActivePage = tabAP
     Align = alClient
     TabOrder = 5
-    ClientRectBottom = 386
-    ClientRectRight = 978
+    ClientRectBottom = 391
+    ClientRectLeft = 4
+    ClientRectRight = 976
     ClientRectTop = 24
     object tabAP: TcxTabSheet
       Caption = 'Rekap Penjualan Per Faktur'
@@ -340,8 +341,8 @@ object LapPenjualanFrm: TLapPenjualanFrm
       object grdAP_List: TcxGrid
         Left = 0
         Top = 0
-        Width = 978
-        Height = 362
+        Width = 972
+        Height = 367
         Align = alClient
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
@@ -464,6 +465,14 @@ object LapPenjualanFrm: TLapPenjualanFrm
             HeaderAlignmentVert = vaCenter
             Options.Editing = False
             Width = 92
+          end
+          object grddbtvAP_ListColumn4: TcxGridDBColumn
+            Caption = 'Post'
+            DataBinding.FieldName = 'ispost'
+            PropertiesClassName = 'TcxCheckBoxProperties'
+            Properties.ValueChecked = '1'
+            Properties.ValueUnchecked = '0'
+            Width = 30
           end
         end
         object grddbtvAP_ListDetail: TcxGridDBTableView
@@ -829,8 +838,8 @@ object LapPenjualanFrm: TLapPenjualanFrm
       object grdItemPromo: TcxGrid
         Left = 0
         Top = 0
-        Width = 978
-        Height = 362
+        Width = 972
+        Height = 367
         Align = alClient
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
@@ -2440,7 +2449,7 @@ object LapPenjualanFrm: TLapPenjualanFrm
   object SR: TcxStyleRepository
     Left = 239
     Top = 8
-    PixelsPerInch = 125
+    PixelsPerInch = 96
     object cxStyle1: TcxStyle
       AssignedValues = [svColor, svFont, svTextColor]
       Color = 7039851

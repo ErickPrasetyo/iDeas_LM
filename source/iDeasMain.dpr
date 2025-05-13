@@ -117,7 +117,8 @@ uses
   U_BayarNotaPenjualan in 'U_BayarNotaPenjualan.pas' {BayarNotaPenjualanFrm},
   U_ItemCheck in 'U_ItemCheck.pas' {ItemCheckFrm},
   U_LapSetoran in 'U_LapSetoran.pas' {LapSetoranFrm},
-  U_NotaOnline in 'U_NotaOnline.pas' {NotaOnlineFrm};
+  U_NotaOnline in 'U_NotaOnline.pas' {NotaOnlineFrm},
+  U_NotaRetailTouch in 'U_NotaRetailTouch.pas' {NotaRetailTouchFrm};
 
 {$R *.res}
 

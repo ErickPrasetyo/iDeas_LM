@@ -201,6 +201,8 @@ type
     LaporanSetoran1: TMenuItem;
     actOnline: TAction;
     Online1: TMenuItem;
+    actNotaRetailTouch: TAction;
+    RetailTouchScreen1: TMenuItem;
     procedure FormCreate(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure actDatabaseConnectionExecute(Sender: TObject);
@@ -302,6 +304,7 @@ type
     procedure actItemCheckExecute(Sender: TObject);
     procedure actLapSetoranExecute(Sender: TObject);
     procedure actOnlineExecute(Sender: TObject);
+    procedure actNotaRetailTouchExecute(Sender: TObject);
 
   private
     { Private declarations }
@@ -337,7 +340,8 @@ uses AdvStyleIF, U_DM, U_AppLog, U_Supplier, U_Customer,
   U_InfoMatlStok2, U_ImportPiutangMayora, U_Ref_NoFaktur,
   U_List_FakturPenjualan, U_ImportPembelianMayora, U_NotaRetail, U_MGudang,
   U_LapPembelian, U_LapUmurHutang, U_MutasiStok, U_LapPenjualan,
-  U_LapKasirPerShift, U_KertasKerja, U_ItemCheck, U_LapSetoran;
+  U_LapKasirPerShift, U_KertasKerja, U_ItemCheck, U_LapSetoran,
+  U_NotaOnline, U_NotaRetailTouch;
 
 {$R *.dfm}
 
@@ -1266,6 +1270,13 @@ begin
   if not isWindowsFound('TNotaOnlineFrm') then begin
       U_NotaOnline.ShowForm('Penjualan Online', '206', '','', 605);
       MDITabset.AddTab(NotaOnlineFrm);
+  end;
+end;
+
+procedure TMainFrm.actNotaRetailTouchExecute(Sender: TObject);
+begin
+  if not isWindowsFound('TNotaRetailTouchFrm') then begin
+      U_NotaRetailTouch.ShowForm('Penjualan Retail', '201', '','', 606);
   end;
 end;
 

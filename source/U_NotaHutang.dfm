@@ -1,6 +1,6 @@
 object NotaHutangFrm: TNotaHutangFrm
-  Left = 332
-  Top = 57
+  Left = 133
+  Top = 31
   Width = 1218
   Height = 642
   Caption = 'Nota Hutang'
@@ -948,7 +948,7 @@ object NotaHutangFrm: TNotaHutangFrm
         Left = 0
         Top = 0
         Width = 1202
-        Height = 137
+        Height = 165
         Align = alTop
         Color = 15986925
         GradientMid = 15845560
@@ -1041,6 +1041,18 @@ object NotaHutangFrm: TNotaHutangFrm
           Caption = 'Kode Rek. [Cn]'
           Transparent = True
           Visible = False
+        end
+        object Shape9: TShape
+          Left = 13
+          Top = 132
+          Width = 85
+          Height = 25
+        end
+        object Shape10: TShape
+          Left = 97
+          Top = 132
+          Width = 155
+          Height = 25
         end
         object RzGroupBox2: TRzGroupBox
           Left = 13
@@ -1140,7 +1152,7 @@ object NotaHutangFrm: TNotaHutangFrm
           Style.IsFontAssigned = True
           TabOrder = 4
           Transparent = True
-          Height = 115
+          Height = 139
           Width = 253
           object Label13: TLabel
             Left = 7
@@ -1308,6 +1320,33 @@ object NotaHutangFrm: TNotaHutangFrm
             OnKeyPress = EditKeyPress
             Width = 189
           end
+          object SCLabel2: TSCLabel
+            Left = 52
+            Top = 112
+            Width = 114
+            Height = 23
+            Cursor = crHandPoint
+            Alignment = taCenter
+            BorderProps.Border = sccbFlat
+            Caption = 'Export Item'
+            Color = clTeal
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWhite
+            Font.Height = -11
+            Font.Name = 'Tahoma'
+            Font.Style = [fsBold]
+            HotImage = 89
+            Hottrack = False
+            HotUnderline = False
+            GradientEnd = clGray
+            GradientMid = clGray
+            ImageIndex = 19
+            Images = DM.ImageList1
+            ParentColor = False
+            ParentFont = False
+            TabOrder = 2
+            OnClick = SCLabel2Click
+          end
         end
         object rgPayment: TcxGroupBox
           Left = 509
@@ -1322,7 +1361,7 @@ object NotaHutangFrm: TNotaHutangFrm
           Style.IsFontAssigned = True
           TabOrder = 5
           Transparent = True
-          Height = 115
+          Height = 139
           Width = 190
           object Label12: TLabel
             Left = 7
@@ -1493,6 +1532,198 @@ object NotaHutangFrm: TNotaHutangFrm
           Visible = False
           OnKeyPress = EditKeyPress
           Width = 135
+        end
+        object cxGroupBox1: TcxGroupBox
+          Left = 993
+          Top = 18
+          Caption = 'Informasi Pembayaran'
+          ParentFont = False
+          Style.Font.Charset = ANSI_CHARSET
+          Style.Font.Color = clWindowText
+          Style.Font.Height = -11
+          Style.Font.Name = 'Arial'
+          Style.Font.Style = []
+          Style.IsFontAssigned = True
+          TabOrder = 8
+          Transparent = True
+          Visible = False
+          Height = 139
+          Width = 371
+          object grdItem: TcxGrid
+            Left = 2
+            Top = 19
+            Width = 367
+            Height = 118
+            Align = alClient
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            ParentFont = False
+            TabOrder = 0
+            object cxGridDBTableView1: TcxGridDBTableView
+              NavigatorButtons.ConfirmDelete = False
+              DataController.Summary.DefaultGroupSummaryItems = <>
+              DataController.Summary.FooterSummaryItems = <>
+              DataController.Summary.SummaryGroups = <>
+              OptionsData.CancelOnExit = False
+              OptionsData.Deleting = False
+              OptionsData.DeletingConfirmation = False
+              OptionsData.Inserting = False
+              OptionsView.Footer = True
+              OptionsView.GroupByBox = False
+              OptionsView.HeaderHeight = 30
+              object cxGridDBColumn1: TcxGridDBColumn
+                Caption = 'ITEM ID'
+                DataBinding.FieldName = 'kd_item'
+                PropertiesClassName = 'TcxLabelProperties'
+                Properties.Alignment.Horz = taCenter
+                HeaderAlignmentHorz = taCenter
+                HeaderAlignmentVert = vaCenter
+                Options.Editing = False
+                Width = 117
+              end
+              object cxGridDBColumn2: TcxGridDBColumn
+                Caption = 'ITEM NAME'
+                DataBinding.FieldName = 'nama_item'
+                PropertiesClassName = 'TcxLabelProperties'
+                Properties.Alignment.Horz = taLeftJustify
+                HeaderAlignmentHorz = taCenter
+                HeaderAlignmentVert = vaCenter
+                Options.Editing = False
+                Width = 393
+              end
+              object cxGridDBColumn3: TcxGridDBColumn
+                Caption = 'UNIT'
+                DataBinding.FieldName = 'kd_satuan'
+                PropertiesClassName = 'TcxLabelProperties'
+                Properties.Alignment.Horz = taCenter
+                HeaderAlignmentHorz = taCenter
+                HeaderAlignmentVert = vaCenter
+                Options.Editing = False
+                Width = 65
+              end
+              object cxGridDBColumn4: TcxGridDBColumn
+                DataBinding.FieldName = 'stok_awal'
+                HeaderAlignmentHorz = taCenter
+                HeaderAlignmentVert = vaCenter
+                Width = 78
+              end
+              object cxGridDBColumn5: TcxGridDBColumn
+                DataBinding.FieldName = 'stok_berjalan'
+                HeaderAlignmentHorz = taCenter
+                HeaderAlignmentVert = vaCenter
+                Width = 82
+              end
+              object cxGridDBColumn6: TcxGridDBColumn
+                DataBinding.FieldName = 'stok_akhir'
+                HeaderAlignmentHorz = taCenter
+                HeaderAlignmentVert = vaCenter
+              end
+            end
+            object grddbtvItem: TcxGridDBTableView
+              NavigatorButtons.ConfirmDelete = False
+              DataController.DataSource = dsmITEM
+              DataController.Summary.DefaultGroupSummaryItems = <>
+              DataController.Summary.FooterSummaryItems = <
+                item
+                  Format = '0.0,0'
+                  Kind = skSum
+                  FieldName = 'sisa'
+                end
+                item
+                  Format = '0.0,0'
+                  Kind = skSum
+                  FieldName = 'current'
+                end
+                item
+                  Format = '0.0,0'
+                  Kind = skSum
+                  FieldName = 'tiga_puluh'
+                end
+                item
+                  Format = '0.0,0'
+                  Kind = skSum
+                  FieldName = 'enam_puluh'
+                end
+                item
+                  Format = '0.0,0'
+                  Kind = skSum
+                  FieldName = 'sembilan_puluh'
+                end
+                item
+                  Format = '0.0,0'
+                  Kind = skSum
+                  FieldName = 'lebih_sembilan_puluh'
+                end
+                item
+                  Format = '0.0,0'
+                end
+                item
+                  Format = '0.0,0'
+                  Kind = skSum
+                end
+                item
+                  Kind = skCount
+                end
+                item
+                  Kind = skCount
+                end>
+              DataController.Summary.SummaryGroups = <>
+              OptionsView.DataRowHeight = 35
+              OptionsView.Footer = True
+              OptionsView.GroupByBox = False
+              OptionsView.HeaderHeight = 30
+              Styles.ContentEven = cxStyle3
+              Styles.Selection = cxStyle2
+              Styles.Header = cxStyle1
+              Styles.Indicator = cxStyle4
+              object grddbtvItemno_nota: TcxGridDBColumn
+                Caption = 'Kode Item'
+                DataBinding.FieldName = 'kd_item'
+                HeaderAlignmentHorz = taCenter
+                HeaderAlignmentVert = vaCenter
+                Options.Editing = False
+                Width = 120
+              end
+              object grddbtvItemdt_nota: TcxGridDBColumn
+                Caption = 'Nama Item'
+                DataBinding.FieldName = 'nama_item'
+                HeaderAlignmentHorz = taCenter
+                HeaderAlignmentVert = vaCenter
+                Options.Editing = False
+                Width = 255
+              end
+              object grddbtvItemno_bukti: TcxGridDBColumn
+                Caption = 'Qty Tersedia'
+                DataBinding.FieldName = 'qty'
+                HeaderAlignmentHorz = taCenter
+                HeaderAlignmentVert = vaCenter
+                Options.Editing = False
+                Width = 120
+              end
+              object grddbtvItemColumn1: TcxGridDBColumn
+                Caption = 'Satuan'
+                DataBinding.FieldName = 'satuan_jual'
+                HeaderAlignmentHorz = taCenter
+                HeaderAlignmentVert = vaCenter
+                Width = 120
+              end
+              object grddbtvItemColumn2: TcxGridDBColumn
+                Caption = 'Harga'
+                DataBinding.FieldName = 'hrg_beli'
+                Width = 120
+              end
+              object grddbtvItemColumn3: TcxGridDBColumn
+                Caption = 'Qty Order'
+                DataBinding.FieldName = 'qty_order'
+              end
+            end
+            object grdItemLevel1: TcxGridLevel
+              GridView = grddbtvItem
+            end
+          end
         end
       end
       object SCPanel1: TSCPanel
@@ -1682,16 +1913,16 @@ object NotaHutangFrm: TNotaHutangFrm
       end
       object SCPanel2: TSCPanel
         Left = 0
-        Top = 137
+        Top = 165
         Width = 1202
-        Height = 255
+        Height = 227
         Align = alClient
         TabOrder = 2
         object adpDetailNavigator: TAdvDockPanel
           Left = 0
           Top = 0
           Width = 1202
-          Height = 28
+          Height = 55
           MinimumSize = 25
           LockHeight = False
           Persistence.Location = plRegistry
@@ -1701,7 +1932,7 @@ object NotaHutangFrm: TNotaHutangFrm
           Version = '6.0.4.5'
           object atbDetailNavigator: TAdvToolBar
             Left = 3
-            Top = 1
+            Top = 28
             Width = 1196
             Height = 26
             AllowFloating = False
@@ -2051,12 +2282,101 @@ object NotaHutangFrm: TNotaHutangFrm
               Width = 48
             end
           end
+          object AdvToolBar1: TAdvToolBar
+            Left = 3
+            Top = 1
+            Width = 1196
+            Height = 26
+            AllowFloating = False
+            Caption = 'Untitled'
+            CaptionFont.Charset = DEFAULT_CHARSET
+            CaptionFont.Color = clWindowText
+            CaptionFont.Height = -11
+            CaptionFont.Name = 'MS Sans Serif'
+            CaptionFont.Style = []
+            CompactImageIndex = -1
+            ShowRightHandle = False
+            ShowClose = False
+            ShowOptionIndicator = False
+            FullSize = True
+            TextAutoOptionMenu = 'Add or Remove Buttons'
+            TextOptionMenu = 'Options'
+            ToolBarStyler = ATBOS
+            ParentOptionPicture = False
+            ShowHint = False
+            ToolBarIndex = -1
+            object lblTM: TSCLabel
+              Left = 2
+              Top = 2
+              Width = 135
+              Height = 24
+              Cursor = crHandPoint
+              Alignment = taCenter
+              BorderProps.Border = sccbFlat
+              Caption = 'Ambil Data Item'
+              Color = clGreen
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWhite
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = [fsBold]
+              HotImage = 89
+              Hottrack = False
+              HotUnderline = False
+              ImageIndex = 23
+              Images = DM.ImageList1
+              ParentColor = False
+              ParentFont = False
+              TabOrder = 0
+              OnClick = lblTMClick
+            end
+            object cbSheet: TcxComboBox
+              Left = 137
+              Top = 2
+              Cursor = crHandPoint
+              Hint = 'Pilih Sheet Excel'
+              AutoSize = False
+              ParentShowHint = False
+              ShowHint = True
+              Style.BorderColor = clInfoText
+              Style.BorderStyle = ebs3D
+              Style.ButtonStyle = bts3D
+              TabOrder = 1
+              Height = 23
+              Width = 130
+            end
+            object SCLabel1: TSCLabel
+              Left = 267
+              Top = 2
+              Width = 86
+              Height = 23
+              Cursor = crHandPoint
+              Alignment = taCenter
+              BorderProps.Border = sccbFlat
+              Caption = 'IMPORT'
+              Color = clBlue
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWhite
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = [fsBold]
+              HotImage = 89
+              Hottrack = False
+              HotUnderline = False
+              ImageIndex = 22
+              Images = DM.ImageList1
+              ParentColor = False
+              ParentFont = False
+              TabOrder = 2
+              OnClick = SCLabel1Click
+            end
+          end
         end
         object grdDetail: TcxGrid
           Left = 0
-          Top = 28
+          Top = 55
           Width = 1202
-          Height = 227
+          Height = 172
           Align = alClient
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -7892,5 +8212,299 @@ object NotaHutangFrm: TNotaHutangFrm
       FieldName = 'rasio'
       Required = True
     end
+  end
+  object OpenDialog1: TOpenDialog
+    DefaultExt = 'xls'
+    Filter = '.xls'
+    Left = 816
+    Top = 255
+  end
+  object ADOConnection1: TADOConnection
+    ConnectionString = 'Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\SO.xls;'
+    LoginPrompt = False
+    Mode = cmShareDenyNone
+    Provider = 'Microsoft.ACE.OLEDB.12.0'
+    Left = 845
+    Top = 255
+  end
+  object ADODataSet1: TADODataSet
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    CommandText = 'SELECT * FROM [SO$]'
+    FieldDefs = <
+      item
+        Name = 'F1'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'F2'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'F3'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'F4'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'F5'
+        DataType = ftWideString
+        Size = 255
+      end>
+    Parameters = <>
+    StoreDefs = True
+    Left = 876
+    Top = 258
+    object ADODataSet1F1: TStringField
+      FieldName = 'F1'
+      Size = 100
+    end
+    object ADODataSet1F2: TStringField
+      FieldName = 'F2'
+      Size = 100
+    end
+    object ADODataSet1F3: TStringField
+      FieldName = 'F3'
+      Size = 255
+    end
+    object ADODataSet1F4: TStringField
+      FieldName = 'F4'
+      Size = 100
+    end
+    object ADODataSet1F5: TStringField
+      FieldName = 'F5'
+      Size = 100
+    end
+  end
+  object kmtData: TkbmMemTable
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
+    FieldDefs = <
+      item
+        Name = 'F1'
+        DataType = ftString
+        Size = 100
+      end
+      item
+        Name = 'F2'
+        DataType = ftString
+        Size = 100
+      end
+      item
+        Name = 'F3'
+        DataType = ftString
+        Size = 255
+      end
+      item
+        Name = 'F4'
+        DataType = ftString
+        Size = 100
+      end
+      item
+        Name = 'F5'
+        DataType = ftString
+        Size = 100
+      end
+      item
+        Name = 'F6'
+        DataType = ftString
+        Size = 100
+      end
+      item
+        Name = 'F7'
+        DataType = ftString
+        Size = 100
+      end
+      item
+        Name = 'F8'
+        DataType = ftString
+        Size = 100
+      end>
+    IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    FilterOptions = []
+    Version = '7.10.00 Standard Edition'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
+    Left = 910
+    Top = 251
+    object kmtDataF1: TStringField
+      FieldName = 'F1'
+      Size = 100
+    end
+    object kmtDataF2: TStringField
+      FieldName = 'F2'
+      Size = 100
+    end
+    object kmtDataF3: TStringField
+      FieldName = 'F3'
+      Size = 255
+    end
+    object kmtDataF4: TStringField
+      FieldName = 'F4'
+      Size = 100
+    end
+    object kmtDataF5: TStringField
+      FieldName = 'F5'
+      Size = 100
+    end
+  end
+  object dskmtData: TDataSource
+    DataSet = kmtData
+    Left = 938
+    Top = 255
+  end
+  object ZReadOnlyQuery1: TZReadOnlyQuery
+    Connection = DM.conn
+    SQL.Strings = (
+      'select b.*, a.hrg_beli_karton'
+      
+        'from inventory.fn_gen_kertas_kerja_so(:principal,:pwarehouse,:pt' +
+        'gl1) b '
+      'left join master.item a on a.kd_item=b.id_item'
+      'where b.id_item=:pid_item')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'principal'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'pwarehouse'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'ptgl1'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'pid_item'
+        ParamType = ptUnknown
+      end>
+    Left = 970
+    Top = 255
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'principal'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'pwarehouse'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'ptgl1'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'pid_item'
+        ParamType = ptUnknown
+      end>
+    object qryITEMid_item: TStringField
+      FieldName = 'id_item'
+      ReadOnly = True
+      Size = 252
+    end
+    object qryITEMitem_name: TStringField
+      FieldName = 'item_name'
+      ReadOnly = True
+      Size = 252
+    end
+    object qryITEMid_cat_item: TStringField
+      FieldName = 'id_cat_item'
+      Size = 252
+    end
+    object FloatField1: TFloatField
+      FieldName = 'rasio'
+      Required = True
+    end
+    object qryITEMrasio_lusin: TFloatField
+      FieldName = 'rasio_lusin'
+      Required = True
+    end
+    object qryITEMstok: TFloatField
+      FieldName = 'stok'
+      ReadOnly = True
+    end
+    object qryITEMstok_str: TMemoField
+      FieldName = 'stok_str'
+      ReadOnly = True
+      BlobType = ftMemo
+    end
+    object qryITEMhrg_beli_karton: TFloatField
+      FieldName = 'hrg_beli_karton'
+      Required = True
+    end
+  end
+  object SaveDialog1: TSaveDialog
+    DefaultExt = 'xls'
+    Filter = '.xls'
+    Left = 1020
+    Top = 74
+  end
+  object mITEM: TZReadOnlyQuery
+    Connection = DM.conn
+    SQL.Strings = (
+      'select *, 0 as qty, 0 as harga, 0 as qty_order'
+      'from master.item'
+      'where isdetail='#39'1'#39
+      'order by nama_item asc')
+    Params = <>
+    Left = 1048
+    Top = 76
+    object mITEMkd_item: TStringField
+      FieldName = 'kd_item'
+      Required = True
+      Size = 200
+    end
+    object mITEMnama_item: TStringField
+      FieldName = 'nama_item'
+      Size = 1020
+    end
+    object mITEMsatuan_jual: TStringField
+      FieldName = 'satuan_jual'
+      Size = 80
+    end
+    object mITEMqty: TIntegerField
+      FieldName = 'qty'
+      ReadOnly = True
+    end
+    object mITEMharga: TIntegerField
+      FieldName = 'harga'
+      ReadOnly = True
+    end
+    object mITEMqty_order: TIntegerField
+      FieldName = 'qty_order'
+      ReadOnly = True
+    end
+    object mITEMhrg_beli: TFloatField
+      FieldName = 'hrg_beli'
+      Required = True
+    end
+  end
+  object dsmITEM: TDataSource
+    DataSet = mITEM
+    Left = 1081
+    Top = 78
   end
 end

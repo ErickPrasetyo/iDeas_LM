@@ -327,7 +327,7 @@ object LapPenjualanFrm: TLapPenjualanFrm
     Top = 80
     Width = 980
     Height = 395
-    ActivePage = tsItemPromo
+    ActivePage = tabAP
     Align = alClient
     TabOrder = 5
     ClientRectBottom = 391
@@ -341,8 +341,8 @@ object LapPenjualanFrm: TLapPenjualanFrm
       object grdAP_List: TcxGrid
         Left = 0
         Top = 0
-        Width = 978
-        Height = 362
+        Width = 972
+        Height = 367
         Align = alClient
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
@@ -465,6 +465,16 @@ object LapPenjualanFrm: TLapPenjualanFrm
             HeaderAlignmentVert = vaCenter
             Options.Editing = False
             Width = 92
+          end
+          object grddbtvAP_ListColumn4: TcxGridDBColumn
+            Caption = 'Post'
+            DataBinding.FieldName = 'ispost'
+            PropertiesClassName = 'TcxCheckBoxProperties'
+            Properties.ValueChecked = '1'
+            Properties.ValueUnchecked = '0'
+            HeaderAlignmentHorz = taCenter
+            HeaderAlignmentVert = vaCenter
+            Width = 30
           end
         end
         object grddbtvAP_ListDetail: TcxGridDBTableView
