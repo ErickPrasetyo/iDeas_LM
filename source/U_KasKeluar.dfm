@@ -1,6 +1,6 @@
 object KasKeluarFrm: TKasKeluarFrm
-  Left = 521
-  Top = 262
+  Left = 255
+  Top = 85
   Width = 1203
   Height = 659
   Caption = 'Bukti Kas Keluar'
@@ -8,7 +8,7 @@ object KasKeluarFrm: TKasKeluarFrm
   Ctl3D = False
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -12
+  Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   FormStyle = fsMDIChild
@@ -18,7 +18,7 @@ object KasKeluarFrm: TKasKeluarFrm
   WindowState = wsMaximized
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
-  PixelsPerInch = 106
+  PixelsPerInch = 96
   TextHeight = 13
   object pnlHeader: TAdvPanel
     Left = 0
@@ -246,7 +246,7 @@ object KasKeluarFrm: TKasKeluarFrm
   end
   object pnlNavigator: TAdvPanel
     Left = 0
-    Top = 578
+    Top = 580
     Width = 1187
     Height = 40
     Align = alBottom
@@ -475,14 +475,14 @@ object KasKeluarFrm: TKasKeluarFrm
     Left = 0
     Top = 81
     Width = 1187
-    Height = 497
-    ActivePage = tsBrowse
+    Height = 499
+    ActivePage = tsDetail
     Align = alClient
     Style = 8
     TabOrder = 3
     OnChange = pgTransactionChange
     OnPageChanging = pgTransactionPageChanging
-    ClientRectBottom = 497
+    ClientRectBottom = 499
     ClientRectRight = 1187
     ClientRectTop = 24
     object tsBrowse: TcxTabSheet
@@ -492,7 +492,7 @@ object KasKeluarFrm: TKasKeluarFrm
         Left = 0
         Top = 40
         Width = 1187
-        Height = 433
+        Height = 435
         Align = alClient
         TabOrder = 0
         object grddbtvMaster: TcxGridDBTableView
@@ -1460,7 +1460,7 @@ object KasKeluarFrm: TKasKeluarFrm
       end
       object SCPanel1: TSCPanel
         Left = 0
-        Top = 379
+        Top = 381
         Width = 1187
         Height = 94
         Align = alBottom
@@ -1729,7 +1729,7 @@ object KasKeluarFrm: TKasKeluarFrm
         Left = 0
         Top = 157
         Width = 1187
-        Height = 222
+        Height = 224
         Align = alClient
         TabOrder = 1
         OnEnter = grdDetailEnter
@@ -2006,7 +2006,7 @@ object KasKeluarFrm: TKasKeluarFrm
   object SR: TcxStyleRepository
     Left = 412
     Top = 8
-    PixelsPerInch = 106
+    PixelsPerInch = 96
     object cxStyle1: TcxStyle
       AssignedValues = [svColor, svFont, svTextColor]
       Color = 7039851
@@ -3313,7 +3313,7 @@ object KasKeluarFrm: TKasKeluarFrm
       
         '              a.total_in, a.total_idr, sum(b.dibayar) as pembaya' +
         'ran, sum(b.dibayar) as pembayaran_idr, a.sisa, a.sisa_idr, mr.na' +
-        'ma_rekanan, a.id_rek_gl '
+        'ma_rekanan, a.id_rek_gl, c.id_nota'
       'FROM accfin.vnotahutang a'
       'LEFT JOIN master.mrekanan mr ON mr.kd_rekanan=a.kd_rekanan'
       'left join accfin.payment_detail b on b.no_bukti=a.no_bukti'
@@ -3327,7 +3327,8 @@ object KasKeluarFrm: TKasKeluarFrm
         'bukti, a.kd_rekanan, a.dt_due, '
       
         '              a.total_in, a.total_idr, a.pembayaran, a.pembayara' +
-        'n_idr, a.sisa, a.sisa_idr, mr.nama_rekanan, a.id_rek_gl')
+        'n_idr, a.sisa, a.sisa_idr, mr.nama_rekanan, a.id_rek_gl, c.id_no' +
+        'ta')
     Params = <
       item
         DataType = ftUnknown
@@ -3399,6 +3400,10 @@ object KasKeluarFrm: TKasKeluarFrm
     object L_Notaid_rek_gl: TStringField
       FieldName = 'id_rek_gl'
       Size = 252
+    end
+    object L_Notaid_nota: TLargeintField
+      FieldName = 'id_nota'
+      Required = True
     end
   end
   object qryGET_NO_REFF: TZQuery

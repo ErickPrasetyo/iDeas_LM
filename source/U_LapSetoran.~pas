@@ -221,6 +221,7 @@ type
     memDetailnomor: TStringField;
     memDetaildeskripsi: TStringField;
     memDetailtotal: TFloatField;
+    qNotadibayar: TFloatField;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure actCloseExecute(Sender: TObject);
@@ -756,7 +757,7 @@ begin
       Detaildt_nota.AsDateTime:= qNotadt_payment.AsDateTime;
       Detailcara_bayar.AsString:='';
       Detailnama_supplier.AsString:= qNotanama_rekanan.AsString;
-      Detailtotal_bayar.AsFloat:= qNotanominal.AsFloat;
+      Detailtotal_bayar.AsFloat:= qNotadibayar.AsFloat;
       Detail.Post;
       qNota.Next;
     end;

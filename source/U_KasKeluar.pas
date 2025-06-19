@@ -341,6 +341,7 @@ type
     L_Notanama_rekanan: TStringField;
     L_Notaid_rek_gl: TStringField;
     qExec: TZQuery;
+    L_Notaid_nota: TLargeintField;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure actCloseExecute(Sender: TObject);
@@ -663,6 +664,7 @@ begin
 end;
 
 procedure TKasKeluarFrm.actSaveExecute(Sender: TObject);
+var s: String;
 begin
 
  if (MessageBox(0, PChar('Peringatan ! '+#13#10+
@@ -727,6 +729,21 @@ begin
 //     qryUpdate.Params.Clear;
 //     qryUpdate.SQL.Add('select accfin.proc_update_invoice('+IntToStr(Masterid_payment.AsLargeInt)+')');
 //     qryUpdate.ExecSQL;
+
+    Detail.First;
+    while not Detail.Eof do
+    begin
+
+      if Detailsisa.AsFloat-Detaildibayar.AsFloat=0 then begin
+        DM.PrepareQuery(qExec);
+        s:= 'update transaksi.nota set isget_pay='+QuotedStr('1')+' where id_nota='+QuotedStr(Detailno_reff.AsString);
+        DM.ExecQuery(qExec, s);
+        Detail.Next;
+      end else begin
+        Detail.Next;
+      end;
+
+    end;
 
     DM.CommitTransaction;
     qBrowse.Refresh;
@@ -1150,13 +1167,13 @@ begin
   Mastersubtotal.AsFloat:= vSubTotal;
   Master.Post;
 
-  if Detailsisa.AsFloat-Detaildibayar.AsFloat=0 then begin
-    DM.PrepareQuery(qExec);
-    s:= 'update transaksi.nota set isget_pay='+QuotedStr('1')+' where no_nota='+QuotedStr(Detailno_reff.AsString);
-    DM.ExecQuery(qExec, s);
-  end else begin
-    Exit;
-  end;
+//  if Detailsisa.AsFloat-Detaildibayar.AsFloat=0 then begin
+//    DM.PrepareQuery(qExec);
+//    s:= 'update transaksi.nota set isget_pay='+QuotedStr('1')+' where id_nota='+QuotedStr(Detailno_reff.AsString);
+//    DM.ExecQuery(qExec, s);
+//  end else begin
+//    Exit;
+//  end;
 
 
 end;
@@ -1264,7 +1281,7 @@ begin
    if Detail.State=dsBrowse then
       Exit;
 
-  Detailno_reff.AsString:= L_Notano_doc.AsString;
+  Detailno_reff.AsString:= IntToStr(L_Notaid_nota.AsLargeInt);
   if Length(L_Notaremarks.AsString)<5 then
      Detaildescription.AsString:= 'Pembayaran : '+ L_Notano_doc.AsString+' No Faktur : '+L_Notano_bukti.AsString
   else Detaildescription.AsString:= L_Notaremarks.AsString+' No Faktur : '+L_Notano_bukti.AsString;
@@ -1377,7 +1394,7 @@ begin
    if Detail.State=dsBrowse then
       Exit;
 
-  Detailno_reff.AsString:= L_Notano_doc.AsString;
+  Detailno_reff.AsString:= IntToStr(L_Notaid_nota.AsLargeInt);
   if Length(L_Notaremarks.AsString)<5 then
      Detaildescription.AsString:= 'Pembayaran : '+ L_Notano_doc.AsString+' No Faktur : '+L_Notano_bukti.AsString
   else Detaildescription.AsString:= L_Notaremarks.AsString+' No Faktur : '+L_Notano_bukti.AsString;

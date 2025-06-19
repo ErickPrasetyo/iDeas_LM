@@ -1,6 +1,6 @@
 object LapSetoranFrm: TLapSetoranFrm
-  Left = 441
-  Top = 164
+  Left = 168
+  Top = 69
   Width = 1112
   Height = 646
   Caption = 'Laporan Setoran'
@@ -8,7 +8,7 @@ object LapSetoranFrm: TLapSetoranFrm
   Ctl3D = False
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -12
+  Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   FormStyle = fsMDIChild
@@ -19,7 +19,7 @@ object LapSetoranFrm: TLapSetoranFrm
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnShow = FormShow
-  PixelsPerInch = 106
+  PixelsPerInch = 96
   TextHeight = 13
   object pnlHeader: TAdvPanel
     Left = 0
@@ -87,7 +87,7 @@ object LapSetoranFrm: TLapSetoranFrm
   end
   object pnlNavigator: TAdvPanel
     Left = 0
-    Top = 565
+    Top = 567
     Width = 1096
     Height = 40
     Align = alBottom
@@ -453,14 +453,14 @@ object LapSetoranFrm: TLapSetoranFrm
     Left = 0
     Top = 41
     Width = 1096
-    Height = 524
+    Height = 526
     ActivePage = tsDetail
     Align = alClient
     Style = 8
     TabOrder = 2
     OnChange = pgTransactionChange
     OnPageChanging = pgTransactionPageChanging
-    ClientRectBottom = 524
+    ClientRectBottom = 526
     ClientRectRight = 1096
     ClientRectTop = 24
     object tsBrowse: TcxTabSheet
@@ -470,7 +470,7 @@ object LapSetoranFrm: TLapSetoranFrm
         Left = 0
         Top = 40
         Width = 1096
-        Height = 460
+        Height = 462
         Align = alClient
         TabOrder = 0
         object grddbtvMaster: TcxGridDBTableView
@@ -1015,7 +1015,7 @@ object LapSetoranFrm: TLapSetoranFrm
         Left = 0
         Top = 157
         Width = 1096
-        Height = 343
+        Height = 345
         Align = alClient
         BorderStyle = cxcbsNone
         Font.Charset = DEFAULT_CHARSET
@@ -1219,7 +1219,7 @@ object LapSetoranFrm: TLapSetoranFrm
   object SR: TcxStyleRepository
     Left = 409
     Top = 6
-    PixelsPerInch = 106
+    PixelsPerInch = 96
     object cxStyle1: TcxStyle
       AssignedValues = [svColor, svFont, svTextColor]
       Color = 7039851
@@ -2014,7 +2014,7 @@ object LapSetoranFrm: TLapSetoranFrm
   object qNota: TZQuery
     Connection = DM.conn
     SQL.Strings = (
-      'select a.*, b.no_bukti as no_reff'
+      'select a.*, b.no_bukti as no_reff, b.dibayar'
       'from accfin.payment a'
       'left join accfin.payment_detail b on b.id_payment=a.id_payment'
       
@@ -2199,6 +2199,10 @@ object LapSetoranFrm: TLapSetoranFrm
       FieldName = 'no_reff'
       Required = True
       Size = 128
+    end
+    object qNotadibayar: TFloatField
+      FieldName = 'dibayar'
+      Required = True
     end
   end
   object qExec: TZQuery
@@ -2468,7 +2472,6 @@ object LapSetoranFrm: TLapSetoranFrm
           Top = 113.102350000000000000
           Width = 182.136459230000000000
           Height = 15.118110240000000000
-          DisplayFormat.FormatStr = ',0'
           DisplayFormat.Kind = fkNumeric
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
