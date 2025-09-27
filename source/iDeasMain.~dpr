@@ -118,7 +118,8 @@ uses
   U_ItemCheck in 'U_ItemCheck.pas' {ItemCheckFrm},
   U_LapSetoran in 'U_LapSetoran.pas' {LapSetoranFrm},
   U_NotaOnline in 'U_NotaOnline.pas' {NotaOnlineFrm},
-  U_NotaRetailTouch in 'U_NotaRetailTouch.pas' {NotaRetailTouchFrm};
+  U_NotaRetailTouch in 'U_NotaRetailTouch.pas' {NotaRetailTouchFrm},
+  U_Print in 'U_Print.pas' {PrintFrm};
 
 {$R *.res}
 

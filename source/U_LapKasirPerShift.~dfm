@@ -1568,6 +1568,7 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
           OptionsView.HeaderAutoHeight = True
           OptionsView.HeaderHeight = 35
           OptionsView.Indicator = True
+          OptionsView.ShowColumnFilterButtons = sfbAlways
           Styles.ContentEven = cxStyle3
           Styles.Selection = cxStyle2
           Styles.Header = cxStyle1
@@ -1592,11 +1593,6 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
             Properties.Alignment.Horz = taCenter
             HeaderAlignmentHorz = taCenter
             HeaderAlignmentVert = vaCenter
-            Options.Filtering = False
-            Options.FilteringFilteredItemsList = False
-            Options.FilteringMRUItemsList = False
-            Options.FilteringPopup = False
-            Options.FilteringPopupMultiSelect = False
             Options.Sorting = False
             Width = 105
           end
@@ -1607,11 +1603,6 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
             Properties.Alignment.Horz = taCenter
             HeaderAlignmentHorz = taCenter
             HeaderAlignmentVert = vaCenter
-            Options.Filtering = False
-            Options.FilteringFilteredItemsList = False
-            Options.FilteringMRUItemsList = False
-            Options.FilteringPopup = False
-            Options.FilteringPopupMultiSelect = False
             Width = 116
           end
           object grddbtvDetailnama_pasien: TcxGridDBColumn
@@ -1619,12 +1610,6 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
             DataBinding.FieldName = 'nama_customer'
             HeaderAlignmentHorz = taCenter
             HeaderAlignmentVert = vaCenter
-            Options.Editing = False
-            Options.Filtering = False
-            Options.FilteringFilteredItemsList = False
-            Options.FilteringMRUItemsList = False
-            Options.FilteringPopup = False
-            Options.FilteringPopupMultiSelect = False
             Options.Sorting = False
             Width = 310
           end
@@ -1635,12 +1620,6 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
             Properties.Alignment.Horz = taCenter
             HeaderAlignmentHorz = taCenter
             HeaderAlignmentVert = vaCenter
-            Options.Editing = False
-            Options.Filtering = False
-            Options.FilteringFilteredItemsList = False
-            Options.FilteringMRUItemsList = False
-            Options.FilteringPopup = False
-            Options.FilteringPopupMultiSelect = False
             Options.Sorting = False
             Width = 125
           end
@@ -1649,12 +1628,6 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
             DataBinding.FieldName = 'total'
             HeaderAlignmentHorz = taCenter
             HeaderAlignmentVert = vaCenter
-            Options.Editing = False
-            Options.Filtering = False
-            Options.FilteringFilteredItemsList = False
-            Options.FilteringMRUItemsList = False
-            Options.FilteringPopup = False
-            Options.FilteringPopupMultiSelect = False
             Options.Sorting = False
             Width = 149
           end
@@ -1739,7 +1712,7 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
     object Label17: TLabel
       Left = 672
       Top = 12
-      Width = 118
+      Width = 108
       Height = 14
       Caption = 'Total Faktur Terposting'
       Font.Charset = ANSI_CHARSET

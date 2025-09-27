@@ -1274,30 +1274,40 @@ begin
                 ' where no_nota='+QuotedStr(Masterno_nota.AsString);
             DM.ExecQuery(qExec, s);
 
+            frPOS80.PrintOptions.Copies:= g.vCopies;
             frPOS80.PrintOptions.Printer:='POS80';
             frPOS80.PrepareReport;
             frPOS80.PrintOptions.ShowDialog:= False;
             frPOS80.Print;
-
-            if isPromoUang then begin
-              if (MessageBox(0, PChar('PERINGATAN !'+#13#10+'**Ada Item Dengan Diskon/Promo Uang**'),
-                                      'Perlu Melakukan Cetak Ulang ??', MB_ICONQUESTION or MB_YESNO) = idNo) then
-              Exit;
-
-              frPOS80_Copy.PrintOptions.Printer:='POS80';
-              frPOS80_Copy.PrepareReport;
-              frPOS80_Copy.PrintOptions.ShowDialog:= False;
-              frPOS80_Copy.Print;
-
-            end;
+//
+//            if isPromoUang then begin
+//              if (MessageBox(0, PChar('PERINGATAN !'+#13#10+'**Ada Item Dengan Diskon/Promo Uang**'),
+//                                      'Perlu Melakukan Cetak Ulang ??', MB_ICONQUESTION or MB_YESNO) = idNo) then
+//              Exit;
+//
+//              frPOS80_Copy.PrintOptions.Printer:='POS80';
+//              frPOS80_Copy.PrepareReport;
+//              frPOS80_Copy.PrintOptions.ShowDialog:= False;
+//              frPOS80_Copy.Print;
+//
+//            end;
 
          end
-         else
-           Exit;
+         else begin
+
+            DM.PrepareQuery(qExec);
+            s:= 'delete from transaksi.nota '+
+                'where id_nota='+IntToStr(Masterid_nota.AsLargeInt);
+            DM.ExecQuery(qExec, s);
+
+            Exit;
+
+         end;
        finally
          g.Free;
 
        end;
+
     end;
 
 end;

@@ -1257,7 +1257,7 @@ object NotaRetailFrm: TNotaRetailFrm
         object cxGroupBox2: TcxGroupBox
           Left = 568
           Top = 11
-          Caption = 'Informasi'
+          Caption = 'Total Belanja'
           TabOrder = 5
           Transparent = True
           Height = 110
@@ -1282,7 +1282,7 @@ object NotaRetailFrm: TNotaRetailFrm
             Properties.Alignment.Vert = taVCenter
             Style.Font.Charset = ANSI_CHARSET
             Style.Font.Color = clBlue
-            Style.Font.Height = -53
+            Style.Font.Height = -47
             Style.Font.Name = 'Arial'
             Style.Font.Style = [fsBold]
             Style.IsFontAssigned = True

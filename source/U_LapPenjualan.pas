@@ -25,7 +25,7 @@ uses
   dxSkinOffice2007Pink, dxSkinOffice2007Silver, dxSkinOffice2010Black,
   dxSkinOffice2010Blue, dxSkinOffice2010Silver, dxSkinPumpkin, dxSkinSeven,
   dxSkinSharp, dxSkinSilver, dxSkinSpringTime, dxSkinStardust,
-  dxSkinSummer2008, dxSkinValentine, dxSkinXmas2008Blue;
+  dxSkinSummer2008, dxSkinValentine, dxSkinXmas2008Blue, AdvMenus;
 
 type
   TLapPenjualanFrm = class(TForm)
@@ -287,6 +287,95 @@ type
     frxReport1: TfrxReport;
     OpenDialog: TSaveDialog;
     grddbtvAP_ListColumn4: TcxGridDBColumn;
+    tsPromoUang: TcxTabSheet;
+    grdPromoUang: TcxGrid;
+    grddbtvPromoUang: TcxGridDBTableView;
+    cxGridDBColumn26: TcxGridDBColumn;
+    cxGridDBColumn27: TcxGridDBColumn;
+    cxGridDBColumn28: TcxGridDBColumn;
+    cxGridDBColumn29: TcxGridDBColumn;
+    cxGridDBColumn30: TcxGridDBColumn;
+    cxGridDBColumn31: TcxGridDBColumn;
+    cxGridDBColumn32: TcxGridDBColumn;
+    cxGridDBColumn33: TcxGridDBColumn;
+    cxGridDBColumn34: TcxGridDBColumn;
+    cxGridDBTableView7: TcxGridDBTableView;
+    grdlvlPromoUang: TcxGridLevel;
+    grddbtvPromoUangColumn1: TcxGridDBColumn;
+    PromoUang: TZQuery;
+    dsPromoUang: TDataSource;
+    PromoUangno_nota: TStringField;
+    PromoUangdt_nota: TDateTimeField;
+    PromoUangdisc_rp: TFloatField;
+    PromoUangshift: TIntegerField;
+    PromoUangusr_upd: TStringField;
+    PromoUangkd_item: TStringField;
+    PromoUangnama_item: TStringField;
+    PromoUanghrg: TFloatField;
+    PromoUangqty_biji: TFloatField;
+    PromoUangsatuan_jual: TStringField;
+    PromoUangsub_total: TFloatField;
+    PromoUanghrg_beli: TFloatField;
+    PromoUangmargin_penjualan: TFloatField;
+    frxDBPromoUang: TfrxDBDataset;
+    frxReport2: TfrxReport;
+    RepDiscMember: TZQuery;
+    frxDBRepDiscMember: TfrxDBDataset;
+    dsRepDiscMember: TDataSource;
+    frxRepDiscMember: TfrxReport;
+    RepDiscMemberkd_rekanan: TStringField;
+    RepDiscMembernama_rekanan: TStringField;
+    RepDiscMembertelephone: TStringField;
+    RepDiscMembersub_total: TFloatField;
+    RepDiscMemberdisc_item: TFloatField;
+    RepDiscMemberdisc_member: TFloatField;
+    RepDiscMembertotal: TFloatField;
+    tsDiscMember: TcxTabSheet;
+    grdDiscMember: TcxGrid;
+    grddbtvDiscMember: TcxGridDBTableView;
+    cxGridDBTableView8: TcxGridDBTableView;
+    grdlvlDiscMember: TcxGridLevel;
+    grddbtvDiscMemberColumn1: TcxGridDBColumn;
+    RepDiscMemberalamat: TMemoField;
+    grddbtvDiscMemberColumn2: TcxGridDBColumn;
+    grddbtvDiscMemberColumn3: TcxGridDBColumn;
+    grddbtvDiscMemberColumn4: TcxGridDBColumn;
+    grddbtvDiscMemberColumn5: TcxGridDBColumn;
+    grddbtvDiscMemberColumn6: TcxGridDBColumn;
+    grddbtvDiscMemberColumn7: TcxGridDBColumn;
+    grddbtvDiscMemberColumn8: TcxGridDBColumn;
+    AdvPanel2: TAdvPanel;
+    Label1: TLabel;
+    grdDiscMemberDetail: TcxGrid;
+    grddbtvDiscMemberDetail: TcxGridDBTableView;
+    cxGridDBColumn35: TcxGridDBColumn;
+    cxGridDBColumn36: TcxGridDBColumn;
+    cxGridDBColumn37: TcxGridDBColumn;
+    cxGridDBColumn38: TcxGridDBColumn;
+    cxGridDBColumn39: TcxGridDBColumn;
+    cxGridDBColumn40: TcxGridDBColumn;
+    cxGridDBColumn41: TcxGridDBColumn;
+    cxGridDBColumn42: TcxGridDBColumn;
+    cxGridDBColumn43: TcxGridDBColumn;
+    cxGridDBTableView9: TcxGridDBTableView;
+    grdlvlDiscMemberDetail: TcxGridLevel;
+    DiscMemberDetail: TZQuery;
+    dsDiscMemberDetail: TDataSource;
+    DiscMemberDetailno_nota: TStringField;
+    DiscMemberDetaildt_nota: TDateTimeField;
+    DiscMemberDetailkd_rekanan: TStringField;
+    DiscMemberDetailsub_total: TFloatField;
+    DiscMemberDetaildisc_item: TFloatField;
+    DiscMemberDetaildisc_member: TFloatField;
+    DiscMemberDetailtotal: TFloatField;
+    DiscMemberDetailusr_ins: TStringField;
+    DiscMemberDetailispost: TStringField;
+    DiscMemberDetailnama_rekanan: TStringField;
+    PopUp: TAdvPopupMenu;
+    CetakRekap: TMenuItem;
+    CetakDetail: TMenuItem;
+    frxDBDiscMemberDetail: TfrxDBDataset;
+    frxDiscMemberDetail: TfrxReport;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnRefreshClick(Sender: TObject);
     procedure btnCloseClick(Sender: TObject);
@@ -307,6 +396,11 @@ type
     procedure tsRepLabaShow(Sender: TObject);
     procedure cxTabSheet1Show(Sender: TObject);
     procedure tsItemPromoShow(Sender: TObject);
+    procedure tsPromoUangShow(Sender: TObject);
+    procedure tsDiscMemberShow(Sender: TObject);
+    procedure DiscMemberDetailBeforeOpen(DataSet: TDataSet);
+    procedure CetakRekapClick(Sender: TObject);
+    procedure CetakDetailClick(Sender: TObject);
   private
     { Private declarations }
     namamenu : string;
@@ -463,6 +557,31 @@ begin
         DetailPromo.Open;
         UpdateView(DetailPromo);
      end;
+     4: begin
+
+      dt0:= FormatDateTime('dd/mm/yyyy',dtpStart.Date);
+      dt1:= FormatDateTime('dd/mm/yyyy',dtpEnd.Date);
+
+      PromoUang.Close;
+      PromoUang.params.ParamByName('ptgl0').Value:= dt0;
+      PromoUang.params.ParamByName('ptgl1').Value:= dt1;
+      PromoUang.Open;
+
+     end;
+     5: begin
+
+      dt0:= FormatDateTime('dd/mm/yyyy',dtpStart.Date);
+      dt1:= FormatDateTime('dd/mm/yyyy',dtpEnd.Date);
+
+      RepDiscMember.Close;
+      RepDiscMember.params.ParamByName('ptgl0').Value:= dt0;
+      RepDiscMember.params.ParamByName('ptgl1').Value:= dt1;
+      RepDiscMember.Open;
+
+      DiscMemberDetail.Close;
+      DiscMemberDetail.Open;
+
+     end;
    end;
 end;
 
@@ -504,7 +623,22 @@ begin
    if pgcMaster.ActivePageIndex=1 then begin
       PrepareForPrint('Rekap Penjualan Per Item');
       RepPerItem.ShowReport;
-   end;
+   end
+   else
+   if pgcMaster.ActivePageIndex=3 then begin
+      PrepareForPrint('Rekap Promo Barang');
+      frxReport1.ShowReport;
+   end
+   else
+   if pgcMaster.ActivePageIndex=4 then begin
+      PrepareForPrint('Rekap Promo Uang');
+      frxReport2.ShowReport;
+   end
+   else
+   if pgcMaster.ActivePageIndex=5 then begin
+      PopUp.PopupAtCursor;
+   end
+
 end;
 
 procedure TLapPenjualanFrm.PrintOption(opt: string; val : String);
@@ -669,6 +803,23 @@ begin
 
       end;
 
+   end else
+
+   if pgcMaster.ActivePageIndex=4 then begin
+      if PromoUang.RecordCount=0 then
+         Exit;
+
+      if OpenDialog.Execute then begin
+         appPath:= ExtractFilePath(OpenDialog.InitialDir);
+         ttl:= OpenDialog.FileName;
+
+         if (PromoUang.Active) and (PromoUang.RecordCount>0) then begin
+           ExportGridToExcel(appPath+ttl,grdPromoUang,true,true,true,'xls');
+
+         end;
+
+      end;
+
    end;
 
 end;
@@ -732,6 +883,40 @@ procedure TLapPenjualanFrm.tsItemPromoShow(Sender: TObject);
 begin
   cxLabel1.Visible:= True;
   edtItem.Visible:= True;
+end;
+
+procedure TLapPenjualanFrm.tsPromoUangShow(Sender: TObject);
+begin
+  cxLabel1.Visible:= False;
+  edtItem.Visible:= False;
+end;
+
+procedure TLapPenjualanFrm.tsDiscMemberShow(Sender: TObject);
+begin
+  cxLabel1.Visible:= False;
+  edtItem.Visible:= False;
+end;
+
+procedure TLapPenjualanFrm.DiscMemberDetailBeforeOpen(DataSet: TDataSet);
+var dt0, dt1: String;
+begin
+  dt0:= FormatDateTime('dd/mm/yyyy',dtpStart.Date);
+  dt1:= FormatDateTime('dd/mm/yyyy',dtpEnd.Date);
+
+  DiscMemberDetail.params.ParamByName('ptgl0').Value:= dt0;
+  DiscMemberDetail.params.ParamByName('ptgl1').Value:= dt1;
+end;
+
+procedure TLapPenjualanFrm.CetakRekapClick(Sender: TObject);
+begin
+  PrepareForPrint('Rekap Diskon Member');
+  frxRepDiscMember.ShowReport;
+end;
+
+procedure TLapPenjualanFrm.CetakDetailClick(Sender: TObject);
+begin
+  PrepareForPrint('Rekap Diskon Member Per Transaksi');
+  frxDiscMemberDetail.ShowReport;
 end;
 
 end.

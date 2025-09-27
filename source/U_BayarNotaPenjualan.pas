@@ -113,6 +113,8 @@ type
     Masterdibayar: TFloatField;
     Masterkembali: TFloatField;
     qExec: TZQuery;
+    cxTextEdit1: TcxTextEdit;
+    Label1: TLabel;
     procedure FormShow(Sender: TObject);
     procedure btnCancelClick(Sender: TObject);
     procedure btnOKClick(Sender: TObject);
@@ -124,6 +126,7 @@ type
     procedure edtBayarKeyPress(Sender: TObject; var Key: Char);
     procedure edtPembayaranPropertiesCloseUp(Sender: TObject);
     procedure edtPembayaranKeyPress(Sender: TObject; var Key: Char);
+    procedure cxTextEdit1KeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
     function FormatBayar(sBayar:String):Real;
@@ -132,6 +135,7 @@ type
     { Public declarations }
     vIdNota : Int64;
     vTotal : Double;
+    vCopies : Integer;
   end;
 
 var
@@ -182,7 +186,7 @@ begin
 
 //      edtPembayaran.Properties.ReadOnly:= TRUE;
 //      edtPembayaran.Properties.Buttons[0].Visible:= FALSE;
-
+      cxTextEdit1.Text:= '1';
       edtPembayaran.SetFocus;
     except
       on E: Exception do
@@ -252,6 +256,8 @@ begin
     if MemMastercara_bayar.IsNull or (Trim(MemMastercara_bayar.AsString)='') then
        raise Exception.Create('CARA BAYAR harus diisi !');
 
+    vCopies:= StrToInt(cxTextEdit1.Text);
+
     ModalResult:= mrOk;
 end;
 
@@ -305,7 +311,7 @@ begin
   if not(key in['0'..'9',#8,#13,#27]) then
     key:=#0;
 
-  if Key=#13 then btnOKClick(nil);
+  if Key=#13 then cxTextEdit1.SetFocus;
 
 //      SelectNext(ActiveControl, True, True);
   if Key=#27 then
@@ -332,6 +338,20 @@ begin
   if Key=#13 then
   edtBayar.SetFocus;
 
+end;
+
+procedure TBayarNotaPenjualanFrm.cxTextEdit1KeyPress(Sender: TObject;
+  var Key: Char);
+begin
+ //selain angka (0..9)& backspace( #8 ), input dimatikan
+  if not(key in['0'..'9',#8,#13,#27]) then
+    key:=#0;
+
+  if Key=#13 then btnOKClick(nil);
+
+//      SelectNext(ActiveControl, True, True);
+  if Key=#27 then
+    SelectNext(ActiveControl, False, True);
 end;
 
 end.

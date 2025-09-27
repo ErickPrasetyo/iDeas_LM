@@ -1,6 +1,6 @@
 object InfoMatlStok2Frm: TInfoMatlStok2Frm
-  Left = 115
-  Top = 15
+  Left = 41
+  Top = 14
   Width = 1380
   Height = 754
   Caption = 'Kartu Stok Obat/ Alkes'
@@ -2703,7 +2703,7 @@ object InfoMatlStok2Frm: TInfoMatlStok2Frm
     end
     object Detaildt_doc: TDateTimeField
       FieldName = 'dt_doc'
-      DisplayFormat = 'dd-mmm-yyyy'
+      DisplayFormat = 'dd-mmm-yyyy hh:mm'
     end
     object Detailremarks: TStringField
       FieldName = 'remarks'

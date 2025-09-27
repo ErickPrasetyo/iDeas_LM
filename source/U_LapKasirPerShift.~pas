@@ -657,7 +657,7 @@ begin
 
   DM.PrepareQuery(qExec);
   s:= 'update transaksi.nota set isget='+QuotedStr('1')+' where no_nota in(select no_nota from accfin.kasir_detail '+
-      'where id_kasir='+IntToStr(Masterid.AsLargeInt)+') and ispost_detail = '+QuotedStr('1');
+      'where id_kasir='+IntToStr(Masterid.AsLargeInt)+' and ispost_detail = '+QuotedStr('1')+')';
   DM.ExecQuery(qExec, s);
   
   DBMode:= dmBrowse;
@@ -707,6 +707,7 @@ begin
    Masterid_trans.AsString:= vjns_transaksi;
    Masterketerangan.AsString:= '-';
    Mastertotal.AsFloat:= 0;
+   Mastertotal_unpost.AsFloat:= 0;
 //   DM.LookUser.Close;
 //   DM.LookUser.Params.ParamByName('user').AsString:= dm.UserConnect;
 //   DM.LookUser.Open;
@@ -975,7 +976,7 @@ begin
               Detaildt_nota.AsDateTime:= qNotadt_nota.AsDateTime;
               Detailcara_bayar.AsString:= qNotacara_bayar.AsString;
               Detailid_trans.AsString:= qNotaid_trans.AsString;
-              Detailnama_kasir.AsString:= qNotausr_upd.AsString;
+              Detailnama_kasir.AsString:= qNotausr_ins.AsString;
               Detailnama_customer.AsString:= qNotanama_rekanan.AsString;
               Detailketerangan.AsString:= '-';
               Detailjns_penjualan.AsString:= qNotajns_penjualan.AsString;
@@ -1007,6 +1008,7 @@ begin
 
       Master.Edit;
       Mastertotal_unpost.AsFloat:= totunPost;
+      Mastertotal.AsFloat:= totPost;
 
 
       sts_dlg.Progress_It;

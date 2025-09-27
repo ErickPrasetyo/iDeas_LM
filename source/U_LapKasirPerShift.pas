@@ -655,10 +655,10 @@ begin
     end
   end;
 
-  DM.PrepareQuery(qExec);
-  s:= 'update transaksi.nota set isget='+QuotedStr('1')+' where no_nota in(select no_nota from accfin.kasir_detail '+
-      'where id_kasir='+IntToStr(Masterid.AsLargeInt)+') and ispost_detail = '+QuotedStr('1');
-  DM.ExecQuery(qExec, s);
+//  DM.PrepareQuery(qExec);
+//  s:= 'update transaksi.nota set isget='+QuotedStr('1')+' where no_nota in(select no_nota from accfin.kasir_detail '+
+//      'where id_kasir='+IntToStr(Masterid.AsLargeInt)+' and ispost_detail = '+QuotedStr('1')+')';
+//  DM.ExecQuery(qExec, s);
   
   DBMode:= dmBrowse;
   UpdateView
@@ -976,7 +976,7 @@ begin
               Detaildt_nota.AsDateTime:= qNotadt_nota.AsDateTime;
               Detailcara_bayar.AsString:= qNotacara_bayar.AsString;
               Detailid_trans.AsString:= qNotaid_trans.AsString;
-              Detailnama_kasir.AsString:= qNotausr_upd.AsString;
+              Detailnama_kasir.AsString:= qNotausr_ins.AsString;
               Detailnama_customer.AsString:= qNotanama_rekanan.AsString;
               Detailketerangan.AsString:= '-';
               Detailjns_penjualan.AsString:= qNotajns_penjualan.AsString;

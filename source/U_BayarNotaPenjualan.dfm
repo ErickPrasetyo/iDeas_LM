@@ -1,20 +1,20 @@
 object BayarNotaPenjualanFrm: TBayarNotaPenjualanFrm
-  Left = 1056
-  Top = 139
+  Left = 611
+  Top = 119
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
-  ClientHeight = 402
+  ClientHeight = 450
   ClientWidth = 361
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -12
+  Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
   Position = poScreenCenter
   OnShow = FormShow
-  PixelsPerInch = 106
+  PixelsPerInch = 96
   TextHeight = 13
   object RzPanel1: TRzPanel
     Left = 0
@@ -79,7 +79,7 @@ object BayarNotaPenjualanFrm: TBayarNotaPenjualanFrm
     Left = 0
     Top = 93
     Width = 361
-    Height = 309
+    Height = 357
     Align = alClient
     BorderOuter = fsGroove
     BorderSides = []
@@ -220,9 +220,22 @@ object BayarNotaPenjualanFrm: TBayarNotaPenjualanFrm
       ParentFont = False
       Transparent = True
     end
+    object Label1: TLabel
+      Left = 31
+      Top = 273
+      Width = 77
+      Height = 16
+      Caption = 'Print Copies'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
     object btnOK: TSCButton
       Left = 139
-      Top = 263
+      Top = 313
       Width = 92
       Height = 30
       Caption = 'OK'
@@ -235,7 +248,7 @@ object BayarNotaPenjualanFrm: TBayarNotaPenjualanFrm
     end
     object btnCancel: TSCButton
       Left = 233
-      Top = 263
+      Top = 313
       Width = 92
       Height = 30
       Caption = 'Batal'
@@ -384,6 +397,24 @@ object BayarNotaPenjualanFrm: TBayarNotaPenjualanFrm
       TabOrder = 9
       OnKeyPress = edtPembayaranKeyPress
       Width = 195
+    end
+    object cxTextEdit1: TcxTextEdit
+      Left = 134
+      Top = 265
+      AutoSize = False
+      ParentFont = False
+      Style.BorderStyle = ebsUltraFlat
+      Style.Font.Charset = DEFAULT_CHARSET
+      Style.Font.Color = clWindowText
+      Style.Font.Height = -16
+      Style.Font.Name = 'Tahoma'
+      Style.Font.Style = []
+      Style.TextStyle = [fsBold]
+      Style.IsFontAssigned = True
+      TabOrder = 10
+      OnKeyPress = cxTextEdit1KeyPress
+      Height = 32
+      Width = 40
     end
   end
   object dsMaster: TDataSource
