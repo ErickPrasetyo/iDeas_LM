@@ -1,8 +1,8 @@
 object NotaRetailFrm: TNotaRetailFrm
-  Left = 83
-  Top = 14
+  Left = 109
+  Top = 32
   Width = 1240
-  Height = 688
+  Height = 630
   Caption = 'KASIR'
   Color = clWindow
   Ctl3D = False
@@ -242,7 +242,7 @@ object NotaRetailFrm: TNotaRetailFrm
   end
   object pnlNavigator: TAdvPanel
     Left = 0
-    Top = 609
+    Top = 551
     Width = 1224
     Height = 40
     Align = alBottom
@@ -627,14 +627,14 @@ object NotaRetailFrm: TNotaRetailFrm
     Left = 0
     Top = 59
     Width = 1224
-    Height = 550
+    Height = 492
     ActivePage = tsDetail
     Align = alClient
     Style = 8
     TabOrder = 3
     OnChange = pgTransactionChange
     OnPageChanging = pgTransactionPageChanging
-    ClientRectBottom = 550
+    ClientRectBottom = 492
     ClientRectRight = 1224
     ClientRectTop = 24
     object tsBrowse: TcxTabSheet
@@ -644,7 +644,7 @@ object NotaRetailFrm: TNotaRetailFrm
         Left = 0
         Top = 40
         Width = 1224
-        Height = 486
+        Height = 428
         Align = alClient
         TabOrder = 0
         object grddbtvMaster: TcxGridDBTableView
@@ -1296,7 +1296,7 @@ object NotaRetailFrm: TNotaRetailFrm
       end
       object SCPanel1: TSCPanel
         Left = 0
-        Top = 452
+        Top = 394
         Width = 1224
         Height = 74
         Align = alBottom
@@ -1662,7 +1662,7 @@ object NotaRetailFrm: TNotaRetailFrm
         Left = 0
         Top = 129
         Width = 1224
-        Height = 323
+        Height = 265
         Align = alClient
         TabOrder = 2
         object adpDetailNavigator: TAdvDockPanel
@@ -1712,6 +1712,17 @@ object NotaRetailFrm: TNotaRetailFrm
               Anchors = [akLeft]
               AutoSize = False
               Caption = 'QTY'
+              Transparent = True
+              Layout = tlCenter
+            end
+            object Label10: TLabel
+              Left = 665
+              Top = 2
+              Width = 22
+              Height = 15
+              Alignment = taCenter
+              Anchors = [akLeft]
+              AutoSize = False
               Transparent = True
               Layout = tlCenter
             end
@@ -2029,13 +2040,28 @@ object NotaRetailFrm: TNotaRetailFrm
               OnKeyPress = edtqtyKeyPress
               Width = 48
             end
+            object btnAmbilData: TSCButton
+              Left = 687
+              Top = 2
+              Width = 88
+              Height = 23
+              Caption = 'Cari Item'
+              Color = 13303760
+              Images = DM.ImageList1
+              ImageIndex = 7
+              RoundColor = 11507049
+              RoundWithParentColor = False
+              Style = scbsCorel
+              TabOrder = 8
+              OnClick = btnAmbilDataClick
+            end
           end
         end
         object grdFP_Detail: TcxGrid
           Left = 0
           Top = 28
           Width = 1224
-          Height = 295
+          Height = 237
           Align = alClient
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -5016,41 +5042,51 @@ object NotaRetailFrm: TNotaRetailFrm
     Params = <>
     Left = 669
     Top = 10
+    object qryITEMnama_item: TStringField
+      DisplayLabel = 'Nama Item'
+      DisplayWidth = 50
+      FieldName = 'nama_item'
+      Size = 1020
+    end
     object qryITEMkd_item: TStringField
+      DisplayWidth = 30
       FieldName = 'kd_item'
       Required = True
       Size = 200
     end
-    object qryITEMnama_item: TStringField
-      FieldName = 'nama_item'
-      Size = 1020
-    end
     object qryITEMhrg_beli: TFloatField
       FieldName = 'hrg_beli'
       Required = True
+      Visible = False
       DisplayFormat = ',0'
     end
     object qryITEMhrg_jual: TFloatField
       FieldName = 'hrg_jual'
       Required = True
+      Visible = False
       DisplayFormat = ',0'
     end
     object qryITEMsatuan_jual: TStringField
       FieldName = 'satuan_jual'
+      Visible = False
       Size = 80
     end
     object qryITEMrasio: TFloatField
       FieldName = 'rasio'
       Required = True
+      Visible = False
     end
     object qryITEMhrg_jual_sm_grosir: TFloatField
       FieldName = 'hrg_jual_sm_grosir'
+      Visible = False
     end
     object qryITEMhrg_jual_grosir: TFloatField
       FieldName = 'hrg_jual_grosir'
+      Visible = False
     end
     object qryITEMhrg_jual_grosir_besar: TFloatField
       FieldName = 'hrg_jual_grosir_besar'
+      Visible = False
     end
   end
   object frAP_A5: TfrxReport
@@ -6603,7 +6639,6 @@ object NotaRetailFrm: TNotaRetailFrm
     end
   end
   object MemInfoPerusahaan: TkbmMemTable
-    Active = True
     DesignActivation = True
     AttachedAutoRefresh = True
     AttachMaxCount = 1
@@ -6701,6 +6736,9 @@ object NotaRetailFrm: TNotaRetailFrm
       FieldName = 'printed_by'
       Size = 100
     end
+    object MemInfoPerusahaannpwp: TStringField
+      FieldName = 'npwp'
+    end
   end
   object frxDBInfoPerusahaan: TfrxDBDataset
     UserName = 'frxDBInfoPerusahaan'
@@ -6714,7 +6752,8 @@ object NotaRetailFrm: TNotaRetailFrm
       'kota_perusahaan=kota_perusahaan'
       'judul=judul'
       'periode=periode'
-      'printed_by=printed_by')
+      'printed_by=printed_by'
+      'npwp=npwp')
     DataSet = MemInfoPerusahaan
     BCDToCurrency = False
     Left = 192
@@ -17409,7 +17448,7 @@ object NotaRetailFrm: TNotaRetailFrm
       object PageHeader1: TfrxPageHeader
         FillType = ftBrush
         Height = 24.795300000000000000
-        Top = 268.346630000000000000
+        Top = 283.464750000000000000
         Width = 264.567100000000000000
         object Memo9: TfrxMemoView
           Top = 3.779529999999994000
@@ -17468,7 +17507,7 @@ object NotaRetailFrm: TNotaRetailFrm
       object MasterData1: TfrxMasterData
         FillType = ftBrush
         Height = 34.015770000000010000
-        Top = 355.275820000000000000
+        Top = 370.393940000000000000
         Width = 264.567100000000000000
         DataSet = frxDBDetail
         DataSetName = 'frxDBDetail'
@@ -17629,8 +17668,8 @@ object NotaRetailFrm: TNotaRetailFrm
       end
       object ReportSummary1: TfrxReportSummary
         FillType = ftBrush
-        Height = 136.842610000000000000
-        Top = 449.764070000000000000
+        Height = 148.181200000000000000
+        Top = 464.882190000000000000
         Width = 264.567100000000000000
         object Memo12: TfrxMemoView
           Top = 9.338590000000010000
@@ -17791,7 +17830,7 @@ object NotaRetailFrm: TNotaRetailFrm
           Diagonal = True
         end
         object Memo26: TfrxMemoView
-          Top = 93.165429999999780000
+          Top = 104.165430000000000000
           Width = 253.228510000000000000
           Height = 11.338590000000000000
           Font.Charset = DEFAULT_CHARSET
@@ -17893,7 +17932,7 @@ object NotaRetailFrm: TNotaRetailFrm
           ParentFont = False
         end
         object Memo29: TfrxMemoView
-          Top = 103.063080000000000000
+          Top = 114.063080000000000000
           Width = 253.228510000000000000
           Height = 11.338590000000000000
           Font.Charset = DEFAULT_CHARSET
@@ -17907,7 +17946,7 @@ object NotaRetailFrm: TNotaRetailFrm
           ParentFont = False
         end
         object Memo27: TfrxMemoView
-          Top = 113.047310000000000000
+          Top = 124.047310000000000000
           Width = 253.228510000000000000
           Height = 11.338590000000000000
           Font.Charset = DEFAULT_CHARSET
@@ -17962,10 +18001,24 @@ object NotaRetailFrm: TNotaRetailFrm
             '[frxDBMaster."discount"]')
           ParentFont = False
         end
+        object Memo42: TfrxMemoView
+          Top = 94.488250000000000000
+          Width = 253.228510000000000000
+          Height = 11.338590000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -7
+          Font.Name = 'Times New Roman'
+          Font.Style = []
+          HAlign = haCenter
+          Memo.UTF8 = (
+            'HARGA DI ATAS SUDAH TERMASUK PPN')
+          ParentFont = False
+        end
       end
       object ReportTitle1: TfrxReportTitle
         FillType = ftBrush
-        Height = 226.771800000000000000
+        Height = 241.889920000000000000
         Top = 18.897650000000000000
         Width = 264.567100000000000000
         object Picture1: TfrxPictureView
@@ -18887,7 +18940,7 @@ object NotaRetailFrm: TNotaRetailFrm
           Left = 5.669295000000000000
           Top = 58.149660000000000000
           Width = 253.228510000000000000
-          Height = 18.897650000000000000
+          Height = 34.015770000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -11
@@ -18895,24 +18948,25 @@ object NotaRetailFrm: TNotaRetailFrm
           Font.Style = []
           HAlign = haCenter
           Memo.UTF8 = (
-            '[frxDBInfoPerusahaan."alamat_perusahaan"]')
+            '[frxDBInfoPerusahaan."alamat_perusahaan"]'
+            'NPWP : [frxDBInfoPerusahaan."npwp"]')
           ParentFont = False
         end
         object Line1: TfrxLineView
-          Top = 80.606370000000000000
+          Top = 94.606370000000000000
           Width = 253.228510000000000000
           Color = clBlack
           Diagonal = True
         end
         object Line2: TfrxLineView
-          Top = 83.385900000000010000
+          Top = 97.385900000000010000
           Width = 253.228510000000000000
           Color = clBlack
           Diagonal = True
         end
         object Memo3: TfrxMemoView
           Left = 1.889765000000000000
-          Top = 177.385900000000000000
+          Top = 191.385900000000000000
           Width = 71.811070000000000000
           Height = 15.118120000000000000
           Font.Charset = DEFAULT_CHARSET
@@ -18926,7 +18980,7 @@ object NotaRetailFrm: TNotaRetailFrm
         end
         object Memo4: TfrxMemoView
           Left = 75.590600000000000000
-          Top = 177.385900000000000000
+          Top = 191.385900000000000000
           Width = 3.779530000000000000
           Height = 15.118120000000000000
           Font.Charset = DEFAULT_CHARSET
@@ -18941,7 +18995,7 @@ object NotaRetailFrm: TNotaRetailFrm
         end
         object Memo5: TfrxMemoView
           Left = 83.149660000000000000
-          Top = 177.385900000000000000
+          Top = 191.385900000000000000
           Width = 170.078850000000000000
           Height = 15.118120000000000000
           Font.Charset = DEFAULT_CHARSET
@@ -18960,7 +19014,7 @@ object NotaRetailFrm: TNotaRetailFrm
         end
         object Memo6: TfrxMemoView
           Left = 2.000000000000000000
-          Top = 193.283550000000000000
+          Top = 207.283550000000000000
           Width = 71.811070000000000000
           Height = 15.118110240000000000
           Font.Charset = DEFAULT_CHARSET
@@ -18974,7 +19028,7 @@ object NotaRetailFrm: TNotaRetailFrm
         end
         object Memo7: TfrxMemoView
           Left = 75.700835000000000000
-          Top = 193.283550000000000000
+          Top = 207.283550000000000000
           Width = 3.779530000000000000
           Height = 15.118110240000000000
           Font.Charset = DEFAULT_CHARSET
@@ -18989,7 +19043,7 @@ object NotaRetailFrm: TNotaRetailFrm
         end
         object Memo8: TfrxMemoView
           Left = 83.259895000000000000
-          Top = 193.283550000000000000
+          Top = 207.283550000000000000
           Width = 170.078850000000000000
           Height = 15.118110240000000000
           Font.Charset = DEFAULT_CHARSET
@@ -19003,7 +19057,7 @@ object NotaRetailFrm: TNotaRetailFrm
         end
         object Memo1: TfrxMemoView
           Left = 2.779530000000000000
-          Top = 208.504020000000000000
+          Top = 222.504020000000000000
           Width = 71.811070000000000000
           Height = 15.118110240000000000
           Font.Charset = DEFAULT_CHARSET
@@ -19017,7 +19071,7 @@ object NotaRetailFrm: TNotaRetailFrm
         end
         object Memo35: TfrxMemoView
           Left = 75.480365000000000000
-          Top = 208.504020000000000000
+          Top = 222.504020000000000000
           Width = 3.779530000000000000
           Height = 15.118110240000000000
           Font.Charset = DEFAULT_CHARSET
@@ -19032,7 +19086,7 @@ object NotaRetailFrm: TNotaRetailFrm
         end
         object Memo36: TfrxMemoView
           Left = 84.039425000000000000
-          Top = 208.504020000000000000
+          Top = 222.504020000000000000
           Width = 170.078850000000000000
           Height = 15.118110240000000000
           Font.Charset = DEFAULT_CHARSET
@@ -19046,7 +19100,7 @@ object NotaRetailFrm: TNotaRetailFrm
         end
         object Barcode2D1: TfrxBarcode2DView
           Left = 83.149660000000000000
-          Top = 87.929190000000000000
+          Top = 101.929190000000000000
           Width = 84.000000000000000000
           Height = 84.000000000000000000
           BarType = bcCodeQR
@@ -20868,5 +20922,20 @@ object NotaRetailFrm: TNotaRetailFrm
         end
       end
     end
+  end
+  object LookItem: TwwLookupDialog
+    Selected.Strings = (
+      'nama_item'#9'50'#9'Nama Item'#9'F'
+      'kd_item'#9'30'#9'kd_item'#9'F')
+    GridTitleAlignment = taLeftJustify
+    GridColor = clWhite
+    GridOptions = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgPerfectRowFit]
+    LookupTable = qryITEM
+    Caption = 'Pencarian Item'
+    MaxWidth = 0
+    MaxHeight = 209
+    CharCase = ecNormal
+    Left = 779
+    Top = 212
   end
 end

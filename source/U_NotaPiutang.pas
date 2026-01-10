@@ -596,6 +596,28 @@ type
     grddbtvFP_DetailColumn3: TcxGridDBBandedColumn;
     Detailisgudang: TStringField;
     frPOS80: TfrxReport;
+    MemInfoPerusahaannpwp: TStringField;
+    grddbtvMasterColumn2: TcxGridDBColumn;
+    Detailketerangan: TStringField;
+    Label10: TLabel;
+    btnAmbilData: TSCButton;
+    LookItem: TwwLookupDialog;
+    CheckPromoB: TZReadOnlyQuery;
+    CheckPromoBid_item_promo: TIntegerField;
+    CheckPromoBkd_item: TStringField;
+    CheckPromoBnama_item: TStringField;
+    CheckPromoBjenis: TStringField;
+    CheckPromoBqty_promo: TFloatField;
+    CheckPromoBnilai_promo: TFloatField;
+    CheckPromoBkd_item_promo: TStringField;
+    CheckPromoBnama_item_promo: TStringField;
+    CheckPromoBqty_item_promo: TFloatField;
+    CheckPromoBdiv: TFloatField;
+    CheckPromoBqty_max: TFloatField;
+    qBrowseshift: TIntegerField;
+    grddbtvMasterColumn3: TcxGridDBColumn;
+    grddbtvMasterColumn4: TcxGridDBColumn;
+    qBrowseusr_ins: TStringField;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure actCloseExecute(Sender: TObject);
@@ -675,6 +697,8 @@ type
     procedure CloneDetail;
     function CheckDetail(id_item: string): Boolean;
     procedure Bayar;
+    function CheckPromoUang(kd_item: String; qty : Double): Boolean;
+    function CheckPromoBarang(kd_item: String; qty : Double): Boolean;
 
 
   public
@@ -691,6 +715,38 @@ implementation
 uses U_DM, U_Currency;
 
 {$R *.dfm}
+
+function TNotaPiutangFrm.CheckPromoBarang(kd_item: String; qty : Double): Boolean;
+begin
+  Result := False;
+  Try
+    CheckPromoB.Close;
+    CheckPromoB.Params.ParamByName('kd_item').Value:= kd_item;
+    CheckPromoB.Params.ParamByName('jenis').Value:= 'BARANG';
+    CheckPromoB.Params.ParamByName('qty').Value:= qty;
+    CheckPromoB.Open;
+    if CheckPromoB.RecordCount>0 then
+    Result:= True
+  except
+
+  end
+end;
+
+function TNotaPiutangFrm.CheckPromoUang(kd_item: String; qty : Double): Boolean;
+begin
+  Result := False;
+  Try
+    CheckPromoB.Close;
+    CheckPromoB.Params.ParamByName('kd_item').Value:= kd_item;
+    CheckPromoB.Params.ParamByName('jenis').Value:= 'UANG';
+    CheckPromoB.Params.ParamByName('qty').Value:= qty;
+    CheckPromoB.Open;
+    if CheckPromoB.RecordCount>0 then
+    Result:= True
+  except
+
+  end
+end;
 
 procedure ShowForm(pNamaMenu: String; ptransaksi: String; pitem: String; plook: String; ptag: integer);
 begin
@@ -1213,7 +1269,7 @@ end;
 
 procedure TNotaPiutangFrm.DetailNewRecord(DataSet: TDataSet);
 begin
-  
+
   Detailid_nota.AsLargeInt:= Masterid_nota.AsLargeInt;
   Detailhrg.AsFloat:= 0;
 
@@ -1231,6 +1287,7 @@ begin
   Detailhrg_beli_karton.AsFloat:= 0;
   Detailhrg.AsFloat:= 0;
   Detailispromo.AsString:= '0';
+  Detailisgudang.AsString:= '0';
 
   if vrek_debet<>'' then Detailid_rek_gl.AsString:= vrek_debet;
 
@@ -1518,13 +1575,13 @@ end;
 procedure TNotaPiutangFrm.ER_LCB_ITEM_KODEPropertiesCloseUp(
   Sender: TObject);
 begin
-   if DBMode=dmBrowse then
-      Exit;
-
-   Detailkd_item.AsString:= qryITEMkd_item.AsString;
-   Detaildiskripsi.AsString:= qryITEMnama_item.AsString;
-   Detailhrg.AsFloat:= qryITEMhrg_jual.AsFloat;
-   Detailsatuan_beli.AsString:= qryITEMsatuan_jual.AsString;
+//   if DBMode=dmBrowse then
+//      Exit;
+//
+//   Detailkd_item.AsString:= qryITEMkd_item.AsString;
+//   Detaildiskripsi.AsString:= qryITEMnama_item.AsString;
+//   Detailhrg.AsFloat:= qryITEMhrg_jual.AsFloat;
+//   Detailsatuan_beli.AsString:= qryITEMsatuan_jual.AsString;
    
 end;
 
@@ -1542,10 +1599,10 @@ procedure TNotaPiutangFrm.grddbtvFP_Detailnama_itemGetPropertiesForEdit(
   Sender: TcxCustomGridTableItem; ARecord: TcxCustomGridRecord;
   var AProperties: TcxCustomEditProperties);
 begin
-  if Detail.State in [dsInsert,dsedit] then
-        AProperties := ER_LCB_ITEM_NAME.Properties
-  else
-     AProperties := ER_EDT.Properties;
+//  if Detail.State in [dsInsert,dsedit] then
+//        AProperties := ER_LCB_ITEM_NAME.Properties
+//  else
+//     AProperties := ER_EDT.Properties;
 end;
 
 procedure TNotaPiutangFrm.grddbtvFP_Detailid_rek_glGetPropertiesForEdit(
@@ -1614,13 +1671,13 @@ end;
 procedure TNotaPiutangFrm.ER_LCB_ITEM_NAMEPropertiesCloseUp(
   Sender: TObject);
 begin
-   if DBMode=dmBrowse then
-      Exit;
-
-   Detaildiskripsi.AsString:= qryITEMnama_item.AsString;
-   Detailkd_item.AsString:= qryITEMkd_item.AsString;
-   Detailhrg.AsFloat:= qryITEMhrg_jual.AsFloat;
-   Detailsatuan_beli.AsString:= qryITEMsatuan_jual.AsString;
+//   if DBMode=dmBrowse then
+//      Exit;
+//
+//   Detaildiskripsi.AsString:= qryITEMnama_item.AsString;
+//   Detailkd_item.AsString:= qryITEMkd_item.AsString;
+//   Detailhrg.AsFloat:= qryITEMhrg_jual.AsFloat;
+//   Detailsatuan_beli.AsString:= qryITEMsatuan_jual.AsString;
 end;
 
 
@@ -1689,6 +1746,7 @@ procedure TNotaPiutangFrm.edtItemKeyPress(Sender: TObject; var Key: Char);
 var
 vKey: Word;
 begin
+
   if Key=#13 then
 
     try
@@ -1697,12 +1755,7 @@ begin
       qItem.Open;
 
       if qItem.RecordCount=0 then begin
-//        Detail.Append;
-//        Detailkd_item.AsString:= '';
-//        Detaildiskripsi.AsString:= '';
-//        Detailhrg.AsFloat:= 0;
-//        Detailsatuan_beli.AsString:= '';
-//        grddbtvFP_Detail.GetColumnByFieldName('qty').FocusWithSelection;
+
       end else begin
         edtqty.SetFocus;
 
@@ -1713,8 +1766,6 @@ begin
 
   if Key=#27 then
      btnSave.SetFocus;
-
-
 end;
 
 procedure TNotaPiutangFrm.edtItemKeyDown(Sender: TObject; var Key: Word;
@@ -1726,21 +1777,98 @@ end;
 
 procedure TNotaPiutangFrm.edtqtyKeyPress(Sender: TObject; var Key: Char);
 begin
-  if Key=#13 then
-     try
-        Detail.Append;
-        Detailkd_item.AsString:= qItemkd_item.AsString;
-        Detaildiskripsi.AsString:= qItemnama_item.AsString;
-        Detailhrg.AsFloat:= qItemhrg_jual.AsFloat;
-        Detailsatuan_beli.AsString:= qItemsatuan_jual.AsString;
-        Detailqty_biji.AsFloat:= StrToFloat(edtqty.Text);
-        Detailid_warehouse.AsString:= qItemlok_rak.AsString;
-        Detail.Post;
-        edtItem.Text:='';
-        edtqty.Text:='';
-        edtItem.SetFocus;
-     except
-     end;
+
+  if Key=#13 then begin
+    if CheckPromoUang(edtItem.Text, StrToFloat(edtqty.Text)) then begin
+       if CheckPromoBdiv.AsFloat>0 then begin
+          Detail.Append;
+          Detailkd_item.AsString:= qItemkd_item.AsString;
+          Detaildiskripsi.AsString:= qItemnama_item.AsString;
+          Detailhrg.AsFloat:= qItemhrg_jual.AsFloat;
+          Detailsatuan_beli.AsString:= qItemsatuan_jual.AsString;
+          Detailqty_biji.AsFloat:= StrToFloat(edtqty.Text);
+          Detailid_warehouse.AsString:= qItemlok_rak.AsString;
+          Detaildisc_rp.AsFloat:= CheckPromoBnilai_promo.AsFloat*CheckPromoBdiv.AsFloat;
+          Detail.Post;
+          edtItem.Text:='';
+          edtqty.Text:='';
+          edtItem.SetFocus;
+       end else begin
+          Detail.Append;
+          Detailkd_item.AsString:= qItemkd_item.AsString;
+          Detaildiskripsi.AsString:= qItemnama_item.AsString;
+          Detailhrg.AsFloat:= qItemhrg_jual.AsFloat;
+          Detailsatuan_beli.AsString:= qItemsatuan_jual.AsString;
+          Detailqty_biji.AsFloat:= StrToFloat(edtqty.Text);
+          Detailid_warehouse.AsString:= qItemlok_rak.AsString;
+          Detaildisc_rp.AsFloat:= 0;
+          Detail.Post;
+          edtItem.Text:='';
+          edtqty.Text:='';
+          edtItem.SetFocus;
+       end
+    end
+    else
+    if CheckPromoBarang(edtItem.Text, StrToFloat(edtqty.Text)) then begin
+      if CheckPromoBdiv.AsFloat>0 then begin
+          Detail.Append;
+          Detailkd_item.AsString:= qItemkd_item.AsString;
+          Detaildiskripsi.AsString:= qItemnama_item.AsString;
+          Detailhrg.AsFloat:= qItemhrg_jual.AsFloat;
+          Detailsatuan_beli.AsString:= qItemsatuan_jual.AsString;
+          Detailqty_biji.AsFloat:= StrToFloat(edtqty.Text);
+          Detailid_warehouse.AsString:= qItemlok_rak.AsString;
+          Detaildisc_rp.AsFloat:= 0;
+          Detail.Post;
+//          edtItem.Text:='';
+//          edtqty.Text:='';
+//          edtItem.SetFocus;
+
+          CheckPromoB.First;
+          while not CheckPromoB.Eof do begin
+            Detail.Append;
+            Detailkd_item.AsString:= CheckPromoBkd_item_promo.AsString;
+            Detaildiskripsi.AsString:= CheckPromoBnama_item_promo.AsString;
+
+            if (CheckPromoBqty_item_promo.AsFloat*CheckPromoBdiv.AsFloat)>CheckPromoBqty_max.AsFloat then
+                Detailqty_biji.AsFloat:= CheckPromoBqty_max.AsFloat;
+            if (CheckPromoBqty_item_promo.AsFloat*CheckPromoBdiv.AsFloat)<CheckPromoBqty_max.AsFloat then
+                Detailqty_biji.AsFloat:= CheckPromoBqty_item_promo.AsFloat*CheckPromoBdiv.AsFloat;
+
+            Detailsatuan_beli.AsString:= qItemsatuan_jual.AsString;
+            Detailid_warehouse.AsString:= qItemlok_rak.AsString;
+            Detailispromo.AsString:= '1';
+            Detaildisc_rp.AsFloat:= 0;
+            Detailhrg.AsFloat:= 0;
+            Detailketerangan.AsString:= Trim('Promo Barang Dari Pembelian "'+UpperCase(qItemnama_item.AsString)+'"');
+            Detail.Post;
+            CheckPromoB.Next;
+          end;
+
+          edtItem.Text:='';
+          edtqty.Text:='';
+          edtItem.SetFocus;
+      end else begin
+
+      end;
+
+    end else begin
+          Detail.Append;
+          Detailkd_item.AsString:= qItemkd_item.AsString;
+          Detaildiskripsi.AsString:= qItemnama_item.AsString;
+          Detailhrg.AsFloat:= qItemhrg_jual.AsFloat;
+          Detailsatuan_beli.AsString:= qItemsatuan_jual.AsString;
+          Detailqty_biji.AsFloat:= StrToFloat(edtqty.Text);
+          Detailid_warehouse.AsString:= qItemlok_rak.AsString;
+          Detaildisc_rp.AsFloat:= 0;
+          Detail.Post;
+          edtItem.Text:='';
+          edtqty.Text:='';
+          edtItem.SetFocus;
+    end
+
+  end;
+
 end;
 
 procedure TNotaPiutangFrm.Cetak1Click(Sender: TObject);
@@ -1774,6 +1902,7 @@ begin
   MemInfoPerusahaankota_perusahaan.AsString:= DM.L_Perusahaancity.AsString;
   MemInfoPerusahaanlogo.LoadFromFile(ExtractFilePath(Application.ExeName)+'\IMAGES\LOGO.JPG');
   MemInfoPerusahaanjudul.AsString:= lblHeader1.Caption;
+  MemInfoPerusahaannpwp.AsString:= DM.L_Perusahaannpwp.AsString;
   MemInfoPerusahaan.Post;
 
   MemMaster.Close;
@@ -1805,19 +1934,15 @@ begin
 
   MemMasterkasir.AsString:= DM.UserConnect;
 
-//  vKembali:= FloatToStr(g.MemMasterkembali.AsFloat);
-//  vKembali:= StringReplace(vKembali,'-','',[rfReplaceAll,rfIgnoreCase]);
-//  FKembali:= StrToFloat(vKembali);
-//  MemMasterdibayar.AsString:= FormatFloat('0,0', g.MemMasterdibayar.AsFloat);
-//  MemMasterkembali.AsString:= FormatFloat('0,0', FKembali);
+  MemMasterdibayar.AsString:= FormatFloat('0,0', Masterdibayar.AsFloat);
+  MemMasterkembali.AsString:= FormatFloat('0,0', Masterkembali.AsFloat);
 
-
-  MemMasterprinted_by.AsString:= 'user print : '+DM.UserConnect+'@'+FormatDateTime('ddmmyy:hhmm',now);
+  MemMasterprinted_by.AsString:= 'user print : '+DM.UserConnect+'@'+FormatDateTime('ddmmyy',now);
   MemMastermodel.AsString:= 'NP-'+vjns_transaksi;
   //          MemMasterdistribusi_document.AsString:= QDocDistributedoc_ditribution.AsString;
 
   if Masterdt_nota.IsNull then MemMasterdated.AsString:= ''
-  else MemMasterdated.AsString:= FormatDateTime('dd-mmm-yyyy hh:mm', Masterdt_nota.AsDateTime);
+  else MemMasterdated.AsString:= FormatDateTime('dd-mmm-yyyy', Masterdt_nota.AsDateTime);
 
   if Masterdt_jth_tempo.IsNull then MemMasterdt_due.AsString:= ''
   else MemMasterdt_due.AsString:= FormatDateTime('dd-mmm-yyyy', Masterdt_jth_tempo.AsDateTime);

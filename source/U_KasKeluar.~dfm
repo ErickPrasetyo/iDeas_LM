@@ -1,6 +1,6 @@
 object KasKeluarFrm: TKasKeluarFrm
-  Left = 255
-  Top = 85
+  Left = 124
+  Top = 40
   Width = 1203
   Height = 659
   Caption = 'Bukti Kas Keluar'
@@ -529,21 +529,21 @@ object KasKeluarFrm: TKasKeluarFrm
             Properties.Alignment.Vert = taVCenter
             HeaderAlignmentHorz = taCenter
             HeaderAlignmentVert = vaCenter
-            Width = 95
+            Width = 119
           end
           object grddbtvMasterno_payment: TcxGridDBColumn
             Caption = 'No. BKK'
             DataBinding.FieldName = 'no_payment'
             HeaderAlignmentHorz = taCenter
             HeaderAlignmentVert = vaCenter
-            Width = 126
+            Width = 159
           end
           object grddbtvMasterdt_payment: TcxGridDBColumn
             Caption = 'Tanggal'
             DataBinding.FieldName = 'dt_payment'
             HeaderAlignmentHorz = taCenter
             HeaderAlignmentVert = vaCenter
-            Width = 112
+            Width = 141
           end
           object grddbtvMasterid_rek_gl: TcxGridDBColumn
             Caption = 'Rekening'
@@ -551,14 +551,21 @@ object KasKeluarFrm: TKasKeluarFrm
             HeaderAlignmentHorz = taCenter
             HeaderAlignmentVert = vaCenter
             Options.Editing = False
-            Width = 134
+            Width = 110
+          end
+          object grddbtvMasterColumn1: TcxGridDBColumn
+            Caption = 'Keterangan'
+            DataBinding.FieldName = 'remarks'
+            HeaderAlignmentHorz = taCenter
+            HeaderAlignmentVert = vaCenter
+            Width = 246
           end
           object grddbtvMasterno_bukti: TcxGridDBColumn
             Caption = 'Penerima'
             DataBinding.FieldName = 'nama_rekanan'
             HeaderAlignmentHorz = taCenter
             HeaderAlignmentVert = vaCenter
-            Width = 210
+            Width = 223
           end
           object grddbtvMasterdibayar: TcxGridDBColumn
             Caption = 'Total'
@@ -566,7 +573,7 @@ object KasKeluarFrm: TKasKeluarFrm
             HeaderAlignmentHorz = taCenter
             HeaderAlignmentVert = vaCenter
             Options.Editing = False
-            Width = 132
+            Width = 140
           end
           object grddbtvMasterusr_upd: TcxGridDBColumn
             Caption = 'User'
@@ -574,7 +581,7 @@ object KasKeluarFrm: TKasKeluarFrm
             HeaderAlignmentHorz = taCenter
             HeaderAlignmentVert = vaCenter
             Options.Editing = False
-            Width = 90
+            Width = 97
           end
           object grddbtvMasterispost: TcxGridDBColumn
             Caption = 'Posted'
@@ -585,7 +592,7 @@ object KasKeluarFrm: TKasKeluarFrm
             Properties.ValueUnchecked = '0'
             HeaderAlignmentHorz = taCenter
             HeaderAlignmentVert = vaCenter
-            Width = 61
+            Width = 64
           end
           object grddbtvMasteriscancel: TcxGridDBColumn
             Caption = 'Batal'
@@ -596,7 +603,7 @@ object KasKeluarFrm: TKasKeluarFrm
             Properties.ValueUnchecked = '0'
             HeaderAlignmentHorz = taCenter
             HeaderAlignmentVert = vaCenter
-            Width = 61
+            Width = 65
           end
         end
         object grdlvlMaster: TcxGridLevel
@@ -1469,18 +1476,19 @@ object KasKeluarFrm: TKasKeluarFrm
         ParentColor = False
         TabOrder = 2
         object Label11: TLabel
-          Left = 772
+          Left = 770
           Top = 12
           Width = 46
           Height = 13
           Caption = 'Sub Total'
         end
         object Lblselisih: TLabel
-          Left = 772
-          Top = 32
+          Left = 563
+          Top = 65
           Width = 30
           Height = 13
           Caption = 'Selisih'
+          Visible = False
         end
         object pnlPrepared: TPanel
           Left = 5
@@ -1702,16 +1710,17 @@ object KasKeluarFrm: TKasKeluarFrm
           end
         end
         object edtNominal: TcxDBTextEdit
-          Left = 827
+          Left = 825
           Top = 7
           DataBinding.DataField = 'nominal'
           DataBinding.DataSource = dsMaster
+          Properties.ReadOnly = True
           TabOrder = 3
           Width = 121
         end
         object edtSelisih: TcxDBLabel
-          Left = 829
-          Top = 31
+          Left = 620
+          Top = 64
           DataBinding.DataField = 'selisih'
           DataBinding.DataSource = dsMaster
           ParentFont = False
@@ -1721,6 +1730,7 @@ object KasKeluarFrm: TKasKeluarFrm
           Style.Font.Name = 'MS Sans Serif'
           Style.Font.Style = [fsBold]
           Style.IsFontAssigned = True
+          Visible = False
           Height = 21
           Width = 121
         end
@@ -1770,7 +1780,7 @@ object KasKeluarFrm: TKasKeluarFrm
               Width = 178
             end
             item
-              Width = 121
+              Width = 176
             end>
           object grdDetailDBBTVnomor: TcxGridDBBandedColumn
             Caption = 'NO.'
@@ -1918,9 +1928,19 @@ object KasKeluarFrm: TKasKeluarFrm
             Options.FilteringPopup = False
             Options.FilteringPopupMultiSelect = False
             Options.Sorting = False
-            Width = 136
+            Width = 97
             Position.BandIndex = 3
             Position.ColIndex = 0
+            Position.RowIndex = 0
+          end
+          object grdDetailDBBTVColumn1: TcxGridDBBandedColumn
+            Caption = 'POTONGAN'
+            DataBinding.FieldName = 'potongan'
+            HeaderAlignmentHorz = taCenter
+            HeaderAlignmentVert = vaCenter
+            Width = 79
+            Position.BandIndex = 3
+            Position.ColIndex = 1
             Position.RowIndex = 0
           end
         end
@@ -2356,6 +2376,10 @@ object KasKeluarFrm: TKasKeluarFrm
       DisplayFormat = '#,##0.00;(#,##0.00)'
       Calculated = True
     end
+    object Masterpotongan: TFloatField
+      FieldName = 'potongan'
+      Required = True
+    end
   end
   object Detail: TZQuery
     Connection = DM.conn
@@ -2448,6 +2472,11 @@ object KasKeluarFrm: TKasKeluarFrm
     end
     object Detailid_payment_detail: TLargeintField
       FieldName = 'id_payment_detail'
+    end
+    object Detailpotongan: TFloatField
+      FieldName = 'potongan'
+      Required = True
+      DisplayFormat = '#,##0.00;(#,##0.00)'
     end
   end
   object dsDetail: TDataSource
@@ -4644,7 +4673,7 @@ object KasKeluarFrm: TKasKeluarFrm
       
         'select a.id_payment, a.no_payment, a.dt_payment, a.id_rek_gl, a.' +
         'usr_upd, a.ispost, a.iscancel, b.nama_rekanan, a.usr_post, a.dt_' +
-        'post, a.nominal'
+        'post, a.nominal, a.remarks'
       'from accfin.payment a'
       'left join master.mrekanan b on b.kd_rekanan=a.kd_rekanan'
       'where a.isdelete='#39'0'#39' and a.id_trans=:pid_trans'
@@ -4741,6 +4770,10 @@ object KasKeluarFrm: TKasKeluarFrm
       FieldName = 'nominal'
       Required = True
       DisplayFormat = '0.0,0'
+    end
+    object qBrowseremarks: TStringField
+      FieldName = 'remarks'
+      Size = 1020
     end
   end
   object qryRekanan: TZReadOnlyQuery

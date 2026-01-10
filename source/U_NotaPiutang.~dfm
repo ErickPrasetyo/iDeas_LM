@@ -1,6 +1,6 @@
 object NotaPiutangFrm: TNotaPiutangFrm
-  Left = 193
-  Top = 88
+  Left = 149
+  Top = 21
   Width = 1240
   Height = 688
   Caption = 'Faktur Penjualan'
@@ -436,21 +436,28 @@ object NotaPiutangFrm: TNotaPiutangFrm
             DataBinding.FieldName = 'no_nota'
             HeaderAlignmentHorz = taCenter
             Options.Editing = False
-            Width = 127
+            Width = 135
           end
           object grddbtvMasterdt_req: TcxGridDBColumn
             Caption = 'Tanggal'
             DataBinding.FieldName = 'dt_nota'
             HeaderAlignmentHorz = taCenter
             Options.Editing = False
-            Width = 136
+            Width = 144
           end
           object grddbtvMasterrequester: TcxGridDBColumn
             Caption = 'Customer'
             DataBinding.FieldName = 'nama_rekanan'
             HeaderAlignmentHorz = taCenter
             Options.Editing = False
-            Width = 282
+            Width = 299
+          end
+          object grddbtvMasterColumn2: TcxGridDBColumn
+            Caption = 'Cara Bayar'
+            DataBinding.FieldName = 'cara_bayar'
+            HeaderAlignmentHorz = taCenter
+            HeaderAlignmentVert = vaCenter
+            Width = 105
           end
           object grddbtvMastersub_total: TcxGridDBColumn
             Caption = 'Sub Total'
@@ -466,14 +473,14 @@ object NotaPiutangFrm: TNotaPiutangFrm
             HeaderAlignmentHorz = taCenter
             HeaderAlignmentVert = vaCenter
             Options.Editing = False
-            Width = 129
+            Width = 131
           end
           object grddbtvMasterColumn1: TcxGridDBColumn
             Caption = 'Disc Item[Rp.]'
             DataBinding.FieldName = 'disc_rp'
             HeaderAlignmentHorz = taCenter
             HeaderAlignmentVert = vaCenter
-            Width = 116
+            Width = 115
           end
           object grddbtvMastertotal: TcxGridDBColumn
             Caption = 'Total'
@@ -481,7 +488,7 @@ object NotaPiutangFrm: TNotaPiutangFrm
             HeaderAlignmentHorz = taCenter
             HeaderAlignmentVert = vaCenter
             Options.Editing = False
-            Width = 128
+            Width = 130
           end
           object grddbtvMasterusr_upd: TcxGridDBColumn
             Caption = 'User'
@@ -491,6 +498,12 @@ object NotaPiutangFrm: TNotaPiutangFrm
             HeaderAlignmentHorz = taCenter
             Options.Editing = False
             Width = 88
+          end
+          object grddbtvMasterColumn3: TcxGridDBColumn
+            Caption = 'Shift'
+            DataBinding.FieldName = 'shift'
+            HeaderAlignmentHorz = taCenter
+            HeaderAlignmentVert = vaCenter
           end
           object grddbtvMasterispost: TcxGridDBColumn
             Caption = 'Posted'
@@ -502,7 +515,7 @@ object NotaPiutangFrm: TNotaPiutangFrm
             HeaderAlignmentHorz = taCenter
             HeaderAlignmentVert = vaCenter
             Options.Editing = False
-            Width = 48
+            Width = 49
           end
           object grddbtvMasteriscancel: TcxGridDBColumn
             Caption = 'Batal'
@@ -901,7 +914,6 @@ object NotaPiutangFrm: TNotaPiutangFrm
             Height = 13
             Caption = 'Cara Bayar'
             Transparent = True
-            Visible = False
           end
           object LookRekanan: TcxDBTextEdit
             Left = 91
@@ -921,11 +933,10 @@ object NotaPiutangFrm: TNotaPiutangFrm
             ParentFont = False
             Properties.Items.Strings = (
               'TUNAI'
-              'TRANSFER'
-              'DEBIT')
+              'QRIS'
+              'DEBET')
             Properties.MaxLength = 0
             TabOrder = 1
-            Visible = False
             Height = 21
             Width = 193
           end
@@ -1336,6 +1347,17 @@ object NotaPiutangFrm: TNotaPiutangFrm
               Transparent = True
               Layout = tlCenter
             end
+            object Label10: TLabel
+              Left = 665
+              Top = 2
+              Width = 22
+              Height = 15
+              Alignment = taCenter
+              Anchors = [akLeft]
+              AutoSize = False
+              Transparent = True
+              Layout = tlCenter
+            end
             object dbagbDeleteDetail: TDBAdvGlowButton
               Left = 122
               Top = 2
@@ -1649,6 +1671,20 @@ object NotaPiutangFrm: TNotaPiutangFrm
               TabOrder = 7
               OnKeyPress = edtqtyKeyPress
               Width = 48
+            end
+            object btnAmbilData: TSCButton
+              Left = 687
+              Top = 2
+              Width = 88
+              Height = 23
+              Caption = 'Cari Item'
+              Color = 13303760
+              Images = DM.ImageList1
+              ImageIndex = 7
+              RoundColor = 11507049
+              RoundWithParentColor = False
+              Style = scbsCorel
+              TabOrder = 8
             end
           end
         end
@@ -2541,6 +2577,10 @@ object NotaPiutangFrm: TNotaPiutangFrm
       FieldName = 'isgudang'
       Required = True
       Size = 4
+    end
+    object Detailketerangan: TStringField
+      FieldName = 'keterangan'
+      Size = 1020
     end
   end
   object dsDetail: TDataSource
@@ -6228,7 +6268,6 @@ object NotaPiutangFrm: TNotaPiutangFrm
     end
   end
   object MemInfoPerusahaan: TkbmMemTable
-    Active = True
     DesignActivation = True
     AttachedAutoRefresh = True
     AttachMaxCount = 1
@@ -6326,6 +6365,9 @@ object NotaPiutangFrm: TNotaPiutangFrm
       FieldName = 'printed_by'
       Size = 100
     end
+    object MemInfoPerusahaannpwp: TStringField
+      FieldName = 'npwp'
+    end
   end
   object frxDBInfoPerusahaan: TfrxDBDataset
     UserName = 'frxDBInfoPerusahaan'
@@ -6339,7 +6381,8 @@ object NotaPiutangFrm: TNotaPiutangFrm
       'kota_perusahaan=kota_perusahaan'
       'judul=judul'
       'periode=periode'
-      'printed_by=printed_by')
+      'printed_by=printed_by'
+      'npwp=npwp')
     DataSet = MemInfoPerusahaan
     BCDToCurrency = False
     Left = 192
@@ -7170,7 +7213,7 @@ object NotaPiutangFrm: TNotaPiutangFrm
       
         #9'a.promo_barang, a.promo_uang, a.total, a.disc_rp, c.description' +
         ' as nama_salesman, a.id_division, a.sub_total, a.evocer, a.mvoce' +
-        'r, a.disc_member'
+        'r, a.disc_member, a.shift'
       'FROM transaksi.nota a'
       'LEFT JOIN master.mrekanan b ON b.kd_rekanan=a.kd_rekanan'
       'LEFT JOIN master.mdivision c ON c.id_division=a.id_division'
@@ -7349,6 +7392,10 @@ object NotaPiutangFrm: TNotaPiutangFrm
       FieldName = 'disc_member'
       Required = True
       DisplayFormat = '0.0,0'
+    end
+    object qBrowseshift: TIntegerField
+      Alignment = taCenter
+      FieldName = 'shift'
     end
   end
   object dsqBrowse: TDataSource
@@ -17485,7 +17532,7 @@ object NotaPiutangFrm: TNotaPiutangFrm
       end
       object ReportSummary1: TfrxReportSummary
         FillType = ftBrush
-        Height = 136.842610000000000000
+        Height = 144.401670000000000000
         Top = 449.764070000000000000
         Width = 264.567100000000000000
         object Memo12: TfrxMemoView
@@ -17647,7 +17694,7 @@ object NotaPiutangFrm: TNotaPiutangFrm
           Diagonal = True
         end
         object Memo26: TfrxMemoView
-          Top = 93.165429999999780000
+          Top = 103.165430000000000000
           Width = 253.228510000000000000
           Height = 11.338590000000000000
           Font.Charset = DEFAULT_CHARSET
@@ -17749,7 +17796,7 @@ object NotaPiutangFrm: TNotaPiutangFrm
           ParentFont = False
         end
         object Memo29: TfrxMemoView
-          Top = 103.063080000000000000
+          Top = 113.063080000000000000
           Width = 253.228510000000000000
           Height = 11.338590000000000000
           Font.Charset = DEFAULT_CHARSET
@@ -17763,7 +17810,7 @@ object NotaPiutangFrm: TNotaPiutangFrm
           ParentFont = False
         end
         object Memo27: TfrxMemoView
-          Top = 113.047310000000000000
+          Top = 123.047310000000000000
           Width = 253.228510000000000000
           Height = 11.338590000000000000
           Font.Charset = DEFAULT_CHARSET
@@ -17816,6 +17863,20 @@ object NotaPiutangFrm: TNotaPiutangFrm
           HAlign = haRight
           Memo.UTF8 = (
             '[frxDBMaster."discount"]')
+          ParentFont = False
+        end
+        object Memo3: TfrxMemoView
+          Top = 92.488250000000000000
+          Width = 253.228510000000000000
+          Height = 11.338590000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -7
+          Font.Name = 'Times New Roman'
+          Font.Style = []
+          HAlign = haCenter
+          Memo.UTF8 = (
+            'HARGA DI ATAS SUDAH TERMASUK PPN')
           ParentFont = False
         end
       end
@@ -18743,7 +18804,7 @@ object NotaPiutangFrm: TNotaPiutangFrm
           Left = 5.669295000000000000
           Top = 58.149660000000000000
           Width = 253.228510000000000000
-          Height = 18.897650000000000000
+          Height = 30.236240000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -11
@@ -18751,72 +18812,25 @@ object NotaPiutangFrm: TNotaPiutangFrm
           Font.Style = []
           HAlign = haCenter
           Memo.UTF8 = (
-            '[frxDBInfoPerusahaan."alamat_perusahaan"]')
+            '[frxDBInfoPerusahaan."alamat_perusahaan"]'
+            'NPWP : [frxDBInfoPerusahaan."npwp"]')
           ParentFont = False
         end
         object Line1: TfrxLineView
-          Top = 80.606370000000000000
+          Top = 93.606370000000000000
           Width = 253.228510000000000000
           Color = clBlack
           Diagonal = True
         end
         object Line2: TfrxLineView
-          Top = 83.385900000000010000
+          Top = 96.385900000000010000
           Width = 253.228510000000000000
           Color = clBlack
           Diagonal = True
         end
-        object Memo3: TfrxMemoView
-          Left = 1.889765000000000000
-          Top = 177.385900000000000000
-          Width = 71.811070000000000000
-          Height = 15.118120000000000000
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial'
-          Font.Style = []
-          Memo.UTF8 = (
-            'No. Transaksi')
-          ParentFont = False
-        end
-        object Memo4: TfrxMemoView
-          Left = 75.590600000000000000
-          Top = 177.385900000000000000
-          Width = 3.779530000000000000
-          Height = 15.118120000000000000
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial'
-          Font.Style = []
-          HAlign = haCenter
-          Memo.UTF8 = (
-            ':')
-          ParentFont = False
-        end
-        object Memo5: TfrxMemoView
-          Left = 83.149660000000000000
-          Top = 177.385900000000000000
-          Width = 170.078850000000000000
-          Height = 15.118120000000000000
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial'
-          Font.Style = []
-          Memo.UTF8 = (
-            '[frxDBMaster."req_number"] ')
-          ParentFont = False
-          Formats = <
-            item
-            end
-            item
-            end>
-        end
         object Memo6: TfrxMemoView
           Left = 2.000000000000000000
-          Top = 193.283550000000000000
+          Top = 191.283550000000000000
           Width = 71.811070000000000000
           Height = 15.118110240000000000
           Font.Charset = DEFAULT_CHARSET
@@ -18830,7 +18844,7 @@ object NotaPiutangFrm: TNotaPiutangFrm
         end
         object Memo7: TfrxMemoView
           Left = 75.700835000000000000
-          Top = 193.283550000000000000
+          Top = 191.283550000000000000
           Width = 3.779530000000000000
           Height = 15.118110240000000000
           Font.Charset = DEFAULT_CHARSET
@@ -18845,7 +18859,7 @@ object NotaPiutangFrm: TNotaPiutangFrm
         end
         object Memo8: TfrxMemoView
           Left = 83.259895000000000000
-          Top = 193.283550000000000000
+          Top = 191.283550000000000000
           Width = 170.078850000000000000
           Height = 15.118110240000000000
           Font.Charset = DEFAULT_CHARSET
@@ -18859,7 +18873,7 @@ object NotaPiutangFrm: TNotaPiutangFrm
         end
         object Memo1: TfrxMemoView
           Left = 2.779530000000000000
-          Top = 208.504020000000000000
+          Top = 206.504020000000000000
           Width = 71.811070000000000000
           Height = 15.118110240000000000
           Font.Charset = DEFAULT_CHARSET
@@ -18873,7 +18887,7 @@ object NotaPiutangFrm: TNotaPiutangFrm
         end
         object Memo35: TfrxMemoView
           Left = 75.480365000000000000
-          Top = 208.504020000000000000
+          Top = 206.504020000000000000
           Width = 3.779530000000000000
           Height = 15.118110240000000000
           Font.Charset = DEFAULT_CHARSET
@@ -18888,7 +18902,7 @@ object NotaPiutangFrm: TNotaPiutangFrm
         end
         object Memo36: TfrxMemoView
           Left = 84.039425000000000000
-          Top = 208.504020000000000000
+          Top = 206.504020000000000000
           Width = 170.078850000000000000
           Height = 15.118110240000000000
           Font.Charset = DEFAULT_CHARSET
@@ -18902,7 +18916,7 @@ object NotaPiutangFrm: TNotaPiutangFrm
         end
         object Barcode2D1: TfrxBarcode2DView
           Left = 83.149660000000000000
-          Top = 87.929190000000000000
+          Top = 100.929190000000000000
           Width = 84.000000000000000000
           Height = 84.000000000000000000
           BarType = bcCodeQR
@@ -18921,6 +18935,104 @@ object NotaPiutangFrm: TNotaPiutangFrm
           QuietZone = 0
         end
       end
+    end
+  end
+  object LookItem: TwwLookupDialog
+    Selected.Strings = (
+      'nama_item'#9'50'#9'Nama Item'#9'F'
+      'kd_item'#9'30'#9'kd_item'#9'F')
+    GridTitleAlignment = taLeftJustify
+    GridColor = clWhite
+    GridOptions = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgPerfectRowFit]
+    LookupTable = qryITEM
+    Caption = 'Pencarian Item'
+    MaxWidth = 0
+    MaxHeight = 209
+    CharCase = ecNormal
+    Left = 779
+    Top = 212
+  end
+  object CheckPromoB: TZReadOnlyQuery
+    Connection = DM.conn
+    SQL.Strings = (
+      'select a.*, div(:qty,a.qty_promo)'
+      'from master.item_promo a'
+      'where a.kd_item=:kd_item and a.jenis=:jenis')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'qty'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'kd_item'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'jenis'
+        ParamType = ptUnknown
+      end>
+    Left = 669
+    Top = 114
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'qty'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'kd_item'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'jenis'
+        ParamType = ptUnknown
+      end>
+    object CheckPromoBid_item_promo: TIntegerField
+      FieldName = 'id_item_promo'
+      Required = True
+    end
+    object CheckPromoBkd_item: TStringField
+      FieldName = 'kd_item'
+      Required = True
+      Size = 200
+    end
+    object CheckPromoBnama_item: TStringField
+      FieldName = 'nama_item'
+      Size = 1020
+    end
+    object CheckPromoBjenis: TStringField
+      FieldName = 'jenis'
+      Required = True
+      Size = 200
+    end
+    object CheckPromoBqty_promo: TFloatField
+      FieldName = 'qty_promo'
+    end
+    object CheckPromoBnilai_promo: TFloatField
+      FieldName = 'nilai_promo'
+    end
+    object CheckPromoBkd_item_promo: TStringField
+      FieldName = 'kd_item_promo'
+      Size = 200
+    end
+    object CheckPromoBnama_item_promo: TStringField
+      FieldName = 'nama_item_promo'
+      Size = 1020
+    end
+    object CheckPromoBqty_item_promo: TFloatField
+      FieldName = 'qty_item_promo'
+    end
+    object CheckPromoBdiv: TFloatField
+      FieldName = 'div'
+      ReadOnly = True
+    end
+    object CheckPromoBqty_max: TFloatField
+      FieldName = 'qty_max'
     end
   end
 end

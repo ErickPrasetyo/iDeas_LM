@@ -613,6 +613,10 @@ type
     grddbtvFP_DetailColumn5: TcxGridDBBandedColumn;
     Detailisgudang: TStringField;
     cxDBLabel3: TcxDBLabel;
+    MemInfoPerusahaannpwp: TStringField;
+    LookItem: TwwLookupDialog;
+    btnAmbilData: TSCButton;
+    Label10: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure actCloseExecute(Sender: TObject);
@@ -689,6 +693,7 @@ type
     procedure edtItemKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure edtDiscItemPropertiesChange(Sender: TObject);
+    procedure btnAmbilDataClick(Sender: TObject);
   private
     DBMode: TDBMode;
     { Private declarations }
@@ -1159,6 +1164,7 @@ begin
          g:= TBayarNotaPenjualanFrm.Create(Application);
          g.vTotal:= Mastertotal.AsFloat;
          g.vIdNota:= Masterid_nota.AsLargeInt;
+
          if g.ShowModal=mrOK then begin
            UpdateBayar(g.MemMastercara_bayar.AsString,g.MemMasterbank.AsString,g.MemMasterno_kartu.AsString,
                         FloatToStr(g.MemMasterdibayar.AsFloat),StringReplace(FloatToStr(g.MemMasterkembali.AsFloat),'-','',[rfReplaceAll,rfIgnoreCase]));
@@ -1180,6 +1186,7 @@ begin
             MemInfoPerusahaankota_perusahaan.AsString:= DM.L_Perusahaancity.AsString;
             MemInfoPerusahaanlogo.LoadFromFile(ExtractFilePath(Application.ExeName)+'\IMAGES\LOGO.JPG');
             MemInfoPerusahaanjudul.AsString:= lblHeader1.Caption;
+            MemInfoPerusahaannpwp.AsString:= DM.L_Perusahaannpwp.AsString;
             MemInfoPerusahaan.Post;
 
             MemMaster.Close;
@@ -1503,7 +1510,7 @@ begin
    Masterevocer.AsFloat:= 0;
    Mastermvocer.AsFloat:= 0;
    Masterjns_transaksi.AsString:= 'Faktur Penjualan';
-   Mastercara_bayar.AsString:= '';
+   Mastercara_bayar.AsString:= 'TUNAI';
    Masterkd_rekanan.AsString:= 'CASH';
    Masternama_salesman.AsString:= DM.UserConnect;
    Masternama_rekanan.AsString:= 'CASH';
@@ -1636,10 +1643,10 @@ procedure TNotaRetailFrm.DetailBeforePost(DataSet: TDataSet);
 begin
  if (Detailkd_item.IsNull) or (Trim(Detailkd_item.AsString)='') then
     raise Exception.Create('KODE harus diisi !')
-// else
+ else
 // if (Detailid_rek_gl.IsNull) or (Trim(Detailid_rek_gl.AsString)='') then
 //    raise Exception.Create('KODE REKENING harus diisi !')
- else
+// else
  if (Detailhrg.IsNull) or (Trim(Detailhrg.AsString)='') then
     raise Exception.Create('HARGA harus diisi !')
  else
@@ -2205,10 +2212,10 @@ procedure TNotaRetailFrm.grddbtvFP_Detailnama_itemGetPropertiesForEdit(
   var AProperties: TcxCustomEditProperties);
 begin
 
-  if Detail.State in [dsInsert,dsedit] then
-        AProperties := ER_LCB_ITEM_NAME.Properties
-  else
-     AProperties := ER_EDT.Properties;
+//  if Detail.State in [dsInsert,dsedit] then
+//        AProperties := ER_LCB_ITEM_NAME.Properties
+//  else
+//     AProperties := ER_EDT.Properties;
 end;
 
 procedure TNotaRetailFrm.grddbtvFP_Detailid_rek_glGetPropertiesForEdit(
@@ -2288,14 +2295,15 @@ end;
 procedure TNotaRetailFrm.ER_LCB_ITEM_NAMEPropertiesCloseUp(
   Sender: TObject);
 begin
-   if DBMode=dmBrowse then
-      Exit;
+  if DBMode=dmBrowse then
+    Exit;
 
-   Detaildiskripsi.AsString:= qryITEMnama_item.AsString;
-   Detailkd_item.AsString:= qryITEMkd_item.AsString;
-   Detailhrg.AsFloat:= qryITEMhrg_jual.AsFloat;
-   Detailsatuan_beli.AsString:= qryITEMsatuan_jual.AsString;
-   Detailqty_biji.AsFloat:= 1;
+  Detaildiskripsi.AsString:= qryITEMnama_item.AsString;
+  Detailkd_item.AsString:= qryITEMkd_item.AsString;
+  Detailhrg.AsFloat:= qryITEMhrg_jual.AsFloat;
+  Detailsatuan_beli.AsString:= qryITEMsatuan_jual.AsString;
+  Detailqty_biji.AsFloat:= 1;
+
 end;
 
 
@@ -2308,87 +2316,9 @@ end;
 procedure TNotaRetailFrm.Detailqty_bijiChange(Sender: TField);
 begin
 
-    try
-      qCekHrg_Jual.Close;
-      qCekHrg_Jual.Open;
-      Detailhrg.AsFloat:= qCekHrg_Jualhrg.AsFloat;
-
-//      qItem.Close;
-//      qItem.Params.ParamByName('pkd_item').Value:= Detailkd_item.AsString;
-//      qItem.Open;
-//
-//        if CheckPromoUang(Detailkd_item.AsString, Detailqty_biji.AsFloat) then begin
-//           if CheckPromoBdiv.AsFloat>0 then begin
-//              Detailhrg.AsFloat:= qItemhrg_jual.AsFloat;
-//              Detailid_warehouse.AsString:= qItemlok_rak.AsString;
-//              Detaildisc_rp.AsFloat:= CheckPromoBnilai_promo.AsFloat*CheckPromoBdiv.AsFloat;
-//  //            Detail.Post;
-//  //            edtItem.Text:='';
-//  //            edtqty.Text:='';
-//  //            edtItem.SetFocus;
-//           end else begin
-//              Detailhrg.AsFloat:= qItemhrg_jual.AsFloat;
-//              Detailid_warehouse.AsString:= qItemlok_rak.AsString;
-//              Detaildisc_rp.AsFloat:= 0;
-//  //            Detail.Post;
-//  //            edtItem.Text:='';
-//  //            edtqty.Text:='';
-//  //            edtItem.SetFocus;
-//           end
-//        end
-//        else
-//        if CheckPromoBarang(Detailkd_item.AsString, Detailqty_biji.AsFloat) then begin
-//          if CheckPromoBdiv.AsFloat>0 then begin
-//              Detailhrg.AsFloat:= qItemhrg_jual.AsFloat;
-//              Detailid_warehouse.AsString:= qItemlok_rak.AsString;
-//              Detaildisc_rp.AsFloat:= 0;
-//  //            Detail.Post;
-//    //          edtItem.Text:='';
-//    //          edtqty.Text:='';
-//    //          edtItem.SetFocus;
-//
-//              CheckPromoB.First;
-//              while not CheckPromoB.Eof do begin
-//                Detail.Append;
-//                Detailkd_item.AsString:= CheckPromoBkd_item_promo.AsString;
-//                Detaildiskripsi.AsString:= CheckPromoBnama_item_promo.AsString;
-//
-//                if (CheckPromoBqty_item_promo.AsFloat*CheckPromoBdiv.AsFloat)>CheckPromoBqty_max.AsFloat then
-//                    Detailqty_biji.AsFloat:= CheckPromoBqty_max.AsFloat;
-//                if (CheckPromoBqty_item_promo.AsFloat*CheckPromoBdiv.AsFloat)<CheckPromoBqty_max.AsFloat then
-//                    Detailqty_biji.AsFloat:= CheckPromoBqty_item_promo.AsFloat*CheckPromoBdiv.AsFloat;
-//
-//                Detailsatuan_beli.AsString:= qItemsatuan_jual.AsString;
-//                Detailid_warehouse.AsString:= qItemlok_rak.AsString;
-//                Detailispromo.AsString:= '1';
-//                Detaildisc_rp.AsFloat:= 0;
-//                Detailhrg.AsFloat:= 0;
-//                Detailketerangan.AsString:= Trim('Promo Barang Dari Pembelian "'+UpperCase(qItemnama_item.AsString)+'"');
-//                Detail.Post;
-//                CheckPromoB.Next;
-//              end;
-//
-//              edtItem.Text:='';
-//              edtqty.Text:='';
-//              edtItem.SetFocus;
-//          end else begin
-//
-//          end;
-//
-//        end else begin
-//              Detailhrg.AsFloat:= qItemhrg_jual.AsFloat;
-//              Detailid_warehouse.AsString:= qItemlok_rak.AsString;
-//              Detaildisc_rp.AsFloat:= 0;
-//  //            Detail.Post;
-//  //            edtItem.Text:='';
-//  //            edtqty.Text:='';
-//  //            edtItem.SetFocus;
-//        end;
-
-
-    except
-
-    end;
+  qCekHrg_Jual.Close;
+  qCekHrg_Jual.Open;
+  Detailhrg.AsFloat:= qCekHrg_Jualhrg.AsFloat;
 
 end;
 
@@ -2508,12 +2438,7 @@ begin
       qItem.Open;
 
       if qItem.RecordCount=0 then begin
-//        Detail.Append;
-//        Detailkd_item.AsString:= '';
-//        Detaildiskripsi.AsString:= '';
-//        Detailhrg.AsFloat:= 0;
-//        Detailsatuan_beli.AsString:= '';
-//        grddbtvFP_Detail.GetColumnByFieldName('qty').FocusWithSelection;
+
       end else begin
         edtqty.SetFocus;
 
@@ -2524,7 +2449,6 @@ begin
 
   if Key=#27 then
      btnSave.SetFocus;
-
 
 end;
 
@@ -2635,6 +2559,28 @@ begin
   if Masterdisc_rp.AsFloat>0 then
       isPromoUang:= True;
 
+end;
+
+procedure TNotaRetailFrm.btnAmbilDataClick(Sender: TObject);
+var key : Char;
+begin
+  try
+    qryITEM.Close;
+    qryITEM.Open;
+
+    if LookItem.Execute then begin
+      edtItem.SetFocus;
+      edtItem.Text:= Trim(qryITEMkd_item.AsString);
+
+      Key := #13;
+      edtItem.OnKeyPress(edtItem, Key);
+
+    end;
+    
+  except
+    on E: Exception do
+      DM.MyMsg(mmError,'Error has been encountered !',E.Message)
+  end
 end;
 
 end.

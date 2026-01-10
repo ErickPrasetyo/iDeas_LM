@@ -646,12 +646,19 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
             item
               Format = ',0'
               Kind = skSum
+              FieldName = 'total_tunai'
               Column = grddbtvMastertunai
             end
             item
               Format = ',0'
               Kind = skSum
+              FieldName = 'total_debit'
               Column = grddbtvMasterklaim
+            end
+            item
+              Format = ',0'
+              Kind = skSum
+              Column = grddbtvMasterColumn1
             end>
           DataController.Summary.SummaryGroups = <>
           OptionsCustomize.ColumnsQuickCustomization = True
@@ -745,11 +752,18 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
             Width = 102
           end
           object grddbtvMasterklaim: TcxGridDBColumn
-            Caption = 'Total Klaim'
-            DataBinding.FieldName = 'total_klaim'
+            Caption = 'Total Debet'
+            DataBinding.FieldName = 'total_debit'
             HeaderAlignmentHorz = taCenter
             HeaderAlignmentVert = vaCenter
             Width = 103
+          end
+          object grddbtvMasterColumn1: TcxGridDBColumn
+            Caption = 'Total QRIS'
+            DataBinding.FieldName = 'total_qris'
+            HeaderAlignmentHorz = taCenter
+            HeaderAlignmentVert = vaCenter
+            Width = 102
           end
           object grddbtvMasterispost: TcxGridDBColumn
             Caption = 'Posted'
@@ -1553,6 +1567,10 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
             item
               Format = '0.0,0'
               Kind = skSum
+            end
+            item
+              Kind = skCount
+              Column = grddbtvDetailno_nota
             end>
           DataController.Summary.SummaryGroups = <>
           Filtering.ColumnMRUItemsList = False
@@ -1737,6 +1755,48 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
       ParentFont = False
       Transparent = True
     end
+    object Label9: TLabel
+      Left = 44
+      Top = 6
+      Width = 51
+      Height = 14
+      Caption = 'Total Tunai'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      Transparent = True
+    end
+    object Label10: TLabel
+      Left = 43
+      Top = 24
+      Width = 53
+      Height = 14
+      Caption = 'Total Debet'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      Transparent = True
+    end
+    object Label11: TLabel
+      Left = 43
+      Top = 43
+      Width = 49
+      Height = 14
+      Caption = 'Total QRIS'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      Transparent = True
+    end
     object cxDBLabel1: TcxDBLabel
       Left = 824
       Top = 9
@@ -1776,6 +1836,66 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
       Width = 127
       AnchorX = 952
       AnchorY = 44
+    end
+    object cxDBLabel3: TcxDBLabel
+      Left = 103
+      Top = 3
+      DataBinding.DataField = 'total_tunai'
+      DataBinding.DataSource = dsMaster
+      ParentFont = False
+      Properties.Alignment.Horz = taRightJustify
+      Properties.Alignment.Vert = taVCenter
+      Style.Font.Charset = ANSI_CHARSET
+      Style.Font.Color = clBlue
+      Style.Font.Height = -12
+      Style.Font.Name = 'Arial'
+      Style.Font.Style = [fsBold]
+      Style.IsFontAssigned = True
+      Transparent = True
+      Height = 21
+      Width = 127
+      AnchorX = 230
+      AnchorY = 14
+    end
+    object cxDBLabel4: TcxDBLabel
+      Left = 102
+      Top = 21
+      DataBinding.DataField = 'total_debit'
+      DataBinding.DataSource = dsMaster
+      ParentFont = False
+      Properties.Alignment.Horz = taRightJustify
+      Properties.Alignment.Vert = taVCenter
+      Style.Font.Charset = ANSI_CHARSET
+      Style.Font.Color = clBlue
+      Style.Font.Height = -12
+      Style.Font.Name = 'Arial'
+      Style.Font.Style = [fsBold]
+      Style.IsFontAssigned = True
+      Transparent = True
+      Height = 21
+      Width = 127
+      AnchorX = 229
+      AnchorY = 32
+    end
+    object cxDBLabel5: TcxDBLabel
+      Left = 102
+      Top = 40
+      DataBinding.DataField = 'total_qris'
+      DataBinding.DataSource = dsMaster
+      ParentFont = False
+      Properties.Alignment.Horz = taRightJustify
+      Properties.Alignment.Vert = taVCenter
+      Style.Font.Charset = ANSI_CHARSET
+      Style.Font.Color = clBlue
+      Style.Font.Height = -12
+      Style.Font.Name = 'Arial'
+      Style.Font.Style = [fsBold]
+      Style.IsFontAssigned = True
+      Transparent = True
+      Height = 21
+      Width = 127
+      AnchorX = 229
+      AnchorY = 51
     end
   end
   object AFS: TAdvFormStyler
@@ -2088,6 +2208,22 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
     object Mastertotal_unpost: TFloatField
       FieldName = 'total_unpost'
       Required = True
+      DisplayFormat = ',0'
+    end
+    object Mastertotal_tunai: TFloatField
+      FieldName = 'total_tunai'
+      Required = True
+      DisplayFormat = ',0'
+    end
+    object Mastertotal_debit: TFloatField
+      FieldName = 'total_debit'
+      Required = True
+      DisplayFormat = ',0'
+    end
+    object Mastertotal_qris: TFloatField
+      FieldName = 'total_qris'
+      Required = True
+      DisplayFormat = ',0'
     end
   end
   object Detail: TZQuery

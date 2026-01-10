@@ -171,7 +171,7 @@ begin
       MemMaster.Open;
       MemMaster.Append;
       MemMasterdue_type.AsString:= edtPembayaran.Text;
-      MemMastercara_bayar.AsString:= '';
+      MemMastercara_bayar.AsString:= 'TUNAI';
       MemMastergrand_total.AsFloat:= vTotal;
       MemMasterdibayar.AsFloat:= 0;
       MemMasterkembali.AsFloat:= Masterkembali.AsFloat;
@@ -265,6 +265,7 @@ procedure TBayarNotaPenjualanFrm.edtBayarEnter(Sender: TObject);
 begin
     if (MemMaster.State=dsInsert) or (MemMaster.State=dsEdit)  then
       MemMaster.Edit;
+    
 end;
 
 procedure TBayarNotaPenjualanFrm.MemMasterCalcFields(DataSet: TDataSet);

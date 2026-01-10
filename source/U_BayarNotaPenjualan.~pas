@@ -135,6 +135,7 @@ type
     { Public declarations }
     vIdNota : Int64;
     vTotal : Double;
+    vCopies : Integer;
   end;
 
 var
@@ -255,6 +256,8 @@ begin
     if MemMastercara_bayar.IsNull or (Trim(MemMastercara_bayar.AsString)='') then
        raise Exception.Create('CARA BAYAR harus diisi !');
 
+    vCopies:= StrToInt(cxTextEdit1.Text);
+
     ModalResult:= mrOk;
 end;
 
@@ -262,6 +265,7 @@ procedure TBayarNotaPenjualanFrm.edtBayarEnter(Sender: TObject);
 begin
     if (MemMaster.State=dsInsert) or (MemMaster.State=dsEdit)  then
       MemMaster.Edit;
+    
 end;
 
 procedure TBayarNotaPenjualanFrm.MemMasterCalcFields(DataSet: TDataSet);

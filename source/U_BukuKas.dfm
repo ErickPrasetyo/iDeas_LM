@@ -507,14 +507,14 @@ object BukuKasFrm: TBukuKasFrm
     Top = 111
     Width = 1078
     Height = 346
-    Position = 454
-    Percent = 42
+    Position = 384
+    Percent = 36
     Align = alClient
     TabOrder = 7
     BarSize = (
-      454
+      384
       0
-      458
+      388
       346)
     UpperLeftControls = (
       grdMaster)
@@ -523,7 +523,7 @@ object BukuKasFrm: TBukuKasFrm
     object grdMaster: TcxGrid
       Left = 0
       Top = 0
-      Width = 454
+      Width = 384
       Height = 346
       Align = alClient
       Font.Charset = ANSI_CHARSET
@@ -568,19 +568,6 @@ object BukuKasFrm: TBukuKasFrm
         Styles.Selection = cxStyle2
         Styles.Header = cxStyle1
         Styles.Indicator = cxStyle4
-        object grddbtvMasterid_rek_gl: TcxGridDBColumn
-          DataBinding.FieldName = 'id_rek_gl'
-          HeaderAlignmentHorz = taCenter
-          HeaderAlignmentVert = vaCenter
-          Options.Editing = False
-          Options.Filtering = False
-          Options.FilteringFilteredItemsList = False
-          Options.FilteringMRUItemsList = False
-          Options.FilteringPopup = False
-          Options.FilteringPopupMultiSelect = False
-          Options.Sorting = False
-          Width = 66
-        end
         object grddbtvMasterdescriptions: TcxGridDBColumn
           DataBinding.FieldName = 'descriptions'
           HeaderAlignmentHorz = taCenter
@@ -707,15 +694,9 @@ object BukuKasFrm: TBukuKasFrm
     object grdDetail: TcxGrid
       Left = 0
       Top = 0
-      Width = 620
+      Width = 690
       Height = 346
       Align = alClient
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
       TabOrder = 0
       object grddbtvDetail: TcxGridDBTableView
         NavigatorButtons.ConfirmDelete = False
@@ -723,23 +704,34 @@ object BukuKasFrm: TBukuKasFrm
         DataController.Summary.DefaultGroupSummaryItems = <>
         DataController.Summary.FooterSummaryItems = <
           item
-            Format = '0.0,0'
-            Kind = skSum
-            FieldName = 'debet'
-            Column = grddbtvDetaildebet
-          end
-          item
-            Format = '0.0,0'
+            Format = '#,##0.00;(#,##0.00)'
             Kind = skSum
             FieldName = 'kredit'
-            Column = grddbtvDetailkredit
+            Column = grddbtvMasterdibayar
+          end
+          item
+            Format = '#,##0.00;(#,##0.00)'
+            Kind = skSum
+            FieldName = 'debet'
+            Column = grddbtvMasterno_bukti
+          end
+          item
+            Format = '#,##0.00;(#,##0.00)'
+            Kind = skSum
+            Column = grddbtvDetailColumn1
+          end
+          item
+            Format = '#,##0.00;(#,##0.00)'
+            Kind = skSum
+            Column = grddbtvDetailColumn2
           end>
         DataController.Summary.SummaryGroups = <>
-        OptionsBehavior.GoToNextCellOnEnter = True
         OptionsData.CancelOnExit = False
         OptionsData.Deleting = False
         OptionsData.DeletingConfirmation = False
+        OptionsData.Editing = False
         OptionsData.Inserting = False
+        OptionsSelection.CellSelect = False
         OptionsView.CellAutoHeight = True
         OptionsView.ColumnAutoWidth = True
         OptionsView.Footer = True
@@ -748,147 +740,70 @@ object BukuKasFrm: TBukuKasFrm
         Styles.Selection = cxStyle2
         Styles.Header = cxStyle1
         Styles.Indicator = cxStyle4
-        object grddbtvDetailno_payment: TcxGridDBColumn
+        object grddbtvMasterid_payment: TcxGridDBColumn
           Caption = 'NO. PEMBAYARAN'
           DataBinding.FieldName = 'no_payment'
+          PropertiesClassName = 'TcxLabelProperties'
+          Properties.Alignment.Horz = taCenter
+          Properties.Alignment.Vert = taVCenter
           HeaderAlignmentHorz = taCenter
           HeaderAlignmentVert = vaCenter
           Options.Editing = False
-          Options.Filtering = False
-          Options.FilteringFilteredItemsList = False
-          Options.FilteringMRUItemsList = False
-          Options.FilteringPopup = False
-          Options.FilteringPopupMultiSelect = False
-          Width = 110
+          Width = 109
         end
-        object grddbtvDetailno_bukti: TcxGridDBColumn
+        object grddbtvMasterno_payment: TcxGridDBColumn
           Caption = 'NO. BUKTI'
           DataBinding.FieldName = 'no_bukti'
           HeaderAlignmentHorz = taCenter
           HeaderAlignmentVert = vaCenter
           Options.Editing = False
-          Options.Filtering = False
-          Options.FilteringFilteredItemsList = False
-          Options.FilteringMRUItemsList = False
-          Options.FilteringPopup = False
-          Options.FilteringPopupMultiSelect = False
-          Width = 100
+          Width = 96
         end
-        object grddbtvDetaildt_payment: TcxGridDBColumn
-          Caption = 'TGL'
+        object grddbtvMasterdt_payment: TcxGridDBColumn
+          Caption = 'TGL.'
           DataBinding.FieldName = 'dt_payment'
           HeaderAlignmentHorz = taCenter
           HeaderAlignmentVert = vaCenter
           Options.Editing = False
-          Options.Filtering = False
-          Options.FilteringFilteredItemsList = False
-          Options.FilteringMRUItemsList = False
-          Options.FilteringPopup = False
-          Options.FilteringPopupMultiSelect = False
-          Width = 100
+          Width = 90
         end
-        object grddbtvDetaildescription: TcxGridDBColumn
-          Caption = 'DISKRIPSI'
+        object grddbtvMasterno_bukti1: TcxGridDBColumn
+          Caption = 'DESKRIPSI'
           DataBinding.FieldName = 'description'
           HeaderAlignmentHorz = taCenter
           HeaderAlignmentVert = vaCenter
           Options.Editing = False
-          Options.Filtering = False
-          Options.FilteringFilteredItemsList = False
-          Options.FilteringMRUItemsList = False
-          Options.FilteringPopup = False
-          Options.FilteringPopupMultiSelect = False
-          Width = 274
+          Width = 242
         end
-        object grddbtvDetaildebet: TcxGridDBColumn
+        object grddbtvDetailColumn1: TcxGridDBColumn
+          Caption = 'SUBTOTAL'
+          DataBinding.FieldName = 'subtotal'
+          HeaderAlignmentHorz = taCenter
+          HeaderAlignmentVert = vaCenter
+          Width = 114
+        end
+        object grddbtvDetailColumn2: TcxGridDBColumn
+          Caption = 'POTONGAN'
+          DataBinding.FieldName = 'potongan'
+          HeaderAlignmentHorz = taCenter
+          HeaderAlignmentVert = vaCenter
+          Width = 101
+        end
+        object grddbtvMasterno_bukti: TcxGridDBColumn
           Caption = 'DEBET'
           DataBinding.FieldName = 'debet'
           HeaderAlignmentHorz = taCenter
           HeaderAlignmentVert = vaCenter
           Options.Editing = False
-          Options.Filtering = False
-          Options.FilteringFilteredItemsList = False
-          Options.FilteringMRUItemsList = False
-          Options.FilteringPopup = False
-          Options.FilteringPopupMultiSelect = False
-          Width = 100
+          Width = 123
         end
-        object grddbtvDetailkredit: TcxGridDBColumn
+        object grddbtvMasterdibayar: TcxGridDBColumn
           Caption = 'KREDIT'
           DataBinding.FieldName = 'kredit'
           HeaderAlignmentHorz = taCenter
           HeaderAlignmentVert = vaCenter
-          Options.Editing = False
-          Options.Filtering = False
-          Options.FilteringFilteredItemsList = False
-          Options.FilteringMRUItemsList = False
-          Options.FilteringPopup = False
-          Options.FilteringPopupMultiSelect = False
-          Width = 100
+          Width = 101
         end
-      end
-      object TcxGridDBTableView
-        NavigatorButtons.ConfirmDelete = False
-        DataController.DetailKeyFieldNames = 'id_nota'
-        DataController.MasterKeyFieldNames = 'id_nota'
-        DataController.Summary.DefaultGroupSummaryItems = <>
-        DataController.Summary.FooterSummaryItems = <>
-        DataController.Summary.SummaryGroups = <>
-        OptionsView.GroupByBox = False
-        Styles.ContentOdd = cxStyle3
-        Styles.Selection = cxStyle2
-        Styles.Header = cxStyle1
-        Styles.Indicator = cxStyle4
-        object description: TcxGridDBColumn
-          Caption = 'NAMA PELAYANAN'
-          DataBinding.FieldName = 'description'
-          HeaderAlignmentHorz = taCenter
-          HeaderAlignmentVert = vaCenter
-          Width = 135
-        end
-        object qty_ot: TcxGridDBColumn
-          Caption = 'JUMLAH'
-          DataBinding.FieldName = 'qty_ot'
-          HeaderAlignmentHorz = taCenter
-          HeaderAlignmentVert = vaCenter
-          Width = 100
-        end
-        object satuan: TcxGridDBColumn
-          Caption = 'SATUAN'
-          DataBinding.FieldName = 'satuan'
-          HeaderAlignmentHorz = taCenter
-          HeaderAlignmentVert = vaCenter
-          Width = 100
-        end
-        object harga: TcxGridDBColumn
-          Caption = 'HARGA'
-          DataBinding.FieldName = 'harga'
-          HeaderAlignmentHorz = taCenter
-          HeaderAlignmentVert = vaCenter
-          Width = 100
-        end
-        object disc_psn: TcxGridDBColumn
-          Caption = 'DISC (%)'
-          DataBinding.FieldName = 'disc_psn'
-          HeaderAlignmentHorz = taCenter
-          HeaderAlignmentVert = vaCenter
-          Width = 100
-        end
-        object sub_total: TcxGridDBColumn
-          Caption = 'TOTAL'
-          DataBinding.FieldName = 'sub_total'
-          HeaderAlignmentHorz = taCenter
-          HeaderAlignmentVert = vaCenter
-          Width = 100
-        end
-      end
-      object TcxGridDBTableView
-        NavigatorButtons.ConfirmDelete = False
-        DataController.DetailKeyFieldNames = 'id_nota'
-        DataController.MasterKeyFieldNames = 'id_nota'
-        DataController.Summary.DefaultGroupSummaryItems = <>
-        DataController.Summary.FooterSummaryItems = <>
-        DataController.Summary.SummaryGroups = <>
       end
       object grdDetailLevel1: TcxGridLevel
         GridView = grddbtvDetail
@@ -1359,10 +1274,11 @@ object BukuKasFrm: TBukuKasFrm
   object Master: TZQuery
     Connection = DM.conn
     BeforeOpen = MasterBeforeOpen
+    OnCalcFields = MasterCalcFields
     SQL.Strings = (
       'select *'
       'from accfin.vpayment_detail'
-      'where id_trans in ('#39'401'#39','#39'402'#39')'
+      'where id_trans in ('#39'401'#39','#39'402'#39','#39'502'#39')'
       'and id_rek_gl=:pid_rek_gl'
       
         'and dt_payment between to_timestamp(:ptgl0,'#39'dd/mm/yyyy'#39') and to_' +
@@ -1452,6 +1368,16 @@ object BukuKasFrm: TBukuKasFrm
       FieldName = 'kredit'
       DisplayFormat = '#,##0.00;(#,##0.00)'
     end
+    object Masterpotongan: TFloatField
+      FieldName = 'potongan'
+      DisplayFormat = '#,##0.00;(#,##0.00)'
+    end
+    object Mastersubtotal: TFloatField
+      FieldKind = fkCalculated
+      FieldName = 'subtotal'
+      DisplayFormat = '#,##0.00;(#,##0.00)'
+      Calculated = True
+    end
   end
   object frxDBInfoPerusahaan: TfrxDBDataset
     UserName = 'frxDBInfoPerusahaan'
@@ -1464,6 +1390,7 @@ object BukuKasFrm: TBukuKasFrm
       'fax_perusahaan=fax_perusahaan'
       'kota_perusahaan=kota_perusahaan')
     DataSet = MemInfoPerusahaan
+    BCDToCurrency = False
     Left = 678
     Top = 8
   end
@@ -1541,7 +1468,7 @@ object BukuKasFrm: TBukuKasFrm
     end
   end
   object frxRepMaster: TfrxReport
-    Version = '4.5'
+    Version = '5.2.3'
     DotMatrixReport = False
     IniFile = '\Software\Fast Reports'
     PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick]
@@ -1610,6 +1537,7 @@ object BukuKasFrm: TBukuKasFrm
       TopMargin = 5.000000000000000000
       BottomMargin = 10.000000000000000000
       object PageHeader1: TfrxPageHeader
+        FillType = ftBrush
         Height = 185.196970000000000000
         Top = 18.897650000000000000
         Width = 755.906000000000000000
@@ -1638,6 +1566,8 @@ object BukuKasFrm: TBukuKasFrm
           DataSet = frxDBInfoPerusahaan
           DataSetName = 'frxDBInfoPerusahaan'
           HightQuality = False
+          Transparent = False
+          TransparentColor = clWhite
         end
         object Memo4: TfrxMemoView
           Left = 136.842610000000000000
@@ -1810,13 +1740,13 @@ object BukuKasFrm: TBukuKasFrm
           Top = 162.519790000000000000
           Width = 56.692950000000000000
           Height = 15.118120000000000000
-          Color = clWhite
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -9
           Font.Name = 'Tahoma'
           Font.Style = [fsBold]
+          Fill.BackColor = clWhite
           Memo.UTF8 = (
             'KODE REK.')
           ParentFont = False
@@ -1847,13 +1777,13 @@ object BukuKasFrm: TBukuKasFrm
           Top = 162.519790000000000000
           Width = 11.338590000000000000
           Height = 15.118120000000000000
-          Color = clWhite
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -9
           Font.Name = 'Tahoma'
           Font.Style = [fsBold]
+          Fill.BackColor = clWhite
           HAlign = haCenter
           Memo.UTF8 = (
             ':')
@@ -1865,13 +1795,13 @@ object BukuKasFrm: TBukuKasFrm
           Top = 162.519790000000000000
           Width = 79.370130000000000000
           Height = 15.118120000000000000
-          Color = clWhite
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -9
           Font.Name = 'Tahoma'
           Font.Style = [fsBold]
+          Fill.BackColor = clWhite
           HAlign = haRight
           Memo.UTF8 = (
             'SALDO AWAL')
@@ -1904,13 +1834,13 @@ object BukuKasFrm: TBukuKasFrm
           Top = 162.519790000000000000
           Width = 11.338590000000000000
           Height = 15.118120000000000000
-          Color = clWhite
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -9
           Font.Name = 'Tahoma'
           Font.Style = [fsBold]
+          Fill.BackColor = clWhite
           HAlign = haCenter
           Memo.UTF8 = (
             ':')
@@ -1919,6 +1849,7 @@ object BukuKasFrm: TBukuKasFrm
         end
       end
       object Band6: TfrxMasterData
+        FillType = ftBrush
         Height = 26.456710000000000000
         Top = 313.700990000000000000
         Width = 755.906000000000000000
@@ -1990,7 +1921,7 @@ object BukuKasFrm: TBukuKasFrm
         end
         object Memo54: TfrxMemoView
           Left = 291.023810000000000000
-          Width = 275.905690000000000000
+          Width = 249.448980000000000000
           Height = 26.456710000000000000
           StretchMode = smMaxHeight
           DataField = 'diskripsi'
@@ -2009,15 +1940,15 @@ object BukuKasFrm: TBukuKasFrm
           ParentFont = False
         end
         object Memo55: TfrxMemoView
-          Left = 566.929500000000000000
-          Width = 75.590600000000000000
+          Left = 540.472790000000000000
+          Width = 90.708720000000000000
           Height = 26.456710000000000000
           StretchMode = smMaxHeight
           DataField = 'debet'
           DataSet = frxDBMaster
           DataSetName = 'frxDBMaster'
           DisplayFormat.DecimalSeparator = ','
-          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.FormatStr = '%.0n'
           DisplayFormat.Kind = fkNumeric
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -2030,15 +1961,15 @@ object BukuKasFrm: TBukuKasFrm
           ParentFont = False
         end
         object Memo58: TfrxMemoView
-          Left = 642.520100000000000000
-          Width = 75.590600000000000000
+          Left = 631.181510000000000000
+          Width = 86.929190000000000000
           Height = 26.456710000000000000
           StretchMode = smMaxHeight
           DataField = 'kredit'
           DataSet = frxDBMaster
           DataSetName = 'frxDBMaster'
           DisplayFormat.DecimalSeparator = ','
-          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.FormatStr = '%.0n'
           DisplayFormat.Kind = fkNumeric
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -2052,8 +1983,9 @@ object BukuKasFrm: TBukuKasFrm
         end
       end
       object PageFooter1: TfrxPageFooter
+        FillType = ftBrush
         Height = 105.826840000000000000
-        Top = 495.118430000000000000
+        Top = 540.472790000000000000
         Width = 755.906000000000000000
         OnBeforePrint = 'PageFooter1OnBeforePrint'
         object MemoApprover: TfrxMemoView
@@ -2229,6 +2161,7 @@ object BukuKasFrm: TBukuKasFrm
         end
       end
       object ColumnHeader1: TfrxColumnHeader
+        FillType = ftBrush
         Height = 26.456710000000000000
         Top = 226.771800000000000000
         Width = 755.906000000000000000
@@ -2236,7 +2169,6 @@ object BukuKasFrm: TBukuKasFrm
           Left = 37.795300000000000000
           Width = 94.488250000000000000
           Height = 22.677180000000000000
-          Color = clWhite
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -2244,6 +2176,7 @@ object BukuKasFrm: TBukuKasFrm
           Font.Name = 'Tahoma'
           Font.Style = [fsBold]
           Frame.Typ = [ftTop, ftBottom]
+          Fill.BackColor = clWhite
           HAlign = haCenter
           Memo.UTF8 = (
             'NO. PEMBAYARAN')
@@ -2254,7 +2187,6 @@ object BukuKasFrm: TBukuKasFrm
           Left = 132.283550000000000000
           Width = 94.488250000000000000
           Height = 22.677180000000000000
-          Color = clWhite
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -2262,6 +2194,7 @@ object BukuKasFrm: TBukuKasFrm
           Font.Name = 'Tahoma'
           Font.Style = [fsBold]
           Frame.Typ = [ftTop, ftBottom]
+          Fill.BackColor = clWhite
           HAlign = haCenter
           Memo.UTF8 = (
             'NO. BUKTI')
@@ -2269,10 +2202,9 @@ object BukuKasFrm: TBukuKasFrm
           VAlign = vaCenter
         end
         object Memo32: TfrxMemoView
-          Left = 642.520100000000000000
-          Width = 75.590600000000000000
+          Left = 631.181510000000000000
+          Width = 86.929190000000000000
           Height = 22.677180000000000000
-          Color = clWhite
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -2280,6 +2212,7 @@ object BukuKasFrm: TBukuKasFrm
           Font.Name = 'Tahoma'
           Font.Style = [fsBold]
           Frame.Typ = [ftTop, ftBottom]
+          Fill.BackColor = clWhite
           HAlign = haCenter
           Memo.UTF8 = (
             'KREDIT')
@@ -2290,7 +2223,6 @@ object BukuKasFrm: TBukuKasFrm
           Left = 226.771800000000000000
           Width = 64.252010000000000000
           Height = 22.677180000000000000
-          Color = clWhite
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -2298,6 +2230,7 @@ object BukuKasFrm: TBukuKasFrm
           Font.Name = 'Tahoma'
           Font.Style = [fsBold]
           Frame.Typ = [ftTop, ftBottom]
+          Fill.BackColor = clWhite
           HAlign = haCenter
           Memo.UTF8 = (
             'TANGGAL')
@@ -2306,9 +2239,8 @@ object BukuKasFrm: TBukuKasFrm
         end
         object Memo6: TfrxMemoView
           Left = 291.023810000000000000
-          Width = 275.905690000000000000
+          Width = 249.448980000000000000
           Height = 22.677180000000000000
-          Color = clWhite
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -2316,6 +2248,7 @@ object BukuKasFrm: TBukuKasFrm
           Font.Name = 'Tahoma'
           Font.Style = [fsBold]
           Frame.Typ = [ftTop, ftBottom]
+          Fill.BackColor = clWhite
           HAlign = haCenter
           Memo.UTF8 = (
             'DISKRIPSI')
@@ -2323,10 +2256,9 @@ object BukuKasFrm: TBukuKasFrm
           VAlign = vaCenter
         end
         object Memo7: TfrxMemoView
-          Left = 566.929500000000000000
-          Width = 75.590600000000000000
+          Left = 540.472790000000000000
+          Width = 90.708720000000000000
           Height = 22.677180000000000000
-          Color = clWhite
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -2334,6 +2266,7 @@ object BukuKasFrm: TBukuKasFrm
           Font.Name = 'Tahoma'
           Font.Style = [fsBold]
           Frame.Typ = [ftTop, ftBottom]
+          Fill.BackColor = clWhite
           HAlign = haCenter
           Memo.UTF8 = (
             'DEBET')
@@ -2342,99 +2275,58 @@ object BukuKasFrm: TBukuKasFrm
         end
       end
       object ReportSummary1: TfrxReportSummary
-        Height = 71.811070000000000000
+        FillType = ftBrush
+        Height = 117.165430000000000000
         Top = 400.630180000000000000
         Width = 755.906000000000000000
         object Memo8: TfrxMemoView
           Left = 445.984540000000000000
-          Top = 34.015770000000000000
+          Top = 49.015770000000000000
           Width = 79.370130000000000000
           Height = 15.118120000000000000
-          Color = clWhite
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -9
           Font.Name = 'Tahoma'
           Font.Style = [fsBold]
+          Fill.BackColor = clWhite
           HAlign = haRight
           Memo.UTF8 = (
             'MUTASI')
           ParentFont = False
           VAlign = vaCenter
         end
-        object Memo9: TfrxMemoView
-          Left = 536.693260000000000000
-          Top = 34.015770000000000000
-          Width = 181.417440000000000000
-          Height = 15.118120000000000000
-          StretchMode = smMaxHeight
-          DataField = 'mutasi'
-          DataSet = frxDBInfo
-          DataSetName = 'frxDBRepInfo'
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial'
-          Font.Style = []
-          HAlign = haRight
-          Memo.UTF8 = (
-            '[frxDBRepInfo."mutasi"]')
-          ParentFont = False
-          VAlign = vaCenter
-        end
         object Memo10: TfrxMemoView
           Left = 445.984540000000000000
-          Top = 52.913420000000000000
+          Top = 70.913420000000000000
           Width = 79.370130000000000000
           Height = 15.118120000000000000
-          Color = clWhite
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -9
           Font.Name = 'Tahoma'
           Font.Style = [fsBold]
+          Fill.BackColor = clWhite
           HAlign = haRight
           Memo.UTF8 = (
             'SALDO AKHIR')
           ParentFont = False
           VAlign = vaCenter
         end
-        object Memo11: TfrxMemoView
-          Left = 536.693260000000000000
-          Top = 52.913420000000000000
-          Width = 181.417440000000000000
-          Height = 15.118120000000000000
-          StretchMode = smMaxHeight
-          DataField = 'sal_akir'
-          DataSet = frxDBInfo
-          DataSetName = 'frxDBRepInfo'
-          DisplayFormat.DecimalSeparator = ','
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial'
-          Font.Style = []
-          HAlign = haRight
-          Memo.UTF8 = (
-            '[frxDBRepInfo."sal_akir"]')
-          ParentFont = False
-          VAlign = vaCenter
-        end
         object Memo12: TfrxMemoView
           Left = 525.354670000000000000
-          Top = 34.015770000000000000
+          Top = 49.015770000000000000
           Width = 11.338590000000000000
           Height = 15.118120000000000000
-          Color = clWhite
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -9
           Font.Name = 'Tahoma'
           Font.Style = [fsBold]
+          Fill.BackColor = clWhite
           HAlign = haCenter
           Memo.UTF8 = (
             ':')
@@ -2443,92 +2335,100 @@ object BukuKasFrm: TBukuKasFrm
         end
         object Memo13: TfrxMemoView
           Left = 525.354670000000000000
-          Top = 52.913420000000000000
+          Top = 71.031496062992130000
           Width = 11.338590000000000000
           Height = 15.118120000000000000
-          Color = clWhite
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -9
           Font.Name = 'Tahoma'
           Font.Style = [fsBold]
+          Fill.BackColor = clWhite
           HAlign = haCenter
           Memo.UTF8 = (
             ':')
           ParentFont = False
           VAlign = vaCenter
         end
-        object Memo24: TfrxMemoView
-          Left = 34.015770000000000000
-          Top = 23.795300000000000000
-          Width = 687.874460000000000000
-          Height = 3.779530000000000000
-          Color = clWhite
+        object Memo9: TfrxMemoView
+          Left = 536.693260000000000000
+          Top = 49.015770000000000000
+          Width = 185.196970000000000000
+          Height = 15.118120000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -9
           Font.Name = 'Tahoma'
           Font.Style = [fsBold]
-          Frame.Typ = [ftTop]
+          Fill.BackColor = clWhite
+          HAlign = haRight
+          Memo.UTF8 = (
+            '[frxDBRepInfo."mutasi"]')
           ParentFont = False
           VAlign = vaCenter
         end
-        object Memo25: TfrxMemoView
-          Left = 566.929500000000000000
-          Top = 3.779530000000000000
-          Width = 75.590600000000000000
+        object Memo11: TfrxMemoView
+          Left = 536.693260000000000000
+          Top = 71.031496060000000000
+          Width = 185.196970000000000000
           Height = 15.118120000000000000
-          StretchMode = smMaxHeight
-          DataSet = frxDBInfo
-          DataSetName = 'frxDBRepInfo'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -9
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          Fill.BackColor = clWhite
+          HAlign = haRight
+          Memo.UTF8 = (
+            '[frxDBRepInfo."sal_akir"]')
+          ParentFont = False
+          VAlign = vaCenter
+        end
+        object Line1: TfrxLineView
+          Left = 37.795300000000000000
+          Top = 3.779530000000000000
+          Width = 684.094930000000000000
+          Color = clBlack
+          Frame.Typ = [ftTop]
+        end
+        object Memo24: TfrxMemoView
+          Left = 540.472790000000000000
+          Top = 7.559060000000000000
+          Width = 90.708720000000000000
+          Height = 15.118120000000000000
           DisplayFormat.DecimalSeparator = ','
-          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.FormatStr = '%.0n'
           DisplayFormat.Kind = fkNumeric
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial'
-          Font.Style = []
+          Font.Height = -9
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          Fill.BackColor = clWhite
           HAlign = haRight
           Memo.UTF8 = (
             '[SUM(<frxDBMaster."debet">,Band6)]')
           ParentFont = False
           VAlign = vaCenter
         end
-        object Memo26: TfrxMemoView
-          Left = 642.520100000000000000
-          Top = 3.779530000000000000
-          Width = 75.590600000000000000
+        object Memo25: TfrxMemoView
+          Left = 631.181510000000000000
+          Top = 7.559060000000000000
+          Width = 86.929190000000000000
           Height = 15.118120000000000000
-          StretchMode = smMaxHeight
-          DataSet = frxDBInfo
-          DataSetName = 'frxDBRepInfo'
           DisplayFormat.DecimalSeparator = ','
-          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.FormatStr = '%.0n'
           DisplayFormat.Kind = fkNumeric
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial'
-          Font.Style = []
-          HAlign = haRight
-          Memo.UTF8 = (
-            '[SUM(<frxDBMaster."kredit">,Band6)]')
-          ParentFont = False
-          VAlign = vaCenter
-        end
-        object Memo27: TfrxMemoView
-          Left = 34.015770000000000000
-          Width = 687.874460000000000000
-          Height = 3.779530000000000000
-          Color = clWhite
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -9
           Font.Name = 'Tahoma'
           Font.Style = [fsBold]
-          Frame.Typ = [ftTop]
+          Fill.BackColor = clWhite
+          HAlign = haRight
+          Memo.UTF8 = (
+            '[SUM(<frxDBMaster."kredit">,Band6)]')
           ParentFont = False
           VAlign = vaCenter
         end
@@ -2579,9 +2479,19 @@ object BukuKasFrm: TBukuKasFrm
     end
     object MemMasterdebet: TFloatField
       FieldName = 'debet'
+      DisplayFormat = '#,##0;(#,##0)'
+    end
+    object MemMasterpotongan: TFloatField
+      FieldName = 'potongan'
+      DisplayFormat = '#,##0;(#,##0)'
+    end
+    object MemMastersubtotal: TFloatField
+      FieldName = 'subtotal'
+      DisplayFormat = '#,##0;(#,##0)'
     end
     object MemMasterkredit: TFloatField
       FieldName = 'kredit'
+      DisplayFormat = '#,##0;(#,##0)'
     end
   end
   object frxDBMaster: TfrxDBDataset
@@ -2593,8 +2503,11 @@ object BukuKasFrm: TBukuKasFrm
       'tgl=tgl'
       'diskripsi=diskripsi'
       'debet=debet'
+      'potongan=potongan'
+      'subtotal=subtotal'
       'kredit=kredit')
     DataSet = MemMaster
+    BCDToCurrency = False
     Left = 741
     Top = 8
   end
@@ -2612,6 +2525,7 @@ object BukuKasFrm: TBukuKasFrm
       'sal_akir=sal_akir'
       'mutasi=mutasi')
     DataSet = MemRepInfo
+    BCDToCurrency = False
     Left = 899
     Top = 13
   end
@@ -2796,11 +2710,11 @@ object BukuKasFrm: TBukuKasFrm
     SQL.Strings = (
       'select coalesce(sum(debet-kredit),0) as saldo_awal'
       'from accfin.vpayment_detail'
-      'where id_trans in ('#39'401'#39','#39'402'#39')'
+      'where id_trans in ('#39'401'#39','#39'402'#39','#39'502'#39')'
       'and id_rek_gl=:pid_rek_gl'
       
-        'and dt_payment < to_timestamp(:ptgl0,'#39'dd/mm/yyyy'#39') +  interval '#39 +
-        '23 hours 59 min'#39)
+        'and dt_payment < to_timestamp(:ptgl0,'#39'dd/mm/yyyy'#39') -  interval '#39 +
+        '1 sec'#39)
     Params = <
       item
         DataType = ftUnknown
@@ -2848,7 +2762,7 @@ object BukuKasFrm: TBukuKasFrm
     SQL.Strings = (
       'select coalesce(sum(debet-kredit),0) as mutasi'
       'from accfin.vpayment_detail'
-      'where id_trans in ('#39'401'#39','#39'402'#39')'
+      'where id_trans in ('#39'401'#39','#39'402'#39','#39'502'#39')'
       'and id_rek_gl=:pid_rek_gl'
       
         'and dt_payment between to_timestamp(:ptgl0,'#39'dd/mm/yyyy'#39') and to_' +
@@ -2902,6 +2816,8 @@ object BukuKasFrm: TBukuKasFrm
     UseFileCache = True
     ShowProgress = True
     OverwritePrompt = False
+    DataOnly = False
+    ExportEMF = True
     AsText = False
     Background = True
     FastExport = True
@@ -2915,10 +2831,12 @@ object BukuKasFrm: TBukuKasFrm
     UseFileCache = True
     ShowProgress = True
     OverwritePrompt = False
+    DataOnly = False
     PrintOptimized = False
     Outline = False
     Background = False
     HTMLTags = True
+    Quality = 95
     Author = 'FastReport'
     Subject = 'FastReport PDF export'
     ProtectionFlags = [ePrint, eModify, eCopy, eAnnot]
@@ -2935,6 +2853,8 @@ object BukuKasFrm: TBukuKasFrm
     UseFileCache = True
     ShowProgress = True
     OverwritePrompt = False
+    DataOnly = False
+    PictureType = gpPNG
     Wysiwyg = True
     Creator = 'FastReport'
     SuppressPageHeadersFooters = False

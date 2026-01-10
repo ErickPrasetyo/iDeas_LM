@@ -123,21 +123,6 @@ type
     Masterdebet: TFloatField;
     Masterkredit: TFloatField;
     rsMaster: TRzSplitter;
-    grdDetail: TcxGrid;
-    grddbtvDetail: TcxGridDBTableView;
-    grddbtvDetailno_payment: TcxGridDBColumn;
-    grddbtvDetailno_bukti: TcxGridDBColumn;
-    grddbtvDetaildt_payment: TcxGridDBColumn;
-    grddbtvDetaildescription: TcxGridDBColumn;
-    grddbtvDetaildebet: TcxGridDBColumn;
-    grddbtvDetailkredit: TcxGridDBColumn;
-    description: TcxGridDBColumn;
-    qty_ot: TcxGridDBColumn;
-    satuan: TcxGridDBColumn;
-    harga: TcxGridDBColumn;
-    disc_psn: TcxGridDBColumn;
-    sub_total: TcxGridDBColumn;
-    grdDetailLevel1: TcxGridLevel;
     qryRekawal: TFloatField;
     qryRekberjalan: TFloatField;
     qryRekakhir: TFloatField;
@@ -151,11 +136,25 @@ type
     cxGridDBColumn12: TcxGridDBColumn;
     grdMasterLevel1: TcxGridLevel;
     grddbtvMasterdescriptions: TcxGridDBColumn;
-    grddbtvMasterid_rek_gl: TcxGridDBColumn;
     grddbtvMasterawal: TcxGridDBColumn;
     grddbtvMasterberjalan: TcxGridDBColumn;
     grddbtvMasterakhir: TcxGridDBColumn;
     btnOK: TSCButton;
+    grdDetail: TcxGrid;
+    grddbtvDetail: TcxGridDBTableView;
+    grddbtvMasterid_payment: TcxGridDBColumn;
+    grddbtvMasterno_payment: TcxGridDBColumn;
+    grddbtvMasterdt_payment: TcxGridDBColumn;
+    grddbtvMasterno_bukti1: TcxGridDBColumn;
+    grddbtvMasterno_bukti: TcxGridDBColumn;
+    grddbtvMasterdibayar: TcxGridDBColumn;
+    grdDetailLevel1: TcxGridLevel;
+    grddbtvDetailColumn1: TcxGridDBColumn;
+    grddbtvDetailColumn2: TcxGridDBColumn;
+    Masterpotongan: TFloatField;
+    Mastersubtotal: TFloatField;
+    MemMasterpotongan: TFloatField;
+    MemMastersubtotal: TFloatField;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnOKClick(Sender: TObject);
     procedure btnCloseClick(Sender: TObject);
@@ -169,6 +168,7 @@ type
     procedure qryMutasiBeforeOpen(DataSet: TDataSet);
     procedure qryRekAfterScroll(DataSet: TDataSet);
     procedure qryRekBeforeOpen(DataSet: TDataSet);
+    procedure MasterCalcFields(DataSet: TDataSet);
   private
     { Private declarations }
     vtag : integer;
@@ -310,9 +310,9 @@ begin
          MemRepInfotgl1.AsString:= FormatDateTime('dd/mm/yyyy', edtDatePicker1.Date);
          MemRepInfotgl2.AsString:= FormatDateTime('dd/mm/yyyy', edtDatePicker2.Date);
          MemRepInfokode_rek.AsString:=UpperCase(qryRekdescriptions.AsString)+' ('+qryRekid_rek_gl.AsString+')';
-         MemRepInfosal_awal.AsString:=FormatFloat('#,##0.00;(#,##0.00)',qrySaldosaldo_awal.AsFloat);
-         MemRepInfomutasi.AsString:=FormatFloat('#,##0.00;(#,##0.00)',qryMutasimutasi.AsFloat);
-         MemRepInfosal_akir.AsString:=FormatFloat('#,##0.00;(#,##0.00)',qrySaldosaldo_akhir.AsFloat);
+         MemRepInfosal_awal.AsString:=FormatFloat('#,##0;(#,##0)',qrySaldosaldo_awal.AsFloat);
+         MemRepInfomutasi.AsString:=FormatFloat('#,##0;(#,##0)',qryMutasimutasi.AsFloat);
+         MemRepInfosal_akir.AsString:=FormatFloat('#,##0;(#,##0)',qrySaldosaldo_akhir.AsFloat);
 
          Dm.qryUser.Close;
          DM.qryUser.Params.ParamByName('pvuser').Value:= DM.UserConnect;
@@ -335,6 +335,8 @@ begin
             MemMasterdiskripsi.AsString:=Masterdescription.AsString;
             MemMasterdebet.AsFloat:=Masterdebet.AsFloat;
             MemMasterkredit.AsFloat:=Masterkredit.AsFloat;
+            MemMasterpotongan.AsFloat:= Masterpotongan.AsFloat;
+            MemMastersubtotal.AsFloat:= Mastersubtotal.AsFloat;
             MemMaster.Post;
             Master.Next;
          end;
@@ -402,6 +404,11 @@ procedure TBukuKasFrm.qryRekBeforeOpen(DataSet: TDataSet);
 begin
     qryRek.Params.ParamByName('ptgl0').Value:=FormatDateTime('dd/mm/yyyy',edtDatePicker1.Date);
     qryRek.Params.ParamByName('ptgl1').Value:=FormatDateTime('dd/mm/yyyy',edtDatePicker2.Date);
+end;
+
+procedure TBukuKasFrm.MasterCalcFields(DataSet: TDataSet);
+begin
+  Mastersubtotal.AsFloat:= Masterdebet.AsFloat+Masterkredit.AsFloat+Masterpotongan.AsFloat;
 end;
 
 end.

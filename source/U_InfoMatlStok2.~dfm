@@ -1,8 +1,8 @@
 object InfoMatlStok2Frm: TInfoMatlStok2Frm
-  Left = 41
-  Top = 14
-  Width = 1380
-  Height = 754
+  Left = 215
+  Top = 79
+  Width = 1206
+  Height = 689
   Caption = 'Kartu Stok Obat/ Alkes'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -21,7 +21,7 @@ object InfoMatlStok2Frm: TInfoMatlStok2Frm
   object SCPanel1: TSCPanel
     Left = 0
     Top = 40
-    Width = 1364
+    Width = 1190
     Height = 51
     Align = alTop
     Color = 16511984
@@ -155,7 +155,7 @@ object InfoMatlStok2Frm: TInfoMatlStok2Frm
   object pnlHeader: TAdvPanel
     Left = 0
     Top = 0
-    Width = 1364
+    Width = 1190
     Height = 40
     Align = alTop
     BevelOuter = bvNone
@@ -217,8 +217,8 @@ object InfoMatlStok2Frm: TInfoMatlStok2Frm
   end
   object AdvPanel1: TAdvPanel
     Left = 0
-    Top = 664
-    Width = 1364
+    Top = 599
+    Width = 1190
     Height = 51
     Align = alBottom
     BevelOuter = bvNone
@@ -378,7 +378,7 @@ object InfoMatlStok2Frm: TInfoMatlStok2Frm
   object grdItem: TcxGrid
     Left = 0
     Top = 91
-    Width = 1364
+    Width = 1190
     Height = 302
     Align = alTop
     Font.Charset = ANSI_CHARSET
@@ -682,14 +682,14 @@ object InfoMatlStok2Frm: TInfoMatlStok2Frm
   object pgDetail: TcxPageControl
     Left = 0
     Top = 393
-    Width = 1364
-    Height = 271
+    Width = 1190
+    Height = 206
     ActivePage = cxTabSheet1
     Align = alClient
     Style = 8
     TabOrder = 6
-    ClientRectBottom = 271
-    ClientRectRight = 1364
+    ClientRectBottom = 206
+    ClientRectRight = 1190
     ClientRectTop = 24
     object cxTabSheet1: TcxTabSheet
       Caption = 'DETAIL TRANSAKSI'
@@ -697,15 +697,15 @@ object InfoMatlStok2Frm: TInfoMatlStok2Frm
       object pnlHistory: TPanel
         Left = 0
         Top = 0
-        Width = 1364
-        Height = 247
+        Width = 1190
+        Height = 182
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
         object pnlHeaderMaster: TPanel
           Left = 0
           Top = 0
-          Width = 1364
+          Width = 1190
           Height = 23
           Align = alTop
           Alignment = taLeftJustify
@@ -723,8 +723,8 @@ object InfoMatlStok2Frm: TInfoMatlStok2Frm
         object grdetail: TcxGrid
           Left = 0
           Top = 23
-          Width = 1364
-          Height = 224
+          Width = 1190
+          Height = 159
           Align = alClient
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText

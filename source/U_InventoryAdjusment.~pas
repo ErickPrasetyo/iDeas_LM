@@ -280,6 +280,18 @@ type
     Detailsatuan: TStringField;
     ADODataSet1F6: TStringField;
     kmtDataF6: TStringField;
+    Item: TZReadOnlyQuery;
+    Itemid_item: TStringField;
+    Itemitem_name: TStringField;
+    Itemsatuan: TStringField;
+    Itemid_cat_item: TStringField;
+    Itemlok_rak: TStringField;
+    Itemid_parent: TStringField;
+    Itemparent_name: TStringField;
+    Itemstok_awal: TFloatField;
+    Itemtotal_in: TFloatField;
+    Itemtotal_ot: TFloatField;
+    Itemstok_akhir: TFloatField;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure actCloseExecute(Sender: TObject);
@@ -1028,10 +1040,30 @@ end;
 
 procedure TInventoryAdjusmentFrm.actLookItemExecute(Sender: TObject);
 begin
-//    if (DBMode<>dmInsert) and (DBMode<>dmEdit) then
-//      Exit;
-//    if Detail.State=dsBrowse then
-//      Exit;
+    if (DBMode<>dmInsert) and (DBMode<>dmEdit) then
+      Exit;
+    if Detail.State=dsBrowse then
+      Exit;
+
+    try
+      Item.Close;
+      Item.Params.ParamByName('pgudang').Value:= Detailid_warehouse.AsString;
+      Item.Params.ParamByName('ptgl0').Value:= FormatDateTime('dd/mm/yyyy',Masterdt_mutasi.AsDateTime);
+      Item.Open;
+
+      if LookItem.Execute then begin
+         Detailid_item.AsString:= Itemid_item.AsString;
+         Detaildescription.AsString:= Itemitem_name.AsString;
+         Detailqty_in.AsFloat:= Itemstok_akhir.AsFloat;
+         Detailqty_ot.AsFloat:= 0;
+      end;
+      
+    except
+      on E: Exception do
+        DM.MyMsg(mmError,'Error has been encountered !',E.Message)
+    end;
+
+      
 //
 //    try
 //      LItem.Close;
@@ -1056,6 +1088,9 @@ end;
 procedure TInventoryAdjusmentFrm.grddbtvDetailid_itemPropertiesButtonClick(
   Sender: TObject; AButtonIndex: Integer);
 begin
+  if Detailid_warehouse.IsNull or (Trim(Detailid_warehouse.AsString)='') then
+     raise Exception.Create('GUDANG harus diisi !')
+  else
     actLookItem.Execute;
 end;
 

@@ -988,6 +988,7 @@ object InventoryAdjusmentFrm: TInventoryAdjusmentFrm
           Top = 82
           DataBinding.DataField = 'dt_mutasi'
           DataBinding.DataSource = dsMaster
+          Properties.Kind = ckDateTime
           Style.BorderStyle = ebsNone
           Style.Edges = [bLeft, bTop, bRight, bBottom]
           Style.Shadow = False
@@ -1449,6 +1450,20 @@ object InventoryAdjusmentFrm: TInventoryAdjusmentFrm
             Options.Sorting = False
             Width = 45
           end
+          object grddbtvDetailid_warehouse: TcxGridDBColumn
+            Caption = 'GUDANG'
+            DataBinding.FieldName = 'id_warehouse'
+            OnGetPropertiesForEdit = grddbtvDetailid_warehouseGetPropertiesForEdit
+            HeaderAlignmentHorz = taCenter
+            HeaderAlignmentVert = vaCenter
+            Options.Filtering = False
+            Options.FilteringFilteredItemsList = False
+            Options.FilteringMRUItemsList = False
+            Options.FilteringPopup = False
+            Options.FilteringPopupMultiSelect = False
+            Options.Sorting = False
+            Width = 100
+          end
           object grddbtvDetailid_item: TcxGridDBColumn
             Caption = 'KODE'
             DataBinding.FieldName = 'id_item'
@@ -1482,20 +1497,6 @@ object InventoryAdjusmentFrm: TInventoryAdjusmentFrm
             Options.FilteringPopupMultiSelect = False
             Options.Sorting = False
             Width = 275
-          end
-          object grddbtvDetailid_warehouse: TcxGridDBColumn
-            Caption = 'GUDANG'
-            DataBinding.FieldName = 'id_warehouse'
-            OnGetPropertiesForEdit = grddbtvDetailid_warehouseGetPropertiesForEdit
-            HeaderAlignmentHorz = taCenter
-            HeaderAlignmentVert = vaCenter
-            Options.Filtering = False
-            Options.FilteringFilteredItemsList = False
-            Options.FilteringMRUItemsList = False
-            Options.FilteringPopup = False
-            Options.FilteringPopupMultiSelect = False
-            Options.Sorting = False
-            Width = 100
           end
           object grddbtvDetailqty_in: TcxGridDBColumn
             Caption = 'QTY STOCK DATABASE'
@@ -2404,6 +2405,7 @@ object InventoryAdjusmentFrm: TInventoryAdjusmentFrm
       DisplayLabel = 'DISKRIPSI'
       DisplayWidth = 50
       FieldName = 'nama_item'
+      Visible = False
       Size = 255
     end
     object LItemkd_item: TStringField
@@ -2411,6 +2413,7 @@ object InventoryAdjusmentFrm: TInventoryAdjusmentFrm
       DisplayWidth = 15
       FieldName = 'kd_item'
       Required = True
+      Visible = False
       Size = 50
     end
     object LItemid_warehouse: TStringField
@@ -2418,6 +2421,7 @@ object InventoryAdjusmentFrm: TInventoryAdjusmentFrm
       DisplayWidth = 12
       FieldName = 'id_warehouse'
       Required = True
+      Visible = False
       Size = 12
     end
     object LItemstok: TFloatField
@@ -2425,17 +2429,19 @@ object InventoryAdjusmentFrm: TInventoryAdjusmentFrm
       DisplayWidth = 10
       FieldName = 'stok'
       ReadOnly = True
+      Visible = False
     end
     object LItemkd_satuan: TStringField
       DisplayLabel = 'SATUAN'
       DisplayWidth = 12
       FieldName = 'kd_satuan'
+      Visible = False
       Size = 12
     end
     object LItemdescription: TStringField
-      DisplayLabel = 'JENIS'
       DisplayWidth = 25
       FieldName = 'description'
+      Visible = False
       Size = 400
     end
   end
@@ -3766,22 +3772,20 @@ object InventoryAdjusmentFrm: TInventoryAdjusmentFrm
   end
   object LookItem: TwwLookupDialog
     Selected.Strings = (
-      'nama_item'#9'50'#9'DISKRIPSI'#9'F'
-      'kd_item'#9'15'#9'KODE'#9'F'
-      'id_warehouse'#9'12'#9'LOKASI'#9'F'
-      'stok'#9'10'#9'STOK'#9'F'
-      'kd_satuan'#9'12'#9'SATUAN'#9'F'
-      'description'#9'25'#9'JENIS'#9'F')
+      'item_name'#9'50'#9'Nama Item'#9'F'
+      'id_item'#9'30'#9'Kode Item'#9'F'
+      'satuan'#9'20'#9'Satuan'#9'F'
+      'stok_akhir'#9'20'#9'Stok'#9'F')
     GridTitleAlignment = taCenter
     GridColor = clWhite
     GridOptions = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgPerfectRowFit]
-    LookupTable = LItem
+    LookupTable = Item
     Caption = 'Lookup  Approver'
     MaxWidth = 0
     MaxHeight = 209
     CharCase = ecNormal
-    Left = 554
-    Top = 54
+    Left = 70
+    Top = 312
   end
   object frPRBackUp: TfrxReport
     Version = '5.2.3'
@@ -5142,6 +5146,102 @@ object InventoryAdjusmentFrm: TInventoryAdjusmentFrm
     object qryITEMhrg_beli_karton: TFloatField
       FieldName = 'hrg_beli_karton'
       Required = True
+    end
+  end
+  object Item: TZReadOnlyQuery
+    Connection = DM.conn
+    SQL.Strings = (
+      'select *'
+      'from inventory.fn_get_stok_warehouse(:pgudang,:ptgl0,:ptgl0)')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'pgudang'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'ptgl0'
+        ParamType = ptUnknown
+      end>
+    Left = 69
+    Top = 283
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'pgudang'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'ptgl0'
+        ParamType = ptUnknown
+      end>
+    object Itemitem_name: TStringField
+      DisplayLabel = 'Nama Item'
+      DisplayWidth = 50
+      FieldName = 'item_name'
+      ReadOnly = True
+      Size = 252
+    end
+    object Itemid_item: TStringField
+      DisplayLabel = 'Kode Item'
+      DisplayWidth = 30
+      FieldName = 'id_item'
+      ReadOnly = True
+      Size = 252
+    end
+    object Itemsatuan: TStringField
+      DisplayLabel = 'Satuan'
+      DisplayWidth = 20
+      FieldName = 'satuan'
+      ReadOnly = True
+      Size = 252
+    end
+    object Itemstok_akhir: TFloatField
+      DisplayLabel = 'Stok'
+      DisplayWidth = 20
+      FieldName = 'stok_akhir'
+      ReadOnly = True
+    end
+    object Itemid_cat_item: TStringField
+      FieldName = 'id_cat_item'
+      ReadOnly = True
+      Visible = False
+      Size = 252
+    end
+    object Itemlok_rak: TStringField
+      FieldName = 'lok_rak'
+      ReadOnly = True
+      Visible = False
+      Size = 252
+    end
+    object Itemid_parent: TStringField
+      FieldName = 'id_parent'
+      ReadOnly = True
+      Visible = False
+      Size = 252
+    end
+    object Itemparent_name: TStringField
+      FieldName = 'parent_name'
+      ReadOnly = True
+      Visible = False
+      Size = 252
+    end
+    object Itemstok_awal: TFloatField
+      FieldName = 'stok_awal'
+      ReadOnly = True
+      Visible = False
+    end
+    object Itemtotal_in: TFloatField
+      FieldName = 'total_in'
+      ReadOnly = True
+      Visible = False
+    end
+    object Itemtotal_ot: TFloatField
+      FieldName = 'total_ot'
+      ReadOnly = True
+      Visible = False
     end
   end
 end

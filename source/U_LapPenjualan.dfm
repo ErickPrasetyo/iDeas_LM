@@ -10197,7 +10197,7 @@ object LapPenjualanFrm: TLapPenjualanFrm
   object PopUp: TAdvPopupMenu
     Images = DM.ImageList1
     Version = '2.5.5.1'
-    Left = 662
+    Left = 661
     Top = 290
     object CetakRekap: TMenuItem
       Caption = 'Cetak Rekap'

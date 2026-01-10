@@ -10197,7 +10197,7 @@ object LapPenjualanFrm: TLapPenjualanFrm
   object PopUp: TAdvPopupMenu
     Images = DM.ImageList1
     Version = '2.5.5.1'
-    Left = 662
+    Left = 661
     Top = 290
     object CetakRekap: TMenuItem
       Caption = 'Cetak Rekap'
@@ -10209,6 +10209,7 @@ object LapPenjualanFrm: TLapPenjualanFrm
       Caption = 'Cetak Detal'
       SubMenuImages = DM.ImageList1
       ImageIndex = 8
+      OnClick = CetakDetailClick
     end
   end
   object frxDBDiscMemberDetail: TfrxDBDataset

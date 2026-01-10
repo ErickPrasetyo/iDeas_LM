@@ -400,6 +400,7 @@ type
     procedure tsDiscMemberShow(Sender: TObject);
     procedure DiscMemberDetailBeforeOpen(DataSet: TDataSet);
     procedure CetakRekapClick(Sender: TObject);
+    procedure CetakDetailClick(Sender: TObject);
   private
     { Private declarations }
     namamenu : string;
@@ -821,6 +822,23 @@ begin
 
    end;
 
+   if pgcMaster.ActivePageIndex=6 then begin
+      if RepDiscMember.RecordCount=0 then
+         Exit;
+
+      if OpenDialog.Execute then begin
+         appPath:= ExtractFilePath(OpenDialog.InitialDir);
+         ttl:= OpenDialog.FileName;
+
+         if (RepDiscMember.Active) and (RepDiscMember.RecordCount>0) then begin
+           ExportGridToExcel(appPath+ttl,grdDiscMember,true,true,true,'xls');
+
+         end;
+
+      end;
+
+   end;
+
 end;
 
 procedure TLapPenjualanFrm.qRepLabaBeforeOpen(DataSet: TDataSet);
@@ -910,6 +928,12 @@ procedure TLapPenjualanFrm.CetakRekapClick(Sender: TObject);
 begin
   PrepareForPrint('Rekap Diskon Member');
   frxRepDiscMember.ShowReport;
+end;
+
+procedure TLapPenjualanFrm.CetakDetailClick(Sender: TObject);
+begin
+  PrepareForPrint('Rekap Diskon Member Per Transaksi');
+  frxDiscMemberDetail.ShowReport;
 end;
 
 end.

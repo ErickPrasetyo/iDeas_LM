@@ -822,6 +822,23 @@ begin
 
    end;
 
+   if pgcMaster.ActivePageIndex=5 then begin
+      if RepDiscMember.RecordCount=0 then
+         Exit;
+
+      if OpenDialog.Execute then begin
+         appPath:= ExtractFilePath(OpenDialog.InitialDir);
+         ttl:= OpenDialog.FileName;
+
+         if (RepDiscMember.Active) and (RepDiscMember.RecordCount>0) then begin
+           ExportGridToExcel(appPath+ttl,grdDiscMember,true,true,true,'xls');
+
+         end;
+
+      end;
+
+   end;
+
 end;
 
 procedure TLapPenjualanFrm.qRepLabaBeforeOpen(DataSet: TDataSet);

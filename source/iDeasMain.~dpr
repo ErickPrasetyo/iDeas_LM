@@ -97,7 +97,6 @@ uses
   U_InfoMatlStok2 in 'U_InfoMatlStok2.pas' {InfoMatlStok2Frm},
   U_ItemReceive in 'U_ItemReceive.pas' {ItemReceiveFrm},
   U_PengeluaranBarang in 'U_PengeluaranBarang.pas' {PengeluaranBarangFrm},
-  U_LapNilaiSediaan in 'U_LapNilaiSediaan.pas' {LapNilaiSediaanFrm},
   U_StokAwal in 'U_StokAwal.pas' {StokAwalFrm},
   U_Verifikasi in 'U_Verifikasi.pas' {VerifikasiFrm},
   U_Pencarian in 'U_Pencarian.pas' {PencarianFrm},
@@ -119,7 +118,7 @@ uses
   U_LapSetoran in 'U_LapSetoran.pas' {LapSetoranFrm},
   U_NotaOnline in 'U_NotaOnline.pas' {NotaOnlineFrm},
   U_NotaRetailTouch in 'U_NotaRetailTouch.pas' {NotaRetailTouchFrm},
-  U_Print in 'U_Print.pas' {PrintFrm};
+  U_NilaiPersediaan in 'U_NilaiPersediaan.pas' {NilaiPersediaanFrm};
 
 {$R *.res}
 

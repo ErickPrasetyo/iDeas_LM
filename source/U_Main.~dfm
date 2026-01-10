@@ -76,7 +76,7 @@ object MainFrm: TMainFrm
         Progress.ShowBorder = False
         Progress.Stacked = False
         Style = psDate
-        Text = 'Wednesday, Feb 12, 2025'
+        Text = 'Saturday, Oct 11, 2025'
         TimeFormat = 'hh:mm:ss'
         Width = 150
       end
@@ -103,7 +103,7 @@ object MainFrm: TMainFrm
         Progress.ShowBorder = False
         Progress.Stacked = False
         Style = psTime
-        Text = '09:34:23'
+        Text = '10:07:58'
         TimeFormat = 'hh:mm:ss'
         Width = 60
       end

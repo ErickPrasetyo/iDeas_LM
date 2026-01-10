@@ -342,6 +342,13 @@ type
     L_Notaid_rek_gl: TStringField;
     qExec: TZQuery;
     L_Notaid_nota: TLargeintField;
+    Masterpotongan: TFloatField;
+    grdDetailDBBTVColumn1: TcxGridDBBandedColumn;
+    Detailpotongan: TFloatField;
+    grddbtvMasterColumn1: TcxGridDBColumn;
+    qBrowseremarks: TStringField;
+    MemDetailpotongan: TFloatField;
+    MemMasterpotongan: TFloatField;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure actCloseExecute(Sender: TObject);
@@ -401,12 +408,14 @@ type
     procedure grdDetailDBBTVno_buktiGetPropertiesForEdit(
       Sender: TcxCustomGridTableItem; ARecord: TcxCustomGridRecord;
       var AProperties: TcxCustomEditProperties);
+    procedure edtPotonganPropertiesChange(Sender: TObject);
   private
     { Private declarations }
     vjns_transaksi, vjudul, vNoPayment : string;
     vtag : integer;
     DBMode: TDBMode;
-    vSubTotal : Single;
+    vSubTotal : Double;
+    vPotongan : Double;
     procedure UpdateView;
     function CheckEditRight(var msg: string): Boolean;
     function CheckDeleteRight(var msg: string): Boolean;
@@ -491,6 +500,7 @@ end;
 procedure TKasKeluarFrm.CloneDetail;
 begin
   vSubTotal:= 0;
+  vPotongan:= 0;
   Detail.DisableControls;
   try
     try
@@ -501,7 +511,8 @@ begin
         kmtCheckDetail.Append;
         kmtCheckDetailid_item.AsString:= Detailno_reff.AsString;
         kmtCheckDetail.Post;
-        vSubTotal:= vSubTotal+Detaildibayar.AsFloat;
+        vPotongan:= vPotongan+Detailpotongan.AsFloat;
+        vSubTotal:= vSubTotal+(Detaildibayar.AsFloat-Detailpotongan.AsFloat);
         Detail.Next
       end;
     except
@@ -734,7 +745,7 @@ begin
     while not Detail.Eof do
     begin
 
-      if Detailsisa.AsFloat-Detaildibayar.AsFloat=0 then begin
+      if Detailsisa.AsFloat-Detaildibayar.AsFloat-Detailpotongan.AsFloat=0 then begin
         DM.PrepareQuery(qExec);
         s:= 'update transaksi.nota set isget_pay='+QuotedStr('1')+' where id_nota='+QuotedStr(Detailno_reff.AsString);
         DM.ExecQuery(qExec, s);
@@ -888,6 +899,7 @@ begin
    Masterid_trans.AsString := vjns_transaksi;
    Masternominal.AsFloat:= 0;
    Masterkurs.AsFloat:= 1;
+   Masterpotongan.AsFloat:= 0;
    Masterid_curr.AsString:= 'IDR';
    Masterid_rek_gl.AsString:= '111.01';
    Masterjns_rekanan.AsString:= 'SUPPLIER';
@@ -1029,6 +1041,7 @@ begin
   DM.MyKonversi1.Nilai:= Masternominal.AsFloat;
   MemMasterterbilang.AsString:= DM.MyKonversi1.HasilKonversi;
   MemMastertotal_str.AsString:= FormatFloat('0.0,0', Masternominal.AsFloat);
+  MemMasterpotongan.AsFloat:= Masterpotongan.AsFloat;
 
 
   if Masterispost.AsString='1' then MemMasterposted.AsString:= 'POSTED'
@@ -1059,6 +1072,7 @@ begin
           MemDetailid_cc_project.AsString:= '';
           MemDetaildibayar.AsFloat:= Detaildibayar.AsFloat;
           MemDetaildibayar_str.AsString:= FormatFloat('0.0,0', Detaildibayar.AsFloat);
+          MemDetailpotongan.AsFloat:= Detailpotongan.AsFloat;
           MemDetail.Post;
           Detail.Next;
         end;
@@ -1120,6 +1134,10 @@ begin
      Detailno_reff.AsString:= qryGET_NO_REFFreff_number.AsString;
   end;
 
+  if Detailno_bukti.IsNull or (Trim(Detailno_bukti.AsString)='') then begin
+     Detailno_bukti.AsString:= Detailno_reff.AsString;
+  end;
+
     if Detail.State=dsInsert then begin
       Detailid_payment_detail.AsLargeInt:= sq_payment_detail.GetNextValue;
   end 
@@ -1165,6 +1183,7 @@ begin
   if Master.State=dsBrowse then
     Master.Edit;
   Mastersubtotal.AsFloat:= vSubTotal;
+  Masterpotongan.AsFloat:= vPotongan;
   Master.Post;
 
 //  if Detailsisa.AsFloat-Detaildibayar.AsFloat=0 then begin
@@ -1423,6 +1442,11 @@ begin
   end
   else
      AProperties := ER_EDT.Properties;
+end;
+
+procedure TKasKeluarFrm.edtPotonganPropertiesChange(Sender: TObject);
+begin
+  Mastersubtotal.AsFloat:= Masternominal.AsFloat-Masterpotongan.AsFloat;
 end;
 
 end.

@@ -1,6 +1,6 @@
 object KasMasukFrm: TKasMasukFrm
-  Left = 416
-  Top = 161
+  Left = 281
+  Top = 37
   Width = 1170
   Height = 707
   Caption = 'Bukti Kas Masuk'
@@ -1007,9 +1007,9 @@ object KasMasukFrm: TKasMasukFrm
           object Label4: TLabel
             Left = 8
             Top = 84
-            Width = 32
+            Width = 24
             Height = 13
-            Caption = 'Alamat'
+            Caption = 'Jenis'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clBlack
             Font.Height = -11
@@ -1072,7 +1072,7 @@ object KasMasukFrm: TKasMasukFrm
           end
           object cxDBLabel1: TcxDBLabel
             Left = 58
-            Top = 63
+            Top = 61
             DataBinding.DataField = 'kd_rekanan'
             DataBinding.DataSource = dsMaster
             ParentFont = False
@@ -1085,24 +1085,9 @@ object KasMasukFrm: TKasMasukFrm
             Height = 17
             Width = 121
           end
-          object cxDBLabel2: TcxDBLabel
-            Left = 58
-            Top = 83
-            DataBinding.DataField = 'lcust_addr'
-            DataBinding.DataSource = dsMaster
-            ParentFont = False
-            Style.Font.Charset = ANSI_CHARSET
-            Style.Font.Color = clBlack
-            Style.Font.Height = -11
-            Style.Font.Name = 'Arial'
-            Style.Font.Style = []
-            Style.IsFontAssigned = True
-            Height = 17
-            Width = 189
-          end
           object edtJenis: TcxDBLookupComboBox
             Left = 59
-            Top = 16
+            Top = 14
             DataBinding.DataField = 'jns_rekanan'
             DataBinding.DataSource = dsMaster
             ParentFont = False
@@ -1131,7 +1116,7 @@ object KasMasukFrm: TKasMasukFrm
           end
           object edtCustNo: TcxDBButtonEdit
             Left = 58
-            Top = 40
+            Top = 38
             DataBinding.DataField = 'nama_rekanan'
             DataBinding.DataSource = dsMaster
             ParentFont = False
@@ -1150,6 +1135,25 @@ object KasMasukFrm: TKasMasukFrm
             Style.ButtonStyle = bts3D
             Style.IsFontAssigned = True
             TabOrder = 1
+            OnKeyPress = EditKeyPress
+            Width = 174
+          end
+          object cbJnsTransaksi: TcxDBComboBox
+            Left = 59
+            Top = 79
+            DataBinding.DataField = 'jns_transaksi'
+            DataBinding.DataSource = dsMaster
+            ParentFont = False
+            Properties.Items.Strings = (
+              'SETORAN KASIR'
+              'LAIN - LAIN')
+            Style.Font.Charset = ANSI_CHARSET
+            Style.Font.Color = clWindowText
+            Style.Font.Height = -11
+            Style.Font.Name = 'Arial'
+            Style.Font.Style = []
+            Style.IsFontAssigned = True
+            TabOrder = 3
             OnKeyPress = EditKeyPress
             Width = 174
           end
@@ -1879,10 +1883,11 @@ object KasMasukFrm: TKasMasukFrm
             end
             item
               Caption = 'REKENING PERKIRAAN'
+              Visible = False
               Width = 192
             end
             item
-              Caption = 'KHUSUS PIUTANG'
+              Caption = 'KHUSUS SETORAN'
               Width = 158
             end
             item
@@ -2439,6 +2444,10 @@ object KasMasukFrm: TKasMasukFrm
       FieldName = 'selisih'
       DisplayFormat = '#,##0.00;(#,##0.00)'
       Calculated = True
+    end
+    object Masterjns_transaksi: TStringField
+      FieldName = 'jns_transaksi'
+      Size = 200
     end
   end
   object Detail: TZQuery
@@ -4632,6 +4641,18 @@ object KasMasukFrm: TKasMasukFrm
       ReadOnly = True
       DisplayFormat = '0.0,0'
     end
+    object L_Notatotal_tunai: TFloatField
+      FieldName = 'total_tunai'
+      ReadOnly = True
+    end
+    object L_Notatotal_debet: TFloatField
+      FieldName = 'total_debet'
+      ReadOnly = True
+    end
+    object L_Notatotal_qris: TFloatField
+      FieldName = 'total_qris'
+      ReadOnly = True
+    end
   end
   object dsL_Nota: TDataSource
     DataSet = L_Nota
@@ -4671,6 +4692,11 @@ object KasMasukFrm: TKasMasukFrm
           Caption = 'Pembayaran'
           Width = 100
           FieldName = 'pembayaran'
+        end
+        item
+          Caption = 'Total Tunai'
+          Width = 80
+          FieldName = 'total_tunai'
         end>
       Properties.ListSource = dsL_Nota
       Properties.PostPopupValueOnTab = True

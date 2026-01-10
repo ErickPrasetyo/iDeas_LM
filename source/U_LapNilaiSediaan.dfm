@@ -1,6 +1,6 @@
 object LapNilaiSediaanFrm: TLapNilaiSediaanFrm
-  Left = 599
-  Top = 203
+  Left = 131
+  Top = 125
   Width = 1194
   Height = 636
   Caption = 'Laporan Persediaan Farmasi'
@@ -1060,7 +1060,12 @@ object LapNilaiSediaanFrm: TLapNilaiSediaanFrm
       'select '
       'c.id_warehouse,'
       'c.description'
-      'from master.warehouse c')
+      'from master.warehouse c'
+      'union all'
+      'select'
+      'a.kd_rak,'
+      'a.deskripsi'
+      'from master.rak a')
     Params = <>
     Left = 639
     Top = 7

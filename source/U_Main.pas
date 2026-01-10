@@ -336,12 +336,12 @@ uses AdvStyleIF, U_DM, U_AppLog, U_Supplier, U_Customer,
   U_ImportReturBeli, U_ImportReturBungah, U_ImportHutang2,
   U_IkhtisarPenjualan, U_InfoVoucherList, U_ImportVoucher2,
   U_InfoAgeAR, U_ItemReceive, U_PengeluaranBarang,
-  U_Verifikasi, U_StokAwal, U_LapNilaiSediaan, U_InventoryAdjusment,
+  U_Verifikasi, U_StokAwal, U_InventoryAdjusment,
   U_InfoMatlStok2, U_ImportPiutangMayora, U_Ref_NoFaktur,
   U_List_FakturPenjualan, U_ImportPembelianMayora, U_NotaRetail, U_MGudang,
   U_LapPembelian, U_LapUmurHutang, U_MutasiStok, U_LapPenjualan,
   U_LapKasirPerShift, U_KertasKerja, U_ItemCheck, U_LapSetoran,
-  U_NotaOnline, U_NotaRetailTouch;
+  U_NotaOnline, U_NotaRetailTouch, U_NilaiPersediaan;
 
 {$R *.dfm}
 
@@ -1131,9 +1131,9 @@ end;
 
 procedure TMainFrm.actGKartuPersediaanExecute(Sender: TObject);
 begin
-  if not isWindowsFound('TLapNilaiSediaanFrm') then begin
-      U_LapNilaiSediaan.ShowForm('',711);
-      MDITabset.AddTab(LapNilaiSediaanFrm);
+  if not isWindowsFound('TNilaiPersediaanFrm') then begin
+      U_NilaiPersediaan.ShowForm('Laporan Nilai Persediaan', '', 'GDU','BB',711);
+      MDITabset.AddTab(NilaiPersediaanFrm);
   end;
 end;
 

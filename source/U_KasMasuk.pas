@@ -273,7 +273,6 @@ type
     qBrowseiscancel: TStringField;
     qBrowsenama_rekanan: TStringField;
     Label4: TLabel;
-    cxDBLabel2: TcxDBLabel;
     ER_LCB_REK_GL: TcxEditRepositoryLookupComboBoxItem;
     ER_LCB_CC: TcxEditRepositoryLookupComboBoxItem;
     qBrowseusr_post: TStringField;
@@ -352,6 +351,11 @@ type
     Mastersubtotal: TFloatField;
     Masterselisih: TFloatField;
     qExec: TZQuery;
+    cbJnsTransaksi: TcxDBComboBox;
+    Masterjns_transaksi: TStringField;
+    L_Notatotal_tunai: TFloatField;
+    L_Notatotal_debet: TFloatField;
+    L_Notatotal_qris: TFloatField;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure actCloseExecute(Sender: TObject);
@@ -686,6 +690,7 @@ begin
 end;
 
 procedure TKasMasukFrm.actSaveExecute(Sender: TObject);
+var s : String;
 begin
 
  if (MessageBox(0, PChar('Peringatan ! '+#13#10+
@@ -747,6 +752,26 @@ begin
     Master.ApplyUpdates;
     Master.CommitUpdates;
 
+
+    if Masterjns_transaksi.AsString = 'SETORAN KASIR' then begin
+
+      try
+         Detail.First;
+         while not Detail.Eof do
+         begin
+          DM.PrepareQuery(qExec);
+          s:= 'update accfin.kasir set isget_pay='+QuotedStr('1')+' where no_kasir='+QuotedStr(Detailno_reff.AsString);
+          DM.ExecQuery(qExec, s);
+
+          Detail.Next;
+         end;
+
+      except
+        on E: Exception do
+          DM.MyMsg(mmError,'Error has been encountered !',E.Message)
+      end;
+
+    end;
 
    DM.CommitTransaction;
    qBrowse.Refresh;
@@ -897,6 +922,7 @@ begin
    Masterid_curr.AsString:= 'IDR';
    Masterkurs.AsFloat:= 1;
    Masterjns_rekanan.AsString:= 'PEGAWAI';
+   Masterjns_transaksi.AsString:= '';
 
    DM.L_Transaction.Close;
    DM.L_Transaction.Params.ParamByName('pid_trans').Value:= vjns_transaksi ;
@@ -916,6 +942,7 @@ begin
   Detailsisa.AsFloat:= 0;
   Detaildibayar.AsFloat:= 0;
   Detailid_arus.AsString:= '101';
+  Detailid_rek_gl.AsString:= '111.01';
 
   if Detail.RecordCount<>0 then
     Detailnomor.AsInteger:= Detail.RecordCount + 1
@@ -937,6 +964,9 @@ begin
   else
   if Masterid_curr.IsNull or (Trim(Masterid_curr.AsString)='') then
     raise Exception.Create('Mata Uang harus diisi !')
+  else
+  if Masterjns_transaksi.IsNull or (Trim(Masterjns_transaksi.AsString)='') then
+    raise Exception.Create('Jenis Transaksi harus diisi !')
   else
   if Masterid_rek_gl.IsNull or (Trim(Masterid_rek_gl.AsString)='') then
      raise Exception.Create('ID REK GL harus diisi!');
@@ -1221,10 +1251,6 @@ begin
   Mastersubtotal.AsFloat:= vSubTotal;
   Master.Post;
 
-  DM.PrepareQuery(qExec);
-  s:= 'update accfin.kasir set isget_pay='+QuotedStr('1')+' where no_kasir='+QuotedStr(Detailno_reff.AsString);
-  DM.ExecQuery(qExec, s);
-
 end;
 
 procedure TKasMasukFrm.edtRekGLEnter(Sender: TObject);
@@ -1262,7 +1288,11 @@ procedure TKasMasukFrm.grdDetailDBBTVno_reffGetPropertiesForEdit(
   Sender: TcxCustomGridTableItem; ARecord: TcxCustomGridRecord;
   var AProperties: TcxCustomEditProperties);
 begin
+
   if Detail.State in [dsInsert,dsedit] then begin
+
+    if Masterjns_transaksi.AsString = 'SETORAN KASIR' then begin
+
       AProperties := ER_LCB_REFF.Properties;
       try
         L_Nota.Close;
@@ -1272,9 +1302,14 @@ begin
         on E: Exception do
           DM.MyMsg(mmError,'Error has been encountered !',E.Message)
       end;
+
+    end;
+
   end else begin
       AProperties := ER_EDT.Properties;
+
   end;
+
 end;
 
 procedure TKasMasukFrm.dtpStartCloseUp(Sender: TObject);
@@ -1327,12 +1362,12 @@ begin
 
      Detailno_reff.AsString:= L_Notano_nota.AsString;
      if Length(L_Notaremarks.AsString)<5 then
-        Detaildescription.AsString:='Pembayaran nota no: '+L_Notano_nota.AsString+' a/n : '+L_Notanama_rekanan.AsString
+        Detaildescription.AsString:='Setoran Laporan Kasir no: '+L_Notano_nota.AsString+' a/n : '+L_Notanama_rekanan.AsString
      else Detaildescription.AsString:= L_Notaremarks.AsString;
      Detailkd_rekanan.AsString:= L_Notakd_rekanan.AsString;
      Detailpembayaran.AsFloat:= L_Notapembayaran.AsFloat;
-     Detailsisa.AsFloat:= L_Notatotal.AsFloat-L_Notapembayaran.AsFloat;
-     Detaildibayar.AsFloat:= L_Notatotal.AsFloat-L_Notapembayaran.AsFloat;
+     Detailsisa.AsFloat:= L_Notasisa.AsFloat;
+     Detaildibayar.AsFloat:= L_Notatotal_tunai.AsFloat;
      Detailid_rek_gl.AsString:= L_Notaid_rek_gl.AsString;
      Detailid_rek_gl.AsString:= '111.01';
 end;

@@ -310,6 +310,16 @@ type
     Label7: TLabel;
     cxDBLabel2: TcxDBLabel;
     Mastertotal_unpost: TFloatField;
+    Mastertotal_tunai: TFloatField;
+    Mastertotal_debit: TFloatField;
+    Mastertotal_qris: TFloatField;
+    Label9: TLabel;
+    cxDBLabel3: TcxDBLabel;
+    Label10: TLabel;
+    cxDBLabel4: TcxDBLabel;
+    Label11: TLabel;
+    cxDBLabel5: TcxDBLabel;
+    grddbtvMasterColumn1: TcxGridDBColumn;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure actCloseExecute(Sender: TObject);
@@ -350,7 +360,7 @@ type
     vid_nota : Int64;
     DBMode: TDBMode;
     issparepart : boolean;
-    totPost, totunPost : Double;
+    totPost, totunPost, total_tunai, total_debet, total_qris : Double;
     { Private declarations }
     procedure UpdateView;
     function CheckEditRight(var msg: string): Boolean;
@@ -421,6 +431,16 @@ begin
     btnCancel.Visible:= False;
     btnPrint.Visible:= False;
     adpDetailNavigator.Visible:= False;
+//    Label9.Visible:= False;
+//    Label10.Visible:= False;
+//    Label11.Visible:= False;
+//    Label7.Visible:= False;
+//    Label17.Visible:= False;
+//    cxDBLabel3.Visible:= False;
+//    cxDBLabel4.Visible:= False;
+//    cxDBLabel5.Visible:= False;
+//    cxDBLabel1.Visible:= False;
+//    cxDBLabel2.Visible:= False;
   end else begin
     isBrowse := DBMode=dmBrowse;
     isEmpty := Master.RecordCount=0;
@@ -473,7 +493,19 @@ begin
     adpDetailNavigator.Visible:= not isBrowse;
     dbagbAddDetail.Enabled:= accinsert;
     dbagbEditDetail.Enabled:= accedit;
-    dbagbDeleteDetail.Enabled:= accdelete
+    dbagbDeleteDetail.Enabled:= accdelete;
+
+    cxDBLabel3.Visible:= not isBrowse;
+    cxDBLabel4.Visible:=  not isBrowse;
+    cxDBLabel5.Visible:=  not isBrowse;
+    cxDBLabel1.Visible:=  not isBrowse;
+    cxDBLabel2.Visible:=  not isBrowse;
+    Label9.Visible:= not isBrowse;
+    Label10.Visible:= not isBrowse;
+    Label11.Visible:= not isBrowse;
+    Label7.Visible:= not isBrowse;
+    Label17.Visible:= not isBrowse;
+
   end;
 end;
 
@@ -655,10 +687,10 @@ begin
     end
   end;
 
-  DM.PrepareQuery(qExec);
-  s:= 'update transaksi.nota set isget='+QuotedStr('1')+' where no_nota in(select no_nota from accfin.kasir_detail '+
-      'where id_kasir='+IntToStr(Masterid.AsLargeInt)+' and ispost_detail = '+QuotedStr('1')+')';
-  DM.ExecQuery(qExec, s);
+//  DM.PrepareQuery(qExec);
+//  s:= 'update transaksi.nota set isget='+QuotedStr('1')+' where no_nota in(select no_nota from accfin.kasir_detail '+
+//      'where id_kasir='+IntToStr(Masterid.AsLargeInt)+' and ispost_detail = '+QuotedStr('1')+')';
+//  DM.ExecQuery(qExec, s);
   
   DBMode:= dmBrowse;
   UpdateView
@@ -712,6 +744,9 @@ begin
 //   DM.LookUser.Params.ParamByName('user').AsString:= dm.UserConnect;
 //   DM.LookUser.Open;
    Masteran.AsString:= '';
+   Mastertotal_tunai.AsFloat:= 0;
+   Mastertotal_debit.AsFloat:= 0;
+   Mastertotal_qris.AsFloat:= 0;
 end;
 
 procedure TLapKasirPerShiftFrm.DetailNewRecord(DataSet: TDataSet);
@@ -943,6 +978,10 @@ begin
     totPost:= 0;
     totunPost:= 0;
 
+    total_tunai:= 0;
+    total_debet:= 0;
+    total_qris:= 0;
+
    if (Master.State<>dsBrowse) then
       Master.Post;
 
@@ -994,6 +1033,14 @@ begin
                  Detailtotal.AsFloat:= 0;
               end;
 
+              if qNotacara_bayar.AsString = 'TUNAI' then
+                 total_tunai:= total_tunai+qNotatotal.AsFloat;
+              if qNotacara_bayar.AsString = 'DEBET' then
+                 total_debet:= total_debet+qNotatotal.AsFloat;
+              if qNotacara_bayar.AsString = 'QRIS' then
+                 total_qris:= total_qris+qNotatotal.AsFloat;
+
+
               Detail.Post;
               qNota.Next;
               sts_dlg.Progress_It;
@@ -1009,6 +1056,9 @@ begin
       Master.Edit;
       Mastertotal_unpost.AsFloat:= totunPost;
       Mastertotal.AsFloat:= totPost;
+      Mastertotal_tunai.AsFloat:= total_tunai;
+      Mastertotal_debit.AsFloat:= total_debet;
+      Mastertotal_qris.AsFloat:= total_qris;
 
 
       sts_dlg.Progress_It;
