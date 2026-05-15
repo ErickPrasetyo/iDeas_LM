@@ -833,7 +833,9 @@ begin
   end
 
   else if (Masterdescription.IsNull) or (Masterdescription.AsString='') then
-      raise Exception.Create('Jenis Pekerjaan Belum Diisi!');
+      raise Exception.Create('Jenis Pekerjaan Belum Diisi!')
+  else if (Masterjenis.IsNull) or (Masterjenis.AsString='') then
+      raise Exception.Create('Pilih Jenis Transaksi Dahulu!');
 
   if Master.State=dsInsert then begin
       Masterid_mutasi.AsLargeInt:= SQ.GetNextValue;

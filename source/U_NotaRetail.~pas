@@ -478,7 +478,6 @@ type
     LookBrowse: TwwLookupDialog;
     FilterBrowse: TwwFilterDialog;
     cxStyle5: TcxStyle;
-    grddbtvFP_DetailColumn1: TcxGridDBBandedColumn;
     MemRemarks: TcxDBMemo;
     qryITEMkd_item: TStringField;
     qryITEMnama_item: TStringField;
@@ -569,7 +568,6 @@ type
     frxPrint: TfrxDBDataset;
     MemMasterdibayar: TStringField;
     MemMasterkembali: TStringField;
-    LookRekanan: TcxDBTextEdit;
     qDiscMember: TZQuery;
     qDiscMemberdisc_member_psn: TFloatField;
     Label4: TLabel;
@@ -617,6 +615,31 @@ type
     LookItem: TwwLookupDialog;
     btnAmbilData: TSCButton;
     Label10: TLabel;
+    Label11: TLabel;
+    edtKarton: TcxTextEdit;
+    qCheckJmlPcs: TZQuery;
+    qCheckJmlPcsjml: TFloatField;
+    grddbtvFP_DetailColumn6: TcxGridDBBandedColumn;
+    grddbtvFP_DetailColumn7: TcxGridDBBandedColumn;
+    qCheckHarga: TZQuery;
+    qCheckHargahrg_jual: TFloatField;
+    qCheckHargahrg_beli: TFloatField;
+    edtVerifMember: TcxTextEdit;
+    Label12: TLabel;
+    LookRekanan: TDBText;
+    BtnNewMember: TSCButton;
+    BtnCariMember: TSCButton;
+    qMember: TZQuery;
+    qMemberkd_rekanan: TStringField;
+    qMembernama_rekanan: TStringField;
+    qMemberalamat: TStringField;
+    qMemberjenis: TStringField;
+    qMembercontact: TStringField;
+    qMemberkota: TStringField;
+    qMemberkode_pos: TStringField;
+    qMembertelephone: TStringField;
+    qMemberfaxcimile: TStringField;
+    qMemberdisc_member_psn: TFloatField;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure actCloseExecute(Sender: TObject);
@@ -683,9 +706,6 @@ type
     procedure grddbtvFP_DetailEditKeyDown(Sender: TcxCustomGridTableView;
       AItem: TcxCustomGridTableItem; AEdit: TcxCustomEdit; var Key: Word;
       Shift: TShiftState);
-    procedure LookRekananKeyDown(Sender: TObject; var Key: Word;
-      Shift: TShiftState);
-    procedure qDiscMemberBeforeOpen(DataSet: TDataSet);
     procedure edtCaraBayarKeyPress(Sender: TObject; var Key: Char);
     procedure grddbtvFP_Detailkd_itemPropertiesChange(Sender: TObject);
     procedure edtItemKeyPress(Sender: TObject; var Key: Char);
@@ -694,13 +714,17 @@ type
       Shift: TShiftState);
     procedure edtDiscItemPropertiesChange(Sender: TObject);
     procedure btnAmbilDataClick(Sender: TObject);
+    procedure edtKartonKeyPress(Sender: TObject; var Key: Char);
+    procedure BtnCariMemberClick(Sender: TObject);
+    procedure edtVerifMemberKeyPress(Sender: TObject; var Key: Char);
   private
     DBMode: TDBMode;
     { Private declarations }
     vjns_item, vjns_transaksi, vjudul, vlook, vrek_kredit, vrek_debet : string;
     vtag : integer;
-    vSubTotal, vDiscRP : Double;
+    vSubTotal, vDiscRP, vJmlPcs : Double;
     isPromoUang : Boolean;
+    tagDiscMember : Boolean;
     procedure UpdateView;
     function CheckEditRight(var msg: string): Boolean;
     function CheckDeleteRight(var msg: string): Boolean;
@@ -708,9 +732,11 @@ type
     function CheckDetail(id_item: string): Boolean;
     procedure Print;
     procedure Bayar;
+    procedure CheckJumlahPcs;
     procedure UpdateBayar(cara, bank, nokartu, dibayar, kembali: string);
     function CheckPromoUang(kd_item: String; qty : Double): Boolean;
     function CheckPromoBarang(kd_item: String; qty : Double): Boolean;
+    function CheckHargaJual(kd_item: String): Boolean;
 
 
   public
@@ -917,7 +943,6 @@ begin
     edtNoMVocer.Properties.ReadOnly:= isBrowse;
     edtMVocer.Properties.ReadOnly:= isBrowse;
 
-    LookRekanan.Properties.ReadOnly:= isBrowse;
 //    LookRekanan.Properties.Buttons[0].Visible:= not isBrowse;
 //    edtCurrency.Properties.ReadOnly:= isBrowse;
 //    edtCurrency.Properties.Buttons[0].Visible:= not isBrowse;
@@ -1024,7 +1049,11 @@ begin
   end;
   UpdateView;
   edtItem.SetFocus;
+  edtKarton.Text:= '0';
+  edtqty.Text:= '0';
   isPromoUang:= False;
+  edtVerifMember.Text:= '';
+  tagDiscMember:= False;
   //Detail.Append;
 end;
 
@@ -1258,7 +1287,7 @@ begin
                 MemDetaildescription.AsString:= Detailnama_item.AsString+' '+Detailketerangan.AsString
                 else
                 MemDetaildescription.AsString:= Detailnama_item.AsString;
-                MemDetailqty.AsFloat:= Detailqty_biji.AsFloat;
+                MemDetailqty.AsFloat:= Detailqty_total_biji.AsFloat;
                 MemDetailsatuan.AsString:= Detailsatuan_beli.AsString;
                 MemDetailqty_karton.AsFloat:= Detailqty_karton.AsFloat;
                 MemDetailqty_lusin.AsFloat:= Detailqty_lusin.AsFloat;
@@ -2357,34 +2386,6 @@ begin
 
 end;
 
-procedure TNotaRetailFrm.LookRekananKeyDown(Sender: TObject; var Key: Word;
-  Shift: TShiftState);
-begin
-  if Key=VK_RETURN then
-  try
-    qDiscMember.Close;
-    qDiscMember.Open;
-     if qDiscMemberdisc_member_psn.AsFloat=0 then begin
-        Masterkd_rekanan.AsString:= 'CASH';
-        Masternama_rekanan.AsString:= 'CASH';
-        Masterdisc_member.AsFloat:= 0;
-        Mastertotal.AsFloat:= vSubTotal-Masterdisc_member.AsFloat;
-     end else begin
-        Masterdisc_member.AsFloat:= vSubTotal*qDiscMemberdisc_member_psn.AsFloat/100;
-        btnSave.SetFocus;
-     end;
-
-  Except
-  end;
-
-end;
-
-procedure TNotaRetailFrm.qDiscMemberBeforeOpen(DataSet: TDataSet);
-begin
-  qDiscMember.Params.ParamByName('pTotal').Value:= Mastertotal.AsFloat;
-  qDiscMember.Params.ParamByName('pkd_rekanan').Value:= LookRekanan.Text;
-end;
-
 procedure TNotaRetailFrm.edtCaraBayarKeyPress(Sender: TObject;
   var Key: Char);
 begin
@@ -2440,7 +2441,7 @@ begin
       if qItem.RecordCount=0 then begin
 
       end else begin
-        edtqty.SetFocus;
+        edtKarton.SetFocus;
 
       end;
 
@@ -2455,19 +2456,29 @@ end;
 procedure TNotaRetailFrm.edtqtyKeyPress(Sender: TObject; var Key: Char);
 begin
   if Key=#13 then begin
-    if CheckPromoUang(edtItem.Text, StrToFloat(edtqty.Text)) then begin
+
+    if CheckHargaJual(edtItem.Text) then
+      raise Exception.Create('Harga Jual lebih murah dari Harga Beli, Segera hub Admin!');
+
+
+    CheckJumlahPcs;
+
+    if CheckPromoUang(edtItem.Text, vJmlPcs) then begin
        if CheckPromoBdiv.AsFloat>0 then begin
           Detail.Append;
           Detailkd_item.AsString:= qItemkd_item.AsString;
           Detaildiskripsi.AsString:= qItemnama_item.AsString;
           Detailhrg.AsFloat:= qItemhrg_jual.AsFloat;
           Detailsatuan_beli.AsString:= qItemsatuan_jual.AsString;
-          Detailqty_biji.AsFloat:= StrToFloat(edtqty.Text);
+          Detailqty_karton.AsFloat:= StrToFloat(edtKarton.Text);
+          Detailqty_total_biji.AsFloat:= StrToFloat(edtqty.Text);
+          Detailqty_biji.AsFloat:= vJmlPcs;
           Detailid_warehouse.AsString:= qItemlok_rak.AsString;
           Detaildisc_rp.AsFloat:= CheckPromoBnilai_promo.AsFloat*CheckPromoBdiv.AsFloat;
           Detail.Post;
           edtItem.Text:='';
-          edtqty.Text:='';
+          edtqty.Text:='0';
+          edtKarton.Text:= '0';
           edtItem.SetFocus;
        end else begin
           Detail.Append;
@@ -2475,24 +2486,29 @@ begin
           Detaildiskripsi.AsString:= qItemnama_item.AsString;
           Detailhrg.AsFloat:= qItemhrg_jual.AsFloat;
           Detailsatuan_beli.AsString:= qItemsatuan_jual.AsString;
-          Detailqty_biji.AsFloat:= StrToFloat(edtqty.Text);
+          Detailqty_karton.AsFloat:= StrToFloat(edtKarton.Text);
+          Detailqty_total_biji.AsFloat:= StrToFloat(edtqty.Text);
+          Detailqty_biji.AsFloat:= vJmlPcs;
           Detailid_warehouse.AsString:= qItemlok_rak.AsString;
           Detaildisc_rp.AsFloat:= 0;
           Detail.Post;
           edtItem.Text:='';
-          edtqty.Text:='';
+          edtqty.Text:='0';
+          edtKarton.Text:='0';
           edtItem.SetFocus;
        end
     end
     else
-    if CheckPromoBarang(edtItem.Text, StrToFloat(edtqty.Text)) then begin
+    if CheckPromoBarang(edtItem.Text, vJmlPcs) then begin
       if CheckPromoBdiv.AsFloat>0 then begin
           Detail.Append;
           Detailkd_item.AsString:= qItemkd_item.AsString;
           Detaildiskripsi.AsString:= qItemnama_item.AsString;
           Detailhrg.AsFloat:= qItemhrg_jual.AsFloat;
           Detailsatuan_beli.AsString:= qItemsatuan_jual.AsString;
-          Detailqty_biji.AsFloat:= StrToFloat(edtqty.Text);
+          Detailqty_karton.AsFloat:= StrToFloat(edtKarton.Text);
+          Detailqty_total_biji.AsFloat:= StrToFloat(edtqty.Text);
+          Detailqty_biji.AsFloat:= vJmlPcs;
           Detailid_warehouse.AsString:= qItemlok_rak.AsString;
           Detaildisc_rp.AsFloat:= 0;
           Detail.Post;
@@ -2512,6 +2528,8 @@ begin
                 Detailqty_biji.AsFloat:= CheckPromoBqty_item_promo.AsFloat*CheckPromoBdiv.AsFloat;
 
             Detailsatuan_beli.AsString:= qItemsatuan_jual.AsString;
+            Detailqty_karton.AsFloat:= 0;
+            Detailqty_total_biji.AsFloat:= 0;
             Detailid_warehouse.AsString:= qItemlok_rak.AsString;
             Detailispromo.AsString:= '1';
             Detaildisc_rp.AsFloat:= 0;
@@ -2522,7 +2540,8 @@ begin
           end;
 
           edtItem.Text:='';
-          edtqty.Text:='';
+          edtqty.Text:='0';
+          edtKarton.Text:='0';
           edtItem.SetFocus;
       end else begin
 
@@ -2534,12 +2553,15 @@ begin
           Detaildiskripsi.AsString:= qItemnama_item.AsString;
           Detailhrg.AsFloat:= qItemhrg_jual.AsFloat;
           Detailsatuan_beli.AsString:= qItemsatuan_jual.AsString;
-          Detailqty_biji.AsFloat:= StrToFloat(edtqty.Text);
+          Detailqty_karton.AsFloat:= StrToFloat(edtKarton.Text);
+          Detailqty_total_biji.AsFloat:= StrToFloat(edtqty.Text);
+          Detailqty_biji.AsFloat:= vJmlPcs;
           Detailid_warehouse.AsString:= qItemlok_rak.AsString;
           Detaildisc_rp.AsFloat:= 0;
           Detail.Post;
           edtItem.Text:='';
-          edtqty.Text:='';
+          edtqty.Text:='0';
+          edtKarton.Text:='0';
           edtItem.SetFocus;
     end
 
@@ -2581,6 +2603,100 @@ begin
     on E: Exception do
       DM.MyMsg(mmError,'Error has been encountered !',E.Message)
   end
+end;
+
+procedure TNotaRetailFrm.edtKartonKeyPress(Sender: TObject; var Key: Char);
+begin
+  if Key = #13 then
+    edtqty.SetFocus;
+end;
+
+procedure TNotaRetailFrm.CheckJumlahPcs;
+begin
+  vJmlPcs := 0;
+  try
+    qCheckJmlPcs.Close;
+    qCheckJmlPcs.Params.ParamByName('pKarton').Value:= StrToFloat(edtKarton.Text);
+    qCheckJmlPcs.Params.ParamByName('pPcs').Value:= StrToFloat(edtqty.Text);
+    qCheckJmlPcs.Params.ParamByName('pKd_item').Value:= edtItem.Text;
+    qCheckJmlPcs.Open;
+
+    vJmlPcs:= qCheckJmlPcsjml.AsFloat;
+
+  except
+    on E: Exception do
+      DM.MyMsg(mmError,'Error has been encountered !',E.Message)
+  end;
+
+end;
+
+function TNotaRetailFrm.CheckHargaJual(kd_item: String): Boolean;
+var s : String;
+begin
+  Result:= False;
+
+  Try
+    qCheckHarga.Close;
+    qCheckHarga.Params.ParamByName('pkd_item').Value:= kd_item;
+    qCheckHarga.Open;
+
+    if qCheckHargahrg_jual.AsFloat < qCheckHargahrg_beli.AsFloat then
+    Result:= True;
+  except
+    on E: Exception do
+      DM.MyMsg(mmError,'Error has been encountered !',E.Message)
+  end
+
+end;
+
+procedure TNotaRetailFrm.BtnCariMemberClick(Sender: TObject);
+begin
+
+  if not tagDiscMember then begin
+
+      Master.Edit;
+
+      try
+        qDiscMember.Close;
+        qDiscMember.Params.ParamByName('pTotal').Value:= Mastertotal.AsFloat;
+        qDiscMember.Params.ParamByName('pno').Value:= edtVerifMember.Text;
+        qDiscMember.Open;
+
+        qMember.Close;
+        qMember.Params.ParamByName('pno').Value:= edtVerifMember.Text;
+        qMember.Open;
+
+         if qDiscMemberdisc_member_psn.AsFloat=0 then begin
+            Masterkd_rekanan.AsString:= 'CASH';
+            Masternama_rekanan.AsString:= 'CASH';
+            Masterdisc_member.AsFloat:= 0;
+            Mastertotal.AsFloat:= vSubTotal-Masterdisc_member.AsFloat;
+         end else begin
+
+            Masterkd_rekanan.AsString:= qMemberkd_rekanan.AsString;
+            Masternama_rekanan.AsString:= qMembernama_rekanan.AsString;
+            Masteralamat_rekanan.AsString:= qMemberalamat.AsString;
+            Masterdisc_member.AsFloat:= vSubTotal*qDiscMemberdisc_member_psn.AsFloat/100;
+            btnSave.SetFocus;
+         end;
+
+      Except
+        on E: Exception do
+          DM.MyMsg(mmError,'Error has been encountered !',E.Message)
+      end;
+
+      tagDiscMember:= True;
+
+  end;
+  
+end;
+
+procedure TNotaRetailFrm.edtVerifMemberKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  if Key = #13 then
+     BtnCariMember.Click;
+
 end;
 
 end.

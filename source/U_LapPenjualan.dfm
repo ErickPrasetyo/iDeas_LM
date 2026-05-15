@@ -327,7 +327,7 @@ object LapPenjualanFrm: TLapPenjualanFrm
     Top = 80
     Width = 980
     Height = 472
-    ActivePage = tsDiscMember
+    ActivePage = tsRepLaba
     Align = alClient
     TabOrder = 5
     ClientRectBottom = 468

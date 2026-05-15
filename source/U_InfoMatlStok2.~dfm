@@ -1,6 +1,6 @@
 object InfoMatlStok2Frm: TInfoMatlStok2Frm
-  Left = 215
-  Top = 79
+  Left = 37
+  Top = 44
   Width = 1206
   Height = 689
   Caption = 'Kartu Stok Obat/ Alkes'

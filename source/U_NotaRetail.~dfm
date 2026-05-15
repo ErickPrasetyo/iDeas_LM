@@ -1,8 +1,8 @@
 object NotaRetailFrm: TNotaRetailFrm
-  Left = 109
-  Top = 32
-  Width = 1240
-  Height = 630
+  Left = 259
+  Top = 103
+  Width = 1090
+  Height = 559
   Caption = 'KASIR'
   Color = clWindow
   Ctl3D = False
@@ -23,7 +23,7 @@ object NotaRetailFrm: TNotaRetailFrm
   object pnlHeader: TAdvPanel
     Left = 0
     Top = 0
-    Width = 1224
+    Width = 1074
     Height = 59
     Align = alTop
     BevelOuter = bvNone
@@ -242,8 +242,8 @@ object NotaRetailFrm: TNotaRetailFrm
   end
   object pnlNavigator: TAdvPanel
     Left = 0
-    Top = 551
-    Width = 1224
+    Top = 480
+    Width = 1074
     Height = 40
     Align = alBottom
     BevelOuter = bvNone
@@ -626,16 +626,16 @@ object NotaRetailFrm: TNotaRetailFrm
   object pgTransaction: TcxPageControl
     Left = 0
     Top = 59
-    Width = 1224
-    Height = 492
+    Width = 1074
+    Height = 421
     ActivePage = tsDetail
     Align = alClient
     Style = 8
     TabOrder = 3
     OnChange = pgTransactionChange
     OnPageChanging = pgTransactionPageChanging
-    ClientRectBottom = 492
-    ClientRectRight = 1224
+    ClientRectBottom = 421
+    ClientRectRight = 1074
     ClientRectTop = 24
     object tsBrowse: TcxTabSheet
       Caption = 'Browse'
@@ -643,8 +643,8 @@ object NotaRetailFrm: TNotaRetailFrm
       object grdMaster: TcxGrid
         Left = 0
         Top = 40
-        Width = 1224
-        Height = 428
+        Width = 1074
+        Height = 357
         Align = alClient
         TabOrder = 0
         object grddbtvMaster: TcxGridDBTableView
@@ -842,7 +842,7 @@ object NotaRetailFrm: TNotaRetailFrm
       object SCPanel3: TSCPanel
         Left = 0
         Top = 0
-        Width = 1224
+        Width = 1074
         Height = 40
         Align = alTop
         Bevel = sccbSoftRaised
@@ -973,7 +973,7 @@ object NotaRetailFrm: TNotaRetailFrm
       object pnlMaster: TSCPanel
         Left = 0
         Top = 0
-        Width = 1224
+        Width = 1074
         Height = 129
         Align = alTop
         Color = 15986925
@@ -1168,13 +1168,15 @@ object NotaRetailFrm: TNotaRetailFrm
             Top = 59
             Width = 195
             Height = 15
+            Color = clDefault
             DataField = 'alamat_rekanan'
             DataSource = dsMaster
             Font.Charset = ANSI_CHARSET
-            Font.Color = clNavy
+            Font.Color = clDefault
             Font.Height = -11
             Font.Name = 'Tahoma'
             Font.Style = []
+            ParentColor = False
             ParentFont = False
             Transparent = True
           end
@@ -1185,7 +1187,7 @@ object NotaRetailFrm: TNotaRetailFrm
             Height = 13
             Caption = 'Nama'
             Font.Charset = DEFAULT_CHARSET
-            Font.Color = clRed
+            Font.Color = clDefault
             Font.Height = -11
             Font.Name = 'MS Sans Serif'
             Font.Style = []
@@ -1205,13 +1207,15 @@ object NotaRetailFrm: TNotaRetailFrm
             Top = 17
             Width = 196
             Height = 17
+            Color = clDefault
             DataField = 'nama_rekanan'
             DataSource = dsMaster
             Font.Charset = ANSI_CHARSET
-            Font.Color = clRed
+            Font.Color = clDefault
             Font.Height = -11
             Font.Name = 'Tahoma'
             Font.Style = []
+            ParentColor = False
             ParentFont = False
             Transparent = True
           end
@@ -1224,15 +1228,22 @@ object NotaRetailFrm: TNotaRetailFrm
             Transparent = True
             Visible = False
           end
-          object LookRekanan: TcxDBTextEdit
-            Left = 91
-            Top = 35
-            DataBinding.DataField = 'kd_rekanan'
-            DataBinding.DataSource = dsMaster
-            TabOrder = 0
-            OnKeyDown = LookRekananKeyDown
-            OnKeyPress = EditKeyPress
-            Width = 195
+          object LookRekanan: TDBText
+            Left = 92
+            Top = 37
+            Width = 196
+            Height = 17
+            Color = clDefault
+            DataField = 'kd_rekanan'
+            DataSource = dsMaster
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clDefault
+            Font.Height = -11
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            ParentColor = False
+            ParentFont = False
+            Transparent = True
           end
           object edtCaraBayar: TcxDBComboBox
             Left = 92
@@ -1247,7 +1258,7 @@ object NotaRetailFrm: TNotaRetailFrm
               'TRANSFER'
               'DEBIT')
             Properties.MaxLength = 0
-            TabOrder = 1
+            TabOrder = 0
             Visible = False
             OnKeyPress = edtCaraBayarKeyPress
             Height = 21
@@ -1255,7 +1266,7 @@ object NotaRetailFrm: TNotaRetailFrm
           end
         end
         object cxGroupBox2: TcxGroupBox
-          Left = 568
+          Left = 566
           Top = 11
           Caption = 'Total Belanja'
           TabOrder = 5
@@ -1296,8 +1307,8 @@ object NotaRetailFrm: TNotaRetailFrm
       end
       object SCPanel1: TSCPanel
         Left = 0
-        Top = 394
-        Width = 1224
+        Top = 323
+        Width = 1074
         Height = 74
         Align = alBottom
         Color = 15986925
@@ -1305,7 +1316,7 @@ object NotaRetailFrm: TNotaRetailFrm
         ParentColor = False
         TabOrder = 1
         object Label16: TLabel
-          Left = 736
+          Left = 764
           Top = 10
           Width = 83
           Height = 14
@@ -1319,7 +1330,7 @@ object NotaRetailFrm: TNotaRetailFrm
           Transparent = True
         end
         object Label17: TLabel
-          Left = 736
+          Left = 764
           Top = 52
           Width = 33
           Height = 14
@@ -1333,13 +1344,13 @@ object NotaRetailFrm: TNotaRetailFrm
           Transparent = True
         end
         object Shape9: TShape
-          Left = 829
+          Left = 857
           Top = 50
           Width = 128
           Height = 20
         end
         object Label23: TLabel
-          Left = 167
+          Left = 12
           Top = 7
           Width = 70
           Height = 14
@@ -1354,7 +1365,7 @@ object NotaRetailFrm: TNotaRetailFrm
           Visible = False
         end
         object Label19: TLabel
-          Left = 388
+          Left = 233
           Top = 7
           Width = 49
           Height = 13
@@ -1369,7 +1380,7 @@ object NotaRetailFrm: TNotaRetailFrm
           Visible = False
         end
         object Label22: TLabel
-          Left = 388
+          Left = 233
           Top = 50
           Width = 62
           Height = 13
@@ -1378,14 +1389,14 @@ object NotaRetailFrm: TNotaRetailFrm
           Visible = False
         end
         object Shape12: TShape
-          Left = 465
+          Left = 310
           Top = 47
           Width = 130
           Height = 20
           Visible = False
         end
         object Label24: TLabel
-          Left = 246
+          Left = 91
           Top = 8
           Width = 3
           Height = 14
@@ -1400,7 +1411,7 @@ object NotaRetailFrm: TNotaRetailFrm
           Visible = False
         end
         object Label25: TLabel
-          Left = 459
+          Left = 304
           Top = 8
           Width = 3
           Height = 13
@@ -1415,7 +1426,7 @@ object NotaRetailFrm: TNotaRetailFrm
           Visible = False
         end
         object Label26: TLabel
-          Left = 459
+          Left = 304
           Top = 48
           Width = 3
           Height = 13
@@ -1424,7 +1435,7 @@ object NotaRetailFrm: TNotaRetailFrm
           Visible = False
         end
         object Label27: TLabel
-          Left = 388
+          Left = 233
           Top = 28
           Width = 51
           Height = 13
@@ -1439,7 +1450,7 @@ object NotaRetailFrm: TNotaRetailFrm
           Visible = False
         end
         object Label28: TLabel
-          Left = 459
+          Left = 304
           Top = 29
           Width = 3
           Height = 13
@@ -1454,7 +1465,7 @@ object NotaRetailFrm: TNotaRetailFrm
           Visible = False
         end
         object Label29: TLabel
-          Left = 246
+          Left = 91
           Top = 29
           Width = 3
           Height = 14
@@ -1469,7 +1480,7 @@ object NotaRetailFrm: TNotaRetailFrm
           Visible = False
         end
         object Label30: TLabel
-          Left = 167
+          Left = 12
           Top = 28
           Width = 72
           Height = 14
@@ -1484,7 +1495,7 @@ object NotaRetailFrm: TNotaRetailFrm
           Visible = False
         end
         object Label9: TLabel
-          Left = 736
+          Left = 764
           Top = 32
           Width = 63
           Height = 14
@@ -1497,8 +1508,22 @@ object NotaRetailFrm: TNotaRetailFrm
           ParentFont = False
           Transparent = True
         end
+        object Label12: TLabel
+          Left = 416
+          Top = 10
+          Width = 117
+          Height = 14
+          Caption = 'Verifikasi No HP Member'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+          Transparent = True
+        end
         object edtVAT: TcxDBTextEdit
-          Left = 828
+          Left = 856
           Top = 5
           DataBinding.DataField = 'disc_member'
           DataBinding.DataSource = dsMaster
@@ -1517,7 +1542,7 @@ object NotaRetailFrm: TNotaRetailFrm
           Width = 130
         end
         object cxDBLabel1: TcxDBLabel
-          Left = 828
+          Left = 856
           Top = 49
           DataBinding.DataField = 'total'
           DataBinding.DataSource = dsMaster
@@ -1533,11 +1558,11 @@ object NotaRetailFrm: TNotaRetailFrm
           Transparent = True
           Height = 21
           Width = 127
-          AnchorX = 955
+          AnchorX = 983
           AnchorY = 60
         end
         object edtVocer: TcxDBTextEdit
-          Left = 465
+          Left = 310
           Top = 3
           DataBinding.DataField = 'evocer'
           DataBinding.DataSource = dsMaster
@@ -1557,7 +1582,7 @@ object NotaRetailFrm: TNotaRetailFrm
           Width = 130
         end
         object edtNoVocer: TcxDBTextEdit
-          Left = 252
+          Left = 97
           Top = 2
           DataBinding.DataField = 'no_evocer'
           DataBinding.DataSource = dsMaster
@@ -1577,7 +1602,7 @@ object NotaRetailFrm: TNotaRetailFrm
           Width = 130
         end
         object cxDBLabel2: TcxDBLabel
-          Left = 465
+          Left = 310
           Top = 46
           DataBinding.DataField = 'sisa'
           DataBinding.DataSource = dsMaster
@@ -1594,11 +1619,11 @@ object NotaRetailFrm: TNotaRetailFrm
           Visible = False
           Height = 21
           Width = 126
-          AnchorX = 591
+          AnchorX = 436
           AnchorY = 57
         end
         object edtMVocer: TcxDBTextEdit
-          Left = 465
+          Left = 310
           Top = 24
           DataBinding.DataField = 'mvocer'
           DataBinding.DataSource = dsMaster
@@ -1618,7 +1643,7 @@ object NotaRetailFrm: TNotaRetailFrm
           Width = 130
         end
         object edtNoMVocer: TcxDBTextEdit
-          Left = 252
+          Left = 97
           Top = 23
           DataBinding.DataField = 'no_mvocer'
           DataBinding.DataSource = dsMaster
@@ -1638,7 +1663,7 @@ object NotaRetailFrm: TNotaRetailFrm
           Width = 130
         end
         object edtDiscItem: TcxDBTextEdit
-          Left = 828
+          Left = 856
           Top = 27
           DataBinding.DataField = 'disc_rp'
           DataBinding.DataSource = dsMaster
@@ -1657,18 +1682,55 @@ object NotaRetailFrm: TNotaRetailFrm
           TabOrder = 7
           Width = 130
         end
+        object edtVerifMember: TcxTextEdit
+          Left = 538
+          Top = 6
+          TabOrder = 8
+          OnKeyPress = edtVerifMemberKeyPress
+          Width = 132
+        end
+        object BtnNewMember: TSCButton
+          Left = 537
+          Top = 33
+          Width = 132
+          Height = 23
+          Caption = 'Add Member Baru'
+          Color = 13303760
+          Images = DM.ImageList1
+          ImageIndex = 1
+          RoundColor = 11507049
+          RoundWithParentColor = False
+          Style = scbsCorel
+          TabOrder = 9
+          Visible = False
+        end
+        object BtnCariMember: TSCButton
+          Left = 673
+          Top = 5
+          Width = 61
+          Height = 23
+          Caption = 'Cari'
+          Color = 13303760
+          Images = DM.ImageList1
+          ImageIndex = 7
+          RoundColor = 11507049
+          RoundWithParentColor = False
+          Style = scbsCorel
+          TabOrder = 10
+          OnClick = BtnCariMemberClick
+        end
       end
       object SCPanel2: TSCPanel
         Left = 0
         Top = 129
-        Width = 1224
-        Height = 265
+        Width = 1074
+        Height = 194
         Align = alClient
         TabOrder = 2
         object adpDetailNavigator: TAdvDockPanel
           Left = 0
           Top = 0
-          Width = 1224
+          Width = 1074
           Height = 28
           MinimumSize = 25
           LockHeight = False
@@ -1680,7 +1742,7 @@ object NotaRetailFrm: TNotaRetailFrm
           object atbDetailNavigator: TAdvToolBar
             Left = 3
             Top = 1
-            Width = 1218
+            Width = 1068
             Height = 26
             AllowFloating = False
             Caption = 'Untitled'
@@ -1701,28 +1763,40 @@ object NotaRetailFrm: TNotaRetailFrm
             ShowHint = False
             ToolBarIndex = -1
             DesignSize = (
-              1218
+              1068
               26)
             object Label5: TLabel
-              Left = 577
+              Left = 680
               Top = 2
               Width = 40
               Height = 15
               Alignment = taCenter
               Anchors = [akLeft]
               AutoSize = False
-              Caption = 'QTY'
+              Caption = 'Pcs'
               Transparent = True
               Layout = tlCenter
             end
             object Label10: TLabel
-              Left = 665
+              Left = 768
               Top = 2
               Width = 22
               Height = 15
               Alignment = taCenter
               Anchors = [akLeft]
               AutoSize = False
+              Transparent = True
+              Layout = tlCenter
+            end
+            object Label11: TLabel
+              Left = 577
+              Top = 2
+              Width = 55
+              Height = 15
+              Alignment = taCenter
+              Anchors = [akLeft]
+              AutoSize = False
+              Caption = 'Karton'
               Transparent = True
               Layout = tlCenter
             end
@@ -2034,14 +2108,14 @@ object NotaRetailFrm: TNotaRetailFrm
               Width = 195
             end
             object edtqty: TcxTextEdit
-              Left = 617
+              Left = 720
               Top = 2
               TabOrder = 7
               OnKeyPress = edtqtyKeyPress
               Width = 48
             end
             object btnAmbilData: TSCButton
-              Left = 687
+              Left = 790
               Top = 2
               Width = 88
               Height = 23
@@ -2055,13 +2129,20 @@ object NotaRetailFrm: TNotaRetailFrm
               TabOrder = 8
               OnClick = btnAmbilDataClick
             end
+            object edtKarton: TcxTextEdit
+              Left = 632
+              Top = 2
+              TabOrder = 9
+              OnKeyPress = edtKartonKeyPress
+              Width = 48
+            end
           end
         end
         object grdFP_Detail: TcxGrid
           Left = 0
           Top = 28
-          Width = 1224
-          Height = 237
+          Width = 1074
+          Height = 166
           Align = alClient
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -2104,10 +2185,10 @@ object NotaRetailFrm: TNotaRetailFrm
             Bands = <
               item
                 Caption = 'ITEM'
-                Width = 478
+                Width = 578
               end
               item
-                Width = 262
+                Width = 136
               end
               item
                 Width = 648
@@ -2143,7 +2224,7 @@ object NotaRetailFrm: TNotaRetailFrm
               Options.FilteringPopup = False
               Options.FilteringPopupMultiSelect = False
               Options.Sorting = False
-              Width = 145
+              Width = 127
               Position.BandIndex = 0
               Position.ColIndex = 2
               Position.RowIndex = 0
@@ -2160,14 +2241,15 @@ object NotaRetailFrm: TNotaRetailFrm
               Options.FilteringPopup = False
               Options.FilteringPopupMultiSelect = False
               Options.Sorting = False
-              Width = 278
+              Width = 286
               Position.BandIndex = 0
               Position.ColIndex = 3
               Position.RowIndex = 0
             end
             object grddbtvFP_Detailqty_ot_biji: TcxGridDBBandedColumn
-              Caption = 'Qty'
+              Caption = 'Total Pcs'
               DataBinding.FieldName = 'qty_biji'
+              Visible = False
               HeaderAlignmentHorz = taCenter
               HeaderAlignmentVert = vaCenter
               Options.Filtering = False
@@ -2177,15 +2259,16 @@ object NotaRetailFrm: TNotaRetailFrm
               Options.FilteringPopupMultiSelect = False
               Options.Sorting = False
               Width = 52
-              Position.BandIndex = 1
-              Position.ColIndex = 0
+              Position.BandIndex = 2
+              Position.ColIndex = 4
               Position.RowIndex = 0
             end
             object grddbtvFP_Detailhrg_jual_lusin: TcxGridDBBandedColumn
-              Caption = 'Harga Jual'
+              Caption = 'Harga Jual/Pcs'
               DataBinding.FieldName = 'hrg'
               HeaderAlignmentHorz = taCenter
               HeaderAlignmentVert = vaCenter
+              Options.Editing = False
               Options.Filtering = False
               Options.FilteringFilteredItemsList = False
               Options.FilteringMRUItemsList = False
@@ -2194,7 +2277,7 @@ object NotaRetailFrm: TNotaRetailFrm
               Options.Sorting = False
               Width = 113
               Position.BandIndex = 1
-              Position.ColIndex = 2
+              Position.ColIndex = 0
               Position.RowIndex = 0
             end
             object grddbtvFP_Detailsub_total: TcxGridDBBandedColumn
@@ -2202,6 +2285,7 @@ object NotaRetailFrm: TNotaRetailFrm
               DataBinding.FieldName = 'sub_total'
               HeaderAlignmentHorz = taCenter
               HeaderAlignmentVert = vaCenter
+              Options.Editing = False
               Options.Filtering = False
               Options.FilteringFilteredItemsList = False
               Options.FilteringMRUItemsList = False
@@ -2219,20 +2303,10 @@ object NotaRetailFrm: TNotaRetailFrm
               GroupSummaryAlignment = taCenter
               HeaderAlignmentHorz = taCenter
               HeaderAlignmentVert = vaCenter
+              Options.Editing = False
               Width = 123
               Position.BandIndex = 2
               Position.ColIndex = 0
-              Position.RowIndex = 0
-            end
-            object grddbtvFP_DetailColumn1: TcxGridDBBandedColumn
-              Caption = 'Satuan'
-              DataBinding.FieldName = 'satuan_beli'
-              GroupSummaryAlignment = taCenter
-              HeaderAlignmentHorz = taCenter
-              HeaderAlignmentVert = vaCenter
-              Width = 97
-              Position.BandIndex = 1
-              Position.ColIndex = 1
               Position.RowIndex = 0
             end
             object grddbtvFP_DetailColumn3: TcxGridDBBandedColumn
@@ -2243,6 +2317,7 @@ object NotaRetailFrm: TNotaRetailFrm
               Properties.ValueUnchecked = '0'
               HeaderAlignmentHorz = taCenter
               HeaderAlignmentVert = vaCenter
+              Options.Editing = False
               Width = 103
               Position.BandIndex = 2
               Position.ColIndex = 2
@@ -2253,6 +2328,7 @@ object NotaRetailFrm: TNotaRetailFrm
               DataBinding.FieldName = 'keterangan'
               HeaderAlignmentHorz = taCenter
               HeaderAlignmentVert = vaCenter
+              Options.Editing = False
               Width = 282
               Position.BandIndex = 2
               Position.ColIndex = 3
@@ -2266,9 +2342,31 @@ object NotaRetailFrm: TNotaRetailFrm
               Properties.ValueUnchecked = '0'
               HeaderAlignmentHorz = taCenter
               HeaderAlignmentVert = vaCenter
-              Width = 55
+              Width = 54
               Position.BandIndex = 0
               Position.ColIndex = 1
+              Position.RowIndex = 0
+            end
+            object grddbtvFP_DetailColumn6: TcxGridDBBandedColumn
+              Caption = 'Karton'
+              DataBinding.FieldName = 'qty_karton'
+              HeaderAlignmentHorz = taCenter
+              HeaderAlignmentVert = vaCenter
+              Options.Editing = False
+              Width = 53
+              Position.BandIndex = 0
+              Position.ColIndex = 4
+              Position.RowIndex = 0
+            end
+            object grddbtvFP_DetailColumn7: TcxGridDBBandedColumn
+              Caption = 'Pcs'
+              DataBinding.FieldName = 'qty_total_biji'
+              HeaderAlignmentHorz = taCenter
+              HeaderAlignmentVert = vaCenter
+              Options.Editing = False
+              Width = 58
+              Position.BandIndex = 0
+              Position.ColIndex = 5
               Position.RowIndex = 0
             end
           end
@@ -5049,19 +5147,39 @@ object NotaRetailFrm: TNotaRetailFrm
       Size = 1020
     end
     object qryITEMkd_item: TStringField
+      DisplayLabel = 'Kode Item'
       DisplayWidth = 30
       FieldName = 'kd_item'
       Required = True
       Size = 200
     end
+    object qryITEMhrg_jual: TFloatField
+      DisplayLabel = 'Retail'
+      DisplayWidth = 15
+      FieldName = 'hrg_jual'
+      Required = True
+      DisplayFormat = '0.0,0'
+    end
+    object qryITEMhrg_jual_sm_grosir: TFloatField
+      DisplayLabel = 'Semi Grosir'
+      DisplayWidth = 15
+      FieldName = 'hrg_jual_sm_grosir'
+      DisplayFormat = '0.0,0'
+    end
+    object qryITEMhrg_jual_grosir: TFloatField
+      DisplayLabel = 'Grosir'
+      DisplayWidth = 15
+      FieldName = 'hrg_jual_grosir'
+      DisplayFormat = '0.0,0'
+    end
+    object qryITEMhrg_jual_grosir_besar: TFloatField
+      DisplayLabel = 'Grosir Besar'
+      DisplayWidth = 15
+      FieldName = 'hrg_jual_grosir_besar'
+      DisplayFormat = '0.0,0'
+    end
     object qryITEMhrg_beli: TFloatField
       FieldName = 'hrg_beli'
-      Required = True
-      Visible = False
-      DisplayFormat = ',0'
-    end
-    object qryITEMhrg_jual: TFloatField
-      FieldName = 'hrg_jual'
       Required = True
       Visible = False
       DisplayFormat = ',0'
@@ -5074,18 +5192,6 @@ object NotaRetailFrm: TNotaRetailFrm
     object qryITEMrasio: TFloatField
       FieldName = 'rasio'
       Required = True
-      Visible = False
-    end
-    object qryITEMhrg_jual_sm_grosir: TFloatField
-      FieldName = 'hrg_jual_sm_grosir'
-      Visible = False
-    end
-    object qryITEMhrg_jual_grosir: TFloatField
-      FieldName = 'hrg_jual_grosir'
-      Visible = False
-    end
-    object qryITEMhrg_jual_grosir_besar: TFloatField
-      FieldName = 'hrg_jual_grosir_besar'
       Visible = False
     end
   end
@@ -15542,7 +15648,7 @@ object NotaRetailFrm: TNotaRetailFrm
         Name = 'pqty'
         ParamType = ptUnknown
       end>
-    Left = 596
+    Left = 616
     Top = 240
     ParamData = <
       item
@@ -17284,11 +17390,10 @@ object NotaRetailFrm: TNotaRetailFrm
   end
   object qDiscMember: TZQuery
     Connection = DM.conn
-    BeforeOpen = qDiscMemberBeforeOpen
     SQL.Strings = (
       
-        'select master.fn_gen_disc_member_psn(:pTotal,:pkd_rekanan) as di' +
-        'sc_member_psn')
+        'select master.fn_gen_disc_member_psn(:pTotal,:pno) as disc_membe' +
+        'r_psn')
     Params = <
       item
         DataType = ftUnknown
@@ -17297,11 +17402,11 @@ object NotaRetailFrm: TNotaRetailFrm
       end
       item
         DataType = ftUnknown
-        Name = 'pkd_rekanan'
+        Name = 'pno'
         ParamType = ptUnknown
       end>
-    Left = 564
-    Top = 232
+    Left = 539
+    Top = 227
     ParamData = <
       item
         DataType = ftUnknown
@@ -17310,7 +17415,7 @@ object NotaRetailFrm: TNotaRetailFrm
       end
       item
         DataType = ftUnknown
-        Name = 'pkd_rekanan'
+        Name = 'pno'
         ParamType = ptUnknown
       end>
     object qDiscMemberdisc_member_psn: TFloatField
@@ -17506,7 +17611,7 @@ object NotaRetailFrm: TNotaRetailFrm
       end
       object MasterData1: TfrxMasterData
         FillType = ftBrush
-        Height = 34.015770000000010000
+        Height = 34.015770000000000000
         Top = 370.393940000000000000
         Width = 264.567100000000000000
         DataSet = frxDBDetail
@@ -17534,44 +17639,9 @@ object NotaRetailFrm: TNotaRetailFrm
             item
             end>
         end
-        object Memo37: TfrxMemoView
-          Top = 15.118119999999980000
-          Width = 60.262523330000000000
-          Height = 15.118120000000000000
-          StretchMode = smMaxHeight
-          DisplayFormat.FormatStr = ',#'
-          DisplayFormat.Kind = fkNumeric
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -9
-          Font.Name = 'Times New Roman'
-          Font.Style = []
-          HAlign = haRight
-          Memo.UTF8 = (
-            '[frxDBDetail."unit_price"]')
-          ParentFont = False
-        end
-        object Memo38: TfrxMemoView
-          Left = 58.488250000000000000
-          Top = 15.118119999999980000
-          Width = 11.338590000000000000
-          Height = 15.118120000000000000
-          StretchMode = smMaxHeight
-          DisplayFormat.FormatStr = ',#'
-          DisplayFormat.Kind = fkNumeric
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -9
-          Font.Name = 'Times New Roman'
-          Font.Style = []
-          HAlign = haCenter
-          Memo.UTF8 = (
-            'X')
-          ParentFont = False
-        end
         object Memo39: TfrxMemoView
           Left = 158.953721110000000000
-          Top = 15.562564440000020000
+          Top = 15.118110236220470000
           Width = 15.118120000000000000
           Height = 15.118120000000000000
           StretchMode = smMaxHeight
@@ -17590,9 +17660,9 @@ object NotaRetailFrm: TNotaRetailFrm
           ParentFont = False
         end
         object Memo40: TfrxMemoView
-          Left = 72.606370000000000000
-          Top = 15.118119999999980000
-          Width = 18.897650000000000000
+          Left = 0.606370000000000000
+          Top = 15.118120000000000000
+          Width = 22.677180000000000000
           Height = 15.118120000000000000
           StretchMode = smMaxHeight
           DataSet = frxDBDetail
@@ -17604,14 +17674,13 @@ object NotaRetailFrm: TNotaRetailFrm
           Font.Height = -9
           Font.Name = 'Times New Roman'
           Font.Style = []
-          HAlign = haCenter
           Memo.UTF8 = (
-            '[frxDBDetail."qty"]')
+            '[frxDBDetail."qty_karton"]')
           ParentFont = False
         end
         object Memo41: TfrxMemoView
           Left = 175.071841120000000000
-          Top = 15.118119999999980000
+          Top = 15.118110236220470000
           Width = 77.601113330000000000
           Height = 15.118120000000000000
           StretchMode = smMaxHeight
@@ -17630,9 +17699,9 @@ object NotaRetailFrm: TNotaRetailFrm
           ParentFont = False
         end
         object Memo33: TfrxMemoView
-          Left = 92.666666670000000000
-          Top = 15.432900000000020000
-          Width = 11.338590000000000000
+          Left = 23.666666670000000000
+          Top = 15.118110240000000000
+          Width = 30.236240000000000000
           Height = 15.118120000000000000
           StretchMode = smMaxHeight
           DisplayFormat.FormatStr = ',#'
@@ -17642,15 +17711,14 @@ object NotaRetailFrm: TNotaRetailFrm
           Font.Height = -9
           Font.Name = 'Times New Roman'
           Font.Style = []
-          HAlign = haCenter
           Memo.UTF8 = (
-            '-')
+            'Karton')
           ParentFont = False
         end
         object Memo34: TfrxMemoView
-          Left = 105.000000000000000000
-          Top = 15.432900000000020000
-          Width = 52.703463330000000000
+          Left = 55.220470000000000000
+          Top = 15.118110240000000000
+          Width = 22.467223330000000000
           Height = 15.118120000000000000
           StretchMode = smMaxHeight
           DisplayFormat.FormatStr = ',#'
@@ -17660,9 +17728,25 @@ object NotaRetailFrm: TNotaRetailFrm
           Font.Height = -9
           Font.Name = 'Times New Roman'
           Font.Style = []
-          HAlign = haRight
           Memo.UTF8 = (
-            '[frxDBDetail."disc"]')
+            '[frxDBDetail."qty"]')
+          ParentFont = False
+        end
+        object Memo37: TfrxMemoView
+          Left = 79.370130000000000000
+          Top = 15.118120000000000000
+          Width = 18.687693330000000000
+          Height = 15.118120000000000000
+          StretchMode = smMaxHeight
+          DisplayFormat.FormatStr = ',#'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -9
+          Font.Name = 'Times New Roman'
+          Font.Style = []
+          Memo.UTF8 = (
+            'Pcs')
           ParentFont = False
         end
       end
@@ -17702,7 +17786,7 @@ object NotaRetailFrm: TNotaRetailFrm
         end
         object Memo14: TfrxMemoView
           Left = 154.960730000000000000
-          Top = 9.338590000000068000
+          Top = 9.338590000000000000
           Width = 98.267780000000000000
           Height = 11.338590000000000000
           Font.Charset = DEFAULT_CHARSET
@@ -20926,7 +21010,11 @@ object NotaRetailFrm: TNotaRetailFrm
   object LookItem: TwwLookupDialog
     Selected.Strings = (
       'nama_item'#9'50'#9'Nama Item'#9'F'
-      'kd_item'#9'30'#9'kd_item'#9'F')
+      'kd_item'#9'30'#9'Kode Item'#9'F'
+      'hrg_jual'#9'15'#9'Retail'#9'F'
+      'hrg_jual_sm_grosir'#9'15'#9'Semi Grosir'#9'F'
+      'hrg_jual_grosir'#9'15'#9'Grosir'#9'F'
+      'hrg_jual_grosir_besar'#9'15'#9'Grosir Besar'#9'F')
     GridTitleAlignment = taLeftJustify
     GridColor = clWhite
     GridOptions = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgPerfectRowFit]
@@ -20937,5 +21025,147 @@ object NotaRetailFrm: TNotaRetailFrm
     CharCase = ecNormal
     Left = 779
     Top = 212
+  end
+  object qCheckJmlPcs: TZQuery
+    Connection = DM.conn
+    SQL.Strings = (
+      
+        'select * from master.fn_count_qty_pcs(:pKarton,:pPcs,:pkd_item) ' +
+        'as jml')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'pKarton'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'pPcs'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'pkd_item'
+        ParamType = ptUnknown
+      end>
+    Left = 556
+    Top = 194
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'pKarton'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'pPcs'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'pkd_item'
+        ParamType = ptUnknown
+      end>
+    object qCheckJmlPcsjml: TFloatField
+      FieldName = 'jml'
+      ReadOnly = True
+    end
+  end
+  object qCheckHarga: TZQuery
+    Connection = DM.conn
+    SQL.Strings = (
+      'select hrg_jual, hrg_beli'
+      'from master.item'
+      'where kd_item=:pkd_item')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'pkd_item'
+        ParamType = ptUnknown
+      end>
+    Left = 651
+    Top = 241
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'pkd_item'
+        ParamType = ptUnknown
+      end>
+    object qCheckHargahrg_jual: TFloatField
+      FieldName = 'hrg_jual'
+      Required = True
+    end
+    object qCheckHargahrg_beli: TFloatField
+      FieldName = 'hrg_beli'
+      Required = True
+    end
+  end
+  object qMember: TZQuery
+    Connection = DM.conn
+    SQL.Strings = (
+      'select *'
+      'from master.mrekanan'
+      
+        'where jenis = '#39'CUSTOMER'#39' and (telephone = :pno or kd_rekanan = :' +
+        'pno)')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'pno'
+        ParamType = ptUnknown
+      end>
+    Left = 507
+    Top = 229
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'pno'
+        ParamType = ptUnknown
+      end>
+    object qMemberkd_rekanan: TStringField
+      FieldName = 'kd_rekanan'
+      Required = True
+      Size = 80
+    end
+    object qMembernama_rekanan: TStringField
+      FieldName = 'nama_rekanan'
+      Required = True
+      Size = 1020
+    end
+    object qMemberalamat: TStringField
+      FieldName = 'alamat'
+      Required = True
+      Size = 1020
+    end
+    object qMemberjenis: TStringField
+      FieldName = 'jenis'
+      Required = True
+      Size = 200
+    end
+    object qMembercontact: TStringField
+      FieldName = 'contact'
+      Required = True
+      Size = 200
+    end
+    object qMemberkota: TStringField
+      FieldName = 'kota'
+      Size = 120
+    end
+    object qMemberkode_pos: TStringField
+      FieldName = 'kode_pos'
+      Size = 40
+    end
+    object qMembertelephone: TStringField
+      FieldName = 'telephone'
+      Size = 400
+    end
+    object qMemberfaxcimile: TStringField
+      FieldName = 'faxcimile'
+      Size = 400
+    end
+    object qMemberdisc_member_psn: TFloatField
+      FieldName = 'disc_member_psn'
+      Required = True
+    end
   end
 end

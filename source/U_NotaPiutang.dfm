@@ -338,7 +338,7 @@ object NotaPiutangFrm: TNotaPiutangFrm
     Top = 59
     Width = 1224
     Height = 550
-    ActivePage = tsBrowse
+    ActivePage = tsDetail
     Align = alClient
     Style = 8
     TabOrder = 3
@@ -1344,25 +1344,37 @@ object NotaPiutangFrm: TNotaPiutangFrm
               1218
               26)
             object Label5: TLabel
-              Left = 577
+              Left = 674
               Top = 2
               Width = 40
               Height = 15
               Alignment = taCenter
               Anchors = [akLeft]
               AutoSize = False
-              Caption = 'QTY'
+              Caption = 'Pcs'
               Transparent = True
               Layout = tlCenter
             end
             object Label10: TLabel
-              Left = 665
+              Left = 762
               Top = 2
               Width = 22
               Height = 15
               Alignment = taCenter
               Anchors = [akLeft]
               AutoSize = False
+              Transparent = True
+              Layout = tlCenter
+            end
+            object Label9: TLabel
+              Left = 577
+              Top = 2
+              Width = 49
+              Height = 15
+              Alignment = taCenter
+              Anchors = [akLeft]
+              AutoSize = False
+              Caption = 'Karton'
               Transparent = True
               Layout = tlCenter
             end
@@ -1674,14 +1686,14 @@ object NotaPiutangFrm: TNotaPiutangFrm
               Width = 195
             end
             object edtqty: TcxTextEdit
-              Left = 617
+              Left = 714
               Top = 2
               TabOrder = 7
               OnKeyPress = edtqtyKeyPress
               Width = 48
             end
             object btnAmbilData: TSCButton
-              Left = 687
+              Left = 784
               Top = 2
               Width = 88
               Height = 23
@@ -1693,6 +1705,13 @@ object NotaPiutangFrm: TNotaPiutangFrm
               RoundWithParentColor = False
               Style = scbsCorel
               TabOrder = 8
+            end
+            object edtKarton: TcxTextEdit
+              Left = 626
+              Top = 2
+              TabOrder = 9
+              OnKeyPress = edtKartonKeyPress
+              Width = 48
             end
           end
         end
@@ -1742,7 +1761,7 @@ object NotaPiutangFrm: TNotaPiutangFrm
             Bands = <
               item
                 Caption = 'ITEM'
-                Width = 461
+                Width = 466
               end
               item
                 Width = 262
@@ -1802,8 +1821,9 @@ object NotaPiutangFrm: TNotaPiutangFrm
               Position.RowIndex = 0
             end
             object grddbtvFP_Detailqty_ot_biji: TcxGridDBBandedColumn
-              Caption = 'Qty'
+              Caption = 'Total Pcs'
               DataBinding.FieldName = 'qty_biji'
+              Visible = False
               HeaderAlignmentHorz = taCenter
               HeaderAlignmentVert = vaCenter
               Options.Filtering = False
@@ -1813,15 +1833,16 @@ object NotaPiutangFrm: TNotaPiutangFrm
               Options.FilteringPopupMultiSelect = False
               Options.Sorting = False
               Width = 52
-              Position.BandIndex = 1
-              Position.ColIndex = 0
+              Position.BandIndex = 2
+              Position.ColIndex = 2
               Position.RowIndex = 0
             end
             object grddbtvFP_Detailhrg_jual_lusin: TcxGridDBBandedColumn
-              Caption = 'Harga Jual'
+              Caption = 'Harga Jual/Pcs'
               DataBinding.FieldName = 'hrg'
               HeaderAlignmentHorz = taCenter
               HeaderAlignmentVert = vaCenter
+              Options.Editing = False
               Options.Filtering = False
               Options.FilteringFilteredItemsList = False
               Options.FilteringMRUItemsList = False
@@ -1830,7 +1851,7 @@ object NotaPiutangFrm: TNotaPiutangFrm
               Options.Sorting = False
               Width = 113
               Position.BandIndex = 1
-              Position.ColIndex = 2
+              Position.ColIndex = 0
               Position.RowIndex = 0
             end
             object grddbtvFP_Detailsub_total: TcxGridDBBandedColumn
@@ -1838,6 +1859,7 @@ object NotaPiutangFrm: TNotaPiutangFrm
               DataBinding.FieldName = 'sub_total'
               HeaderAlignmentHorz = taCenter
               HeaderAlignmentVert = vaCenter
+              Options.Editing = False
               Options.Filtering = False
               Options.FilteringFilteredItemsList = False
               Options.FilteringMRUItemsList = False
@@ -1855,20 +1877,10 @@ object NotaPiutangFrm: TNotaPiutangFrm
               GroupSummaryAlignment = taCenter
               HeaderAlignmentHorz = taCenter
               HeaderAlignmentVert = vaCenter
+              Options.Editing = False
               Width = 103
               Position.BandIndex = 2
               Position.ColIndex = 0
-              Position.RowIndex = 0
-            end
-            object grddbtvFP_DetailColumn1: TcxGridDBBandedColumn
-              Caption = 'Satuan'
-              DataBinding.FieldName = 'satuan_beli'
-              GroupSummaryAlignment = taCenter
-              HeaderAlignmentHorz = taCenter
-              HeaderAlignmentVert = vaCenter
-              Width = 97
-              Position.BandIndex = 1
-              Position.ColIndex = 1
               Position.RowIndex = 0
             end
             object grddbtvFP_DetailColumn3: TcxGridDBBandedColumn
@@ -1882,6 +1894,26 @@ object NotaPiutangFrm: TNotaPiutangFrm
               Width = 49
               Position.BandIndex = 0
               Position.ColIndex = 1
+              Position.RowIndex = 0
+            end
+            object grddbtvFP_DetailColumn4: TcxGridDBBandedColumn
+              Caption = 'Karton'
+              DataBinding.FieldName = 'qty_karton'
+              HeaderAlignmentHorz = taCenter
+              HeaderAlignmentVert = vaCenter
+              Options.Editing = False
+              Position.BandIndex = 0
+              Position.ColIndex = 4
+              Position.RowIndex = 0
+            end
+            object grddbtvFP_DetailColumn5: TcxGridDBBandedColumn
+              Caption = 'Pcs'
+              DataBinding.FieldName = 'qty_total_biji'
+              HeaderAlignmentHorz = taCenter
+              HeaderAlignmentVert = vaCenter
+              Options.Editing = False
+              Position.BandIndex = 0
+              Position.ColIndex = 5
               Position.RowIndex = 0
             end
           end
@@ -4689,41 +4721,59 @@ object NotaPiutangFrm: TNotaPiutangFrm
     Params = <>
     Left = 669
     Top = 10
+    object qryITEMnama_item: TStringField
+      DisplayLabel = 'Nama Item'
+      DisplayWidth = 50
+      FieldName = 'nama_item'
+      Size = 1020
+    end
     object qryITEMkd_item: TStringField
+      DisplayLabel = 'Kode Item'
+      DisplayWidth = 30
       FieldName = 'kd_item'
       Required = True
       Size = 200
     end
-    object qryITEMnama_item: TStringField
-      FieldName = 'nama_item'
-      Size = 1020
+    object qryITEMhrg_jual: TFloatField
+      DisplayLabel = 'Retail'
+      DisplayWidth = 15
+      FieldName = 'hrg_jual'
+      Required = True
+      DisplayFormat = '0.0,0'
+    end
+    object qryITEMhrg_jual_sm_grosir: TFloatField
+      DisplayLabel = 'Semi Grosir'
+      DisplayWidth = 15
+      FieldName = 'hrg_jual_sm_grosir'
+      DisplayFormat = '0.0,0'
+    end
+    object qryITEMhrg_jual_grosir: TFloatField
+      DisplayLabel = 'Grosir'
+      DisplayWidth = 15
+      FieldName = 'hrg_jual_grosir'
+      DisplayFormat = '0.0,0'
+    end
+    object qryITEMhrg_jual_grosir_besar: TFloatField
+      DisplayLabel = 'Grosir Besar'
+      DisplayWidth = 15
+      FieldName = 'hrg_jual_grosir_besar'
+      DisplayFormat = '0.0,0'
     end
     object qryITEMhrg_beli: TFloatField
       FieldName = 'hrg_beli'
       Required = True
-      DisplayFormat = ',0'
-    end
-    object qryITEMhrg_jual: TFloatField
-      FieldName = 'hrg_jual'
-      Required = True
+      Visible = False
       DisplayFormat = ',0'
     end
     object qryITEMsatuan_jual: TStringField
       FieldName = 'satuan_jual'
+      Visible = False
       Size = 80
     end
     object qryITEMrasio: TFloatField
       FieldName = 'rasio'
       Required = True
-    end
-    object qryITEMhrg_jual_sm_grosir: TFloatField
-      FieldName = 'hrg_jual_sm_grosir'
-    end
-    object qryITEMhrg_jual_grosir: TFloatField
-      FieldName = 'hrg_jual_grosir'
-    end
-    object qryITEMhrg_jual_grosir_besar: TFloatField
-      FieldName = 'hrg_jual_grosir_besar'
+      Visible = False
     end
   end
   object frAP_A5: TfrxReport
@@ -17383,7 +17433,7 @@ object NotaPiutangFrm: TNotaPiutangFrm
       end
       object MasterData1: TfrxMasterData
         FillType = ftBrush
-        Height = 34.015770000000010000
+        Height = 34.015770000000000000
         Top = 355.275820000000000000
         Width = 264.567100000000000000
         DataSet = frxDBDetail
@@ -17411,44 +17461,9 @@ object NotaPiutangFrm: TNotaPiutangFrm
             item
             end>
         end
-        object Memo37: TfrxMemoView
-          Top = 15.118119999999980000
-          Width = 60.262523330000000000
-          Height = 15.118120000000000000
-          StretchMode = smMaxHeight
-          DisplayFormat.FormatStr = ',#'
-          DisplayFormat.Kind = fkNumeric
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -9
-          Font.Name = 'Times New Roman'
-          Font.Style = []
-          HAlign = haRight
-          Memo.UTF8 = (
-            '[frxDBDetail."unit_price"]')
-          ParentFont = False
-        end
-        object Memo38: TfrxMemoView
-          Left = 58.488250000000000000
-          Top = 15.118119999999980000
-          Width = 11.338590000000000000
-          Height = 15.118120000000000000
-          StretchMode = smMaxHeight
-          DisplayFormat.FormatStr = ',#'
-          DisplayFormat.Kind = fkNumeric
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -9
-          Font.Name = 'Times New Roman'
-          Font.Style = []
-          HAlign = haCenter
-          Memo.UTF8 = (
-            'X')
-          ParentFont = False
-        end
         object Memo39: TfrxMemoView
-          Left = 158.953721110000000000
-          Top = 15.562564440000020000
+          Left = 158.347351110000000000
+          Top = 15.118120000000000000
           Width = 15.118120000000000000
           Height = 15.118120000000000000
           StretchMode = smMaxHeight
@@ -17467,9 +17482,8 @@ object NotaPiutangFrm: TNotaPiutangFrm
           ParentFont = False
         end
         object Memo40: TfrxMemoView
-          Left = 72.606370000000000000
-          Top = 15.118119999999980000
-          Width = 18.897650000000000000
+          Top = 15.118129760000000000
+          Width = 22.677180000000000000
           Height = 15.118120000000000000
           StretchMode = smMaxHeight
           DataSet = frxDBDetail
@@ -17481,14 +17495,13 @@ object NotaPiutangFrm: TNotaPiutangFrm
           Font.Height = -9
           Font.Name = 'Times New Roman'
           Font.Style = []
-          HAlign = haCenter
           Memo.UTF8 = (
-            '[frxDBDetail."qty"]')
+            '[frxDBDetail."qty_karton"]')
           ParentFont = False
         end
         object Memo41: TfrxMemoView
-          Left = 175.071841120000000000
-          Top = 15.118119999999980000
+          Left = 174.465471120000000000
+          Top = 15.118120000000000000
           Width = 77.601113330000000000
           Height = 15.118120000000000000
           StretchMode = smMaxHeight
@@ -17507,9 +17520,9 @@ object NotaPiutangFrm: TNotaPiutangFrm
           ParentFont = False
         end
         object Memo33: TfrxMemoView
-          Left = 92.666666670000000000
-          Top = 15.432900000000020000
-          Width = 11.338590000000000000
+          Left = 23.060296670000000000
+          Top = 15.118120000000000000
+          Width = 30.236240000000000000
           Height = 15.118120000000000000
           StretchMode = smMaxHeight
           DisplayFormat.FormatStr = ',#'
@@ -17519,15 +17532,14 @@ object NotaPiutangFrm: TNotaPiutangFrm
           Font.Height = -9
           Font.Name = 'Times New Roman'
           Font.Style = []
-          HAlign = haCenter
           Memo.UTF8 = (
-            '-')
+            'Karton')
           ParentFont = False
         end
         object Memo34: TfrxMemoView
-          Left = 105.000000000000000000
-          Top = 15.432900000000020000
-          Width = 52.703463330000000000
+          Left = 54.614100000000000000
+          Top = 15.118120000000000000
+          Width = 22.467223330000000000
           Height = 15.118120000000000000
           StretchMode = smMaxHeight
           DisplayFormat.FormatStr = ',#'
@@ -17537,9 +17549,25 @@ object NotaPiutangFrm: TNotaPiutangFrm
           Font.Height = -9
           Font.Name = 'Times New Roman'
           Font.Style = []
-          HAlign = haRight
           Memo.UTF8 = (
-            '[frxDBDetail."disc"]')
+            '[frxDBDetail."qty"]')
+          ParentFont = False
+        end
+        object Memo37: TfrxMemoView
+          Left = 78.763760000000000000
+          Top = 15.118129760000000000
+          Width = 18.687693330000000000
+          Height = 15.118120000000000000
+          StretchMode = smMaxHeight
+          DisplayFormat.FormatStr = ',#'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -9
+          Font.Name = 'Times New Roman'
+          Font.Style = []
+          Memo.UTF8 = (
+            'Pcs')
           ParentFont = False
         end
       end
@@ -18953,7 +18981,11 @@ object NotaPiutangFrm: TNotaPiutangFrm
   object LookItem: TwwLookupDialog
     Selected.Strings = (
       'nama_item'#9'50'#9'Nama Item'#9'F'
-      'kd_item'#9'30'#9'kd_item'#9'F')
+      'kd_item'#9'30'#9'Kode Item'#9'F'
+      'hrg_jual'#9'15'#9'Retail'#9'F'
+      'hrg_jual_sm_grosir'#9'15'#9'Semi Grosir'#9'F'
+      'hrg_jual_grosir'#9'15'#9'Grosir'#9'F'
+      'hrg_jual_grosir_besar'#9'15'#9'Grosir Besar'#9'F')
     GridTitleAlignment = taLeftJustify
     GridColor = clWhite
     GridOptions = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgPerfectRowFit]
@@ -19046,6 +19078,51 @@ object NotaPiutangFrm: TNotaPiutangFrm
     end
     object CheckPromoBqty_max: TFloatField
       FieldName = 'qty_max'
+    end
+  end
+  object qCheckJmlPcs: TZQuery
+    Connection = DM.conn
+    SQL.Strings = (
+      
+        'select * from master.fn_count_qty_pcs(:pKarton,:pPcs,:pkd_item) ' +
+        'as jml')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'pKarton'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'pPcs'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'pkd_item'
+        ParamType = ptUnknown
+      end>
+    Left = 585
+    Top = 185
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'pKarton'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'pPcs'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'pkd_item'
+        ParamType = ptUnknown
+      end>
+    object qCheckJmlPcsjml: TFloatField
+      FieldName = 'jml'
+      ReadOnly = True
     end
   end
 end

@@ -1,0 +1,35 @@
+DROP FUNCTION IF EXISTS master.fn_gen_disc_member_psn(numeric, character varying);
+
+CREATE OR REPLACE FUNCTION master.fn_gen_disc_member_psn(
+	ptotal numeric,
+	pno character varying)
+    RETURNS numeric
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+AS $BODY$
+DECLARE
+ vDiscPsn numeric;
+ x record;
+begin
+
+  vDiscPsn:=0;
+
+  for x in select a.* from master.mrekanan a
+  		where a.telephone=pno
+	    order by a.kd_rekanan
+		
+	loop
+	   if (x.total_min<=pTotal) and  (pTotal<=x.total_max) then 
+	      vDiscPsn=x.disc_member_psn	
+	      exit;		
+	   end if;
+	    
+	end loop;
+
+   return vDiscPsn::numeric;
+end;
+$BODY$;
+
+ALTER FUNCTION master.fn_gen_disc_member_psn(numeric, character varying)
+    OWNER TO ideas;

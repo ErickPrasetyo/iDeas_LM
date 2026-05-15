@@ -118,7 +118,9 @@ uses
   U_LapSetoran in 'U_LapSetoran.pas' {LapSetoranFrm},
   U_NotaOnline in 'U_NotaOnline.pas' {NotaOnlineFrm},
   U_NotaRetailTouch in 'U_NotaRetailTouch.pas' {NotaRetailTouchFrm},
-  U_NilaiPersediaan in 'U_NilaiPersediaan.pas' {NilaiPersediaanFrm};
+  U_NilaiPersediaan in 'U_NilaiPersediaan.pas' {NilaiPersediaanFrm},
+  U_RencanaPembelian in 'U_RencanaPembelian.pas' {RencanaPembelianFrm},
+  U_CariItem in 'U_CariItem.pas' {CariItemFrm};
 
 {$R *.res}
 

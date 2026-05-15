@@ -353,7 +353,7 @@ begin
     Master.Params.Clear;
     if RBSemua.Checked then begin
           s:= 'SELECT a.id_item, a.item_name, a.satuan, a.id_cat_item, a.id_parent, a.parent_name, b.rasio, a.stok_awal, a.total_in, a.total_ot, a.stok_akhir';
-          s:= s+' FROM inventory.fn_get_stok_jenis_warehouse('+dt0+','+dt1+') a';
+          s:= s+' FROM inventory.fn_get_stok_all('+dt0+','+dt1+') a';
           s:= s+' join master.item b on b.kd_item=a.id_item';
           s:= s+' ORDER BY a.id_item';
     end

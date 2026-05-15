@@ -76,7 +76,7 @@ object MainFrm: TMainFrm
         Progress.ShowBorder = False
         Progress.Stacked = False
         Style = psDate
-        Text = 'Saturday, Oct 11, 2025'
+        Text = 'Wednesday, May 06, 2026'
         TimeFormat = 'hh:mm:ss'
         Width = 150
       end
@@ -103,7 +103,7 @@ object MainFrm: TMainFrm
         Progress.ShowBorder = False
         Progress.Stacked = False
         Style = psTime
-        Text = '10:07:58'
+        Text = '07:35:46'
         TimeFormat = 'hh:mm:ss'
         Width = 60
       end
@@ -1201,6 +1201,11 @@ object MainFrm: TMainFrm
       ImageIndex = 22
       OnExecute = actNotaRetailTouchExecute
     end
+    object actRencanaPembelian: TAction
+      Category = 'Pengadaan'
+      Caption = 'Rencana Pembelian'
+      ImageIndex = 2
+    end
   end
   object MainMenu: TAdvMainMenu
     Images = DM.IconList
@@ -1390,6 +1395,11 @@ object MainFrm: TMainFrm
     object Pembelian1: TMenuItem
       Tag = 500
       Caption = 'Pembelian'
+      object RencanaPembelian1: TMenuItem
+        Tag = 505
+        Action = actRencanaPembelian
+        GroupIndex = 1
+      end
       object agihanPembelian1: TMenuItem
         Tag = 501
         Action = actPNotaHutang

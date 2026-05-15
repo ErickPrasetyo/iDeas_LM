@@ -492,7 +492,6 @@ type
     grddbtvFP_Detailhrg_jual_lusin: TcxGridDBBandedColumn;
     grddbtvFP_Detailsub_total: TcxGridDBBandedColumn;
     grddbtvFP_DetailColumn2: TcxGridDBBandedColumn;
-    grddbtvFP_DetailColumn1: TcxGridDBBandedColumn;
     grdlvlFP_Detail: TcxGridLevel;
     btnSave: TSCButton;
     btnCancel: TSCButton;
@@ -618,6 +617,12 @@ type
     grddbtvMasterColumn3: TcxGridDBColumn;
     grddbtvMasterColumn4: TcxGridDBColumn;
     qBrowseusr_ins: TStringField;
+    Label9: TLabel;
+    edtKarton: TcxTextEdit;
+    qCheckJmlPcs: TZQuery;
+    qCheckJmlPcsjml: TFloatField;
+    grddbtvFP_DetailColumn4: TcxGridDBBandedColumn;
+    grddbtvFP_DetailColumn5: TcxGridDBBandedColumn;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure actCloseExecute(Sender: TObject);
@@ -685,16 +690,18 @@ type
       Shift: TShiftState);
     procedure edtqtyKeyPress(Sender: TObject; var Key: Char);
     procedure Cetak1Click(Sender: TObject);
+    procedure edtKartonKeyPress(Sender: TObject; var Key: Char);
   private
     DBMode: TDBMode;
     { Private declarations }
     vjns_item, vjns_transaksi, vjudul, vlook, vrek_kredit, vrek_debet : string;
     vtag : integer;
-    vSubTotal, vDiscRP : Double;
+    vSubTotal, vDiscRP, vJmlPcs : Double;
     procedure UpdateView;
     function CheckEditRight(var msg: string): Boolean;
     function CheckDeleteRight(var msg: string): Boolean;
     procedure CloneDetail;
+    procedure CheckJumlahPcs;
     function CheckDetail(id_item: string): Boolean;
     procedure Bayar;
     function CheckPromoUang(kd_item: String; qty : Double): Boolean;
@@ -924,7 +931,7 @@ begin
       MemDetailno.AsString:= Detailnomor.AsString;
       MemDetailid_item.AsString:= Detailkd_item.AsString;
       MemDetaildescription.AsString:= Detailnama_item.AsString;
-      MemDetailqty.AsFloat:= Detailqty_biji.AsFloat;
+      MemDetailqty.AsFloat:= Detailqty_total_biji.AsFloat;
       MemDetailsatuan.AsString:= Detailsatuan_beli.AsString;
       MemDetailqty_karton.AsFloat:= Detailqty_karton.AsFloat;
       MemDetailqty_lusin.AsFloat:= Detailqty_lusin.AsFloat;
@@ -1083,6 +1090,8 @@ begin
       DM.MyMsg(mmError,'Error has been encountered !',E.Message)
     end;
   end;
+  edtKarton.Text:= '0';
+  edtqty.Text:= '0';
   UpdateView
 end;
 
@@ -1376,7 +1385,8 @@ end;
 
 procedure TNotaPiutangFrm.DetailCalcFields(DataSet: TDataSet);
 begin
-  Detailsub_total.AsFloat:= Detailqty_biji.AsFloat*(Detailhrg.AsFloat-Detaildisc_rp.AsFloat-(Detailhrg.AsFloat*Detaildisc_psn.AsFloat/100));
+  Detailsub_total.AsFloat:= Round(Detailqty_biji.AsFloat*Detailhrg.AsFloat);
+  //Detailsub_total.AsFloat:= Detailqty_biji.AsFloat*(Detailhrg.AsFloat-Detaildisc_rp.AsFloat-(Detailhrg.AsFloat*Detaildisc_psn.AsFloat/100));
 //  Detailsub_total.AsFloat:=(Detailqty_karton.AsFloat*Detailhrg_jual_karton.AsFloat)+
 //                        (Detailqty_lusin.AsFloat*Detailhrg_jual_lusin.AsFloat)+
 //                        (Detailqty_biji.AsFloat*Detailhrg.AsFloat)-
@@ -1739,7 +1749,9 @@ begin
       DM.MyMsg(mmError,'Error has been encountered !',E.Message)
     end;
   end;
-  UpdateView
+  UpdateView;
+  edtKarton.Text:= '0';
+  edtqty.Text:= '0';
 end;
 
 procedure TNotaPiutangFrm.edtItemKeyPress(Sender: TObject; var Key: Char);
@@ -1757,7 +1769,7 @@ begin
       if qItem.RecordCount=0 then begin
 
       end else begin
-        edtqty.SetFocus;
+        edtKarton.SetFocus;
 
       end;
 
@@ -1766,6 +1778,25 @@ begin
 
   if Key=#27 then
      btnSave.SetFocus;
+end;
+
+procedure TNotaPiutangFrm.CheckJumlahPcs;
+begin
+  vJmlPcs := 0;
+  try
+    qCheckJmlPcs.Close;
+    qCheckJmlPcs.Params.ParamByName('pKarton').Value:= StrToFloat(edtKarton.Text);
+    qCheckJmlPcs.Params.ParamByName('pPcs').Value:= StrToFloat(edtqty.Text);
+    qCheckJmlPcs.Params.ParamByName('pKd_item').Value:= edtItem.Text;
+    qCheckJmlPcs.Open;
+
+    vJmlPcs:= qCheckJmlPcsjml.AsFloat;
+
+  except
+    on E: Exception do
+      DM.MyMsg(mmError,'Error has been encountered !',E.Message)
+  end;
+
 end;
 
 procedure TNotaPiutangFrm.edtItemKeyDown(Sender: TObject; var Key: Word;
@@ -1779,19 +1810,24 @@ procedure TNotaPiutangFrm.edtqtyKeyPress(Sender: TObject; var Key: Char);
 begin
 
   if Key=#13 then begin
-    if CheckPromoUang(edtItem.Text, StrToFloat(edtqty.Text)) then begin
+    CheckJumlahPcs;
+
+    if CheckPromoUang(edtItem.Text, vJmlPcs) then begin
        if CheckPromoBdiv.AsFloat>0 then begin
           Detail.Append;
           Detailkd_item.AsString:= qItemkd_item.AsString;
           Detaildiskripsi.AsString:= qItemnama_item.AsString;
           Detailhrg.AsFloat:= qItemhrg_jual.AsFloat;
           Detailsatuan_beli.AsString:= qItemsatuan_jual.AsString;
-          Detailqty_biji.AsFloat:= StrToFloat(edtqty.Text);
+          Detailqty_karton.AsFloat:= StrToFloat(edtKarton.Text);
+          Detailqty_total_biji.AsFloat:= StrToFloat(edtqty.Text);
+          Detailqty_biji.AsFloat:= vJmlPcs;
           Detailid_warehouse.AsString:= qItemlok_rak.AsString;
           Detaildisc_rp.AsFloat:= CheckPromoBnilai_promo.AsFloat*CheckPromoBdiv.AsFloat;
           Detail.Post;
           edtItem.Text:='';
-          edtqty.Text:='';
+          edtqty.Text:='0';
+          edtKarton.Text:= '0';
           edtItem.SetFocus;
        end else begin
           Detail.Append;
@@ -1799,24 +1835,29 @@ begin
           Detaildiskripsi.AsString:= qItemnama_item.AsString;
           Detailhrg.AsFloat:= qItemhrg_jual.AsFloat;
           Detailsatuan_beli.AsString:= qItemsatuan_jual.AsString;
-          Detailqty_biji.AsFloat:= StrToFloat(edtqty.Text);
+          Detailqty_karton.AsFloat:= StrToFloat(edtKarton.Text);
+          Detailqty_total_biji.AsFloat:= StrToFloat(edtqty.Text);
+          Detailqty_biji.AsFloat:= vJmlPcs;
           Detailid_warehouse.AsString:= qItemlok_rak.AsString;
           Detaildisc_rp.AsFloat:= 0;
           Detail.Post;
           edtItem.Text:='';
-          edtqty.Text:='';
+          edtqty.Text:='0';
+          edtKarton.Text:='0';
           edtItem.SetFocus;
        end
     end
     else
-    if CheckPromoBarang(edtItem.Text, StrToFloat(edtqty.Text)) then begin
+    if CheckPromoBarang(edtItem.Text, vJmlPcs) then begin
       if CheckPromoBdiv.AsFloat>0 then begin
           Detail.Append;
           Detailkd_item.AsString:= qItemkd_item.AsString;
           Detaildiskripsi.AsString:= qItemnama_item.AsString;
           Detailhrg.AsFloat:= qItemhrg_jual.AsFloat;
           Detailsatuan_beli.AsString:= qItemsatuan_jual.AsString;
-          Detailqty_biji.AsFloat:= StrToFloat(edtqty.Text);
+          Detailqty_karton.AsFloat:= StrToFloat(edtKarton.Text);
+          Detailqty_total_biji.AsFloat:= StrToFloat(edtqty.Text);
+          Detailqty_biji.AsFloat:= vJmlPcs;
           Detailid_warehouse.AsString:= qItemlok_rak.AsString;
           Detaildisc_rp.AsFloat:= 0;
           Detail.Post;
@@ -1836,6 +1877,8 @@ begin
                 Detailqty_biji.AsFloat:= CheckPromoBqty_item_promo.AsFloat*CheckPromoBdiv.AsFloat;
 
             Detailsatuan_beli.AsString:= qItemsatuan_jual.AsString;
+            Detailqty_karton.AsFloat:= 0;
+            Detailqty_total_biji.AsFloat:= 0;
             Detailid_warehouse.AsString:= qItemlok_rak.AsString;
             Detailispromo.AsString:= '1';
             Detaildisc_rp.AsFloat:= 0;
@@ -1846,7 +1889,8 @@ begin
           end;
 
           edtItem.Text:='';
-          edtqty.Text:='';
+          edtqty.Text:='0';
+          edtKarton.Text:='0';
           edtItem.SetFocus;
       end else begin
 
@@ -1858,12 +1902,15 @@ begin
           Detaildiskripsi.AsString:= qItemnama_item.AsString;
           Detailhrg.AsFloat:= qItemhrg_jual.AsFloat;
           Detailsatuan_beli.AsString:= qItemsatuan_jual.AsString;
-          Detailqty_biji.AsFloat:= StrToFloat(edtqty.Text);
+          Detailqty_karton.AsFloat:= StrToFloat(edtKarton.Text);
+          Detailqty_total_biji.AsFloat:= StrToFloat(edtqty.Text);
+          Detailqty_biji.AsFloat:= vJmlPcs;
           Detailid_warehouse.AsString:= qItemlok_rak.AsString;
           Detaildisc_rp.AsFloat:= 0;
           Detail.Post;
           edtItem.Text:='';
-          edtqty.Text:='';
+          edtqty.Text:='0';
+          edtKarton.Text:='0';
           edtItem.SetFocus;
     end
 
@@ -1987,6 +2034,13 @@ begin
   frPOS80.PrepareReport;
   frPOS80.PrintOptions.ShowDialog:= False;
   frPOS80.Print;
+end;
+
+procedure TNotaPiutangFrm.edtKartonKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  if Key = #13 then
+    edtqty.SetFocus;
 end;
 
 end.

@@ -822,7 +822,7 @@ begin
 
    end;
 
-   if pgcMaster.ActivePageIndex=6 then begin
+   if pgcMaster.ActivePageIndex=5 then begin
       if RepDiscMember.RecordCount=0 then
          Exit;
 

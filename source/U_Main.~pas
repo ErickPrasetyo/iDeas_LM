@@ -203,6 +203,8 @@ type
     Online1: TMenuItem;
     actNotaRetailTouch: TAction;
     RetailTouchScreen1: TMenuItem;
+    actRencanaPembelian: TAction;
+    RencanaPembelian1: TMenuItem;
     procedure FormCreate(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure actDatabaseConnectionExecute(Sender: TObject);
@@ -341,7 +343,7 @@ uses AdvStyleIF, U_DM, U_AppLog, U_Supplier, U_Customer,
   U_List_FakturPenjualan, U_ImportPembelianMayora, U_NotaRetail, U_MGudang,
   U_LapPembelian, U_LapUmurHutang, U_MutasiStok, U_LapPenjualan,
   U_LapKasirPerShift, U_KertasKerja, U_ItemCheck, U_LapSetoran,
-  U_NotaOnline, U_NotaRetailTouch, U_NilaiPersediaan;
+  U_NotaOnline, U_NotaRetailTouch, U_NilaiPersediaan, U_RencanaPembelian;
 
 {$R *.dfm}
 
@@ -1132,7 +1134,7 @@ end;
 procedure TMainFrm.actGKartuPersediaanExecute(Sender: TObject);
 begin
   if not isWindowsFound('TNilaiPersediaanFrm') then begin
-      U_NilaiPersediaan.ShowForm('',711);
+      U_NilaiPersediaan.ShowForm('Laporan Nilai Persediaan', '', 'GDU','BB',711);
       MDITabset.AddTab(NilaiPersediaanFrm);
   end;
 end;
