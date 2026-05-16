@@ -327,12 +327,11 @@ object LapPenjualanFrm: TLapPenjualanFrm
     Top = 80
     Width = 980
     Height = 472
-    ActivePage = tsDiscMember
+    ActivePage = tsRepLaba
     Align = alClient
     TabOrder = 5
-    ClientRectBottom = 468
-    ClientRectLeft = 4
-    ClientRectRight = 976
+    ClientRectBottom = 472
+    ClientRectRight = 980
     ClientRectTop = 24
     object tabAP: TcxTabSheet
       Caption = 'Rekap Penjualan Per Faktur'
@@ -507,8 +506,8 @@ object LapPenjualanFrm: TLapPenjualanFrm
       object cxGrid1: TcxGrid
         Left = 0
         Top = 0
-        Width = 972
-        Height = 444
+        Width = 980
+        Height = 448
         Align = alClient
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
@@ -1195,7 +1194,7 @@ object LapPenjualanFrm: TLapPenjualanFrm
       object grdDiscMember: TcxGrid
         Left = 0
         Top = 0
-        Width = 972
+        Width = 980
         Height = 256
         Align = alTop
         Font.Charset = ANSI_CHARSET
@@ -1372,7 +1371,7 @@ object LapPenjualanFrm: TLapPenjualanFrm
       object AdvPanel2: TAdvPanel
         Left = 0
         Top = 256
-        Width = 972
+        Width = 980
         Height = 40
         Align = alTop
         BevelOuter = bvNone
@@ -1435,8 +1434,8 @@ object LapPenjualanFrm: TLapPenjualanFrm
       object grdDiscMemberDetail: TcxGrid
         Left = 0
         Top = 296
-        Width = 972
-        Height = 148
+        Width = 980
+        Height = 152
         Align = alClient
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText

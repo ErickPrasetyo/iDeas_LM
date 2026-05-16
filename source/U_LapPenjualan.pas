@@ -515,23 +515,28 @@ begin
      1: begin
         dt0:= FormatDateTime('dd/mm/yyyy',dtpStart.Date);
         dt1:= FormatDateTime('dd/mm/yyyy',dtpEnd.Date);
-        edtItem.Text:= '';
 
-        Detail.Close;
-        Detail.SQL.Clear;
-        Detail.Params.Clear;
-        s:= 'select a.no_nota, a.dt_nota, a.disc_total, a.total, a.shift, a.usr_upd, nd.kd_item, c.nama_item, nd.hrg, nd.qty_biji, c.satuan_jual, '+
-        'nd.hrg*nd.qty_biji as sub_total, c.hrg_beli, (nd.hrg-c.hrg_beli)*nd.qty_biji as margin_penjualan '+
-        'from transaksi.nota_detail nd '+
-        'left join transaksi.nota a on a.id_nota=nd.id_nota '+
-        'left join master.item c on c.kd_item=nd.kd_item '+
-        'where id_trans='+QuotedStr('201')+' and a.ispost='+QuotedStr('1')+' and a.iscancel='+QuotedStr('0')+' and a.isdelete='+QuotedStr('0')+' '+
-        'and nd.ispromo='+QuotedStr('0')+' '+
-        'and a.dt_nota between to_timestamp('+QuotedStr(dt0)+','+QuotedStr('dd/mm/yyyy')+') and to_timestamp('+QuotedStr(dt1)+','+QuotedStr('dd/mm/yyyy')+') '+
-        'order by a.id_nota asc';
-        Detail.SQL.Add(s);
-        Detail.Open;
-        UpdateView(Detail);
+        if edtItem.Text= '' then begin
+
+          Detail.Close;
+          Detail.SQL.Clear;
+          Detail.Params.Clear;
+          s:= 'select a.no_nota, a.dt_nota, a.disc_total, a.total, a.shift, a.usr_upd, nd.kd_item, c.nama_item, nd.hrg, nd.qty_biji, c.satuan_jual, '+
+          'nd.hrg*nd.qty_biji as sub_total, c.hrg_beli, (nd.hrg-c.hrg_beli)*nd.qty_biji as margin_penjualan '+
+          'from transaksi.nota_detail nd '+
+          'left join transaksi.nota a on a.id_nota=nd.id_nota '+
+          'left join master.item c on c.kd_item=nd.kd_item '+
+          'where id_trans='+QuotedStr('201')+' and a.ispost='+QuotedStr('1')+' and a.iscancel='+QuotedStr('0')+' and a.isdelete='+QuotedStr('0')+' '+
+          'and nd.ispromo='+QuotedStr('0')+' '+
+          'and a.dt_nota between to_timestamp('+QuotedStr(dt0)+','+QuotedStr('dd/mm/yyyy')+') '+
+          'and to_timestamp('+QuotedStr(dt1)+','+QuotedStr('dd/mm/yyyy')+') + interval '+QuotedStr('23 hour 59 minute 59 sec')+
+          ' order by a.id_nota asc';
+          Detail.SQL.Add(s);
+          Detail.Open;
+          UpdateView(Detail);
+
+        end;
+
      end;
      2: begin OpenDataset(qRepLaba);
                 UpdateView(qRepLaba);

@@ -1,6 +1,6 @@
 object CariItemFrm: TCariItemFrm
-  Left = 460
-  Top = 204
+  Left = 572
+  Top = 217
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Form Pencarian'
@@ -110,15 +110,15 @@ object CariItemFrm: TCariItemFrm
       ImageIndex = 0
       object grdDokter: TcxGrid
         Left = 0
-        Top = 48
+        Top = 28
         Width = 559
-        Height = 189
+        Height = 209
         Align = alClient
         TabOrder = 1
         object grddbtvDokter: TcxGridDBTableView
           OnDblClick = btnSaveClick
           NavigatorButtons.ConfirmDelete = False
-          DataController.DataSource = dsqRekanan
+          DataController.DataSource = dsItem
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <>
           DataController.Summary.SummaryGroups = <>
@@ -136,7 +136,7 @@ object CariItemFrm: TCariItemFrm
           Styles.Indicator = cxStyle5
           object grddbtvDokternama_dokter: TcxGridDBColumn
             Caption = 'Nama'
-            DataBinding.FieldName = 'nama_rekanan'
+            DataBinding.FieldName = 'nama_item'
             HeaderAlignmentHorz = taCenter
             HeaderAlignmentVert = vaCenter
             Options.Editing = False
@@ -145,11 +145,11 @@ object CariItemFrm: TCariItemFrm
             Options.FilteringMRUItemsList = False
             Options.FilteringPopup = False
             Options.FilteringPopupMultiSelect = False
-            Width = 355
+            Width = 404
           end
           object grddbtvDokterkd_rekanan: TcxGridDBColumn
             Caption = 'Kode'
-            DataBinding.FieldName = 'kd_rekanan'
+            DataBinding.FieldName = 'kd_item'
             HeaderAlignmentHorz = taCenter
             HeaderAlignmentVert = vaCenter
             Options.Editing = False
@@ -158,6 +158,7 @@ object CariItemFrm: TCariItemFrm
             Options.FilteringMRUItemsList = False
             Options.FilteringPopup = False
             Options.FilteringPopupMultiSelect = False
+            Width = 151
           end
         end
         object grdDokterLevel1: TcxGridLevel
@@ -168,7 +169,7 @@ object CariItemFrm: TCariItemFrm
         Left = 0
         Top = 0
         Width = 559
-        Height = 48
+        Height = 28
         Align = alTop
         BevelOuter = bvNone
         Color = 12318971
@@ -210,45 +211,37 @@ object CariItemFrm: TCariItemFrm
         StatusBar.ColorTo = 5459275
         StatusBar.GradientDirection = gdVertical
         FullHeight = 40
-        object edtRekanan: TcxTextEdit
-          Left = 58
-          Top = 25
-          TabOrder = 0
-          OnKeyPress = edtRekananKeyPress
-          Width = 230
-        end
-        object lblNama: TcxLabel
-          Left = 9
-          Top = 27
-          Caption = 'Nama  :'
-          Transparent = True
-        end
-        object btnCariRekanan: TSCButton
-          Left = 292
-          Top = 9
+        object btnCari: TSCButton
+          Left = 326
+          Top = 2
           Width = 72
-          Height = 25
+          Height = 21
           Caption = 'Cari'
           Images = DM.ImageList1
           ImageIndex = 7
           RoundColor = clWhite
           RoundWithParentColor = False
           Style = scbsOffice2003
-          TabOrder = 1
-          OnClick = btnCariRekananClick
+          TabOrder = 0
+          OnClick = btnCariClick
         end
-        object edtKode: TcxTextEdit
-          Left = 57
+        object edtCari: TcxTextEdit
+          Left = 112
           Top = 2
-          TabOrder = 3
+          Properties.CharCase = ecUpperCase
+          TabOrder = 1
           OnKeyPress = edtRekananKeyPress
-          Width = 230
+          Width = 208
         end
-        object cxLabel1: TcxLabel
+        object cbFilter: TcxComboBox
           Left = 9
-          Top = 4
-          Caption = 'Kode  :'
-          Transparent = True
+          Top = 2
+          Properties.Items.Strings = (
+            'KODE'
+            'NAMA')
+          Properties.MaxLength = 0
+          TabOrder = 2
+          Width = 102
         end
       end
     end
@@ -258,42 +251,6 @@ object CariItemFrm: TCariItemFrm
     AppStyle = DM.apsMain
     Left = 329
     Top = 104
-  end
-  object qRekanan: TZQuery
-    Connection = DM.conn
-    SQL.Strings = (
-      'SELECT kd_rekanan, nama_rekanan'
-      'FROM master.mrekanan'
-      'WHERE jenis=:pjenis'
-      'ORDER BY nama_rekanan')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'pjenis'
-        ParamType = ptUnknown
-      end>
-    Left = 358
-    Top = 102
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'pjenis'
-        ParamType = ptUnknown
-      end>
-    object qRekanankd_rekanan: TStringField
-      FieldName = 'kd_rekanan'
-      Required = True
-    end
-    object qRekanannama_rekanan: TStringField
-      FieldName = 'nama_rekanan'
-      Required = True
-      Size = 255
-    end
-  end
-  object dsqRekanan: TDataSource
-    DataSet = qRekanan
-    Left = 386
-    Top = 103
   end
   object SR: TcxStyleRepository
     Left = 300
@@ -362,5 +319,30 @@ object CariItemFrm: TCariItemFrm
       Styles.BandHeader = cxStyle1
       BuiltIn = True
     end
+  end
+  object qItem: TZQuery
+    Connection = DM.conn
+    SQL.Strings = (
+      'select kd_item, nama_item'
+      'from master.item'
+      'where isdetail = '#39'1'#39
+      'order by nama_item asc')
+    Params = <>
+    Left = 102
+    Top = 102
+    object qItemkd_item: TStringField
+      FieldName = 'kd_item'
+      Required = True
+      Size = 200
+    end
+    object qItemnama_item: TStringField
+      FieldName = 'nama_item'
+      Size = 1020
+    end
+  end
+  object dsItem: TDataSource
+    DataSet = qItem
+    Left = 130
+    Top = 103
   end
 end

@@ -33,7 +33,7 @@ type
     frxXMLExport1: TfrxXMLExport;
     frxRTFExport1: TfrxRTFExport;
     frxPDFExport1: TfrxPDFExport;
-    frxAPList: TfrxReport;
+    frxReport: TfrxReport;
     kmtInfo: TkbmMemTable;
     kmtInfouser_id: TStringField;
     kmtInfouser_name: TStringField;
@@ -64,7 +64,6 @@ type
     kmtInfoalamat: TStringField;
     kmtInfofax_telp: TStringField;
     kmtInfokota_negara: TStringField;
-    kmtInfofilter: TStringField;
     kmtInfoprepared_name: TStringField;
     SCPanel3: TSCPanel;
     cxLabel30: TcxLabel;
@@ -97,8 +96,19 @@ type
     Mastersaran_order: TFloatField;
     Masterorder: TFloatField;
     grddbtvRencanaPembelianColumn8: TcxGridDBColumn;
+    memMaster: TkbmMemTable;
+    frxdbMaster: TfrxDBDataset;
+    memMasterid_item: TStringField;
+    memMasteritem_name: TStringField;
+    memMastersatuan: TStringField;
+    memMasterqty_jual: TStringField;
+    memMasterstok_gdu: TStringField;
+    memMasterstok_display: TStringField;
+    memMastertotal_stok: TStringField;
+    memMastersaran_order: TStringField;
+    memMasterorder: TStringField;
+    kmtInfologo: TBlobField;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure btnRefreshClick(Sender: TObject);
     procedure btnCloseClick(Sender: TObject);
     procedure btnPrintClick(Sender: TObject);
     procedure btnExportClick(Sender: TObject);
@@ -111,8 +121,8 @@ type
     namamenu, dt0, dt1 : string;
     vtag : integer;
     procedure UpdateView(ds : TDataSet);
-    procedure PrintOption(opt: string; val : String);
     procedure PrepareForPrint(pCap : String);
+    procedure OpenDataSet(kdItem :String);
 
   public
     { Public declarations }
@@ -178,11 +188,6 @@ begin
   end;
 end;
 
-procedure TRencanaPembelianFrm.btnRefreshClick(Sender: TObject);
-begin
-//  btnOKClick(nil);
-end;
-
 procedure TRencanaPembelianFrm.btnCloseClick(Sender: TObject);
 begin
   Close;
@@ -200,85 +205,61 @@ begin
 
   kmtInfouser_id.AsString := DM.UserConnect;
   kmtInfouser_name.AsString := DM.UserConnect;
-  kmtInfoperiode.AsString := 'Periode : '+FormatDateTime('dd mmm yyyy',dtFilter.Date)+' s/d '+FormatDateTime('dd mmm yyyy',dtFilter.Date);
+  kmtInfoperiode.AsString := 'Pada Periode : '+FormatDateTime('dd mmm yyyy',dtFilter.Date)+' s/d '+FormatDateTime('dd mmm yyyy', IncMonth(dtFilter.Date, 1));
   kmtInfodt_now.AsString := FormatDateTime('dd mmm yyyy',dm.vSysDatedt_server.AsDateTime);
   kmtInfopnamamenu.AsString := UpperCase(pCap);
   kmtInfonama_perusahaan.AsString:= DM.Perusahaanperusahaan.AsString;
   kmtInfoalamat.AsString:= DM.Perusahaanalamat.AsString;
   kmtInfofax_telp.AsString:= 'Telp.: '+DM.Perusahaantelepon.AsString+', Fax.: '+DM.Perusahaanfax.AsString;
   kmtInfokota_negara.AsString:= UpperCase(DM.Perusahaankota.AsString);
-  kmtInfofilter.AsString:= 'SUPPLIER : '+DM.L_Suppliernama_rekanan.AsString;
+  kmtInfologo.LoadFromFile('IMAGES/LOGO.JPG');
   kmtInfo.Post;
 
 end;
 
 procedure TRencanaPembelianFrm.btnPrintClick(Sender: TObject);
-var f : TPrintOptionFrm;
-    printMode : string;
 begin
 
-//   if pgcMaster.ActivePageIndex=0 then begin
-////       try
-////         f:= TPrintOptionFrm.Create(Application);
-////         f.vMode:= 1;
-////         if f.ShowModal=mrOK then begin
-////             if f.RB_AP_SEMUA.Checked then begin
-////                PrintOption('SO','');
-////             end
-////             else
-////             if f.RB_AP_SUPPLIER.Checked then begin
-////                PrintOption('OO', Trim(F.ESUPPLIER.Text));
-////             end;
-////         end;
-////       finally
-////         f.Free;
-////       end;
-//      PrepareForPrint('Rekap Pembelian Per Faktur');
-//      try
-//        PrintOption('SO','');
-//      finally
-//      end;
-//   end
-//   else
-//   if pgcMaster.ActivePageIndex=1 then begin
-//      PrepareForPrint('Rekap Piutang Per Supplier');
-//      try
-//        qrySUM_SUP.DisableControls;
-//        qrySUM_SUP.First;
-//        frxSUM.ShowReport();
-//      finally
-//        qrySUM_SUP.First;
-//        qrySUM_SUP.EnableControls;
-//      end;
-//   end;
-end;
+  if Master.RecordCount=0 then
+     Exit;
 
-procedure TRencanaPembelianFrm.PrintOption(opt: string; val : String);
-var s, dt1, dt2 : String;
-begin
-// dt1:= FormatDateTime('dd/mm/yyyy',dtpStart.Date);
-// dt2:= FormatDateTime('dd/mm/yyyy',dtpEnd.Date);
-//
-// s:= 'SELECT a.* ';
-// s:= s+' FROM transaksi.fn_rep_ap_list_2('+QuotedStr(dt1)+','+QuotedStr(dt2)+') a';
-//
-// if opt='SO' then begin   // SEMUA NOTA group by sales
-//    s:= s+' ORDER BY a.kd_rekanan';
-//    DM.PrepareQuery(qryPrint);
-//    DM.OpenQuery(qryPrint,s);
-//    PrepareForPrint('Rekap Pembelian');
-//    frxAPList.ShowReport();
-// end
-// else
-// if opt='OO' then begin   // PER SUPPLIER
-//    s:= s+' WHERE a.kd_rekanan='+QuotedStr(val);
-//    DM.PrepareQuery(qryPrint);
-//    DM.OpenQuery(qryPrint,s);
-//    qryPrintDetail.Close;
-//    qryPrintDetail.Open;
-//    PrepareForPrint('Rekap Pembelian');
-//    frxAPListdetail.ShowReport();
-// end;
+  PrepareForPrint('RENCANA PEMBELIAN BARANG');
+
+  Master.DisableControls;
+
+  try
+
+    memMaster.Close;
+    memMaster.EmptyTable;
+    memMaster.Open;
+
+    Master.First;
+    while not Master.Eof do
+    begin
+
+      memMaster.Append;
+      memMasterid_item.AsString:= Masterid_item.AsString;
+      memMasteritem_name.AsString:= Masteritem_name.AsString;
+      memMastersatuan.AsString:= Mastersatuan.AsString;
+      memMasterqty_jual.AsString:= FloatToStr(Masterqty_jual.AsFloat);
+      memMasterstok_gdu.AsString:= FloatToStr(Masterstok_gdu.AsFloat);
+      memMasterstok_display.AsString:= FloatToStr(Masterstok_display.AsFloat);
+      memMastertotal_stok.AsString:= FloatToStr(Mastertotal_stok.AsFloat);
+      memMastersaran_order.AsString:= FloatToStr(Mastersaran_order.AsFloat);
+      memMasterorder.AsString:= FloatToStr(Masterorder.AsFloat);
+      memMaster.Post;
+      Master.Next;
+
+    end;
+
+  except
+    on E:Exception do
+    DM.MyMsg(mmError,'Error has been encountered !',E.Message)
+  end;
+
+  Master.EnableControls;
+
+  frxReport.ShowReport;
 
 end;
 
@@ -287,31 +268,20 @@ var
 excel : Variant;
 appPath, ttl :string;
 begin
-//   if pgcMaster.ActivePageIndex=0 then begin
-//
-//      if Master.RecordCount=0 then
-//         Exit;
-//
-//      if OpenDialog.Execute then begin
-//         appPath:= ExtractFilePath(OpenDialog.InitialDir);
-//         ttl:= OpenDialog.FileName;
-//
-//         if (Master.Active) and (Master.RecordCount>0) then begin
-//           ExportGridToExcel(appPath+ttl,grdAP_List,true,true,true,'xls');
-//
-//         end;
-//
-//      end;
-//
-//   end else
-//
-//   if pgcMaster.ActivePageIndex=1 then begin
-//      DM.Export2Excel(qrySUM_SUP,'rekap_per_suplier');
-//   end else
-//
-//   if pgcMaster.ActivePageIndex=2 then begin
-//      DM.Export2Excel(qryPeriode,'rekap_per_periode');
-//   end
+
+  if Master.RecordCount=0 then
+     Exit;
+
+  if OpenDialog.Execute then begin
+     appPath:= ExtractFilePath(OpenDialog.InitialDir);
+     ttl:= OpenDialog.FileName;
+
+     if (Master.Active) and (Master.RecordCount>0) then begin
+       ExportGridToExcel(appPath+ttl,grdRencanaPembelian,true,true,true,'xls');
+
+     end;
+
+  end;
 
 end;
 
@@ -322,6 +292,7 @@ begin
 
   try
     f:= TCariItemFrm.Create(Application);
+    f.vMode:= 0;
     if f.ShowModal=mrOK then begin
 
     end;
@@ -351,14 +322,31 @@ begin
 end;
 
 procedure TRencanaPembelianFrm.SCButton1Click(Sender: TObject);
+begin
+  OpenDataSet('');
+end;
+
+procedure TRencanaPembelianFrm.OpenDataSet(kdItem: String);
 var
   s: String;
 begin
 
-  DM.PrepareQuery(Master);
-  s:= 'select * from inventory.fn_get_plan_order('+QuotedStr(dt0)+','+QuotedStr(dt1)+') order by item_name asc';
-  DM.OpenQuery(Master, s);
+  try
+  
+    if kdItem <> '' then begin
+       s:= 'select * from inventory.fn_get_plan_order('+QuotedStr(dt0)+','+QuotedStr(dt1)+') where id_item = '+QuotedStr(kdItem)+
+           ' order by item_name asc';
+    end else begin
+       s:= 'select * from inventory.fn_get_plan_order('+QuotedStr(dt0)+','+QuotedStr(dt1)+')'+
+           ' order by item_name asc';
+    end;
 
+    DM.PrepareQuery(Master);
+    DM.OpenQuery(Master, s);
+  except
+    on E:Exception do
+    DM.MyMsg(mmError,'Error has been encountered !',E.Message)
+  end
 end;
 
 end.

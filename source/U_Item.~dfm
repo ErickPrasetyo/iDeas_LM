@@ -1,6 +1,6 @@
 object ItemFrm: TItemFrm
-  Left = 222
-  Top = 185
+  Left = 154
+  Top = 115
   Width = 1120
   Height = 605
   Caption = 'Master Items'
@@ -1390,6 +1390,7 @@ object ItemFrm: TItemFrm
           Font.Name = 'Tahoma'
           Font.Style = []
           ParentFont = False
+          Visible = False
           BlinkIntervalOff = 600
           BlinkIntervalOn = 600
           BevelWidth = 0
@@ -1747,6 +1748,7 @@ object ItemFrm: TItemFrm
           StyleFocused.BorderStyle = ebsThick
           StyleHot.BorderStyle = ebsThick
           TabOrder = 24
+          Visible = False
           OnKeyPress = EditKeyPress
           Width = 68
         end

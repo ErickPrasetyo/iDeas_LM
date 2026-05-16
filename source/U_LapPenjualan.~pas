@@ -527,8 +527,9 @@ begin
         'left join master.item c on c.kd_item=nd.kd_item '+
         'where id_trans='+QuotedStr('201')+' and a.ispost='+QuotedStr('1')+' and a.iscancel='+QuotedStr('0')+' and a.isdelete='+QuotedStr('0')+' '+
         'and nd.ispromo='+QuotedStr('0')+' '+
-        'and a.dt_nota between to_timestamp('+QuotedStr(dt0)+','+QuotedStr('dd/mm/yyyy')+') and to_timestamp('+QuotedStr(dt1)+','+QuotedStr('dd/mm/yyyy')+') '+
-        'order by a.id_nota asc';
+        'and a.dt_nota between to_timestamp('+QuotedStr(dt0)+','+QuotedStr('dd/mm/yyyy')+') '+
+        'and to_timestamp('+QuotedStr(dt1)+','+QuotedStr('dd/mm/yyyy')+') + interval '+QuotedStr('23 hour 59 minute 59 sec')+
+        ' order by a.id_nota asc';
         Detail.SQL.Add(s);
         Detail.Open;
         UpdateView(Detail);

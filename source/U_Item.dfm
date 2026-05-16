@@ -762,7 +762,7 @@ object ItemFrm: TItemFrm
     Top = 81
     Width = 1104
     Height = 445
-    ActivePage = tsDetail
+    ActivePage = tsBrowse
     Align = alClient
     Style = 8
     TabOrder = 3
@@ -777,8 +777,8 @@ object ItemFrm: TItemFrm
       object dbtlMaster: TcxDBTreeList
         Left = 0
         Top = 0
-        Width = 1194
-        Height = 393
+        Width = 1104
+        Height = 382
         Align = alClient
         Bands = <
           item
@@ -958,8 +958,8 @@ object ItemFrm: TItemFrm
       end
       object pnlSearch: TSCPanel
         Left = 0
-        Top = 393
-        Width = 1194
+        Top = 382
+        Width = 1104
         Height = 39
         Align = alBottom
         Color = 15986925

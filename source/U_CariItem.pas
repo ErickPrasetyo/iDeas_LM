@@ -10,13 +10,12 @@ uses
   cxTextEdit, cxGridLevel, cxGridCustomTableView, cxGridDBTableView,
   cxClasses, cxControls, cxGridCustomView, cxGrid, cxPC, SCControl,
   SCStdControls, ExtCtrls, AdvPanel, cxGridBandedTableView, cxLookAndFeels,
-  cxLookAndFeelPainters, dxSkinsCore, dxSkinscxPCPainter;
+  cxLookAndFeelPainters, dxSkinsCore, dxSkinscxPCPainter, cxMaskEdit,
+  cxDropDownEdit;
 
 type
   TCariItemFrm = class(TForm)
     AFS: TAdvFormStyler;
-    qRekanan: TZQuery;
-    dsqRekanan: TDataSource;
     AdvPanel1: TAdvPanel;
     btnCancel: TSCButton;
     btnSave: TSCButton;
@@ -27,11 +26,7 @@ type
     grdDokterLevel1: TcxGridLevel;
     pnlHeader: TAdvPanel;
     grddbtvDokternama_dokter: TcxGridDBColumn;
-    edtRekanan: TcxTextEdit;
-    lblNama: TcxLabel;
-    btnCariRekanan: TSCButton;
-    qRekanankd_rekanan: TStringField;
-    qRekanannama_rekanan: TStringField;
+    btnCari: TSCButton;
     grddbtvDokterkd_rekanan: TcxGridDBColumn;
     SR: TcxStyleRepository;
     cxStyle1: TcxStyle;
@@ -41,15 +36,19 @@ type
     cxStyle5: TcxStyle;
     cxGridTableViewStyleSheet1: TcxGridTableViewStyleSheet;
     cxGridBandedTableViewStyleSheet1: TcxGridBandedTableViewStyleSheet;
-    edtKode: TcxTextEdit;
-    cxLabel1: TcxLabel;
+    edtCari: TcxTextEdit;
+    qItem: TZQuery;
+    dsItem: TDataSource;
+    qItemkd_item: TStringField;
+    qItemnama_item: TStringField;
+    cbFilter: TcxComboBox;
     procedure FormShow(Sender: TObject);
     procedure btnSaveClick(Sender: TObject);
     procedure edtRekananKeyPress(Sender: TObject; var Key: Char);
-    procedure btnCariRekananClick(Sender: TObject);
+    procedure btnCariClick(Sender: TObject);
   private
     { Private declarations }
-    procedure OpenDataSet(vJenis,vKode,vNama :String);
+    procedure OpenDataSet(vJenis,vText :String);
   public
     { Public declarations }
     vMode : integer;
@@ -68,30 +67,29 @@ uses U_DM;
 procedure TCariItemFrm.FormShow(Sender: TObject);
 begin
   pgcKelompok.HideTabs:= True;
-  pgcKelompok.ActivePageIndex:= vMode;
-  OpenDataSet(vJenis,'','');
-  edtKode.SetFocus;
+  OpenDataSet('','');
+  cbFilter.SetFocus;
 end;
 
-procedure TCariItemFrm.OpenDataSet(vJenis,vKode,vNama :String);
-var dtNow, s, ws : String;
+procedure TCariItemFrm.OpenDataSet(vJenis, vText :String);
+var s : String;
 begin
-    if vMode=0 then begin   // rekanan
-        s:= 'SELECT kd_rekanan, nama_rekanan';
-        s:= s+' FROM master.mrekanan';
-        s:= s+' WHERE jenis='+QuotedStr(vJenis);
-        if Trim(vKode)<>'' then
-           s:= s+' AND kd_rekanan LIKE '+QuotedStr(vKode+'%');
-        if Trim(vNama)<>'' then
-           s:= s+' OR UPPER(nama_rekanan) LIKE '+QuotedStr('%'+UpperCase(vNama)+'%');
-        s:= s+' ORDER BY kd_rekanan';
+    if vMode=0 then begin   // item
+        s:= 'SELECT kd_item, nama_item';
+        s:= s+' FROM master.item';
+        s:= s+' WHERE isdetail='+QuotedStr('1');
+        if vJenis = 'KODE' then
+           s:= s+' AND kd_item LIKE '+QuotedStr(vText+'%');
+        if vJenis = 'NAMA' then
+           s:= s+' AND UPPER(nama_item) LIKE '+QuotedStr('%'+UpperCase(vText)+'%');
+        s:= s+' ORDER BY nama_item ASC';
 
         try
-          qRekanan.Close;
-          qRekanan.SQL.Clear;
-          qRekanan.Params.Clear;
-          qRekanan.SQL.Add(s);
-          qRekanan.Open;
+          qItem.Close;
+          qItem.SQL.Clear;
+          qItem.Params.Clear;
+          qItem.SQL.Add(s);
+          qItem.Open;
         except
           on E: Exception do begin
             DM.MyMsg(mmError,'Error has been encountered !',E.Message);
@@ -110,12 +108,12 @@ end;
 procedure TCariItemFrm.edtRekananKeyPress(Sender: TObject; var Key: Char);
 begin
    if Key=#13 then btnSaveClick(nil)
-   else btnCariRekananClick(nil);
+   else btnCariClick(nil);
 end;
 
-procedure TCariItemFrm.btnCariRekananClick(Sender: TObject);
+procedure TCariItemFrm.btnCariClick(Sender: TObject);
 begin
-  OpenDataSet(vJenis,edtKode.Text,edtRekanan.Text);
+  OpenDataSet(cbFilter.Text,edtCari.Text);
 end;
 
 end.
