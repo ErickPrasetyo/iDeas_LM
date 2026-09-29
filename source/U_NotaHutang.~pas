@@ -528,6 +528,7 @@ type
     mITEMharga: TIntegerField;
     grddbtvItemColumn3: TcxGridDBColumn;
     mITEMqty_order: TIntegerField;
+    mITEMhrg_beli: TFloatField;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure actCloseExecute(Sender: TObject);

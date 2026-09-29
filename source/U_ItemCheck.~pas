@@ -131,6 +131,11 @@ type
     RzDBLabel14: TRzDBLabel;
     Panel2: TPanel;
     lblRunnungText: TLabel;
+    GroupBox3: TGroupBox;
+    Masterstatus_promo: TStringField;
+    Masterketerangan_promo: TStringField;
+    RzDBLabel15: TRzDBLabel;
+    RzLabel26: TRzDBLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure EditKeyPress(Sender: TObject; var Key: Char);
     procedure MasterBeforeOpen(DataSet: TDataSet);

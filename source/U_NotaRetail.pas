@@ -588,21 +588,9 @@ type
     edtqty: TcxTextEdit;
     Label5: TLabel;
     frPOS80: TfrxReport;
-    CheckPromoB: TZReadOnlyQuery;
-    CheckPromoBid_item_promo: TIntegerField;
-    CheckPromoBkd_item: TStringField;
-    CheckPromoBnama_item: TStringField;
-    CheckPromoBjenis: TStringField;
-    CheckPromoBqty_promo: TFloatField;
-    CheckPromoBnilai_promo: TFloatField;
-    CheckPromoBkd_item_promo: TStringField;
-    CheckPromoBnama_item_promo: TStringField;
-    CheckPromoBqty_item_promo: TFloatField;
-    CheckPromoBdiv: TFloatField;
     grddbtvFP_DetailColumn3: TcxGridDBBandedColumn;
     Label9: TLabel;
     edtDiscItem: TcxDBTextEdit;
-    CheckPromoBqty_max: TFloatField;
     Detailketerangan: TStringField;
     grddbtvFP_DetailColumn4: TcxGridDBBandedColumn;
     frPOS80_Copy: TfrxReport;
@@ -640,6 +628,60 @@ type
     qMembertelephone: TStringField;
     qMemberfaxcimile: TStringField;
     qMemberdisc_member_psn: TFloatField;
+    MemDetailqty_item: TStringField;
+    MemDetailispromo: TStringField;
+    CheckPromoB: TZQuery;
+    CheckPromoBid_item_promo: TIntegerField;
+    CheckPromoBkd_item: TStringField;
+    CheckPromoBnama_item: TStringField;
+    CheckPromoBjenis: TStringField;
+    CheckPromoBqty_promo: TFloatField;
+    CheckPromoBnilai_promo: TFloatField;
+    CheckPromoBkd_item_promo: TStringField;
+    CheckPromoBnama_item_promo: TStringField;
+    CheckPromoBqty_item_promo: TFloatField;
+    CheckPromoBqty_max: TFloatField;
+    CheckPromoBnilai_belanja: TFloatField;
+    frxPOS80: TfrxReport;
+    qItemnama_principle: TStringField;
+    Detailnama_principle: TStringField;
+    Masterqty_promo: TFloatField;
+    Masterjns_promo: TStringField;
+    qPromoPrinciple: TZQuery;
+    qPromoPrincipleid_principle: TIntegerField;
+    qPromoPrinciplekd_principle: TStringField;
+    qPromoPrinciplenama_principle: TStringField;
+    qPromoPrincipleispromo: TStringField;
+    qPromoPrinciplejns_promo: TStringField;
+    qPromoPrinciplenama_promo: TStringField;
+    qPromoPrinciplenilai_belanja: TFloatField;
+    qPromoPrincipleqty: TFloatField;
+    qNotaPromo: TZQuery;
+    qNotaPromoid_nota: TLargeintField;
+    qNotaPromojns_promo: TStringField;
+    qNotaPromonama_promo: TStringField;
+    qNotaPromoqty: TFloatField;
+    qNotaPromonama_principle: TStringField;
+    qNotaPromoketerangan: TStringField;
+    DataPromo: TZQuery;
+    DataPromoid_nota: TLargeintField;
+    DataPromojns_promo: TStringField;
+    DataPromonama_promo: TStringField;
+    DataPromoqty: TFloatField;
+    DataPromonama_principle: TStringField;
+    DataPromoketerangan: TStringField;
+    frxDataPromo: TfrxDBDataset;
+    LookPromo: TwwLookupDialog;
+    MemDetailDiskon: TStringField;
+    memNotaPromo: TkbmMemTable;
+    memNotaPromoqty: TStringField;
+    memNotaPromonama_promo: TStringField;
+    memNotaPromojns_promo: TStringField;
+    memNotaPromoprinciple: TStringField;
+    Masterbayar_tunai: TFloatField;
+    Masterbayar_debit: TFloatField;
+    Masterbayar_qris: TFloatField;
+    Masterbayar_transfer: TFloatField;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure actCloseExecute(Sender: TObject);
@@ -722,7 +764,7 @@ type
     { Private declarations }
     vjns_item, vjns_transaksi, vjudul, vlook, vrek_kredit, vrek_debet : string;
     vtag : integer;
-    vSubTotal, vDiscRP, vJmlPcs : Double;
+    vSubTotal, vDiscRP, vJmlPcs, subtotal_item_promo, qty_item_promo : Double;
     isPromoUang : Boolean;
     tagDiscMember : Boolean;
     procedure UpdateView;
@@ -736,7 +778,10 @@ type
     procedure UpdateBayar(cara, bank, nokartu, dibayar, kembali: string);
     function CheckPromoUang(kd_item: String; qty : Double): Boolean;
     function CheckPromoBarang(kd_item: String; qty : Double): Boolean;
+    function CheckPromoKupon(kd_item: String; Nilai : Double): Boolean;
     function CheckHargaJual(kd_item: String): Boolean;
+    function CheckPromo(kd_item: String): Boolean;
+    procedure CheckPromoPrinciple;
 
 
   public
@@ -754,15 +799,49 @@ uses U_DM, U_Currency, U_NotaPiutang, U_BayarNotaPenjualan, Math;
 
 {$R *.dfm}
 
-function TNotaRetailFrm.CheckPromoBarang(kd_item: String; qty : Double): Boolean;
+function TNotaRetailFrm.CheckPromo(kd_item: String): Boolean;
+var s : String;
 begin
   Result := False;
   Try
+
+    s:=   'select a.* ';
+    s:= s+'from master.item_promo a ';
+    s:= s+'where a.kd_item=:kd_item';
+
     CheckPromoB.Close;
+    CheckPromoB.SQL.Clear;
+    CheckPromoB.Params.Clear;
+    CheckPromoB.SQL.Add(s);
+    CheckPromoB.Params.ParamByName('kd_item').Value:= kd_item;
+    CheckPromoB.Open;
+
+    if CheckPromoB.RecordCount>0 then
+    Result:= True
+  except
+
+  end
+end;
+
+function TNotaRetailFrm.CheckPromoBarang(kd_item: String; qty : Double): Boolean;
+var s : String;
+begin
+  Result := False;
+  Try
+
+    s:=   'select a.*, div(:qty,a.qty_promo) ';
+    s:= s+'from master.item_promo a ';
+    s:= s+'where a.jenis=:jenis and a.kd_item=:kd_item';
+
+    CheckPromoB.Close;
+    CheckPromoB.SQL.Clear;
+    CheckPromoB.Params.Clear;
+    CheckPromoB.SQL.Add(s);
     CheckPromoB.Params.ParamByName('kd_item').Value:= kd_item;
     CheckPromoB.Params.ParamByName('jenis').Value:= 'BARANG';
     CheckPromoB.Params.ParamByName('qty').Value:= qty;
     CheckPromoB.Open;
+
     if CheckPromoB.RecordCount>0 then
     Result:= True
   except
@@ -771,14 +850,50 @@ begin
 end;
 
 function TNotaRetailFrm.CheckPromoUang(kd_item: String; qty : Double): Boolean;
+var s : String;
 begin
   Result := False;
   Try
+
+    s:=   'select a.*, div(:qty,a.qty_promo) ';
+    s:= s+'from master.item_promo a ';
+    s:= s+'where a.jenis=:jenis and a.kd_item=:kd_item';
+
     CheckPromoB.Close;
+    CheckPromoB.SQL.Clear;
+    CheckPromoB.Params.Clear;
+    CheckPromoB.SQL.Add(s);
     CheckPromoB.Params.ParamByName('kd_item').Value:= kd_item;
     CheckPromoB.Params.ParamByName('jenis').Value:= 'UANG';
     CheckPromoB.Params.ParamByName('qty').Value:= qty;
     CheckPromoB.Open;
+
+    if CheckPromoB.RecordCount>0 then
+    Result:= True
+  except
+
+  end
+end;
+
+function TNotaRetailFrm.CheckPromoKupon(kd_item: String; Nilai: Double): Boolean;
+var s : String;
+begin
+  Result := False;
+  Try
+
+    s:=   'select a.*, div(:nilai,a.nilai_belanja) ';
+    s:= s+'from master.item_promo a ';
+    s:= s+'where a.jenis=:jenis and a.kd_item=:kd_item';
+
+    CheckPromoB.Close;
+    CheckPromoB.SQL.Clear;
+    CheckPromoB.Params.Clear;
+    CheckPromoB.SQL.Add(s);
+    CheckPromoB.Params.ParamByName('kd_item').Value:= kd_item;
+    CheckPromoB.Params.ParamByName('jenis').Value:= 'KUPON';
+    CheckPromoB.Params.ParamByName('nilai').Value:= Nilai;
+    CheckPromoB.Open;
+
     if CheckPromoB.RecordCount>0 then
     Result:= True
   except
@@ -1040,6 +1155,13 @@ begin
     Detail.Close;
     Detail.Params.ParamByName('id_nota').Value:= -1;
     Detail.Open;
+
+    qNotaPromo.Close;
+    qNotaPromo.Open;
+
+    qPromoPrinciple.Close;
+    qPromoPrinciple.Open;
+
     DBMode:= dmInsert;
   except
     on E: Exception do begin
@@ -1119,8 +1241,6 @@ procedure TNotaRetailFrm.actSaveExecute(Sender: TObject);
 var
 s: String;
 begin
-//  if Mastercara_bayar.IsNull or (Trim(Mastercara_bayar.AsString)='') then
-//     raise Exception.Create('CARA BAYAR harus diisi !');
 
   if (MessageBox(0, PChar('Peringatan ! '+#13#10+
 //                            'Once Applied, this document become Un-Edited.'+#13#10+
@@ -1146,23 +1266,51 @@ begin
     Detail.ApplyUpdates;
     Master.CommitUpdates;
     Detail.CommitUpdates;
-//    try
-//      qrySubTotal.Close;
-//      qrySubTotal.Params.ParamByName('pid_nota').Value:= Masterid_nota.Value;
-//      qrySubTotal.Open;
-//    except
-//        on E: Exception do
-//          DM.MyMsg(mmError,'Error has been encountered !',E.Message)
-//    end;
 
-//    Master.Edit;
-//    Mastersub_total.AsFloat:= qrySubTotalsub_total.AsFloat;
-//    Masternet_n_ppn.AsFloat:= Mastertotal.AsFloat;
-//    if (Master.State=dsInsert) or (Master.State=dsEdit)  then
-//        Master.Post;
     Master.ApplyUpdates;
     Master.CommitUpdates;
     DM.CommitTransaction;
+
+    CheckPromoPrinciple;
+
+    DM.PrepareQuery(qExec);
+    s:= 'select * from transaksi.nota_promo where id_nota = '+IntToStr(Masterid_nota.AsLargeInt);
+    DM.OpenQuery(qExec, s);
+
+    memNotaPromo.Close;
+    memNotaPromo.EmptyTable;
+    memNotaPromo.Open;
+
+    if qExec.RecordCount > 0 then begin
+
+        DM.MyMsg(mmInformation,'Information','Pelanggan Berhak Mendapatkan Promo Principle !');
+        DataPromo.Close;
+        DataPromo.Params.ParamByName('id_nota').Value:= Masterid_nota.AsLargeInt;
+        DataPromo.Open;
+        LookPromo.Execute;
+
+      try
+
+        DataPromo.First;
+        while not DataPromo.Eof do
+        begin
+          memNotaPromo.Append;
+          memNotaPromoqty.AsString:= FormatFloat(',#',DataPromoqty.AsFloat);
+          memNotaPromonama_promo.AsString:= DataPromonama_promo.AsString;
+          memNotaPromojns_promo.AsString:= DataPromojns_promo.AsString;
+          memNotaPromoprinciple.AsString:= DataPromonama_principle.AsString;
+          memNotaPromo.Post;
+          DataPromo.Next;
+
+        end;
+
+      except
+        on E: Exception do
+          DM.MyMsg(mmError,'Error has been encountered !',E.Message)
+      end;
+
+    end;
+
     Bayar;
     qBrowse.Refresh;
   except
@@ -1188,15 +1336,16 @@ begin
   getprint.Close;
   getprint.Open;
 
-    if (Masterdibayar.AsFloat=0) or (Masterdibayar.AsFloat<Mastertotal.AsFloat) then begin
+    if ((Masterbayar_tunai.AsFloat+Masterbayar_transfer.AsFloat+Masterbayar_debit.AsFloat+Masterbayar_qris.AsFloat)=0) or
+        ((Masterbayar_tunai.AsFloat+Masterbayar_transfer.AsFloat+Masterbayar_debit.AsFloat+Masterbayar_qris.AsFloat)<Mastertotal.AsFloat) then begin
        try
          g:= TBayarNotaPenjualanFrm.Create(Application);
          g.vTotal:= Mastertotal.AsFloat;
          g.vIdNota:= Masterid_nota.AsLargeInt;
 
          if g.ShowModal=mrOK then begin
-           UpdateBayar(g.MemMastercara_bayar.AsString,g.MemMasterbank.AsString,g.MemMasterno_kartu.AsString,
-                        FloatToStr(g.MemMasterdibayar.AsFloat),StringReplace(FloatToStr(g.MemMasterkembali.AsFloat),'-','',[rfReplaceAll,rfIgnoreCase]));
+//           UpdateBayar(g.MemMastercara_bayar.AsString,g.MemMasterbank.AsString,g.MemMasterno_kartu.AsString,
+//                        FloatToStr(g.MemMasterdibayar.AsFloat),StringReplace(FloatToStr(g.MemMasterkembali.AsFloat),'-','',[rfReplaceAll,rfIgnoreCase]));
 //           UpdateBayarKasKecil(g.Masterno_nota.AsString,FloatToStr(g.MemMasterdibayar.AsFloat));
 
             DM.L_Perusahaan.Close;
@@ -1208,13 +1357,13 @@ begin
             MemInfoPerusahaan.Close;
             MemInfoPerusahaan.Open;
             MemInfoPerusahaan.Append;
-            MemInfoPerusahaannama_perusahaan.AsString:= DM.L_Perusahaannama_perusahaan.AsString;
-            MemInfoPerusahaanalamat_perusahaan.AsString:= DM.L_Perusahaanaddress.AsString;
+            MemInfoPerusahaannama_perusahaan.AsString:= UpperCase(DM.L_Perusahaannama_perusahaan.AsString);
+            MemInfoPerusahaanalamat_perusahaan.AsString:= UpperCase(DM.L_Perusahaanaddress.AsString);
             MemInfoPerusahaantelp_perusahaan.AsString:= 'Telp. : '+DM.L_Perusahaanphone.AsString;
             MemInfoPerusahaanfax_perusahaan.AsString:= 'Fax : '+DM.L_Perusahaanfax.AsString;
-            MemInfoPerusahaankota_perusahaan.AsString:= DM.L_Perusahaancity.AsString;
+            MemInfoPerusahaankota_perusahaan.AsString:= UpperCase(DM.L_Perusahaancity.AsString);
             MemInfoPerusahaanlogo.LoadFromFile(ExtractFilePath(Application.ExeName)+'\IMAGES\LOGO.JPG');
-            MemInfoPerusahaanjudul.AsString:= lblHeader1.Caption;
+            MemInfoPerusahaanjudul.AsString:= UpperCase(lblHeader1.Caption);
             MemInfoPerusahaannpwp.AsString:= DM.L_Perusahaannpwp.AsString;
             MemInfoPerusahaan.Post;
 
@@ -1250,7 +1399,7 @@ begin
 //            vKembali:= FloatToStr(g.MemMasterkembali.AsFloat);
 //            vKembali:= StringReplace(vKembali,'-','',[rfReplaceAll,rfIgnoreCase]);
 //            FKembali:= StrToFloat(vKembali);
-            FKembali:= g.vTotal-g.MemMasterdibayar.AsFloat;
+            FKembali:= g.vSKembali2;
             MemMasterdibayar.AsString:= FormatFloat('0,0', g.MemMasterdibayar.AsFloat);
             MemMasterkembali.AsString:= FormatFloat('0,0', FKembali);
 
@@ -1280,13 +1429,10 @@ begin
             try
               Detail.First;
               while not Detail.Eof do begin
+
                 MemDetail.Append;
                 MemDetailno.AsString:= Detailnomor.AsString;
                 MemDetailid_item.AsString:= Detailkd_item.AsString;
-                if Detailispromo.AsString='1' then
-                MemDetaildescription.AsString:= Detailnama_item.AsString+' '+Detailketerangan.AsString
-                else
-                MemDetaildescription.AsString:= Detailnama_item.AsString;
                 MemDetailqty.AsFloat:= Detailqty_total_biji.AsFloat;
                 MemDetailsatuan.AsString:= Detailsatuan_beli.AsString;
                 MemDetailqty_karton.AsFloat:= Detailqty_karton.AsFloat;
@@ -1295,8 +1441,34 @@ begin
                 MemDetailhrg_lusin.AsFloat:= Detailhrg_jual_lusin.AsFloat;
                 MemDetaildisc.AsFloat:= Detaildisc_rp.AsFloat;
                 MemDetailsub_total.AsFloat:= Detailsub_total.AsFloat;
+                MemDetailispromo.AsString:= Detailispromo.AsString;
+                
+                if Detaildisc_rp.AsFloat > 0 then
+                   MemDetailDiskon.AsString:= 'Diskon '+FormatFloat(',#', Detaildisc_rp.AsFloat)
+                else MemDetailDiskon.AsString:= '';
+
+                if (Detailqty_karton.AsFloat > 0) and (Detailqty_total_biji.AsFloat > 0) then
+                   MemDetailqty_item.AsString:= FormatFloat(',#', Detailqty_karton.AsFloat)+' Karton '+FormatFloat(',#', Detailqty_total_biji.AsFloat)+' Pcs';
+                if (Detailqty_karton.AsFloat = 0) and (Detailqty_total_biji.AsFloat > 0) then
+                   MemDetailqty_item.AsString:= FormatFloat(',#', Detailqty_total_biji.AsFloat)+' Pcs';
+                if (Detailqty_karton.AsFloat > 0) and (Detailqty_total_biji.AsFloat = 0) then
+                   MemDetailqty_item.AsString:= FormatFloat(',#', Detailqty_karton.AsFloat)+' Karton ';
+
+                if Detailispromo.AsString = '1' then begin
+
+                   MemDetaildescription.AsString := Detailketerangan.AsString;
+                   MemDetailqty_item.AsString:= '';
+
+                end
+                else begin
+
+                   MemDetaildescription.AsString:= Detailnama_item.AsString;
+
+                end;
+
                 MemDetail.Post;
                 Detail.Next;
+
               end;
 
             finally
@@ -1310,11 +1482,11 @@ begin
                 ' where no_nota='+QuotedStr(Masterno_nota.AsString);
             DM.ExecQuery(qExec, s);
 
-            frPOS80.PrintOptions.Copies:= g.vCopies;
-            frPOS80.PrintOptions.Printer:='POS80';
-            frPOS80.PrepareReport;
-            frPOS80.PrintOptions.ShowDialog:= False;
-            frPOS80.Print;
+            frxPOS80.PrintOptions.Copies:= g.vCopies;
+            frxPOS80.PrintOptions.Printer:= DM.PrinterKasir;
+            frxPOS80.PrepareReport;
+            frxPOS80.PrintOptions.ShowDialog:= False;
+            frxPOS80.Print;
 //
 //            if isPromoUang then begin
 //              if (MessageBox(0, PChar('PERINGATAN !'+#13#10+'**Ada Item Dengan Diskon/Promo Uang**'),
@@ -2454,116 +2626,290 @@ begin
 end;
 
 procedure TNotaRetailFrm.edtqtyKeyPress(Sender: TObject; var Key: Char);
+var vKdItem : String;
+    sub_total : Double;
 begin
+
   if Key=#13 then begin
+    vKdItem:= edtItem.Text;
 
     if CheckHargaJual(edtItem.Text) then
       raise Exception.Create('Harga Jual lebih murah dari Harga Beli, Segera hub Admin!');
 
-
     CheckJumlahPcs;
 
-    if CheckPromoUang(edtItem.Text, vJmlPcs) then begin
-       if CheckPromoBdiv.AsFloat>0 then begin
-          Detail.Append;
-          Detailkd_item.AsString:= qItemkd_item.AsString;
-          Detaildiskripsi.AsString:= qItemnama_item.AsString;
-          Detailhrg.AsFloat:= qItemhrg_jual.AsFloat;
-          Detailsatuan_beli.AsString:= qItemsatuan_jual.AsString;
-          Detailqty_karton.AsFloat:= StrToFloat(edtKarton.Text);
-          Detailqty_total_biji.AsFloat:= StrToFloat(edtqty.Text);
-          Detailqty_biji.AsFloat:= vJmlPcs;
-          Detailid_warehouse.AsString:= qItemlok_rak.AsString;
-          Detaildisc_rp.AsFloat:= CheckPromoBnilai_promo.AsFloat*CheckPromoBdiv.AsFloat;
+    Detail.Append;
+    Detailkd_item.AsString:= qItemkd_item.AsString;
+    Detaildiskripsi.AsString:= qItemnama_item.AsString;
+    Detailhrg.AsFloat:= qItemhrg_jual.AsFloat;
+    Detailsatuan_beli.AsString:= qItemsatuan_jual.AsString;
+    Detailqty_karton.AsFloat:= StrToFloat(edtKarton.Text);
+    Detailqty_total_biji.AsFloat:= StrToFloat(edtqty.Text);
+    Detailqty_biji.AsFloat:= vJmlPcs;
+    Detailid_warehouse.AsString:= qItemlok_rak.AsString;
+    Detaildisc_rp.AsFloat:= 0;
+    Detailnama_principle.AsString:= qItemnama_principle.AsString;
+    Detailispromo.AsString:= '0';
+
+    sub_total:= Detailsub_total.AsFloat;
+
+    if CheckPromo(vKdItem) then begin
+
+       CheckPromoB.First;
+       while not CheckPromoB.Eof do begin
+
+        if CheckPromoBjenis.AsString = 'UANG' then begin
+
+          Detail.Edit;
+          Detaildisc_rp.AsFloat:= Trunc(vJmlPcs/CheckPromoBqty_promo.AsFloat)*CheckPromoBnilai_promo.AsFloat;
+
+        end
+        else
+        if CheckPromoBjenis.AsString = 'BARANG' then begin
+
+          if Trunc(vJmlPcs/CheckPromoBqty_promo.AsFloat) <> 0 then begin
+
+              Detail.Post;
+
+              Detail.Append;
+              Detailkd_item.AsString:= CheckPromoBkd_item_promo.AsString;
+              Detaildiskripsi.AsString:= CheckPromoBnama_item_promo.AsString;
+
+              if Trunc(vJmlPcs/CheckPromoBqty_promo.AsFloat)>CheckPromoBqty_max.AsFloat then begin
+                  Detailqty_biji.AsFloat:= CheckPromoBqty_max.AsFloat;
+                  Detailqty_total_biji.AsFloat:= CheckPromoBqty_max.AsFloat;
+              end;
+              if Trunc(vJmlPcs/CheckPromoBqty_promo.AsFloat)<CheckPromoBqty_max.AsFloat then begin
+                  Detailqty_biji.AsFloat:= Trunc(vJmlPcs/CheckPromoBqty_promo.AsFloat);
+                  Detailqty_total_biji.AsFloat:= Trunc(vJmlPcs/CheckPromoBqty_promo.AsFloat);
+              end;
+
+              Detailsatuan_beli.AsString:= 'PCS';
+              Detailqty_karton.AsFloat:= 0;
+              Detailid_warehouse.AsString:= 'GDU';
+              Detailispromo.AsString:= '1';
+              Detaildisc_rp.AsFloat:= 0;
+              Detailhrg.AsFloat:= 0;
+              Detailketerangan.AsString:= Trim('GRATIS '+FloatToStr(Detailqty_biji.AsFloat)+' '+CheckPromoBnama_item_promo.AsString+
+                                               ' Dari Pembelian "'+UpperCase(qItemnama_item.AsString)+'"');
+
+          end;
+
+        end
+        else
+        if CheckPromoBjenis.AsString = 'KUPON' then begin
+
           Detail.Post;
-          edtItem.Text:='';
-          edtqty.Text:='0';
-          edtKarton.Text:= '0';
-          edtItem.SetFocus;
-       end else begin
+
           Detail.Append;
-          Detailkd_item.AsString:= qItemkd_item.AsString;
-          Detaildiskripsi.AsString:= qItemnama_item.AsString;
-          Detailhrg.AsFloat:= qItemhrg_jual.AsFloat;
-          Detailsatuan_beli.AsString:= qItemsatuan_jual.AsString;
-          Detailqty_karton.AsFloat:= StrToFloat(edtKarton.Text);
-          Detailqty_total_biji.AsFloat:= StrToFloat(edtqty.Text);
-          Detailqty_biji.AsFloat:= vJmlPcs;
-          Detailid_warehouse.AsString:= qItemlok_rak.AsString;
+          Detailkd_item.AsString:= CheckPromoBkd_item_promo.AsString;
+          Detaildiskripsi.AsString:= CheckPromoBnama_item_promo.AsString;
+
+          if Trunc(sub_total/CheckPromoBnilai_belanja.AsFloat)>CheckPromoBqty_max.AsFloat then begin
+              Detailqty_biji.AsFloat:= CheckPromoBqty_max.AsFloat;
+              Detailqty_total_biji.AsFloat:= CheckPromoBqty_max.AsFloat;
+          end;
+          if Trunc(sub_total/CheckPromoBnilai_belanja.AsFloat)<CheckPromoBqty_max.AsFloat then begin
+              Detailqty_biji.AsFloat:= CheckPromoBqty_item_promo.AsFloat*Trunc(sub_total/CheckPromoBnilai_belanja.AsFloat);
+              Detailqty_total_biji.AsFloat:= CheckPromoBqty_item_promo.AsFloat*Trunc(sub_total/CheckPromoBnilai_belanja.AsFloat);
+          end;
+
+          Detailsatuan_beli.AsString:= 'PCS';
+          Detailqty_karton.AsFloat:= 0;
+          Detailid_warehouse.AsString:= 'GDU';
+          Detailispromo.AsString:= '1';
           Detaildisc_rp.AsFloat:= 0;
-          Detail.Post;
-          edtItem.Text:='';
-          edtqty.Text:='0';
-          edtKarton.Text:='0';
-          edtItem.SetFocus;
-       end
-    end
-    else
-    if CheckPromoBarang(edtItem.Text, vJmlPcs) then begin
-      if CheckPromoBdiv.AsFloat>0 then begin
-          Detail.Append;
-          Detailkd_item.AsString:= qItemkd_item.AsString;
-          Detaildiskripsi.AsString:= qItemnama_item.AsString;
-          Detailhrg.AsFloat:= qItemhrg_jual.AsFloat;
-          Detailsatuan_beli.AsString:= qItemsatuan_jual.AsString;
-          Detailqty_karton.AsFloat:= StrToFloat(edtKarton.Text);
-          Detailqty_total_biji.AsFloat:= StrToFloat(edtqty.Text);
-          Detailqty_biji.AsFloat:= vJmlPcs;
-          Detailid_warehouse.AsString:= qItemlok_rak.AsString;
-          Detaildisc_rp.AsFloat:= 0;
-          Detail.Post;
+          Detailhrg.AsFloat:= 0;
+          Detailketerangan.AsString:= Trim(FloatToStr(Detailqty_biji.AsFloat)+' '+CheckPromoBnama_item_promo.AsString+
+                                           ' Dari Pembelian "'+UpperCase(qItemnama_item.AsString)+'"');
+
+        end;
+
+        CheckPromoB.Next;
+       end;
+
+
+
+
+    end;
+
+    Detail.Post;
+    edtItem.Text:='';
+    edtqty.Text:='0';
+    edtKarton.Text:='0';
+    edtItem.SetFocus;
+
+
+
+
+
+
+
+
+
+//    if CheckPromoUang(vKdItem, vJmlPcs) then begin
+//       if CheckPromoBdiv.AsFloat>0 then begin
+//          Detail.Append;
+//          Detailkd_item.AsString:= qItemkd_item.AsString;
+//          Detaildiskripsi.AsString:= qItemnama_item.AsString;
+//          Detailhrg.AsFloat:= qItemhrg_jual.AsFloat;
+//          Detailsatuan_beli.AsString:= qItemsatuan_jual.AsString;
+//          Detailqty_karton.AsFloat:= StrToFloat(edtKarton.Text);
+//          Detailqty_total_biji.AsFloat:= StrToFloat(edtqty.Text);
+//          Detailqty_biji.AsFloat:= vJmlPcs;
+//          Detailid_warehouse.AsString:= qItemlok_rak.AsString;
+//          Detaildisc_rp.AsFloat:= CheckPromoBnilai_promo.AsFloat*CheckPromoBdiv.AsFloat;
+//          Detail.Post;
+//          edtItem.Text:='';
+//          edtqty.Text:='0';
+//          edtKarton.Text:= '0';
+//          edtItem.SetFocus;
+//       end else begin
+//          Detail.Append;
+//          Detailkd_item.AsString:= qItemkd_item.AsString;
+//          Detaildiskripsi.AsString:= qItemnama_item.AsString;
+//          Detailhrg.AsFloat:= qItemhrg_jual.AsFloat;
+//          Detailsatuan_beli.AsString:= qItemsatuan_jual.AsString;
+//          Detailqty_karton.AsFloat:= StrToFloat(edtKarton.Text);
+//          Detailqty_total_biji.AsFloat:= StrToFloat(edtqty.Text);
+//          Detailqty_biji.AsFloat:= vJmlPcs;
+//          Detailid_warehouse.AsString:= qItemlok_rak.AsString;
+//          Detaildisc_rp.AsFloat:= 0;
+//          Detail.Post;
+//          edtItem.Text:='';
+//          edtqty.Text:='0';
+//          edtKarton.Text:='0';
+//          edtItem.SetFocus;
+//       end
+//    end;
+//
+//    if CheckPromoBarang(vKdItem, vJmlPcs) then begin
+//      if CheckPromoBdiv.AsFloat>0 then begin
+//          Detail.Append;
+//          Detailkd_item.AsString:= qItemkd_item.AsString;
+//          Detaildiskripsi.AsString:= qItemnama_item.AsString;
+//          Detailhrg.AsFloat:= qItemhrg_jual.AsFloat;
+//          Detailsatuan_beli.AsString:= qItemsatuan_jual.AsString;
+//          Detailqty_karton.AsFloat:= StrToFloat(edtKarton.Text);
+//          Detailqty_total_biji.AsFloat:= StrToFloat(edtqty.Text);
+//          Detailqty_biji.AsFloat:= vJmlPcs;
+//          Detailid_warehouse.AsString:= qItemlok_rak.AsString;
+//          Detaildisc_rp.AsFloat:= 0;
+//          Detail.Post;
+////          edtItem.Text:='';
+////          edtqty.Text:='';
+////          edtItem.SetFocus;
+//
+//          CheckPromoB.First;
+//          while not CheckPromoB.Eof do begin
+//            Detail.Append;
+//            Detailkd_item.AsString:= CheckPromoBkd_item_promo.AsString;
+//            Detaildiskripsi.AsString:= CheckPromoBnama_item_promo.AsString;
+//
+//            if (CheckPromoBqty_item_promo.AsFloat*CheckPromoBdiv.AsFloat)>CheckPromoBqty_max.AsFloat then begin
+//                Detailqty_biji.AsFloat:= CheckPromoBqty_max.AsFloat;
+//                Detailqty_total_biji.AsFloat:= CheckPromoBqty_max.AsFloat;
+//            end;
+//            if (CheckPromoBqty_item_promo.AsFloat*CheckPromoBdiv.AsFloat)<CheckPromoBqty_max.AsFloat then begin
+//                Detailqty_biji.AsFloat:= CheckPromoBqty_item_promo.AsFloat*CheckPromoBdiv.AsFloat;
+//                Detailqty_total_biji.AsFloat:= CheckPromoBqty_item_promo.AsFloat*CheckPromoBdiv.AsFloat;
+//            end;
+//
+//            Detailsatuan_beli.AsString:= qItemsatuan_jual.AsString;
+//            Detailqty_karton.AsFloat:= 0;
+//            Detailqty_total_biji.AsFloat:= 0;
+//            Detailid_warehouse.AsString:= qItemlok_rak.AsString;
+//            Detailispromo.AsString:= '1';
+//            Detaildisc_rp.AsFloat:= 0;
+//            Detailhrg.AsFloat:= 0;
+//            Detailketerangan.AsString:= Trim('Promo Dari Pembelian "'+UpperCase(qItemnama_item.AsString)+'"');
+//            Detail.Post;
+//            CheckPromoB.Next;
+//          end;
+//
+//          edtItem.Text:='';
+//          edtqty.Text:='0';
+//          edtKarton.Text:='0';
+//          edtItem.SetFocus;
+//      end else begin
+//
+//      end;
+//
+//    end;
+//
+//    if CheckPromoKupon(vKdItem, Detailsub_total.AsFloat) then begin
+//      if CheckPromoBdiv.AsFloat>0 then begin
+//
+//          Detail.Append;
+//          Detailkd_item.AsString:= qItemkd_item.AsString;
+//          Detaildiskripsi.AsString:= qItemnama_item.AsString;
+//          Detailhrg.AsFloat:= qItemhrg_jual.AsFloat;
+//          Detailsatuan_beli.AsString:= qItemsatuan_jual.AsString;
+//          Detailqty_karton.AsFloat:= StrToFloat(edtKarton.Text);
+//          Detailqty_total_biji.AsFloat:= StrToFloat(edtqty.Text);
+//          Detailqty_biji.AsFloat:= vJmlPcs;
+//          Detailid_warehouse.AsString:= qItemlok_rak.AsString;
+//          Detaildisc_rp.AsFloat:= 0;
+//          Detail.Post;
 //          edtItem.Text:='';
 //          edtqty.Text:='';
 //          edtItem.SetFocus;
+//
+//          CheckPromoB.First;
+//          while not CheckPromoB.Eof do begin
+//            Detail.Append;
+//            Detailkd_item.AsString:= CheckPromoBkd_item_promo.AsString;
+//            Detaildiskripsi.AsString:= CheckPromoBnama_item_promo.AsString;
+//
+//            if CheckPromoBdiv.AsFloat>CheckPromoBqty_max.AsFloat then begin
+//                Detailqty_biji.AsFloat:= CheckPromoBqty_max.AsFloat;
+//                Detailqty_total_biji.AsFloat:= CheckPromoBqty_max.AsFloat;
+//            end;
+//            if CheckPromoBdiv.AsFloat<CheckPromoBqty_max.AsFloat then begin
+//                Detailqty_biji.AsFloat:= CheckPromoBdiv.AsFloat;
+//                Detailqty_total_biji.AsFloat:= CheckPromoBdiv.AsFloat;
+//            end;
+//
+//            Detailsatuan_beli.AsString:= qItemsatuan_jual.AsString;
+//            Detailqty_karton.AsFloat:= 0;
+//            Detailqty_total_biji.AsFloat:= CheckPromoBdiv.AsFloat;;
+//            Detailid_warehouse.AsString:= qItemlok_rak.AsString;
+//            Detailispromo.AsString:= '1';
+//            Detaildisc_rp.AsFloat:= 0;
+//            Detailhrg.AsFloat:= 0;
+//            Detailketerangan.AsString:= Trim('Promo Dari Pembelian "'+UpperCase(qItemnama_item.AsString)+'"');
+//            Detail.Post;
+//            CheckPromoB.Next;
+//          end;
+//
+//          edtItem.Text:='';
+//          edtqty.Text:='0';
+//          edtKarton.Text:='0';
+//          edtItem.SetFocus;
+//      end else begin
+//
+//      end;
+//
+//    end;
 
-          CheckPromoB.First;
-          while not CheckPromoB.Eof do begin
-            Detail.Append;
-            Detailkd_item.AsString:= CheckPromoBkd_item_promo.AsString;
-            Detaildiskripsi.AsString:= CheckPromoBnama_item_promo.AsString;
-
-            if (CheckPromoBqty_item_promo.AsFloat*CheckPromoBdiv.AsFloat)>CheckPromoBqty_max.AsFloat then
-                Detailqty_biji.AsFloat:= CheckPromoBqty_max.AsFloat;
-            if (CheckPromoBqty_item_promo.AsFloat*CheckPromoBdiv.AsFloat)<CheckPromoBqty_max.AsFloat then
-                Detailqty_biji.AsFloat:= CheckPromoBqty_item_promo.AsFloat*CheckPromoBdiv.AsFloat;
-
-            Detailsatuan_beli.AsString:= qItemsatuan_jual.AsString;
-            Detailqty_karton.AsFloat:= 0;
-            Detailqty_total_biji.AsFloat:= 0;
-            Detailid_warehouse.AsString:= qItemlok_rak.AsString;
-            Detailispromo.AsString:= '1';
-            Detaildisc_rp.AsFloat:= 0;
-            Detailhrg.AsFloat:= 0;
-            Detailketerangan.AsString:= Trim('Promo Barang Dari Pembelian "'+UpperCase(qItemnama_item.AsString)+'"');
-            Detail.Post;
-            CheckPromoB.Next;
-          end;
-
-          edtItem.Text:='';
-          edtqty.Text:='0';
-          edtKarton.Text:='0';
-          edtItem.SetFocus;
-      end else begin
-
-      end;
-
-    end else begin
-          Detail.Append;
-          Detailkd_item.AsString:= qItemkd_item.AsString;
-          Detaildiskripsi.AsString:= qItemnama_item.AsString;
-          Detailhrg.AsFloat:= qItemhrg_jual.AsFloat;
-          Detailsatuan_beli.AsString:= qItemsatuan_jual.AsString;
-          Detailqty_karton.AsFloat:= StrToFloat(edtKarton.Text);
-          Detailqty_total_biji.AsFloat:= StrToFloat(edtqty.Text);
-          Detailqty_biji.AsFloat:= vJmlPcs;
-          Detailid_warehouse.AsString:= qItemlok_rak.AsString;
-          Detaildisc_rp.AsFloat:= 0;
-          Detail.Post;
-          edtItem.Text:='';
-          edtqty.Text:='0';
-          edtKarton.Text:='0';
-          edtItem.SetFocus;
-    end
+//    if not (CheckPromoKupon(edtItem.Text, Detailsub_total.AsFloat) or CheckPromoBarang(edtItem.Text, vJmlPcs) or CheckPromoUang(edtItem.Text, vJmlPcs))
+//    then begin
+//          Detail.Append;
+//          Detailkd_item.AsString:= qItemkd_item.AsString;
+//          Detaildiskripsi.AsString:= qItemnama_item.AsString;
+//          Detailhrg.AsFloat:= qItemhrg_jual.AsFloat;
+//          Detailsatuan_beli.AsString:= qItemsatuan_jual.AsString;
+//          Detailqty_karton.AsFloat:= StrToFloat(edtKarton.Text);
+//          Detailqty_total_biji.AsFloat:= StrToFloat(edtqty.Text);
+//          Detailqty_biji.AsFloat:= vJmlPcs;
+//          Detailid_warehouse.AsString:= qItemlok_rak.AsString;
+//          Detaildisc_rp.AsFloat:= 0;
+//          Detail.Post;
+//          edtItem.Text:='';
+//          edtqty.Text:='0';
+//          edtKarton.Text:='0';
+//          edtItem.SetFocus;
+//    end;
 
   end;
 
@@ -2697,6 +3043,53 @@ begin
   if Key = #13 then
      BtnCariMember.Click;
 
+end;
+
+procedure TNotaRetailFrm.CheckPromoPrinciple;
+begin
+  try
+    if qPromoPrinciple.RecordCount > 0 then begin
+
+      qPromoPrinciple.First;
+      while not qPromoPrinciple.Eof do
+      begin
+        subtotal_item_promo:= 0;
+        qty_item_promo:= 0;
+
+        Detail.First;
+        while not Detail.Eof do
+        begin
+          if Detailnama_principle.AsString = qPromoPrinciplenama_principle.AsString then begin
+             subtotal_item_promo:= subtotal_item_promo+Detailsub_total.AsFloat;
+
+          end;
+
+          Detail.Next;
+        end;
+
+        qty_item_promo:= Trunc(subtotal_item_promo/qPromoPrinciplenilai_belanja.AsFloat);
+
+        if qty_item_promo > 0 then begin
+
+           qNotaPromo.Append;
+           qNotaPromoid_nota.AsLargeInt:= Masterid_nota.AsLargeInt;
+           qNotaPromojns_promo.AsString:= qPromoPrinciplejns_promo.AsString;
+           qNotaPromonama_promo.AsString:= qPromoPrinciplenama_promo.AsString;
+           qNotaPromoqty.AsFloat:= qty_item_promo;
+           qNotaPromonama_principle.AsString:= qPromoPrinciplenama_principle.AsString;
+           qNotaPromo.Post;
+           
+        end;
+        
+        qPromoPrinciple.Next;
+      end;
+
+    end;
+
+  except
+    on E: Exception do
+      DM.MyMsg(mmError,'Error has been encountered !',E.Message)
+  end;
 end;
 
 end.

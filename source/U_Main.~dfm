@@ -76,7 +76,7 @@ object MainFrm: TMainFrm
         Progress.ShowBorder = False
         Progress.Stacked = False
         Style = psDate
-        Text = 'Wednesday, May 06, 2026'
+        Text = 'Tuesday, Aug 25, 2026'
         TimeFormat = 'hh:mm:ss'
         Width = 150
       end
@@ -103,7 +103,7 @@ object MainFrm: TMainFrm
         Progress.ShowBorder = False
         Progress.Stacked = False
         Style = psTime
-        Text = '07:35:46'
+        Text = '15:50:17'
         TimeFormat = 'hh:mm:ss'
         Width = 60
       end
@@ -1205,6 +1205,19 @@ object MainFrm: TMainFrm
       Category = 'Pengadaan'
       Caption = 'Rencana Pembelian'
       ImageIndex = 2
+      OnExecute = actRencanaPembelianExecute
+    end
+    object actPrinciple: TAction
+      Category = 'Master'
+      Caption = 'Promo Principle'
+      ImageIndex = 4
+      OnExecute = actPrincipleExecute
+    end
+    object actLapPromoPrinciple: TAction
+      Category = 'Penjualan'
+      Caption = 'Lap. Promo Principle'
+      ImageIndex = 1
+      OnExecute = actLapPromoPrincipleExecute
     end
   end
   object MainMenu: TAdvMainMenu
@@ -1391,6 +1404,11 @@ object MainFrm: TMainFrm
         Action = actItemCheck
         GroupIndex = 1
       end
+      object PromoPrinciple1: TMenuItem
+        Tag = 405
+        Action = actPrinciple
+        GroupIndex = 1
+      end
     end
     object Pembelian1: TMenuItem
       Tag = 500
@@ -1515,6 +1533,11 @@ object MainFrm: TMainFrm
       object LaporanPenjualan1: TMenuItem
         Tag = 603
         Action = actLapPenjualan
+        GroupIndex = 1
+      end
+      object LapPromoPrinciple1: TMenuItem
+        Tag = 607
+        Action = actLapPromoPrinciple
         GroupIndex = 1
       end
       object actLapKasir1: TMenuItem

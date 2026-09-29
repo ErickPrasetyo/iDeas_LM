@@ -2398,6 +2398,10 @@ object NotaHutangFrm: TNotaHutangFrm
                 Kind = skSum
                 FieldName = 'sub_total'
                 Column = grdDBTVDetailsub_total
+              end
+              item
+                Kind = skCount
+                Column = grdDBTVDetailkd_item
               end>
             DataController.Summary.SummaryGroups = <>
             OptionsBehavior.AlwaysShowEditor = True

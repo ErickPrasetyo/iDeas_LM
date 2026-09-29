@@ -304,6 +304,17 @@ type
     qRakkd_rak: TStringField;
     qRakdeskripsi: TStringField;
     Masterlok_rak: TStringField;
+    dbtlMastercxDBTreeListColumn5: TcxDBTreeListColumn;
+    Masterispromo: TStringField;
+    grdDetailDBBTVColumn6: TcxGridDBColumn;
+    ItemPromonilai_belanja: TFloatField;
+    dbtlMastercxDBTreeListColumn6: TcxDBTreeListColumn;
+    Masternama_principle: TStringField;
+    RzLabel24: TRzLabel;
+    edtPrinciple: TcxDBButtonEdit;
+    qPrinciple: TZQuery;
+    LookPrinciple: TwwLookupDialog;
+    qPrinciplenama_principle: TStringField;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure MasterNewRecord(DataSet: TDataSet);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -348,12 +359,16 @@ type
       Sender: TObject);
     procedure edtLokRakPropertiesButtonClick(Sender: TObject;
       AButtonIndex: Integer);
+    procedure grdDetailDBBTVid_rakPropertiesCloseUp(Sender: TObject);
+    procedure edtPrinciplePropertiesButtonClick(Sender: TObject;
+      AButtonIndex: Integer);
   private
     { Private declarations }
     DBMode: TDBMode;
     vjudul : string;
     vtag : integer;
     procedure UpdateView;
+    procedure ShowItemPromo;
   public
     { Public declarations }
   end;
@@ -373,8 +388,9 @@ procedure ShowForm(pNamaMenu:String; ptag : integer);
 begin
   ItemFrm:= TItemFrm.Create(Application);
   try
-    ItemFrm.Master.Close;
-    ItemFrm.Master.Open;
+
+    ItemFrm.ShowItemPromo;
+
   except
     on E: Exception do begin
       DM.MyMsg(mmError,'Error has been encountered !',E.Message)
@@ -600,6 +616,8 @@ begin
    edtSatuanBeli.Properties.Buttons[0].Visible:= Not isBrowse;
    edtLokRak.Properties.ReadOnly:= isBrowse;
    edtLokRak.Properties.Buttons[0].Visible:= Not isBrowse;
+   edtPrinciple.Properties.ReadOnly:= isBrowse;
+   edtPrinciple.Properties.Buttons[0].Visible:= Not isBrowse;
 
    edtRekPersediaan.Properties.ReadOnly:= isBrowse;
    edtRekPersediaan.Properties.Buttons[0].Visible:= Not isBrowse;
@@ -898,19 +916,21 @@ end;
 
 procedure TItemFrm.ItemPromoNewRecord(DataSet: TDataSet);
 begin
+  ItemPromojenis.AsString:= '';
   ItemPromokd_item.AsString:= Masterkd_item.AsString;
   ItemPromonama_item.AsString:= Masternama_item.AsString;
   ItemPromoqty_promo.AsFloat:= 0;
   ItemPromonilai_promo.AsFloat:= 0;
+  ItemPromonilai_belanja.AsFloat:= 0;
 end;
 
 procedure TItemFrm.ItemPromoBeforePost(DataSet: TDataSet);
 begin
     if ItemPromojenis.IsNull or (Trim(ItemPromojenis.AsString)='') then
     raise Exception.Create('JENIS PROMO Harus diisi !')
-    else
-    if ItemPromoqty_promo.AsFloat=0 then
-    raise Exception.Create('QTY ITEM PROMO harus diisi !')
+//    else
+//    if ItemPromoqty_promo.AsFloat=0 then
+//    raise Exception.Create('QTY ITEM PROMO harus diisi !')
 end;
 
 procedure TItemFrm.grdDetailDBBTVid_rakPropertiesEditValueChanged(
@@ -943,6 +963,96 @@ begin
        if Master.State=dsBrowse then
           Master.Edit;
        Masterlok_rak.AsString:= qRakkd_rak.AsString;
+    end;
+  except
+    on E: Exception do
+      DM.MyMsg(mmError,'Error has been encountered !',E.Message)
+  end;
+end;
+
+procedure TItemFrm.ShowItemPromo;
+var s : String;
+begin
+  try
+
+    ItemFrm.Master.Close;
+    ItemFrm.Master.SQL.Clear;
+    s:=   'select a.*, ';
+    s:= s+'cast((case when b.kd_item isnull then '+QuotedStr('0')+' else '+QuotedStr('1')+' end) as varchar) as ispromo ';
+    s:= s+'from master.item a ';
+    s:= s+'left join (select kd_item from master.item_promo group by kd_item) b on b.kd_item = a.kd_item ';
+    s:= s+'order by a.nama_item asc';
+    ItemFrm.Master.SQL.Add(s);
+    ItemFrm.Master.Open;
+
+  except
+    on E: Exception do
+      DM.MyMsg(mmError,'Error has been encountered !',E.Message)
+  end;
+
+  DBMode:= dmBrowse;
+  UpdateView;
+
+end;
+
+procedure TItemFrm.grdDetailDBBTVid_rakPropertiesCloseUp(Sender: TObject);
+begin
+//  ItemPromo.edit;
+//  if ItemPromojenis.AsString = Trim('UANG') then begin
+//     grdDetailDBBTVid_warehouse.Properties.ReadOnly:= True;
+//     grdDetailDBBTVColumn1.Properties.Buttons[0].Enabled:= False;
+//     grdDetailDBBTVColumn2.Properties.Buttons[0].Enabled:= False;
+//     grdDetailDBBTVColumn3.Properties.ReadOnly:= False;
+//     grdDetailDBBTVColumn5.Properties.ReadOnly:= False;
+//     grdDetailDBBTVColumn4.Properties.ReadOnly:= True;
+//     grdDetailDBBTVColumn6.Properties.ReadOnly:= False;
+//
+//  end
+//  else
+//  if ItemPromojenis.AsString = Trim('BARANG') then begin
+//     grdDetailDBBTVid_warehouse.Properties.ReadOnly:= True;
+//     grdDetailDBBTVColumn1.Properties.Buttons[0].Enabled:= True;
+//     grdDetailDBBTVColumn2.Properties.Buttons[0].Enabled:= True;
+//     grdDetailDBBTVColumn3.Properties.ReadOnly:= True;
+//     grdDetailDBBTVColumn5.Properties.ReadOnly:= True;
+//     grdDetailDBBTVColumn4.Properties.ReadOnly:= False;
+//     grdDetailDBBTVColumn6.Properties.ReadOnly:= False;
+//
+//  end
+//  else
+//  if ItemPromojenis.AsString = Trim('KUPON') then begin
+//     grdDetailDBBTVid_warehouse.Properties.ReadOnly:= False;
+//     grdDetailDBBTVColumn1.Properties.Buttons[0].Enabled:= True;
+//     grdDetailDBBTVColumn2.Properties.Buttons[0].Enabled:= True;
+//     grdDetailDBBTVColumn3.Properties.ReadOnly:= False;
+//     grdDetailDBBTVColumn5.Properties.ReadOnly:= False;
+//     grdDetailDBBTVColumn4.Properties.ReadOnly:= False;
+//     grdDetailDBBTVColumn6.Properties.ReadOnly:= True;
+//
+//  end
+//  else
+//  if ItemPromojenis.AsString = Trim('') then begin
+//     grdDetailDBBTVid_warehouse.Properties.ReadOnly:= False;
+//     grdDetailDBBTVColumn1.Properties.Buttons[0].Enabled:= False;
+//     grdDetailDBBTVColumn2.Properties.Buttons[0].Enabled:= False;
+//     grdDetailDBBTVColumn3.Properties.ReadOnly:= False;
+//     grdDetailDBBTVColumn5.Properties.ReadOnly:= False;
+//     grdDetailDBBTVColumn4.Properties.ReadOnly:= False;
+//     grdDetailDBBTVColumn6.Properties.ReadOnly:= False;
+//
+//  end
+end;
+
+procedure TItemFrm.edtPrinciplePropertiesButtonClick(Sender: TObject;
+  AButtonIndex: Integer);
+begin
+  try
+    qPrinciple.Close;
+    qPrinciple.Open;
+    if LookPrinciple.Execute then begin
+       if Master.State=dsBrowse then
+          Master.Edit;
+       Masternama_principle.AsString:= qPrinciplenama_principle.AsString;
     end;
   except
     on E: Exception do

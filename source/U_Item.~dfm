@@ -1,6 +1,6 @@
 object ItemFrm: TItemFrm
-  Left = 154
-  Top = 115
+  Left = 138
+  Top = 57
   Width = 1120
   Height = 605
   Caption = 'Master Items'
@@ -762,7 +762,7 @@ object ItemFrm: TItemFrm
     Top = 81
     Width = 1104
     Height = 445
-    ActivePage = tsDetail
+    ActivePage = tsBrowse
     Align = alClient
     Style = 8
     TabOrder = 3
@@ -777,8 +777,8 @@ object ItemFrm: TItemFrm
       object dbtlMaster: TcxDBTreeList
         Left = 0
         Top = 0
-        Width = 1194
-        Height = 393
+        Width = 1104
+        Height = 382
         Align = alClient
         Bands = <
           item
@@ -799,15 +799,32 @@ object ItemFrm: TItemFrm
         Styles.Indicator = cxStyle4
         TabOrder = 0
         OnDblClick = dbtlMasterDblClick
+        object dbtlMastercxDBTreeListColumn5: TcxDBTreeListColumn
+          PropertiesClassName = 'TcxCheckBoxProperties'
+          Properties.ValueChecked = '1'
+          Properties.ValueUnchecked = '0'
+          Caption.AlignHorz = taCenter
+          Caption.AlignVert = vaCenter
+          Caption.GlyphAlignHorz = taCenter
+          Caption.Text = 'PROMO'
+          DataBinding.FieldName = 'ispromo'
+          Width = 47
+          Position.ColIndex = 0
+          Position.RowIndex = 0
+          Position.BandIndex = 0
+          Summary.FooterSummaryItems = <>
+          Summary.GroupFooterSummaryItems = <>
+        end
         object dbtlMasterid_item: TcxDBTreeListColumn
           Caption.AlignHorz = taCenter
           Caption.AlignVert = vaCenter
+          Caption.GlyphAlignHorz = taCenter
           Caption.Text = 'KODE'
           DataBinding.FieldName = 'kd_item'
           Options.Editing = False
           Options.ShowEditButtons = eisbNever
           Width = 82
-          Position.ColIndex = 0
+          Position.ColIndex = 1
           Position.RowIndex = 0
           Position.BandIndex = 0
           Summary.FooterSummaryItems = <>
@@ -821,7 +838,7 @@ object ItemFrm: TItemFrm
           Options.Editing = False
           Options.ShowEditButtons = eisbNever
           Width = 284
-          Position.ColIndex = 1
+          Position.ColIndex = 3
           Position.RowIndex = 0
           Position.BandIndex = 0
           Summary.FooterSummaryItems = <>
@@ -833,7 +850,7 @@ object ItemFrm: TItemFrm
           Caption.Text = 'SATUAN STOK'
           DataBinding.FieldName = 'satuan_jual'
           Width = 95
-          Position.ColIndex = 2
+          Position.ColIndex = 4
           Position.RowIndex = 0
           Position.BandIndex = 0
           Summary.FooterSummaryItems = <>
@@ -851,7 +868,7 @@ object ItemFrm: TItemFrm
           Options.Editing = False
           Options.ShowEditButtons = eisbNever
           Width = 58
-          Position.ColIndex = 3
+          Position.ColIndex = 5
           Position.RowIndex = 0
           Position.BandIndex = 0
           Summary.FooterSummaryItems = <>
@@ -863,7 +880,7 @@ object ItemFrm: TItemFrm
           Caption.Text = 'Rasio Karton'
           DataBinding.FieldName = 'rasio'
           Width = 71
-          Position.ColIndex = 5
+          Position.ColIndex = 7
           Position.RowIndex = 0
           Position.BandIndex = 0
           Summary.FooterSummaryItems = <>
@@ -876,7 +893,7 @@ object ItemFrm: TItemFrm
           Caption.Text = 'Rasio Lusin'
           DataBinding.FieldName = 'rasio_lusin'
           Width = 77
-          Position.ColIndex = 6
+          Position.ColIndex = 8
           Position.RowIndex = 0
           Position.BandIndex = 0
           Summary.FooterSummaryItems = <>
@@ -888,7 +905,7 @@ object ItemFrm: TItemFrm
           Caption.Text = 'HARGA BELI'
           DataBinding.FieldName = 'hrg_beli'
           Width = 142
-          Position.ColIndex = 7
+          Position.ColIndex = 9
           Position.RowIndex = 0
           Position.BandIndex = 0
           Summary.FooterSummaryItems = <>
@@ -900,7 +917,7 @@ object ItemFrm: TItemFrm
           Caption.Text = 'HARGA JUAL RETAIL'
           DataBinding.FieldName = 'hrg_jual'
           Width = 145
-          Position.ColIndex = 8
+          Position.ColIndex = 10
           Position.RowIndex = 0
           Position.BandIndex = 0
           Summary.FooterSummaryItems = <>
@@ -915,7 +932,7 @@ object ItemFrm: TItemFrm
           Caption.Text = 'INVENTORY'
           DataBinding.FieldName = 'isinventory'
           Width = 71
-          Position.ColIndex = 4
+          Position.ColIndex = 6
           Position.RowIndex = 0
           Position.BandIndex = 0
           Summary.FooterSummaryItems = <>
@@ -926,7 +943,7 @@ object ItemFrm: TItemFrm
           Caption.Text = 'HARGA JUAL SM GROSIR'
           DataBinding.FieldName = 'hrg_jual_sm_grosir'
           Width = 145
-          Position.ColIndex = 9
+          Position.ColIndex = 11
           Position.RowIndex = 0
           Position.BandIndex = 0
           Summary.FooterSummaryItems = <>
@@ -938,7 +955,7 @@ object ItemFrm: TItemFrm
           Caption.Text = 'HARGA JUAL GROSIR'
           DataBinding.FieldName = 'hrg_jual_grosir'
           Width = 145
-          Position.ColIndex = 10
+          Position.ColIndex = 12
           Position.RowIndex = 0
           Position.BandIndex = 0
           Summary.FooterSummaryItems = <>
@@ -949,7 +966,18 @@ object ItemFrm: TItemFrm
           Caption.Text = 'HARGA JUAL GROSIR BESAR'
           DataBinding.FieldName = 'hrg_jual_grosir_besar'
           Width = 163
-          Position.ColIndex = 11
+          Position.ColIndex = 13
+          Position.RowIndex = 0
+          Position.BandIndex = 0
+          Summary.FooterSummaryItems = <>
+          Summary.GroupFooterSummaryItems = <>
+        end
+        object dbtlMastercxDBTreeListColumn6: TcxDBTreeListColumn
+          Caption.AlignHorz = taCenter
+          Caption.AlignVert = vaCenter
+          Caption.Text = 'PRINCIPLE'
+          DataBinding.FieldName = 'nama_principle'
+          Position.ColIndex = 2
           Position.RowIndex = 0
           Position.BandIndex = 0
           Summary.FooterSummaryItems = <>
@@ -958,8 +986,8 @@ object ItemFrm: TItemFrm
       end
       object pnlSearch: TSCPanel
         Left = 0
-        Top = 393
-        Width = 1194
+        Top = 382
+        Width = 1104
         Height = 39
         Align = alBottom
         Color = 15986925
@@ -1074,7 +1102,7 @@ object ItemFrm: TItemFrm
         end
         object RzLabel3: TRzLabel
           Left = 258
-          Top = 147
+          Top = 185
           Width = 61
           Height = 13
           Caption = 'Rasio Karton'
@@ -1090,7 +1118,7 @@ object ItemFrm: TItemFrm
         end
         object RzLabel8: TRzLabel
           Left = 14
-          Top = 225
+          Top = 263
           Width = 81
           Height = 13
           Caption = 'Harga Jual Retail'
@@ -1106,7 +1134,7 @@ object ItemFrm: TItemFrm
         end
         object RzLabel4: TRzLabel
           Left = 12
-          Top = 147
+          Top = 185
           Width = 53
           Height = 13
           Caption = 'Satuan Beli'
@@ -1122,7 +1150,7 @@ object ItemFrm: TItemFrm
         end
         object RzLabel5: TRzLabel
           Left = 142
-          Top = 147
+          Top = 185
           Width = 56
           Height = 13
           Caption = 'Satuan Jual'
@@ -1138,7 +1166,7 @@ object ItemFrm: TItemFrm
         end
         object RzLabel9: TRzLabel
           Left = 13
-          Top = 187
+          Top = 225
           Width = 48
           Height = 13
           Caption = 'Harga Beli'
@@ -1204,7 +1232,7 @@ object ItemFrm: TItemFrm
         end
         object RzLabel11: TRzLabel
           Left = 14
-          Top = 264
+          Top = 302
           Width = 107
           Height = 13
           Caption = 'Harga Jual Semi Grosir'
@@ -1220,7 +1248,7 @@ object ItemFrm: TItemFrm
         end
         object RzLabel12: TRzLabel
           Left = 15
-          Top = 301
+          Top = 339
           Width = 82
           Height = 13
           Caption = 'Harga Jual Grosir'
@@ -1236,7 +1264,7 @@ object ItemFrm: TItemFrm
         end
         object RzLabel13: TRzLabel
           Left = 14
-          Top = 339
+          Top = 377
           Width = 112
           Height = 13
           Caption = 'Harga Jual Grosir Besar'
@@ -1252,7 +1280,7 @@ object ItemFrm: TItemFrm
         end
         object RzLabel14: TRzLabel
           Left = 214
-          Top = 225
+          Top = 263
           Width = 37
           Height = 13
           Caption = 'Qty Min'
@@ -1268,7 +1296,7 @@ object ItemFrm: TItemFrm
         end
         object RzLabel15: TRzLabel
           Left = 262
-          Top = 225
+          Top = 263
           Width = 41
           Height = 13
           Caption = 'Qty Max'
@@ -1284,7 +1312,7 @@ object ItemFrm: TItemFrm
         end
         object RzLabel16: TRzLabel
           Left = 216
-          Top = 264
+          Top = 302
           Width = 37
           Height = 13
           Caption = 'Qty Min'
@@ -1300,7 +1328,7 @@ object ItemFrm: TItemFrm
         end
         object RzLabel17: TRzLabel
           Left = 264
-          Top = 264
+          Top = 302
           Width = 41
           Height = 13
           Caption = 'Qty Max'
@@ -1316,7 +1344,7 @@ object ItemFrm: TItemFrm
         end
         object RzLabel18: TRzLabel
           Left = 216
-          Top = 301
+          Top = 339
           Width = 37
           Height = 13
           Caption = 'Qty Min'
@@ -1332,7 +1360,7 @@ object ItemFrm: TItemFrm
         end
         object RzLabel19: TRzLabel
           Left = 264
-          Top = 301
+          Top = 339
           Width = 41
           Height = 13
           Caption = 'Qty Max'
@@ -1348,7 +1376,7 @@ object ItemFrm: TItemFrm
         end
         object RzLabel20: TRzLabel
           Left = 216
-          Top = 340
+          Top = 378
           Width = 37
           Height = 13
           Caption = 'Qty Min'
@@ -1364,7 +1392,7 @@ object ItemFrm: TItemFrm
         end
         object RzLabel21: TRzLabel
           Left = 264
-          Top = 340
+          Top = 378
           Width = 41
           Height = 13
           Caption = 'Qty Max'
@@ -1380,7 +1408,7 @@ object ItemFrm: TItemFrm
         end
         object RzLabel22: TRzLabel
           Left = 329
-          Top = 147
+          Top = 185
           Width = 53
           Height = 13
           Caption = 'Rasio Lusin'
@@ -1397,10 +1425,26 @@ object ItemFrm: TItemFrm
         end
         object RzLabel23: TRzLabel
           Left = 14
-          Top = 376
+          Top = 414
           Width = 50
           Height = 13
           Caption = 'Lokasi Rak'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+          BlinkIntervalOff = 600
+          BlinkIntervalOn = 600
+          BevelWidth = 0
+        end
+        object RzLabel24: TRzLabel
+          Left = 14
+          Top = 146
+          Width = 39
+          Height = 13
+          Caption = 'Principle'
           Font.Charset = ANSI_CHARSET
           Font.Color = clBlack
           Font.Height = -11
@@ -1426,7 +1470,7 @@ object ItemFrm: TItemFrm
         end
         object ckbDetail: TcxDBCheckBox
           Left = 10
-          Top = 419
+          Top = 457
           Caption = 'Aktif'
           DataBinding.DataField = 'isdetail'
           DataBinding.DataSource = dsMaster
@@ -1453,7 +1497,7 @@ object ItemFrm: TItemFrm
         end
         object edtMin_Stock: TcxDBTextEdit
           Left = 11
-          Top = 238
+          Top = 276
           DataBinding.DataField = 'hrg_jual'
           DataBinding.DataSource = dsMaster
           Style.Shadow = False
@@ -1465,7 +1509,7 @@ object ItemFrm: TItemFrm
         end
         object cb_inventory: TcxDBCheckBox
           Left = 99
-          Top = 419
+          Top = 457
           Caption = 'Inventory (Distok)'
           DataBinding.DataField = 'isinventory'
           DataBinding.DataSource = dsMaster
@@ -1479,7 +1523,7 @@ object ItemFrm: TItemFrm
         end
         object cb_barang_jadi: TcxDBCheckBox
           Left = 243
-          Top = 419
+          Top = 457
           Caption = 'Barang Jadi'
           DataBinding.DataSource = dsMaster
           Properties.NullStyle = nssUnchecked
@@ -1492,7 +1536,7 @@ object ItemFrm: TItemFrm
         end
         object edtSatuan: TcxDBButtonEdit
           Left = 11
-          Top = 162
+          Top = 200
           DataBinding.DataField = 'satuan_beli'
           DataBinding.DataSource = dsMaster
           Properties.Buttons = <
@@ -1512,7 +1556,7 @@ object ItemFrm: TItemFrm
         end
         object edtSatuanBeli: TcxDBButtonEdit
           Left = 139
-          Top = 162
+          Top = 200
           DataBinding.DataField = 'satuan_jual'
           DataBinding.DataSource = dsMaster
           Properties.Buttons = <
@@ -1532,7 +1576,7 @@ object ItemFrm: TItemFrm
         end
         object edtRasio: TcxDBTextEdit
           Left = 256
-          Top = 162
+          Top = 200
           DataBinding.DataField = 'rasio'
           DataBinding.DataSource = dsMaster
           Style.Shadow = False
@@ -1544,7 +1588,7 @@ object ItemFrm: TItemFrm
         end
         object edtHPP: TcxDBTextEdit
           Left = 11
-          Top = 200
+          Top = 238
           DataBinding.DataField = 'hrg_beli'
           DataBinding.DataSource = dsMaster
           Style.Shadow = False
@@ -1609,7 +1653,7 @@ object ItemFrm: TItemFrm
         end
         object edtHrgSmGrosir: TcxDBTextEdit
           Left = 11
-          Top = 277
+          Top = 315
           DataBinding.DataField = 'hrg_jual_sm_grosir'
           DataBinding.DataSource = dsMaster
           Style.Shadow = False
@@ -1621,7 +1665,7 @@ object ItemFrm: TItemFrm
         end
         object edtHrgGrosir: TcxDBTextEdit
           Left = 12
-          Top = 314
+          Top = 352
           DataBinding.DataField = 'hrg_jual_grosir'
           DataBinding.DataSource = dsMaster
           Style.Shadow = False
@@ -1633,7 +1677,7 @@ object ItemFrm: TItemFrm
         end
         object edtHrgGrosirBesar: TcxDBTextEdit
           Left = 11
-          Top = 352
+          Top = 390
           DataBinding.DataField = 'hrg_jual_grosir_besar'
           DataBinding.DataSource = dsMaster
           Style.Shadow = False
@@ -1645,7 +1689,7 @@ object ItemFrm: TItemFrm
         end
         object edtqtymin_retail: TcxDBTextEdit
           Left = 211
-          Top = 238
+          Top = 276
           DataBinding.DataField = 'qty_min_retail'
           DataBinding.DataSource = dsMaster
           Style.Shadow = False
@@ -1657,7 +1701,7 @@ object ItemFrm: TItemFrm
         end
         object edtqtymax_retail: TcxDBTextEdit
           Left = 259
-          Top = 238
+          Top = 276
           DataBinding.DataField = 'qty_max_retail'
           DataBinding.DataSource = dsMaster
           Style.Shadow = False
@@ -1669,7 +1713,7 @@ object ItemFrm: TItemFrm
         end
         object edtqtymin_sm_grosir: TcxDBTextEdit
           Left = 213
-          Top = 277
+          Top = 315
           DataBinding.DataField = 'qty_min_sm_grosir'
           DataBinding.DataSource = dsMaster
           Style.Shadow = False
@@ -1681,7 +1725,7 @@ object ItemFrm: TItemFrm
         end
         object edtqtymax_sm_grosir: TcxDBTextEdit
           Left = 261
-          Top = 277
+          Top = 315
           DataBinding.DataField = 'qty_max_sm_grosir'
           DataBinding.DataSource = dsMaster
           Style.Shadow = False
@@ -1693,7 +1737,7 @@ object ItemFrm: TItemFrm
         end
         object edtqtymin_grosir: TcxDBTextEdit
           Left = 213
-          Top = 314
+          Top = 352
           DataBinding.DataField = 'qty_min_grosir'
           DataBinding.DataSource = dsMaster
           Style.Shadow = False
@@ -1705,7 +1749,7 @@ object ItemFrm: TItemFrm
         end
         object edtqtymax_grosir: TcxDBTextEdit
           Left = 261
-          Top = 314
+          Top = 352
           DataBinding.DataField = 'qty_max_grosir'
           DataBinding.DataSource = dsMaster
           Style.Shadow = False
@@ -1717,7 +1761,7 @@ object ItemFrm: TItemFrm
         end
         object edtqtymin_grosir_besar: TcxDBTextEdit
           Left = 213
-          Top = 353
+          Top = 391
           DataBinding.DataField = 'qty_min_grosir_besar'
           DataBinding.DataSource = dsMaster
           Style.Shadow = False
@@ -1729,7 +1773,7 @@ object ItemFrm: TItemFrm
         end
         object edtqtymax_grosir_besar: TcxDBTextEdit
           Left = 261
-          Top = 353
+          Top = 391
           DataBinding.DataField = 'qty_max_grosir_besar'
           DataBinding.DataSource = dsMaster
           Style.Shadow = False
@@ -1741,7 +1785,7 @@ object ItemFrm: TItemFrm
         end
         object edtRasioLusin: TcxDBTextEdit
           Left = 327
-          Top = 162
+          Top = 200
           DataBinding.DataField = 'rasio_lusin'
           DataBinding.DataSource = dsMaster
           Style.Shadow = False
@@ -1754,7 +1798,7 @@ object ItemFrm: TItemFrm
         end
         object edtLokRak: TcxDBButtonEdit
           Left = 11
-          Top = 391
+          Top = 429
           DataBinding.DataField = 'lok_rak'
           DataBinding.DataSource = dsMaster
           Properties.Buttons = <
@@ -1772,13 +1816,33 @@ object ItemFrm: TItemFrm
           OnKeyPress = EditKeyPress
           Width = 114
         end
+        object edtPrinciple: TcxDBButtonEdit
+          Left = 11
+          Top = 161
+          DataBinding.DataField = 'nama_principle'
+          DataBinding.DataSource = dsMaster
+          Properties.Buttons = <
+            item
+              Default = True
+              Kind = bkEllipsis
+            end>
+          Properties.CharCase = ecUpperCase
+          Properties.MaxLength = 0
+          Properties.OnButtonClick = edtPrinciplePropertiesButtonClick
+          Style.BorderStyle = ebsOffice11
+          StyleFocused.BorderStyle = ebsThick
+          StyleHot.BorderStyle = ebsThick
+          TabOrder = 26
+          OnKeyPress = EditKeyPress
+          Width = 126
+        end
       end
       object RzPanel1: TRzPanel
-        Left = 1006
+        Left = 823
         Top = 0
-        Width = 359
+        Width = 281
         Height = 421
-        Align = alLeft
+        Align = alRight
         Color = 15919073
         Ctl3D = True
         ParentCtl3D = False
@@ -1786,7 +1850,7 @@ object ItemFrm: TItemFrm
         object pnlBottom: TSCPanel
           Left = 2
           Top = 2
-          Width = 355
+          Width = 277
           Height = 30
           Align = alTop
           Alignment = taCenter
@@ -1806,7 +1870,7 @@ object ItemFrm: TItemFrm
         object grdMaster: TcxGrid
           Left = 2
           Top = 32
-          Width = 355
+          Width = 277
           Height = 387
           Align = alClient
           TabOrder = 1
@@ -1881,7 +1945,7 @@ object ItemFrm: TItemFrm
       object RzPanel2: TRzPanel
         Left = 407
         Top = 0
-        Width = 599
+        Width = 682
         Height = 421
         Align = alLeft
         Color = 15919073
@@ -1891,7 +1955,7 @@ object ItemFrm: TItemFrm
         object SCPanel2: TSCPanel
           Left = 2
           Top = 32
-          Width = 595
+          Width = 678
           Height = 30
           Align = alTop
           Alignment = taCenter
@@ -2195,7 +2259,7 @@ object ItemFrm: TItemFrm
         object SCPanel1: TSCPanel
           Left = 2
           Top = 2
-          Width = 595
+          Width = 678
           Height = 30
           Align = alTop
           Alignment = taCenter
@@ -2215,7 +2279,7 @@ object ItemFrm: TItemFrm
         object grdDetail: TcxGrid
           Left = 2
           Top = 62
-          Width = 595
+          Width = 678
           Height = 357
           Align = alClient
           TabOrder = 2
@@ -2247,6 +2311,8 @@ object ItemFrm: TItemFrm
             object grdDetailDBBTVid_warehouse: TcxGridDBColumn
               Caption = 'QTY'
               DataBinding.FieldName = 'qty_promo'
+              PropertiesClassName = 'TcxTextEditProperties'
+              Properties.ReadOnly = False
               HeaderAlignmentHorz = taCenter
               HeaderAlignmentVert = vaCenter
               Options.Filtering = False
@@ -2262,7 +2328,9 @@ object ItemFrm: TItemFrm
               PropertiesClassName = 'TcxComboBoxProperties'
               Properties.Items.Strings = (
                 'UANG'
-                'BARANG')
+                'BARANG'
+                'KUPON')
+              Properties.OnCloseUp = grdDetailDBBTVid_rakPropertiesCloseUp
               Properties.OnEditValueChanged = grdDetailDBBTVid_rakPropertiesEditValueChanged
               HeaderAlignmentHorz = taCenter
               HeaderAlignmentVert = vaCenter
@@ -2303,6 +2371,8 @@ object ItemFrm: TItemFrm
             object grdDetailDBBTVColumn3: TcxGridDBColumn
               Caption = 'QTY PROMO'
               DataBinding.FieldName = 'qty_item_promo'
+              PropertiesClassName = 'TcxTextEditProperties'
+              Properties.ReadOnly = False
               HeaderAlignmentHorz = taCenter
               HeaderAlignmentVert = vaCenter
               Width = 50
@@ -2310,6 +2380,8 @@ object ItemFrm: TItemFrm
             object grdDetailDBBTVColumn5: TcxGridDBColumn
               Caption = 'Qty PROMO MAX'
               DataBinding.FieldName = 'qty_max'
+              PropertiesClassName = 'TcxTextEditProperties'
+              Properties.ReadOnly = False
               HeaderAlignmentHorz = taCenter
               HeaderAlignmentVert = vaCenter
               Width = 48
@@ -2317,9 +2389,20 @@ object ItemFrm: TItemFrm
             object grdDetailDBBTVColumn4: TcxGridDBColumn
               Caption = 'NILAI PROMO'
               DataBinding.FieldName = 'nilai_promo'
+              PropertiesClassName = 'TcxTextEditProperties'
+              Properties.ReadOnly = False
               HeaderAlignmentHorz = taCenter
               HeaderAlignmentVert = vaCenter
               Width = 86
+            end
+            object grdDetailDBBTVColumn6: TcxGridDBColumn
+              Caption = 'NILAI BELANJA'
+              DataBinding.FieldName = 'nilai_belanja'
+              PropertiesClassName = 'TcxTextEditProperties'
+              Properties.ReadOnly = False
+              HeaderAlignmentHorz = taCenter
+              HeaderAlignmentVert = vaCenter
+              Width = 84
             end
           end
           object grdlvlDetail: TcxGridLevel
@@ -2432,7 +2515,7 @@ object ItemFrm: TItemFrm
     BeforePost = MasterBeforePost
     OnNewRecord = MasterNewRecord
     SQL.Strings = (
-      'select a.*'
+      'select a.*, CAST('#39'0'#39' as varchar) as ispromo'
       'from master.item a'
       'order by a.nama_item')
     Params = <>
@@ -2588,6 +2671,15 @@ object ItemFrm: TItemFrm
     end
     object Masterlok_rak: TStringField
       FieldName = 'lok_rak'
+      Size = 200
+    end
+    object Masterispromo: TStringField
+      FieldName = 'ispromo'
+      ReadOnly = True
+      Size = 252
+    end
+    object Masternama_principle: TStringField
+      FieldName = 'nama_principle'
       Size = 200
     end
   end
@@ -3785,6 +3877,9 @@ object ItemFrm: TItemFrm
     object ItemPromoqty_max: TFloatField
       FieldName = 'qty_max'
     end
+    object ItemPromonilai_belanja: TFloatField
+      FieldName = 'nilai_belanja'
+    end
   end
   object dsItemPromo: TDataSource
     DataSet = ItemPromo
@@ -3995,5 +4090,35 @@ object ItemFrm: TItemFrm
       Visible = False
       Size = 200
     end
+  end
+  object qPrinciple: TZQuery
+    Connection = DM.conn
+    SQL.Strings = (
+      'select nama_principle'
+      'from master.principle'
+      'order by id_principle')
+    Params = <>
+    Left = 673
+    Top = 79
+    object qPrinciplenama_principle: TStringField
+      DisplayLabel = 'Nama Principle'
+      DisplayWidth = 150
+      FieldName = 'nama_principle'
+      Size = 1020
+    end
+  end
+  object LookPrinciple: TwwLookupDialog
+    Selected.Strings = (
+      'nama_principle'#9'150'#9'Nama Principle'#9'F')
+    GridTitleAlignment = taCenter
+    GridColor = clWhite
+    GridOptions = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgPerfectRowFit]
+    LookupTable = qPrinciple
+    Caption = 'Lookup ITEM'
+    MaxWidth = 0
+    MaxHeight = 209
+    CharCase = ecNormal
+    Left = 702
+    Top = 78
   end
 end

@@ -137,7 +137,6 @@ type
     edtDateTransaksi: TcxDBDateEdit;
     Label6: TLabel;
     grddbtvDetailid_rekanan: TcxGridDBColumn;
-    grddbtvMastertotal: TcxGridDBColumn;
     grddbtvMasterdt_transaksi: TcxGridDBColumn;
     SCPanel1: TSCPanel;
     Label8: TLabel;
@@ -224,68 +223,12 @@ type
     Masterid: TLargeintField;
     Detailid: TLargeintField;
     qNota: TZQuery;
-    qNotaid_nota: TLargeintField;
-    qNotano_nota: TStringField;
-    qNotadt_nota: TDateTimeField;
-    qNotano_bukti: TStringField;
-    qNotadt_ins: TDateTimeField;
-    qNotadt_upd: TDateTimeField;
-    qNotausr_ins: TStringField;
-    qNotausr_upd: TStringField;
-    qNotaispost: TStringField;
-    qNotaiscancel: TStringField;
-    qNotaisdelete: TStringField;
-    qNotatotal: TFloatField;
-    qNotakd_rekanan: TStringField;
-    qNotaid_trans: TStringField;
-    qNotaid_rek_gl: TStringField;
-    qNotaid_division: TStringField;
-    qNotacara_bayar: TStringField;
-    qNotadt_jth_tempo: TDateTimeField;
-    qNotadiskripsi: TStringField;
-    qNotasub_total: TFloatField;
-    qNotaclaim: TFloatField;
-    qNotadisc_rp: TFloatField;
-    qNotapromo_uang: TFloatField;
-    qNotapromo_barang: TFloatField;
-    qNotanet_n_ppn: TFloatField;
-    qNotaiskirim: TStringField;
-    qNotaislunas: TStringField;
-    qNotaretur: TFloatField;
-    qNotaishpp: TStringField;
-    qNotadt_lunas: TDateTimeField;
-    qNotadt_kirim: TDateTimeField;
-    qNotaisok: TStringField;
-    qNotadt_posting: TDateTimeField;
-    qNotanota_diretur: TStringField;
-    qNotaid_curr: TStringField;
-    qNotakurs: TFloatField;
-    qNotavat_str: TStringField;
-    qNotavat_num: TFloatField;
-    qNotakd_del_place: TStringField;
-    qNotano_rekap: TStringField;
-    qNotan_hari: TIntegerField;
-    qNotaevocer: TFloatField;
-    qNotano_faktur_pajak: TStringField;
-    qNotano_evocer: TStringField;
-    qNotaid_import: TLargeintField;
-    qNotapromo_id: TStringField;
-    qNotamvocer: TFloatField;
-    qNotano_mvocer: TStringField;
-    qNotadisc_psn: TFloatField;
-    qNotaisget: TStringField;
-    qNotajns_transaksi: TStringField;
-    qNotadisc_total: TFloatField;
-    qNotadisc_member: TFloatField;
-    qNotashift: TIntegerField;
-    qNotanama_rekanan: TStringField;
     qTotal: TZQuery;
     qTotalvtotal: TFloatField;
     qExec: TZQuery;
     sq_kasir: TZSequence;
     qUsernk: TStringField;
     qUserfull_name: TStringField;
-    grddbtvDetailColumn1: TcxGridDBColumn;
     frxTT: TfrxReport;
     qTotalUser: TZQuery;
     qTotalUsernama_kasir: TStringField;
@@ -299,7 +242,6 @@ type
     qTotalUsertotal_tunai: TFloatField;
     qTotalUsertotal_debet: TFloatField;
     qTotalUsertotal_qris: TFloatField;
-    qNotajns_penjualan: TMemoField;
     grddbtvDetailColumn2: TcxGridDBColumn;
     Detailjns_penjualan: TStringField;
     AdvPanel1: TAdvPanel;
@@ -320,6 +262,37 @@ type
     Label11: TLabel;
     cxDBLabel5: TcxDBLabel;
     grddbtvMasterColumn1: TcxGridDBColumn;
+    qNotano_nota: TStringField;
+    qNotadt_nota: TDateTimeField;
+    qNotaid_trans: TStringField;
+    qNotausr_ins: TStringField;
+    qNotaispost: TStringField;
+    qNotasub_total: TFloatField;
+    qNotadisc_rp: TFloatField;
+    qNotadisc_member: TFloatField;
+    qNotatotal: TFloatField;
+    qNotabayar_tunai: TFloatField;
+    qNotabayar_transfer: TFloatField;
+    qNotabayar_debit: TFloatField;
+    qNotabayar_qris: TFloatField;
+    qNotadibayar: TFloatField;
+    qNotanama_rekanan: TStringField;
+    qNotajns_penjualan: TMemoField;
+    Detaildisc_item: TFloatField;
+    Detailbayar_tunai: TFloatField;
+    Detailbayar_transfer: TFloatField;
+    Detailbayar_debit: TFloatField;
+    Detailbayar_qris: TFloatField;
+    Label12: TLabel;
+    cxDBLabel6: TcxDBLabel;
+    Mastertotal_transfer: TFloatField;
+    grddbtvDetailColumn4: TcxGridDBColumn;
+    grddbtvDetailColumn5: TcxGridDBColumn;
+    grddbtvDetailColumn6: TcxGridDBColumn;
+    grddbtvDetailColumn7: TcxGridDBColumn;
+    qTotalUsertotal_transfer: TFloatField;
+    Mastertot_penjualan: TFloatField;
+    grddbtvMasterColumn2: TcxGridDBColumn;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure actCloseExecute(Sender: TObject);
@@ -354,13 +327,14 @@ type
     procedure qTotalBeforeOpen(DataSet: TDataSet);
     procedure LaporanKasir1Click(Sender: TObject);
     procedure TSetoran1Click(Sender: TObject);
+    procedure MasterCalcFields(DataSet: TDataSet);
   private
     vjns_transaksi, vjudul, vnoReg : string;
     vtag : integer;
     vid_nota : Int64;
     DBMode: TDBMode;
     issparepart : boolean;
-    totPost, totunPost, total_tunai, total_debet, total_qris : Double;
+    totPost, totunPost, total_tunai, total_transfer, total_debet, total_qris : Double;
     { Private declarations }
     procedure UpdateView;
     function CheckEditRight(var msg: string): Boolean;
@@ -500,11 +474,13 @@ begin
     cxDBLabel5.Visible:=  not isBrowse;
     cxDBLabel1.Visible:=  not isBrowse;
     cxDBLabel2.Visible:=  not isBrowse;
+    cxDBLabel6.Visible:= not isBrowse;
     Label9.Visible:= not isBrowse;
     Label10.Visible:= not isBrowse;
     Label11.Visible:= not isBrowse;
     Label7.Visible:= not isBrowse;
     Label17.Visible:= not isBrowse;
+    Label12.Visible:= not isBrowse;
 
   end;
 end;
@@ -747,6 +723,7 @@ begin
    Mastertotal_tunai.AsFloat:= 0;
    Mastertotal_debit.AsFloat:= 0;
    Mastertotal_qris.AsFloat:= 0;
+   Mastertotal_transfer.AsFloat:= 0;
 end;
 
 procedure TLapKasirPerShiftFrm.DetailNewRecord(DataSet: TDataSet);
@@ -979,13 +956,12 @@ begin
     totunPost:= 0;
 
     total_tunai:= 0;
+    total_transfer:= 0;
     total_debet:= 0;
     total_qris:= 0;
 
    if (Master.State<>dsBrowse) then
       Master.Post;
-
-
 
     DecodeDate(edtDateTransaksi.Date,y,m,d);
 
@@ -1013,7 +989,6 @@ begin
               Detailid_kasir.AsLargeInt:= Masterid.AsLargeInt;
               Detailno_nota.AsString:= qNotano_nota.AsString;
               Detaildt_nota.AsDateTime:= qNotadt_nota.AsDateTime;
-              Detailcara_bayar.AsString:= qNotacara_bayar.AsString;
               Detailid_trans.AsString:= qNotaid_trans.AsString;
               Detailnama_kasir.AsString:= qNotausr_ins.AsString;
               Detailnama_customer.AsString:= qNotanama_rekanan.AsString;
@@ -1021,7 +996,12 @@ begin
               Detailjns_penjualan.AsString:= qNotajns_penjualan.AsString;
               Detailsub_total.AsFloat:= qNotasub_total.AsFloat;
               Detaildisc_member.AsFloat:= qNotadisc_member.AsFloat;
+              Detaildisc_item.AsFloat:= qNotadisc_rp.AsFloat;
               Detailispost_detail.AsString:= qNotaispost.AsString;
+              Detailbayar_tunai.AsFloat:= qNotabayar_tunai.AsFloat;
+              Detailbayar_transfer.AsFloat:= qNotabayar_transfer.AsFloat;
+              Detailbayar_debit.AsFloat:= qNotabayar_debit.AsFloat;
+              Detailbayar_qris.AsFloat:= qNotabayar_qris.AsFloat;
 
               if qNotaispost.AsString = '1' then begin
                  totPost:= totPost + qNotatotal.AsFloat;
@@ -1033,13 +1013,10 @@ begin
                  Detailtotal.AsFloat:= 0;
               end;
 
-              if qNotacara_bayar.AsString = 'TUNAI' then
-                 total_tunai:= total_tunai+qNotatotal.AsFloat;
-              if qNotacara_bayar.AsString = 'DEBET' then
-                 total_debet:= total_debet+qNotatotal.AsFloat;
-              if qNotacara_bayar.AsString = 'QRIS' then
-                 total_qris:= total_qris+qNotatotal.AsFloat;
-
+              total_tunai:= total_tunai+qNotabayar_tunai.AsFloat;
+              total_transfer:= total_transfer+qNotabayar_transfer.AsFloat;
+              total_debet:= total_debet+qNotabayar_debit.AsFloat;
+              total_qris:= total_qris+qNotabayar_qris.AsFloat;
 
               Detail.Post;
               qNota.Next;
@@ -1059,6 +1036,7 @@ begin
       Mastertotal_tunai.AsFloat:= total_tunai;
       Mastertotal_debit.AsFloat:= total_debet;
       Mastertotal_qris.AsFloat:= total_qris;
+      Mastertotal_transfer.AsFloat:= total_transfer;
 
 
       sts_dlg.Progress_It;
@@ -1067,130 +1045,6 @@ begin
       Detail.First;
       Detail.EnableControls;
     end;
-
-
-//   Detail.DisableControls;
-//   try
-//    sts_dlg:= TfrmStatus_Dialog.Create(Application);
-//    sts_dlg.Reset_Progress;
-//    sts_dlg.Set_Min(1);
-//    sts_dlg.Set_Max(3);
-//    sts_dlg.Set_Status('Harap Tunggu, Sedang Proses Loading Data ...!!!');
-//    sts_dlg.Show;
-//
-//     try
-//
-//       if Mastershift.AsInteger=3 then begin
-//         qryNota3.Close;
-//         qryNota3.Params.ParamByName('pshift').Value:= Mastershift.Value;
-//         qryNota3.Params.ParamByName('ptgl0').Value:= FormatDateTime('dd/mm/yyyy',Masterdt_transaksi.AsDateTime);
-//         qryNota3.Params.ParamByName('ptgl1').Value:= FormatDateTime('dd/mm/yyyy',dt2);
-//         qryNota3.Open;
-//         sts_dlg.Progress_It;
-//         if qryNota3.RecordCount>0 then begin
-//            qryNota3.First;
-//            while not qryNota3.Eof do begin
-//                Detail.Append;
-//                Detailno_nota.Value:= qryNota3no_nota.Value;
-//                Detailno_register.Value:= qryNota3no_register.Value;
-//                Detailnama_pasien.AsString:= qryNota3nama_pasien.AsString;
-//                Detailketerangan.AsString:= qryNota3nama_transaksi.AsString;
-//
-//                Detailcara_bayar.AsString:= qryNota3cara_bayar.AsString;
-//                Detailjns_pembayaran.AsString:= qryNota3jns_pembayaran.AsString;
-//                if qryNota3id_pasien.AsString='-' then Detailid_pasien.Clear
-//                else
-//                if (qryNota3id_pasien.IsNull) or (Trim(qryNota3id_pasien.AsString)='') then
-//                   Detailid_pasien.Clear
-//                else
-//                   Detailid_pasien.AsString:= qryNota3id_pasien.AsString;
-//
-//                if (Trim(qryNota3id_penjamin.AsString)='') or (qryNota3id_penjamin.IsNull) then
-//                    Detailid_penjamin.AsString:= qryNota3id_pasien.AsString
-//                else begin
-//                    if (Trim(qryNota3id_penjamin.AsString)='-') then
-//                        Detailid_penjamin.AsString:= qryNota3id_pasien.AsString
-//                    else
-//                       Detailid_penjamin.AsString:= qryNota3id_penjamin.AsString;
-//                end;
-//                Detailid_trans.AsString:= qryNota3id_trans.AsString;
-//                //Detaildibayar.AsFloat:= DM.Pembulatan(qryNota3total.AsFloat-qryNota3disc_rp.AsFloat);
-//                Detailtunai.AsFloat:= qryNota3tunai.AsFloat;
-//                Detailklaim.AsFloat:= qryNota3klaim.AsFloat;
-//                Detaildt_nota.AsDateTime:= qryNota3dt_nota.AsDateTime;
-//                Detailusr_ins.AsString:= qryNota3usr_upd.AsString;
-//                if (qryNota3id_rek_gl.IsNull) or (Trim(qryNota3id_rek_gl.AsString)='') then
-//                    Detailid_rek_gl.Clear
-//                else
-//                    Detailid_rek_gl.AsString:= qryNota3id_rek_gl.AsString;
-//                Detail.Post;
-//                qryNota3.Next;
-//                sts_dlg.Progress_It;
-//            end;
-//         end else begin
-//            DM.MyMsg(mmInformation,'Data tidak ditemukan !','');
-//         end;
-//       end else begin
-//         qryNota.Close;
-//         qryNota.Params.ParamByName('pshift').Value:= Mastershift.Value;
-//         qryNota.Params.ParamByName('ptgl0').Value:= FormatDateTime('dd/mm/yyyy',Masterdt_transaksi.AsDateTime);
-//         qryNota.Params.ParamByName('ptgl1').Value:= FormatDateTime('dd/mm/yyyy',dt2);
-//         qryNota.Open;
-//         sts_dlg.Progress_It;
-//         if qryNota.RecordCount>0 then begin
-//            qryNota.First;
-//            while not qryNota.Eof do begin
-//                Detail.Append;
-//                Detailno_nota.Value:= qryNotano_nota.Value;
-//                Detailno_register.Value:= qryNotano_register.Value;
-//                Detailnama_pasien.AsString:= qryNotanama_pasien.AsString;
-//                Detailketerangan.AsString:= qryNotanama_transaksi.AsString;
-//
-//                Detailcara_bayar.AsString:= qryNotacara_bayar.AsString;
-//                Detailjns_pembayaran.AsString:= qryNotajns_pembayaran.AsString;
-//                if qryNotaid_pasien.AsString='-' then Detailid_pasien.Clear
-//                else
-//                if (qryNotaid_pasien.IsNull) or (Trim(qryNotaid_pasien.AsString)='') then
-//                   Detailid_pasien.Clear
-//                else
-//                   Detailid_pasien.AsString:= qryNotaid_pasien.AsString;
-//
-//                if (Trim(qryNotaid_penjamin.AsString)='') or (qryNotaid_penjamin.IsNull) then
-//                    Detailid_penjamin.AsString:= qryNotaid_pasien.AsString
-//                else begin
-//                    if (Trim(qryNotaid_penjamin.AsString)='-') then
-//                        Detailid_penjamin.AsString:= qryNotaid_pasien.AsString
-//                    else
-//                       Detailid_penjamin.AsString:= qryNotaid_penjamin.AsString;
-//                end;
-//                Detailid_trans.AsString:= qryNotaid_trans.AsString;
-//                //Detaildibayar.AsFloat:= DM.Pembulatan(qryNotatotal.AsFloat-qryNotadisc_rp.AsFloat);
-//                Detailtunai.AsFloat:= qryNotatunai.AsFloat;
-//                Detailklaim.AsFloat:= qryNotaklaim.AsFloat;
-//                Detaildt_nota.AsDateTime:= qryNotadt_nota.AsDateTime;
-//                Detailusr_ins.AsString:= qryNotausr_upd.AsString;
-//                if (qryNotaid_rek_gl.IsNull) or (Trim(qryNotaid_rek_gl.AsString)='') then
-//                    Detailid_rek_gl.Clear
-//                else
-//                    Detailid_rek_gl.AsString:= qryNotaid_rek_gl.AsString;
-//                Detail.Post;
-//                qryNota.Next;
-//                sts_dlg.Progress_It;
-//            end;
-//         end else begin
-//            DM.MyMsg(mmInformation,'Data tidak ditemukan !','');
-//         end;
-//       end;
-//     except
-//        on E: Exception do
-//          DM.MyMsg(mmError,'Error has been encountered !',E.Message)
-//     end;
-//   sts_dlg.Progress_It;
-//   finally
-//     sts_dlg.Free;
-//     Detail.First;
-//     Detail.EnableControls;
-//   end;
 
 end;
 
@@ -1269,6 +1123,11 @@ begin
   except
   end;
     frxTT.ShowReport;
+end;
+
+procedure TLapKasirPerShiftFrm.MasterCalcFields(DataSet: TDataSet);
+begin
+  Mastertot_penjualan.AsFloat:= Mastertotal_tunai.AsFloat+Mastertotal_transfer.AsFloat+Mastertotal_debit.AsFloat+Mastertotal_qris.AsFloat;
 end;
 
 end.

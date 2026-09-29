@@ -205,6 +205,10 @@ type
     RetailTouchScreen1: TMenuItem;
     actRencanaPembelian: TAction;
     RencanaPembelian1: TMenuItem;
+    actPrinciple: TAction;
+    PromoPrinciple1: TMenuItem;
+    actLapPromoPrinciple: TAction;
+    LapPromoPrinciple1: TMenuItem;
     procedure FormCreate(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure actDatabaseConnectionExecute(Sender: TObject);
@@ -308,6 +312,8 @@ type
     procedure actOnlineExecute(Sender: TObject);
     procedure actNotaRetailTouchExecute(Sender: TObject);
     procedure actRencanaPembelianExecute(Sender: TObject);
+    procedure actPrincipleExecute(Sender: TObject);
+    procedure actLapPromoPrincipleExecute(Sender: TObject);
 
   private
     { Private declarations }
@@ -344,7 +350,8 @@ uses AdvStyleIF, U_DM, U_AppLog, U_Supplier, U_Customer,
   U_List_FakturPenjualan, U_ImportPembelianMayora, U_NotaRetail, U_MGudang,
   U_LapPembelian, U_LapUmurHutang, U_MutasiStok, U_LapPenjualan,
   U_LapKasirPerShift, U_KertasKerja, U_ItemCheck, U_LapSetoran,
-  U_NotaOnline, U_NotaRetailTouch, U_NilaiPersediaan, U_RencanaPembelian;
+  U_NotaOnline, U_NotaRetailTouch, U_NilaiPersediaan, U_RencanaPembelian,
+  U_Principle, U_LapPromoPrinciple;
 
 {$R *.dfm}
 
@@ -1289,6 +1296,21 @@ begin
   if not isWindowsFound('TRencanaPembelianFrm') then begin
      U_RencanaPembelian.ShowForm('Rencana Pembelian',505);
      MDITabset.AddTab(RencanaPembelianFrm);
+  end;
+end;
+
+procedure TMainFrm.actPrincipleExecute(Sender: TObject);
+begin
+  if not isWindowsFound('TPrincipleFrm') then begin
+     U_Principle.ShowForm('Promo Principle', 405);
+  end;
+end;
+
+procedure TMainFrm.actLapPromoPrincipleExecute(Sender: TObject);
+begin
+  if not isWindowsFound('TLapPromoPrincipleFrm') then begin
+     U_LapPromoPrinciple.ShowForm('Laporan Promo Principle',607);
+     MDITabset.AddTab(LapPromoPrincipleFrm);
   end;
 end;
 

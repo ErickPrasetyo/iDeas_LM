@@ -279,6 +279,8 @@ type
     L_Member_Onlineisaktif: TStringField;
     L_Member_Onlineno_refferal: TStringField;
     L_Member_Onlinerefferal_isclaim: TStringField;
+    qPrinter: TZQuery;
+    qPrinterprinter: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
     procedure SqlMonitorLogTrace(Sender: TObject; Event: TZLoggingEvent);
@@ -288,7 +290,7 @@ type
   public
     { Public declarations }
     isLogin, isSuperUser: Boolean;
-    UserConnect, pwdConnect, UsrPrincipal, siteOffice : string;
+    UserConnect, pwdConnect, UsrPrincipal, siteOffice, PrinterKasir : string;
     function MyMsg(MsgType: TMyMsgType; Msg, Desc: string): Integer;
     //procedure CreateXDBDataset;
     function Connect_Database_Server: Boolean;
@@ -567,22 +569,22 @@ begin
          atdMain.Icon := tiQuestion;
          atdMain.CustomButtons.Add('Ya');
          atdMain.CustomButtons.Add('Tidak');
-       end;
+    end;
     mmInformation: begin
          atdMain.Title := 'Informasi';
          atdMain.Icon := tiInformation;
          atdMain.CustomButtons.Add('OK');
-       end;
+    end;
     mmWarning: begin
          atdMain.Title := 'Peringatan';
          atdMain.Icon := tiWarning;
          atdMain.CustomButtons.Add('OK');
-       end;
+    end;
     mmError: begin
          atdMain.Title := 'Error';
          atdMain.Icon := tiError;
          atdMain.CustomButtons.Add('OK');
-       end;
+    end;
   end;
   Result:= atdMain.Execute
 end;
@@ -867,6 +869,11 @@ begin
   try
      vTutupBuku.Close;
      vTutupBuku.Open;
+
+     qPrinter.Close;
+     qPrinter.Open;
+     PrinterKasir:= qPrinterprinter.AsString;
+
   except
     on E: Exception do
       MyMsg(mmError,'Error has been encountered !',E.Message)

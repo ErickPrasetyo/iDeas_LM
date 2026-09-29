@@ -4825,4 +4825,16 @@ object DM: TDM
       Size = 4
     end
   end
+  object qPrinter: TZQuery
+    Connection = conn
+    SQL.Strings = (
+      'SELECT printer FROM master.printer')
+    Params = <>
+    Left = 31
+    Top = 312
+    object qPrinterprinter: TStringField
+      FieldName = 'printer'
+      Size = 400
+    end
+  end
 end

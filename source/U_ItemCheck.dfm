@@ -1,8 +1,8 @@
 object ItemCheckFrm: TItemCheckFrm
-  Left = 49
-  Top = 17
-  Width = 1366
-  Height = 743
+  Left = 183
+  Top = 106
+  Width = 1211
+  Height = 653
   Caption = 'Informasi Item'
   Color = clTeal
   Font.Charset = DEFAULT_CHARSET
@@ -63,7 +63,7 @@ object ItemCheckFrm: TItemCheckFrm
   object pnlHeader: TAdvPanel
     Left = 0
     Top = 0
-    Width = 1350
+    Width = 1195
     Height = 81
     Align = alTop
     BevelOuter = bvNone
@@ -282,8 +282,8 @@ object ItemCheckFrm: TItemCheckFrm
   end
   object pnlNavigator: TAdvPanel
     Left = 0
-    Top = 664
-    Width = 1350
+    Top = 574
+    Width = 1195
     Height = 40
     Align = alBottom
     BevelOuter = bvNone
@@ -352,20 +352,20 @@ object ItemCheckFrm: TItemCheckFrm
   object pgMaster: TcxPageControl
     Left = 0
     Top = 120
-    Width = 1350
-    Height = 477
+    Width = 1195
+    Height = 387
     Align = alClient
     Style = 8
     TabOrder = 2
-    ClientRectBottom = 477
-    ClientRectRight = 1350
+    ClientRectBottom = 387
+    ClientRectRight = 1195
     ClientRectTop = 0
   end
   object pnlDetailSupplier: TRzPanel
     Left = 0
     Top = 120
-    Width = 1350
-    Height = 477
+    Width = 1195
+    Height = 387
     Align = alClient
     Color = 15919073
     Ctl3D = True
@@ -446,16 +446,16 @@ object ItemCheckFrm: TItemCheckFrm
     object RadioGroup1: TRadioGroup
       Left = 2
       Top = 2
-      Width = 1346
-      Height = 473
+      Width = 1191
+      Height = 383
       Align = alClient
       TabOrder = 2
     end
     object GroupBox1: TGroupBox
       Left = 2
       Top = 2
-      Width = 1346
-      Height = 473
+      Width = 1191
+      Height = 383
       Align = alClient
       Caption = 'INFORMASI HARGA JUAL BARANG'
       Color = clMoneyGreen
@@ -468,9 +468,9 @@ object ItemCheckFrm: TItemCheckFrm
       ParentFont = False
       TabOrder = 3
       object lblDBItemName: TRzDBLabel
-        Left = 24
-        Top = 47
-        Width = 1257
+        Left = 11
+        Top = 28
+        Width = 1334
         Height = 59
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clDefault
@@ -487,8 +487,8 @@ object ItemCheckFrm: TItemCheckFrm
         DataSource = dsMaster
       end
       object RzLabel2: TRzLabel
-        Left = 648
-        Top = 131
+        Left = 523
+        Top = 97
         Width = 145
         Height = 33
         Caption = 'Harga Retail'
@@ -498,12 +498,104 @@ object ItemCheckFrm: TItemCheckFrm
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
+        Layout = tlCenter
         BlinkIntervalOff = 600
         BlinkIntervalOn = 600
         BevelWidth = 0
       end
       object RzLabel8: TRzLabel
-        Left = 364
+        Left = 239
+        Top = 97
+        Width = 41
+        Height = 33
+        Caption = 'Qty'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -27
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        Layout = tlCenter
+        BlinkIntervalOff = 600
+        BlinkIntervalOn = 600
+        BevelWidth = 0
+      end
+      object RzDBLabel6: TRzDBLabel
+        Left = 290
+        Top = 97
+        Width = 62
+        Height = 33
+        Alignment = taRightJustify
+        Color = clDefault
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clDefault
+        Font.Height = -24
+        Font.Name = 'Times New Roman'
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+        Transparent = True
+        Layout = tlCenter
+        BlinkIntervalOff = 600
+        BlinkIntervalOn = 600
+        DataField = 'qty_min_retail'
+        DataSource = dsMaster
+      end
+      object RzLabel13: TRzLabel
+        Left = 362
+        Top = 97
+        Width = 45
+        Height = 33
+        Caption = 's/d.'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -27
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        Layout = tlCenter
+        BlinkIntervalOff = 600
+        BlinkIntervalOn = 600
+        BevelWidth = 0
+      end
+      object RzDBLabel7: TRzDBLabel
+        Left = 410
+        Top = 97
+        Width = 67
+        Height = 33
+        Alignment = taRightJustify
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clDefault
+        Font.Height = -24
+        Font.Name = 'Times New Roman'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Transparent = True
+        Layout = tlCenter
+        BlinkIntervalOff = 600
+        BlinkIntervalOn = 600
+        DataField = 'qty_max_retail'
+        DataSource = dsMaster
+      end
+      object RzLabel3: TRzLabel
+        Left = 523
+        Top = 131
+        Width = 216
+        Height = 33
+        Caption = 'Harga Semi Grosir'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -27
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        Layout = tlCenter
+        BlinkIntervalOff = 600
+        BlinkIntervalOn = 600
+        BevelWidth = 0
+      end
+      object RzLabel9: TRzLabel
+        Left = 239
         Top = 131
         Width = 41
         Height = 33
@@ -514,99 +606,14 @@ object ItemCheckFrm: TItemCheckFrm
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        BlinkIntervalOff = 600
-        BlinkIntervalOn = 600
-        BevelWidth = 0
-      end
-      object RzDBLabel6: TRzDBLabel
-        Left = 415
-        Top = 138
-        Width = 62
-        Height = 33
-        Alignment = taRightJustify
-        Color = clDefault
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clDefault
-        Font.Height = -24
-        Font.Name = 'Times New Roman'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-        Transparent = True
-        BlinkIntervalOff = 600
-        BlinkIntervalOn = 600
-        DataField = 'qty_min_retail'
-        DataSource = dsMaster
-      end
-      object RzLabel13: TRzLabel
-        Left = 487
-        Top = 132
-        Width = 45
-        Height = 33
-        Caption = 's/d.'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clBlack
-        Font.Height = -27
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        BlinkIntervalOff = 600
-        BlinkIntervalOn = 600
-        BevelWidth = 0
-      end
-      object RzDBLabel7: TRzDBLabel
-        Left = 535
-        Top = 135
-        Width = 67
-        Height = 33
-        Alignment = taRightJustify
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clDefault
-        Font.Height = -24
-        Font.Name = 'Times New Roman'
-        Font.Style = [fsBold]
-        ParentFont = False
-        Transparent = True
-        BlinkIntervalOff = 600
-        BlinkIntervalOn = 600
-        DataField = 'qty_max_retail'
-        DataSource = dsMaster
-      end
-      object RzLabel3: TRzLabel
-        Left = 648
-        Top = 180
-        Width = 216
-        Height = 33
-        Caption = 'Harga Semi Grosir'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clBlack
-        Font.Height = -27
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
-        BlinkIntervalOff = 600
-        BlinkIntervalOn = 600
-        BevelWidth = 0
-      end
-      object RzLabel9: TRzLabel
-        Left = 364
-        Top = 177
-        Width = 41
-        Height = 33
-        Caption = 'Qty'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clBlack
-        Font.Height = -27
-        Font.Name = 'Tahoma'
-        Font.Style = []
-        ParentFont = False
+        Layout = tlCenter
         BlinkIntervalOff = 600
         BlinkIntervalOn = 600
         BevelWidth = 0
       end
       object RzDBLabel8: TRzDBLabel
-        Left = 415
-        Top = 185
+        Left = 290
+        Top = 131
         Width = 62
         Height = 33
         Alignment = taRightJustify
@@ -619,14 +626,15 @@ object ItemCheckFrm: TItemCheckFrm
         ParentColor = False
         ParentFont = False
         Transparent = True
+        Layout = tlCenter
         BlinkIntervalOff = 600
         BlinkIntervalOn = 600
         DataField = 'qty_min_sm_grosir'
         DataSource = dsMaster
       end
       object RzLabel14: TRzLabel
-        Left = 488
-        Top = 180
+        Left = 363
+        Top = 131
         Width = 45
         Height = 33
         Caption = 's/d.'
@@ -636,13 +644,14 @@ object ItemCheckFrm: TItemCheckFrm
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
+        Layout = tlCenter
         BlinkIntervalOff = 600
         BlinkIntervalOn = 600
         BevelWidth = 0
       end
       object RzDBLabel9: TRzDBLabel
-        Left = 535
-        Top = 183
+        Left = 410
+        Top = 131
         Width = 67
         Height = 33
         Alignment = taRightJustify
@@ -653,14 +662,15 @@ object ItemCheckFrm: TItemCheckFrm
         Font.Style = [fsBold]
         ParentFont = False
         Transparent = True
+        Layout = tlCenter
         BlinkIntervalOff = 600
         BlinkIntervalOn = 600
         DataField = 'qty_max_sm_grosir'
         DataSource = dsMaster
       end
       object RzLabel4: TRzLabel
-        Left = 648
-        Top = 228
+        Left = 522
+        Top = 164
         Width = 150
         Height = 33
         Caption = 'Harga Grosir'
@@ -670,13 +680,14 @@ object ItemCheckFrm: TItemCheckFrm
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
+        Layout = tlCenter
         BlinkIntervalOff = 600
         BlinkIntervalOn = 600
         BevelWidth = 0
       end
       object RzLabel11: TRzLabel
-        Left = 367
-        Top = 225
+        Left = 239
+        Top = 164
         Width = 41
         Height = 33
         Caption = 'Qty'
@@ -686,13 +697,14 @@ object ItemCheckFrm: TItemCheckFrm
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
+        Layout = tlCenter
         BlinkIntervalOff = 600
         BlinkIntervalOn = 600
         BevelWidth = 0
       end
       object RzDBLabel10: TRzDBLabel
-        Left = 415
-        Top = 231
+        Left = 289
+        Top = 164
         Width = 62
         Height = 33
         Alignment = taRightJustify
@@ -705,14 +717,15 @@ object ItemCheckFrm: TItemCheckFrm
         ParentColor = False
         ParentFont = False
         Transparent = True
+        Layout = tlCenter
         BlinkIntervalOff = 600
         BlinkIntervalOn = 600
         DataField = 'qty_min_grosir'
         DataSource = dsMaster
       end
       object RzLabel15: TRzLabel
-        Left = 490
-        Top = 227
+        Left = 364
+        Top = 164
         Width = 45
         Height = 33
         Caption = 's/d.'
@@ -722,13 +735,14 @@ object ItemCheckFrm: TItemCheckFrm
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
+        Layout = tlCenter
         BlinkIntervalOff = 600
         BlinkIntervalOn = 600
         BevelWidth = 0
       end
       object RzDBLabel11: TRzDBLabel
-        Left = 535
-        Top = 230
+        Left = 409
+        Top = 164
         Width = 67
         Height = 33
         Alignment = taRightJustify
@@ -739,14 +753,15 @@ object ItemCheckFrm: TItemCheckFrm
         Font.Style = [fsBold]
         ParentFont = False
         Transparent = True
+        Layout = tlCenter
         BlinkIntervalOff = 600
         BlinkIntervalOn = 600
         DataField = 'qty_max_grosir'
         DataSource = dsMaster
       end
       object RzDBLabel13: TRzDBLabel
-        Left = 535
-        Top = 280
+        Left = 410
+        Top = 195
         Width = 67
         Height = 33
         Alignment = taRightJustify
@@ -757,14 +772,15 @@ object ItemCheckFrm: TItemCheckFrm
         Font.Style = [fsBold]
         ParentFont = False
         Transparent = True
+        Layout = tlCenter
         BlinkIntervalOff = 600
         BlinkIntervalOn = 600
         DataField = 'qty_max_grosir_besar'
         DataSource = dsMaster
       end
       object RzLabel16: TRzLabel
-        Left = 490
-        Top = 277
+        Left = 365
+        Top = 195
         Width = 45
         Height = 33
         Caption = 's/d.'
@@ -774,13 +790,14 @@ object ItemCheckFrm: TItemCheckFrm
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
+        Layout = tlCenter
         BlinkIntervalOff = 600
         BlinkIntervalOn = 600
         BevelWidth = 0
       end
       object RzDBLabel12: TRzDBLabel
-        Left = 415
-        Top = 281
+        Left = 290
+        Top = 195
         Width = 62
         Height = 33
         Alignment = taRightJustify
@@ -793,14 +810,15 @@ object ItemCheckFrm: TItemCheckFrm
         ParentColor = False
         ParentFont = False
         Transparent = True
+        Layout = tlCenter
         BlinkIntervalOff = 600
         BlinkIntervalOn = 600
         DataField = 'qty_min_grosir_besar'
         DataSource = dsMaster
       end
       object RzLabel12: TRzLabel
-        Left = 367
-        Top = 277
+        Left = 239
+        Top = 195
         Width = 41
         Height = 33
         Caption = 'Qty'
@@ -810,13 +828,14 @@ object ItemCheckFrm: TItemCheckFrm
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
+        Layout = tlCenter
         BlinkIntervalOff = 600
         BlinkIntervalOn = 600
         BevelWidth = 0
       end
       object RzLabel5: TRzLabel
-        Left = 648
-        Top = 275
+        Left = 523
+        Top = 195
         Width = 224
         Height = 33
         Caption = 'Harga Grosir Besar'
@@ -826,13 +845,14 @@ object ItemCheckFrm: TItemCheckFrm
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
+        Layout = tlCenter
         BlinkIntervalOff = 600
         BlinkIntervalOn = 600
         BevelWidth = 0
       end
       object RzLabel6: TRzLabel
-        Left = 940
-        Top = 128
+        Left = 815
+        Top = 97
         Width = 48
         Height = 33
         Caption = 'Rp. '
@@ -842,13 +862,14 @@ object ItemCheckFrm: TItemCheckFrm
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
+        Layout = tlCenter
         BlinkIntervalOff = 600
         BlinkIntervalOn = 600
         BevelWidth = 0
       end
       object RzLabel17: TRzLabel
-        Left = 940
-        Top = 180
+        Left = 815
+        Top = 131
         Width = 48
         Height = 33
         Caption = 'Rp. '
@@ -858,13 +879,14 @@ object ItemCheckFrm: TItemCheckFrm
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
+        Layout = tlCenter
         BlinkIntervalOff = 600
         BlinkIntervalOn = 600
         BevelWidth = 0
       end
       object RzLabel18: TRzLabel
-        Left = 940
-        Top = 227
+        Left = 814
+        Top = 164
         Width = 48
         Height = 33
         Caption = 'Rp. '
@@ -874,13 +896,14 @@ object ItemCheckFrm: TItemCheckFrm
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
+        Layout = tlCenter
         BlinkIntervalOff = 600
         BlinkIntervalOn = 600
         BevelWidth = 0
       end
       object RzLabel19: TRzLabel
-        Left = 942
-        Top = 272
+        Left = 817
+        Top = 195
         Width = 48
         Height = 33
         Caption = 'Rp. '
@@ -890,13 +913,14 @@ object ItemCheckFrm: TItemCheckFrm
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
+        Layout = tlCenter
         BlinkIntervalOff = 600
         BlinkIntervalOn = 600
         BevelWidth = 0
       end
       object RzDBLabel1: TRzDBLabel
-        Left = 984
-        Top = 133
+        Left = 859
+        Top = 97
         Width = 172
         Height = 33
         Alignment = taRightJustify
@@ -907,6 +931,7 @@ object ItemCheckFrm: TItemCheckFrm
         Font.Style = [fsBold]
         ParentFont = False
         Transparent = True
+        Layout = tlCenter
         Blinking = True
         BlinkIntervalOff = 600
         BlinkIntervalOn = 600
@@ -914,8 +939,8 @@ object ItemCheckFrm: TItemCheckFrm
         DataSource = dsMaster
       end
       object RzDBLabel2: TRzDBLabel
-        Left = 986
-        Top = 184
+        Left = 861
+        Top = 131
         Width = 172
         Height = 33
         Alignment = taRightJustify
@@ -926,6 +951,7 @@ object ItemCheckFrm: TItemCheckFrm
         Font.Style = [fsBold]
         ParentFont = False
         Transparent = True
+        Layout = tlCenter
         Blinking = True
         BlinkIntervalOff = 600
         BlinkIntervalOn = 600
@@ -933,8 +959,8 @@ object ItemCheckFrm: TItemCheckFrm
         DataSource = dsMaster
       end
       object RzDBLabel3: TRzDBLabel
-        Left = 986
-        Top = 232
+        Left = 860
+        Top = 164
         Width = 172
         Height = 33
         Alignment = taRightJustify
@@ -945,6 +971,7 @@ object ItemCheckFrm: TItemCheckFrm
         Font.Style = [fsBold]
         ParentFont = False
         Transparent = True
+        Layout = tlCenter
         Blinking = True
         BlinkIntervalOff = 600
         BlinkIntervalOn = 600
@@ -952,8 +979,8 @@ object ItemCheckFrm: TItemCheckFrm
         DataSource = dsMaster
       end
       object RzDBLabel4: TRzDBLabel
-        Left = 986
-        Top = 276
+        Left = 861
+        Top = 195
         Width = 172
         Height = 33
         Alignment = taRightJustify
@@ -964,6 +991,7 @@ object ItemCheckFrm: TItemCheckFrm
         Font.Style = [fsBold]
         ParentFont = False
         Transparent = True
+        Layout = tlCenter
         Blinking = True
         BlinkIntervalOff = 600
         BlinkIntervalOn = 600
@@ -971,8 +999,8 @@ object ItemCheckFrm: TItemCheckFrm
         DataSource = dsMaster
       end
       object RzLabel22: TRzLabel
-        Left = 138
-        Top = 132
+        Left = 13
+        Top = 97
         Width = 214
         Height = 33
         Caption = 'Pembelian Barang'
@@ -982,13 +1010,14 @@ object ItemCheckFrm: TItemCheckFrm
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
+        Layout = tlCenter
         BlinkIntervalOff = 600
         BlinkIntervalOn = 600
         BevelWidth = 0
       end
       object RzLabel23: TRzLabel
-        Left = 139
-        Top = 177
+        Left = 13
+        Top = 131
         Width = 214
         Height = 33
         Caption = 'Pembelian Barang'
@@ -998,13 +1027,14 @@ object ItemCheckFrm: TItemCheckFrm
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
+        Layout = tlCenter
         BlinkIntervalOff = 600
         BlinkIntervalOn = 600
         BevelWidth = 0
       end
       object RzLabel24: TRzLabel
-        Left = 141
-        Top = 224
+        Left = 13
+        Top = 164
         Width = 214
         Height = 33
         Caption = 'Pembelian Barang'
@@ -1014,13 +1044,14 @@ object ItemCheckFrm: TItemCheckFrm
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
+        Layout = tlCenter
         BlinkIntervalOff = 600
         BlinkIntervalOn = 600
         BevelWidth = 0
       end
       object RzLabel25: TRzLabel
-        Left = 142
-        Top = 275
+        Left = 13
+        Top = 195
         Width = 214
         Height = 33
         Caption = 'Pembelian Barang'
@@ -1030,15 +1061,16 @@ object ItemCheckFrm: TItemCheckFrm
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
+        Layout = tlCenter
         BlinkIntervalOff = 600
         BlinkIntervalOn = 600
         BevelWidth = 0
       end
       object GroupBox2: TGroupBox
         Left = 2
-        Top = 365
-        Width = 1342
-        Height = 106
+        Top = 289
+        Width = 1187
+        Height = 92
         Align = alBottom
         Caption = 'INFORMASI KETERSEDIAAN BARANG'
         TabOrder = 0
@@ -1113,12 +1145,60 @@ object ItemCheckFrm: TItemCheckFrm
           DataSource = dsMaster
         end
       end
+      object GroupBox3: TGroupBox
+        Left = 2
+        Top = 158
+        Width = 1187
+        Height = 131
+        Align = alBottom
+        Caption = 'INFORMASI PROMO'
+        TabOrder = 1
+        object RzDBLabel15: TRzDBLabel
+          Left = 13
+          Top = 36
+          Width = 286
+          Height = 33
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clRed
+          Font.Height = -27
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = True
+          Layout = tlCenter
+          Blinking = True
+          BlinkIntervalOff = 600
+          BlinkIntervalOn = 600
+          DataField = 'status_promo'
+          DataSource = dsMaster
+        end
+        object RzLabel26: TRzDBLabel
+          Left = 13
+          Top = 69
+          Width = 1300
+          Height = 33
+          AutoSize = True
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -27
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+          Transparent = False
+          Layout = tlCenter
+          BlinkIntervalOff = 600
+          BlinkIntervalOn = 600
+          BevelWidth = 0
+          DataField = 'keterangan_promo'
+          DataSource = dsMaster
+        end
+      end
     end
   end
   object Panel1: TPanel
     Left = 0
     Top = 81
-    Width = 1350
+    Width = 1195
     Height = 39
     Align = alTop
     Anchors = [akTop]
@@ -1164,8 +1244,8 @@ object ItemCheckFrm: TItemCheckFrm
   end
   object Panel2: TPanel
     Left = 0
-    Top = 597
-    Width = 1350
+    Top = 507
+    Width = 1195
     Height = 67
     Align = alBottom
     BevelOuter = bvNone
@@ -1211,8 +1291,23 @@ object ItemCheckFrm: TItemCheckFrm
         'l0) a) as stok_gdu,'
       
         '(select c.* from inventory.fn_get_stok_item(:pid_item,'#39'RAK'#39',:ptg' +
-        'l0) c) as stok_rak'
+        'l0) c) as stok_rak,'
+      
+        'CAST((case when p.kd_item is null then '#39'TIDAK ADA PROMO'#39' else '#39'P' +
+        'ROMO '#39'||p.jenis end) as varchar(100)) as status_promo,'
+      
+        'CAST((case when p.jenis='#39'UANG'#39' then '#39'SETIAP PEMBELIAN '#39'||CAST(p.' +
+        'qty_promo as integer)||'#39' PCS '#39'||b.nama_item||'#39'.., DISKON "Rp. '#39'|' +
+        '|CAST(p.nilai_promo as numeric(17))||'#39'"'#39
+      
+        #9#9#9'when p.jenis='#39'BARANG'#39' then '#39'SETIAP PEMBELIAN '#39'||CAST(p.qty_pr' +
+        'omo as integer)||'#39' PCS '#39'||b.nama_item||'#39'.., FREE '#39'||CAST(p.qty_i' +
+        'tem_promo as integer)||'#39' PCS '#39'||p.nama_item_promo||'#39'..'#39
+      
+        #9#9#9'when p.jenis is null then '#39'-'#39' end) as varchar(255)) as ketera' +
+        'ngan_promo'
       'from master.item b'
+      'left join master.item_promo p on p.kd_item = b.kd_item'
       'where b.kd_item=:pid_item')
     Params = <
       item
@@ -1312,6 +1407,16 @@ object ItemCheckFrm: TItemCheckFrm
       FieldName = 'stok_rak'
       ReadOnly = True
       DisplayFormat = ',0'
+    end
+    object Masterstatus_promo: TStringField
+      FieldName = 'status_promo'
+      ReadOnly = True
+      Size = 400
+    end
+    object Masterketerangan_promo: TStringField
+      FieldName = 'keterangan_promo'
+      ReadOnly = True
+      Size = 1020
     end
   end
   object dsMaster: TDataSource

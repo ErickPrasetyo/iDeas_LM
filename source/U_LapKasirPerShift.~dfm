@@ -1,6 +1,6 @@
 object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
-  Left = 180
-  Top = 62
+  Left = 158
+  Top = 36
   Width = 1112
   Height = 646
   Caption = 'Kasir Tunai'
@@ -611,14 +611,14 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
     Left = 0
     Top = 81
     Width = 1096
-    Height = 422
-    ActivePage = tsDetail
+    Height = 395
+    ActivePage = tsBrowse
     Align = alClient
     Style = 8
     TabOrder = 2
     OnChange = pgTransactionChange
     OnPageChanging = pgTransactionPageChanging
-    ClientRectBottom = 422
+    ClientRectBottom = 395
     ClientRectRight = 1096
     ClientRectTop = 24
     object tsBrowse: TcxTabSheet
@@ -628,7 +628,7 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
         Left = 0
         Top = 40
         Width = 1096
-        Height = 358
+        Height = 331
         Align = alClient
         TabOrder = 0
         object grddbtvMaster: TcxGridDBTableView
@@ -641,7 +641,6 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
               Format = ',0'
               Kind = skSum
               FieldName = 'total'
-              Column = grddbtvMastertotal
             end
             item
               Format = ',0'
@@ -736,13 +735,6 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
             HeaderAlignmentVert = vaCenter
             Options.Editing = False
             Width = 147
-          end
-          object grddbtvMastertotal: TcxGridDBColumn
-            Caption = 'Total'
-            DataBinding.FieldName = 'total'
-            HeaderAlignmentHorz = taCenter
-            HeaderAlignmentVert = vaCenter
-            Width = 111
           end
           object grddbtvMastertunai: TcxGridDBColumn
             Caption = 'Total Tunai'
@@ -1535,7 +1527,7 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
         Left = 0
         Top = 141
         Width = 1096
-        Height = 257
+        Height = 230
         Align = alClient
         BorderStyle = cxcbsNone
         Font.Charset = DEFAULT_CHARSET
@@ -1571,6 +1563,30 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
             item
               Kind = skCount
               Column = grddbtvDetailno_nota
+            end
+            item
+              Format = ',0'
+              Kind = skSum
+              FieldName = 'bayar_tunai'
+              Column = grddbtvDetailColumn4
+            end
+            item
+              Format = ',0'
+              Kind = skSum
+              FieldName = 'bayar_transfer'
+              Column = grddbtvDetailColumn5
+            end
+            item
+              Format = ',0'
+              Kind = skSum
+              FieldName = 'bayar_debit'
+              Column = grddbtvDetailColumn6
+            end
+            item
+              Format = ',0'
+              Kind = skSum
+              FieldName = 'bayar_qris'
+              Column = grddbtvDetailColumn7
             end>
           DataController.Summary.SummaryGroups = <>
           Filtering.ColumnMRUItemsList = False
@@ -1612,7 +1628,7 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
             HeaderAlignmentHorz = taCenter
             HeaderAlignmentVert = vaCenter
             Options.Sorting = False
-            Width = 105
+            Width = 126
           end
           object grddbtvDetaildt_nota: TcxGridDBColumn
             Caption = 'Tanggal Nota'
@@ -1621,7 +1637,7 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
             Properties.Alignment.Horz = taCenter
             HeaderAlignmentHorz = taCenter
             HeaderAlignmentVert = vaCenter
-            Width = 116
+            Width = 112
           end
           object grddbtvDetailnama_pasien: TcxGridDBColumn
             Caption = 'Coustomer'
@@ -1629,7 +1645,7 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
             HeaderAlignmentHorz = taCenter
             HeaderAlignmentVert = vaCenter
             Options.Sorting = False
-            Width = 310
+            Width = 282
           end
           object grddbtvDetailid_rekanan: TcxGridDBColumn
             Caption = 'User/Kasir'
@@ -1639,7 +1655,7 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
             HeaderAlignmentHorz = taCenter
             HeaderAlignmentVert = vaCenter
             Options.Sorting = False
-            Width = 125
+            Width = 94
           end
           object grddbtvDetailtotal_tagihan: TcxGridDBColumn
             Caption = 'Total Penjualan'
@@ -1647,21 +1663,42 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
             HeaderAlignmentHorz = taCenter
             HeaderAlignmentVert = vaCenter
             Options.Sorting = False
-            Width = 149
-          end
-          object grddbtvDetailColumn1: TcxGridDBColumn
-            Caption = 'Jenis Pembayaran'
-            DataBinding.FieldName = 'cara_bayar'
-            HeaderAlignmentHorz = taCenter
-            HeaderAlignmentVert = vaCenter
-            Width = 121
+            Width = 129
           end
           object grddbtvDetailColumn2: TcxGridDBColumn
             Caption = 'Jenis Penjualan'
             DataBinding.FieldName = 'jns_penjualan'
             HeaderAlignmentHorz = taCenter
             HeaderAlignmentVert = vaCenter
-            Width = 119
+            Width = 107
+          end
+          object grddbtvDetailColumn4: TcxGridDBColumn
+            Caption = 'Tunai'
+            DataBinding.FieldName = 'bayar_tunai'
+            HeaderAlignmentHorz = taCenter
+            HeaderAlignmentVert = vaCenter
+            Width = 106
+          end
+          object grddbtvDetailColumn5: TcxGridDBColumn
+            Caption = 'Transfer'
+            DataBinding.FieldName = 'bayar_transfer'
+            HeaderAlignmentHorz = taCenter
+            HeaderAlignmentVert = vaCenter
+            Width = 106
+          end
+          object grddbtvDetailColumn6: TcxGridDBColumn
+            Caption = 'Debit'
+            DataBinding.FieldName = 'bayar_debit'
+            HeaderAlignmentHorz = taCenter
+            HeaderAlignmentVert = vaCenter
+            Width = 105
+          end
+          object grddbtvDetailColumn7: TcxGridDBColumn
+            Caption = 'QRIS'
+            DataBinding.FieldName = 'bayar_qris'
+            HeaderAlignmentHorz = taCenter
+            HeaderAlignmentVert = vaCenter
+            Width = 101
           end
           object grddbtvDetailColumn3: TcxGridDBColumn
             Caption = 'Post'
@@ -1671,7 +1708,7 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
             Properties.ValueUnchecked = '0'
             HeaderAlignmentHorz = taCenter
             HeaderAlignmentVert = vaCenter
-            Width = 50
+            Width = 47
           end
         end
         object grdlvlDetail: TcxGridLevel
@@ -1682,9 +1719,9 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
   end
   object AdvPanel1: TAdvPanel
     Left = 0
-    Top = 503
+    Top = 476
     Width = 1096
-    Height = 64
+    Height = 91
     Align = alBottom
     BevelOuter = bvNone
     Color = 13616833
@@ -1797,6 +1834,20 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
       ParentFont = False
       Transparent = True
     end
+    object Label12: TLabel
+      Left = 43
+      Top = 60
+      Width = 67
+      Height = 14
+      Caption = 'Total Transfer'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      Transparent = True
+    end
     object cxDBLabel1: TcxDBLabel
       Left = 824
       Top = 9
@@ -1896,6 +1947,26 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
       Width = 127
       AnchorX = 229
       AnchorY = 51
+    end
+    object cxDBLabel6: TcxDBLabel
+      Left = 102
+      Top = 57
+      DataBinding.DataField = 'total_transfer'
+      DataBinding.DataSource = dsMaster
+      ParentFont = False
+      Properties.Alignment.Horz = taRightJustify
+      Properties.Alignment.Vert = taVCenter
+      Style.Font.Charset = ANSI_CHARSET
+      Style.Font.Color = clBlue
+      Style.Font.Height = -12
+      Style.Font.Name = 'Arial'
+      Style.Font.Style = [fsBold]
+      Style.IsFontAssigned = True
+      Transparent = True
+      Height = 21
+      Width = 127
+      AnchorX = 229
+      AnchorY = 68
     end
   end
   object AFS: TAdvFormStyler
@@ -2077,6 +2148,7 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
   object Master: TZQuery
     Connection = DM.conn
     BeforeOpen = MasterBeforeOpen
+    OnCalcFields = MasterCalcFields
     CachedUpdates = True
     BeforeEdit = MasterBeforeEdit
     BeforePost = MasterBeforePost
@@ -2225,6 +2297,15 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
       Required = True
       DisplayFormat = ',0'
     end
+    object Mastertotal_transfer: TFloatField
+      FieldName = 'total_transfer'
+      DisplayFormat = ',0'
+    end
+    object Mastertot_penjualan: TFloatField
+      FieldKind = fkCalculated
+      FieldName = 'tot_penjualan'
+      Calculated = True
+    end
   end
   object Detail: TZQuery
     Connection = DM.conn
@@ -2306,6 +2387,25 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
     end
     object Detailispost_detail: TStringField
       FieldName = 'ispost_detail'
+    end
+    object Detaildisc_item: TFloatField
+      FieldName = 'disc_item'
+    end
+    object Detailbayar_tunai: TFloatField
+      FieldName = 'bayar_tunai'
+      DisplayFormat = ',0'
+    end
+    object Detailbayar_transfer: TFloatField
+      FieldName = 'bayar_transfer'
+      DisplayFormat = ',0'
+    end
+    object Detailbayar_debit: TFloatField
+      FieldName = 'bayar_debit'
+      DisplayFormat = ',0'
+    end
+    object Detailbayar_qris: TFloatField
+      FieldName = 'bayar_qris'
+      DisplayFormat = ',0'
     end
   end
   object dsDetail: TDataSource
@@ -4168,7 +4268,11 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
     Connection = DM.conn
     BeforeOpen = qNotaBeforeOpen
     SQL.Strings = (
-      'select a.*, b.nama_rekanan,'
+      'select a.no_nota, a.dt_nota, a.id_trans, a.usr_ins, a.ispost,'
+      'a.sub_total, a.disc_rp, a.disc_member, a.total,'
+      'a.bayar_tunai, a.bayar_transfer, a.bayar_debit, a.bayar_qris,'
+      'a.dibayar,'
+      'b.nama_rekanan,'
       '(case when a.id_trans='#39'201'#39' then '#39'Penjualan Toko'#39
       
         #9#9'when a.id_trans='#39'206'#39' then '#39'Penjualan Online'#39' end) as jns_penj' +
@@ -4206,10 +4310,6 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
         Name = 'ptgl0'
         ParamType = ptUnknown
       end>
-    object qNotaid_nota: TLargeintField
-      FieldName = 'id_nota'
-      Required = True
-    end
     object qNotano_nota: TStringField
       FieldName = 'no_nota'
       Size = 120
@@ -4218,25 +4318,13 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
       FieldName = 'dt_nota'
       Required = True
     end
-    object qNotano_bukti: TStringField
-      FieldName = 'no_bukti'
-      Size = 120
-    end
-    object qNotadt_ins: TDateTimeField
-      FieldName = 'dt_ins'
+    object qNotaid_trans: TStringField
+      FieldName = 'id_trans'
       Required = True
-    end
-    object qNotadt_upd: TDateTimeField
-      FieldName = 'dt_upd'
-      Required = True
+      Size = 40
     end
     object qNotausr_ins: TStringField
       FieldName = 'usr_ins'
-      Required = True
-      Size = 120
-    end
-    object qNotausr_upd: TStringField
-      FieldName = 'usr_upd'
       Required = True
       Size = 120
     end
@@ -4245,186 +4333,41 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
       Required = True
       Size = 4
     end
-    object qNotaiscancel: TStringField
-      FieldName = 'iscancel'
-      Required = True
-      Size = 4
-    end
-    object qNotaisdelete: TStringField
-      FieldName = 'isdelete'
-      Required = True
-      Size = 4
-    end
-    object qNotatotal: TFloatField
-      FieldName = 'total'
-      Required = True
-    end
-    object qNotakd_rekanan: TStringField
-      FieldName = 'kd_rekanan'
-      Size = 80
-    end
-    object qNotaid_trans: TStringField
-      FieldName = 'id_trans'
-      Required = True
-      Size = 40
-    end
-    object qNotaid_rek_gl: TStringField
-      FieldName = 'id_rek_gl'
-      Size = 120
-    end
-    object qNotaid_division: TStringField
-      FieldName = 'id_division'
-      Size = 48
-    end
-    object qNotacara_bayar: TStringField
-      FieldName = 'cara_bayar'
-      Size = 40
-    end
-    object qNotadt_jth_tempo: TDateTimeField
-      FieldName = 'dt_jth_tempo'
-    end
-    object qNotadiskripsi: TStringField
-      FieldName = 'diskripsi'
-      Size = 1020
-    end
     object qNotasub_total: TFloatField
       FieldName = 'sub_total'
-      Required = True
-    end
-    object qNotaclaim: TFloatField
-      FieldName = 'claim'
       Required = True
     end
     object qNotadisc_rp: TFloatField
       FieldName = 'disc_rp'
       Required = True
     end
-    object qNotapromo_uang: TFloatField
-      FieldName = 'promo_uang'
-      Required = True
-    end
-    object qNotapromo_barang: TFloatField
-      FieldName = 'promo_barang'
-      Required = True
-    end
-    object qNotanet_n_ppn: TFloatField
-      FieldName = 'net_n_ppn'
-      Required = True
-    end
-    object qNotaiskirim: TStringField
-      FieldName = 'iskirim'
-      Required = True
-      Size = 4
-    end
-    object qNotaislunas: TStringField
-      FieldName = 'islunas'
-      Required = True
-      Size = 4
-    end
-    object qNotaretur: TFloatField
-      FieldName = 'retur'
-      Required = True
-    end
-    object qNotaishpp: TStringField
-      FieldName = 'ishpp'
-      Required = True
-      Size = 4
-    end
-    object qNotadt_lunas: TDateTimeField
-      FieldName = 'dt_lunas'
-    end
-    object qNotadt_kirim: TDateTimeField
-      FieldName = 'dt_kirim'
-    end
-    object qNotaisok: TStringField
-      FieldName = 'isok'
-      Required = True
-      Size = 4
-    end
-    object qNotadt_posting: TDateTimeField
-      FieldName = 'dt_posting'
-    end
-    object qNotanota_diretur: TStringField
-      FieldName = 'nota_diretur'
-      Size = 120
-    end
-    object qNotaid_curr: TStringField
-      FieldName = 'id_curr'
-      Size = 12
-    end
-    object qNotakurs: TFloatField
-      FieldName = 'kurs'
-      Required = True
-    end
-    object qNotavat_str: TStringField
-      FieldName = 'vat_str'
-      Size = 40
-    end
-    object qNotavat_num: TFloatField
-      FieldName = 'vat_num'
-      Required = True
-    end
-    object qNotakd_del_place: TStringField
-      FieldName = 'kd_del_place'
-    end
-    object qNotano_rekap: TStringField
-      FieldName = 'no_rekap'
-      Size = 128
-    end
-    object qNotan_hari: TIntegerField
-      FieldName = 'n_hari'
-      Required = True
-    end
-    object qNotaevocer: TFloatField
-      FieldName = 'evocer'
-      Required = True
-    end
-    object qNotano_faktur_pajak: TStringField
-      FieldName = 'no_faktur_pajak'
-      Size = 200
-    end
-    object qNotano_evocer: TStringField
-      FieldName = 'no_evocer'
-      Size = 200
-    end
-    object qNotaid_import: TLargeintField
-      FieldName = 'id_import'
-    end
-    object qNotapromo_id: TStringField
-      FieldName = 'promo_id'
-      Size = 80
-    end
-    object qNotamvocer: TFloatField
-      FieldName = 'mvocer'
-      Required = True
-    end
-    object qNotano_mvocer: TStringField
-      FieldName = 'no_mvocer'
-      Size = 200
-    end
-    object qNotadisc_psn: TFloatField
-      FieldName = 'disc_psn'
-      Required = True
-    end
-    object qNotaisget: TStringField
-      FieldName = 'isget'
-      Required = True
-      Size = 4
-    end
-    object qNotajns_transaksi: TStringField
-      FieldName = 'jns_transaksi'
-      Size = 400
-    end
-    object qNotadisc_total: TFloatField
-      FieldName = 'disc_total'
-      Required = True
-    end
     object qNotadisc_member: TFloatField
       FieldName = 'disc_member'
       Required = True
     end
-    object qNotashift: TIntegerField
-      FieldName = 'shift'
+    object qNotatotal: TFloatField
+      FieldName = 'total'
+      Required = True
+    end
+    object qNotabayar_tunai: TFloatField
+      FieldName = 'bayar_tunai'
+      ReadOnly = True
+    end
+    object qNotabayar_transfer: TFloatField
+      FieldName = 'bayar_transfer'
+      Required = True
+    end
+    object qNotabayar_debit: TFloatField
+      FieldName = 'bayar_debit'
+      Required = True
+    end
+    object qNotabayar_qris: TFloatField
+      FieldName = 'bayar_qris'
+      Required = True
+    end
+    object qNotadibayar: TFloatField
+      FieldName = 'dibayar'
+      ReadOnly = True
     end
     object qNotanama_rekanan: TStringField
       FieldName = 'nama_rekanan'
@@ -4441,12 +4384,14 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
     Connection = DM.conn
     BeforeOpen = qTotalBeforeOpen
     SQL.Strings = (
-      'select sum(a.total) as vTotal'
+      
+        'select sum(a.bayar_tunai+a.bayar_transfer+a.bayar_debit+a.bayar_' +
+        'qris) as vTotal'
       'from transaksi.nota a'
       'left join master.mrekanan b on b.kd_rekanan=a.kd_rekanan'
       
-        'where a.id_trans='#39'201'#39' and a.ispost='#39'1'#39' and a.isdelete='#39'0'#39' and a' +
-        '.iscancel='#39'0'#39' and a.isget='#39'0'#39' and a.shift=:pshift'
+        'where a.id_trans in ('#39'201'#39', '#39'206'#39') and a.ispost='#39'1'#39' and a.isdele' +
+        'te='#39'0'#39' and a.iscancel='#39'0'#39' and a.isget='#39'0'#39' and a.shift=:pshift'
       
         'and a.dt_nota between to_timestamp(:ptgl0,'#39'dd/mm/yyyy'#39') and to_t' +
         'imestamp(:ptgl0,'#39'dd/mm/yyyy'#39') + interval '#39'23 hours 59 min'#39)
@@ -4759,7 +4704,7 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
         Font.Height = -11
         Font.Name = 'Arial'
         Font.Style = []
-        Height = 15.118110240000000000
+        Height = 34.157380240000000000
         ParentFont = False
         Top = 257.008040000000000000
         Width = 718.110700000000000000
@@ -4768,8 +4713,8 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
         RowCount = 0
         Stretched = True
         object Memo30: TfrxMemoView
-          Left = 581.724800000000000000
-          Width = 136.385900000000000000
+          Left = 490.575140000000000000
+          Width = 113.385826770000000000
           Height = 15.118110240000000000
           DisplayFormat.FormatStr = '#,##;0,00'
           DisplayFormat.Kind = fkNumeric
@@ -4784,8 +4729,8 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
           ParentFont = False
         end
         object Memo14: TfrxMemoView
-          Left = 56.819110000000000000
-          Width = 256.905690000000000000
+          Left = 36.921460000000010000
+          Width = 226.669450000000000000
           Height = 15.118110240000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -4797,8 +4742,8 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
           ParentFont = False
         end
         object SysMemo1: TfrxSysMemoView
-          Width = 56.692913385826800000
-          Height = 15.118110236220500000
+          Width = 37.795263390000000000
+          Height = 15.118110240000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -12
@@ -4810,9 +4755,8 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
           ParentFont = False
         end
         object Memo11: TfrxMemoView
-          Left = 314.000000000000000000
-          Top = 0.141619999999989000
-          Width = 133.719233330000000000
+          Left = 264.086580000000000000
+          Width = 113.385826770000000000
           Height = 15.118110240000000000
           DisplayFormat.FormatStr = '#,##;0,00'
           DisplayFormat.Kind = fkNumeric
@@ -4827,9 +4771,8 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
           ParentFont = False
         end
         object Memo17: TfrxMemoView
-          Left = 448.000000000000000000
-          Top = 0.141619999999989000
-          Width = 133.719233330000000000
+          Left = 377.188930000000000000
+          Width = 113.385826770000000000
           Height = 15.118110240000000000
           DisplayFormat.FormatStr = '#,##;0,00'
           DisplayFormat.Kind = fkNumeric
@@ -4843,6 +4786,22 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
             '[frxDBTotal."total_debet"]')
           ParentFont = False
         end
+        object Memo26: TfrxMemoView
+          Left = 604.724800000000000000
+          Width = 113.385826770000000000
+          Height = 15.118110240000000000
+          DisplayFormat.FormatStr = '#,##;0,00'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8 = (
+            '[frxDBTotal."total_transfer"]')
+          ParentFont = False
+        end
       end
       object ColumnHeader1: TfrxColumnHeader
         FillType = ftBrush
@@ -4850,8 +4809,8 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
         Top = 173.858380000000000000
         Width = 718.110700000000000000
         object Memo9: TfrxMemoView
-          Width = 56.692913390000000000
-          Height = 18.897637795275600000
+          Width = 37.795263390000000000
+          Height = 18.897637800000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -12
@@ -4865,8 +4824,8 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
           VAlign = vaCenter
         end
         object Memo7: TfrxMemoView
-          Left = 581.724800000000000000
-          Width = 136.385900000000000000
+          Left = 491.016080000000000000
+          Width = 113.385826770000000000
           Height = 18.897637800000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -4881,8 +4840,8 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
           VAlign = vaCenter
         end
         object Memo12: TfrxMemoView
-          Left = 56.819110000000000000
-          Width = 256.905690000000000000
+          Left = 37.921460000000010000
+          Width = 226.771653540000000000
           Height = 18.897637800000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -4897,9 +4856,9 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
           VAlign = vaCenter
         end
         object Memo15: TfrxMemoView
-          Left = 314.000000000000000000
+          Left = 264.866110000000000000
           Top = 0.141619999999989000
-          Width = 133.719233330000000000
+          Width = 113.385826770000000000
           Height = 18.897637800000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -4914,9 +4873,9 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
           VAlign = vaCenter
         end
         object Memo23: TfrxMemoView
-          Left = 448.000000000000000000
+          Left = 377.968460000000000000
           Top = 0.141619999999989000
-          Width = 133.719233330000000000
+          Width = 113.385826770000000000
           Height = 18.897637800000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -4930,11 +4889,27 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
           ParentFont = False
           VAlign = vaCenter
         end
+        object Memo27: TfrxMemoView
+          Left = 605.165740000000000000
+          Width = 113.385826770000000000
+          Height = 18.897637800000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8 = (
+            'TRANSFER')
+          ParentFont = False
+          VAlign = vaCenter
+        end
       end
       object PageFooter1: TfrxPageFooter
         FillType = ftBrush
         Height = 89.267780000000000000
-        Top = 377.953000000000000000
+        Top = 396.850650000000000000
         Width = 718.110700000000000000
         object MemoApprovedName: TfrxMemoView
           Left = 495.118430000000000000
@@ -5072,11 +5047,11 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
       object ReportSummary1: TfrxReportSummary
         FillType = ftBrush
         Height = 21.296836900000000000
-        Top = 332.598640000000000000
+        Top = 351.496290000000000000
         Width = 718.110700000000000000
         object Memo6: TfrxMemoView
           Top = 6.178726659999995000
-          Width = 309.792826670000000000
+          Width = 264.438466670000000000
           Height = 15.118110240000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -5095,9 +5070,9 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
           Diagonal = True
         end
         object Memo3: TfrxMemoView
-          Left = 581.724800000000000000
+          Left = 491.016080000000000000
           Top = 6.068026669999995000
-          Width = 136.385900000000000000
+          Width = 113.385826770000000000
           Height = 15.118110240000000000
           DisplayFormat.FormatStr = '#,##;0,00'
           DisplayFormat.Kind = fkNumeric
@@ -5112,9 +5087,9 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
           ParentFont = False
         end
         object Memo24: TfrxMemoView
-          Left = 314.000000000000000000
+          Left = 264.866110000000000000
           Top = 6.209646669999983000
-          Width = 133.719233330000000000
+          Width = 113.385826771653500000
           Height = 15.118110240000000000
           DisplayFormat.FormatStr = '#,##;0,00'
           DisplayFormat.Kind = fkNumeric
@@ -5129,9 +5104,9 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
           ParentFont = False
         end
         object Memo25: TfrxMemoView
-          Left = 448.000000000000000000
+          Left = 377.968460000000000000
           Top = 6.209646669999983000
-          Width = 133.719233330000000000
+          Width = 113.385826770000000000
           Height = 15.118110240000000000
           DisplayFormat.FormatStr = '#,##;0,00'
           DisplayFormat.Kind = fkNumeric
@@ -5145,6 +5120,23 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
             '[SUM(<frxDBTotal."total_debet">,MasterData1)]')
           ParentFont = False
         end
+        object Memo28: TfrxMemoView
+          Left = 604.724800000000000000
+          Top = 6.047244089999992000
+          Width = 113.385826770000000000
+          Height = 15.118110240000000000
+          DisplayFormat.FormatStr = '#,##;0,00'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8 = (
+            '[SUM(<frxDBTotal."total_transfer">,MasterData1)]')
+          ParentFont = False
+        end
       end
     end
   end
@@ -5155,15 +5147,10 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
       
         '(case when c.vuser is null then '#39'Administrator'#39' else c.full_name' +
         ' end) as nama_kasir,'
-      
-        '(case when a.cara_bayar='#39'TUNAI'#39' then sum(a.total)end) as total_t' +
-        'unai,'
-      
-        '(case when a.cara_bayar='#39'DEBET'#39' then sum(a.total)end) as total_d' +
-        'ebet,'
-      
-        '(case when a.cara_bayar='#39'QRIS'#39' then sum(a.total)end) as total_qr' +
-        'is,'
+      'sum(a.bayar_tunai) as total_tunai,'
+      'sum(a.bayar_transfer) as total_transfer,'
+      'sum(a.bayar_debit) as total_debet,'
+      'sum(a.bayar_qris) as total_qris,'
       'b.dt_transaksi, b.an as kepala_kasir, b.shift'
       'from accfin.kasir_detail a'
       'left join accfin.kasir b on b.id=a.id_kasir'
@@ -5214,6 +5201,10 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
       FieldName = 'total_qris'
       ReadOnly = True
     end
+    object qTotalUsertotal_transfer: TFloatField
+      FieldName = 'total_transfer'
+      ReadOnly = True
+    end
   end
   object frxDBTotal: TfrxDBDataset
     UserName = 'frxDBTotal'
@@ -5225,7 +5216,8 @@ object LapKasirPerShiftFrm: TLapKasirPerShiftFrm
       'shift=shift'
       'total_tunai=total_tunai'
       'total_debet=total_debet'
-      'total_qris=total_qris')
+      'total_qris=total_qris'
+      'total_transfer=total_transfer')
     DataSet = qTotalUser
     BCDToCurrency = False
     Left = 714

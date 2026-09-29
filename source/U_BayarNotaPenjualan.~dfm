@@ -1,10 +1,10 @@
 object BayarNotaPenjualanFrm: TBayarNotaPenjualanFrm
-  Left = 611
-  Top = 119
+  Left = 344
+  Top = 7
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
-  ClientHeight = 450
-  ClientWidth = 361
+  ClientHeight = 474
+  ClientWidth = 370
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,7 +19,7 @@ object BayarNotaPenjualanFrm: TBayarNotaPenjualanFrm
   object RzPanel1: TRzPanel
     Left = 0
     Top = 0
-    Width = 361
+    Width = 370
     Height = 93
     Align = alTop
     BorderOuter = fsGroove
@@ -78,8 +78,8 @@ object BayarNotaPenjualanFrm: TBayarNotaPenjualanFrm
   object RzPanel2: TRzPanel
     Left = 0
     Top = 93
-    Width = 361
-    Height = 357
+    Width = 370
+    Height = 381
     Align = alClient
     BorderOuter = fsGroove
     BorderSides = []
@@ -88,8 +88,8 @@ object BayarNotaPenjualanFrm: TBayarNotaPenjualanFrm
     TabOrder = 1
     VisualStyle = vsClassic
     object Label3: TLabel
-      Left = 30
-      Top = 171
+      Left = 29
+      Top = 24
       Width = 74
       Height = 16
       Caption = 'Grand Total'
@@ -100,22 +100,9 @@ object BayarNotaPenjualanFrm: TBayarNotaPenjualanFrm
       Font.Style = [fsBold]
       ParentFont = False
     end
-    object Label4: TLabel
-      Left = 30
-      Top = 197
-      Width = 38
-      Height = 16
-      Caption = 'Bayar'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -13
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      ParentFont = False
-    end
     object Label5: TLabel
-      Left = 30
-      Top = 224
+      Left = 29
+      Top = 250
       Width = 49
       Height = 16
       Caption = 'Kembali'
@@ -126,103 +113,9 @@ object BayarNotaPenjualanFrm: TBayarNotaPenjualanFrm
       Font.Style = [fsBold]
       ParentFont = False
     end
-    object Label11: TLabel
-      Left = 30
-      Top = 37
-      Width = 60
-      Height = 13
-      Caption = 'Tipe Bayar'
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      ParentFont = False
-    end
-    object Label2: TLabel
-      Left = 116
-      Top = 37
-      Width = 9
-      Height = 13
-      Caption = ' : '
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      ParentFont = False
-    end
-    object Label13: TLabel
-      Left = 30
-      Top = 59
-      Width = 28
-      Height = 13
-      Caption = 'Bank'
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      ParentFont = False
-    end
-    object Label9: TLabel
-      Left = 116
-      Top = 59
-      Width = 9
-      Height = 13
-      Caption = ' : '
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      ParentFont = False
-    end
-    object Label14: TLabel
-      Left = 30
-      Top = 80
-      Width = 48
-      Height = 13
-      Caption = 'No Kartu'
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      ParentFont = False
-    end
-    object Label8: TLabel
-      Left = 116
-      Top = 80
-      Width = 9
-      Height = 13
-      Caption = ' : '
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      ParentFont = False
-    end
-    object Label7: TLabel
-      Left = 10
-      Top = 122
-      Width = 325
-      Height = 13
-      Caption = 
-        'Form Diatas diisi jika pembayaran menggunakan  Kartu Debet/Kredi' +
-        't'
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clRed
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
-      Transparent = True
-    end
     object Label1: TLabel
-      Left = 31
-      Top = 273
+      Left = 29
+      Top = 292
       Width = 77
       Height = 16
       Caption = 'Print Copies'
@@ -233,9 +126,131 @@ object BayarNotaPenjualanFrm: TBayarNotaPenjualanFrm
       Font.Style = [fsBold]
       ParentFont = False
     end
+    object Label6: TLabel
+      Left = 29
+      Top = 65
+      Width = 67
+      Height = 13
+      Caption = 'Bayar Tunai'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label10: TLabel
+      Left = 125
+      Top = 65
+      Width = 9
+      Height = 13
+      Caption = ' : '
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label12: TLabel
+      Left = 29
+      Top = 167
+      Width = 84
+      Height = 13
+      Caption = 'Bayar Transfer'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label15: TLabel
+      Left = 125
+      Top = 167
+      Width = 9
+      Height = 13
+      Caption = ' : '
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label16: TLabel
+      Left = 29
+      Top = 192
+      Width = 66
+      Height = 13
+      Caption = 'Bayar Debit'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label17: TLabel
+      Left = 125
+      Top = 192
+      Width = 9
+      Height = 13
+      Caption = ' : '
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label18: TLabel
+      Left = 29
+      Top = 217
+      Width = 64
+      Height = 13
+      Caption = 'Bayar QRIS'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label19: TLabel
+      Left = 125
+      Top = 217
+      Width = 9
+      Height = 13
+      Caption = ' : '
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label2: TLabel
+      Left = 30
+      Top = 123
+      Width = 292
+      Height = 26
+      Caption = 
+        'Khusus Split Payment, Nilai Pembayarannya Harus Sesuai Dengan Ni' +
+        'lai yang di Transfer/Debit/QRIS...!!!'
+      Color = clWhite
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clRed
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+      WordWrap = True
+    end
     object btnOK: TSCButton
       Left = 139
-      Top = 313
+      Top = 323
       Width = 92
       Height = 30
       Caption = 'OK'
@@ -243,12 +258,12 @@ object BayarNotaPenjualanFrm: TBayarNotaPenjualanFrm
       ImageIndex = 19
       RoundColor = clWhite
       Style = scbsXP
-      TabOrder = 3
+      TabOrder = 0
       OnClick = btnOKClick
     end
     object btnCancel: TSCButton
-      Left = 233
-      Top = 313
+      Left = 238
+      Top = 323
       Width = 92
       Height = 30
       Caption = 'Batal'
@@ -256,24 +271,24 @@ object BayarNotaPenjualanFrm: TBayarNotaPenjualanFrm
       ImageIndex = 2
       RoundColor = clWhite
       Style = scbsXP
-      TabOrder = 4
+      TabOrder = 1
       OnClick = btnCancelClick
     end
     object pnlBottom: TSCPanel
-      Left = 25
-      Top = 254
+      Left = 27
+      Top = 275
       Width = 305
-      Height = 1
+      Height = 2
       Color = clWhite
       Gradient = scgLeftToRight
       GradientMid = 16707038
       GradientUsesMid = True
       ParentColor = False
-      TabOrder = 5
+      TabOrder = 2
     end
     object SCPanel1: TSCPanel
       Left = 5
-      Top = 150
+      Top = 48
       Width = 320
       Height = 2
       Color = clWhite
@@ -281,47 +296,11 @@ object BayarNotaPenjualanFrm: TBayarNotaPenjualanFrm
       GradientMid = 16707038
       GradientUsesMid = True
       ParentColor = False
-      TabOrder = 6
-    end
-    object edtNoKartu: TcxDBTextEdit
-      Left = 132
-      Top = 78
-      DataBinding.DataField = 'no_kartu'
-      DataBinding.DataSource = dsMaster
-      Enabled = False
-      ParentFont = False
-      Style.Font.Charset = DEFAULT_CHARSET
-      Style.Font.Color = clWindowText
-      Style.Font.Height = -11
-      Style.Font.Name = 'Tahoma'
-      Style.Font.Style = []
-      Style.TextStyle = [fsBold]
-      Style.IsFontAssigned = True
-      TabOrder = 1
-      OnKeyPress = edtBankKeyPress
-      Width = 195
-    end
-    object edtBank: TcxDBTextEdit
-      Left = 132
-      Top = 57
-      DataBinding.DataField = 'bank'
-      DataBinding.DataSource = dsMaster
-      Enabled = False
-      ParentFont = False
-      Style.Font.Charset = DEFAULT_CHARSET
-      Style.Font.Color = clWindowText
-      Style.Font.Height = -11
-      Style.Font.Name = 'Tahoma'
-      Style.Font.Style = []
-      Style.TextStyle = [fsBold]
-      Style.IsFontAssigned = True
-      TabOrder = 0
-      OnKeyPress = edtBankKeyPress
-      Width = 195
+      TabOrder = 3
     end
     object edtTotal: TcxDBLabel
       Left = 130
-      Top = 165
+      Top = 18
       DataBinding.DataField = 'grand_total'
       DataBinding.DataSource = dsMaster
       ParentColor = False
@@ -339,8 +318,8 @@ object BayarNotaPenjualanFrm: TBayarNotaPenjualanFrm
       AnchorX = 325
     end
     object edtKembali: TcxDBLabel
-      Left = 130
-      Top = 227
+      Left = 132
+      Top = 246
       ParentColor = False
       ParentFont = False
       Properties.Alignment.Horz = taRightJustify
@@ -354,67 +333,105 @@ object BayarNotaPenjualanFrm: TBayarNotaPenjualanFrm
       Transparent = True
       Height = 22
       Width = 195
-      AnchorX = 325
+      AnchorX = 327
     end
-    object edtBayar: TcxTextEdit
-      Left = 133
-      Top = 193
+    object cxTextEdit1: TcxTextEdit
+      Left = 140
+      Top = 288
       AutoSize = False
       ParentFont = False
       Style.BorderStyle = ebsUltraFlat
       Style.Font.Charset = DEFAULT_CHARSET
       Style.Font.Color = clWindowText
-      Style.Font.Height = -16
+      Style.Font.Height = -13
       Style.Font.Name = 'Tahoma'
       Style.Font.Style = []
       Style.TextStyle = [fsBold]
       Style.IsFontAssigned = True
-      TabOrder = 2
-      OnEnter = edtBayarEnter
-      OnKeyPress = edtBayarKeyPress
-      OnKeyUp = edtBayarKeyUp
-      Height = 32
-      Width = 196
+      TabOrder = 6
+      OnKeyPress = cxTextEdit1KeyPress
+      Height = 25
+      Width = 40
     end
-    object edtPembayaran: TcxDBComboBox
-      Left = 132
-      Top = 37
-      DataBinding.DataField = 'cara_bayar'
-      DataBinding.DataSource = dsMaster
+    object edtBayarTunai: TcxTextEdit
+      Left = 140
+      Top = 60
+      AutoSize = False
       ParentFont = False
-      Properties.Items.Strings = (
-        'TUNAI'
-        'DEBET'
-        'QRIS')
-      Properties.OnCloseUp = edtPembayaranPropertiesCloseUp
+      Style.BorderStyle = ebsUltraFlat
       Style.Font.Charset = DEFAULT_CHARSET
       Style.Font.Color = clWindowText
-      Style.Font.Height = -11
+      Style.Font.Height = -13
+      Style.Font.Name = 'Tahoma'
+      Style.Font.Style = []
+      Style.TextStyle = [fsBold]
+      Style.IsFontAssigned = True
+      TabOrder = 7
+      OnEnter = edtBayarTunaiEnter
+      OnKeyPress = edtBayarTunaiKeyPress
+      OnKeyUp = edtBayarTunaiKeyUp
+      Height = 25
+      Width = 196
+    end
+    object edtBayarTransfer: TcxTextEdit
+      Left = 140
+      Top = 161
+      AutoSize = False
+      ParentFont = False
+      Style.BorderStyle = ebsUltraFlat
+      Style.Font.Charset = DEFAULT_CHARSET
+      Style.Font.Color = clWindowText
+      Style.Font.Height = -13
+      Style.Font.Name = 'Tahoma'
+      Style.Font.Style = []
+      Style.TextStyle = [fsBold]
+      Style.IsFontAssigned = True
+      TabOrder = 8
+      OnEnter = edtBayarTransferEnter
+      OnKeyPress = edtBayarTransferKeyPress
+      OnKeyUp = edtBayarTransferKeyUp
+      Height = 25
+      Width = 196
+    end
+    object edtBayarDebit: TcxTextEdit
+      Left = 140
+      Top = 186
+      AutoSize = False
+      ParentFont = False
+      Style.BorderStyle = ebsUltraFlat
+      Style.Font.Charset = DEFAULT_CHARSET
+      Style.Font.Color = clWindowText
+      Style.Font.Height = -13
       Style.Font.Name = 'Tahoma'
       Style.Font.Style = []
       Style.TextStyle = [fsBold]
       Style.IsFontAssigned = True
       TabOrder = 9
-      OnKeyPress = edtPembayaranKeyPress
-      Width = 195
+      OnEnter = edtBayarDebitEnter
+      OnKeyPress = edtBayarDebitKeyPress
+      OnKeyUp = edtBayarDebitKeyUp
+      Height = 25
+      Width = 196
     end
-    object cxTextEdit1: TcxTextEdit
-      Left = 134
-      Top = 265
+    object edtBayarQRIS: TcxTextEdit
+      Left = 140
+      Top = 211
       AutoSize = False
       ParentFont = False
       Style.BorderStyle = ebsUltraFlat
       Style.Font.Charset = DEFAULT_CHARSET
       Style.Font.Color = clWindowText
-      Style.Font.Height = -16
+      Style.Font.Height = -13
       Style.Font.Name = 'Tahoma'
       Style.Font.Style = []
       Style.TextStyle = [fsBold]
       Style.IsFontAssigned = True
       TabOrder = 10
-      OnKeyPress = cxTextEdit1KeyPress
-      Height = 32
-      Width = 40
+      OnEnter = edtBayarQRISEnter
+      OnKeyPress = edtBayarQRISKeyPress
+      OnKeyUp = edtBayarQRISKeyUp
+      Height = 25
+      Width = 196
     end
   end
   object dsMaster: TDataSource
@@ -500,6 +517,22 @@ object BayarNotaPenjualanFrm: TBayarNotaPenjualanFrm
     object MemMastercara_bayar: TStringField
       FieldName = 'cara_bayar'
       Size = 100
+    end
+    object MemMasterBayarTunai: TFloatField
+      FieldName = 'BayarTunai'
+      DisplayFormat = '#,##0.00;(#,##0.00)'
+    end
+    object MemMasterBayarTransfer: TFloatField
+      FieldName = 'BayarTransfer'
+      DisplayFormat = '#,##0.00;(#,##0.00)'
+    end
+    object MemMasterBayarDebit: TFloatField
+      FieldName = 'BayarDebit'
+      DisplayFormat = '#,##0.00;(#,##0.00)'
+    end
+    object MemMasterBayarQRIS: TFloatField
+      FieldName = 'BayarQRIS'
+      DisplayFormat = '#,##0.00;(#,##0.00)'
     end
   end
   object Master: TZQuery
@@ -754,6 +787,22 @@ object BayarNotaPenjualanFrm: TBayarNotaPenjualanFrm
     end
     object Masterkembali: TFloatField
       FieldName = 'kembali'
+      Required = True
+    end
+    object Masterbayar_tunai: TFloatField
+      FieldName = 'bayar_tunai'
+      Required = True
+    end
+    object Masterbayar_debit: TFloatField
+      FieldName = 'bayar_debit'
+      Required = True
+    end
+    object Masterbayar_qris: TFloatField
+      FieldName = 'bayar_qris'
+      Required = True
+    end
+    object Masterbayar_transfer: TFloatField
+      FieldName = 'bayar_transfer'
       Required = True
     end
   end

@@ -560,6 +560,10 @@ object LapPenjualanFrm: TLapPenjualanFrm
             item
               Kind = skCount
               Column = cxGridDBColumn1
+            end
+            item
+              Kind = skSum
+              Column = cxGridDBTableView1Column3
             end>
           DataController.Summary.SummaryGroups = <>
           OptionsBehavior.GoToNextCellOnEnter = True

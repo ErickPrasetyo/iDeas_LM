@@ -25,25 +25,15 @@ type
     lblTipe: TLabel;
     pnlBottom: TSCPanel;
     Label3: TLabel;
-    Label4: TLabel;
     Label5: TLabel;
     MemMaster: TkbmMemTable;
     Master: TZQuery;
     MemMastergrand_total: TFloatField;
     MemMasterdue_type: TStringField;
     MemMasterdibayar: TFloatField;
-    Label11: TLabel;
-    Label2: TLabel;
-    Label13: TLabel;
-    Label9: TLabel;
-    Label14: TLabel;
-    Label8: TLabel;
     SCPanel1: TSCPanel;
-    Label7: TLabel;
     MemMasterbank: TStringField;
     MemMasterno_kartu: TStringField;
-    edtNoKartu: TcxDBTextEdit;
-    edtBank: TcxDBTextEdit;
     edtTotal: TcxDBLabel;
     edtKembali: TcxDBLabel;
     MemMasterkembali: TFloatField;
@@ -52,8 +42,6 @@ type
     qryDuejml_hari: TIntegerField;
     qryDueid_tipe_bayar: TLargeintField;
     dsDue: TDataSource;
-    edtBayar: TcxTextEdit;
-    edtPembayaran: TcxDBComboBox;
     MemMastercara_bayar: TStringField;
     Masterid_nota: TLargeintField;
     Masterno_nota: TStringField;
@@ -115,20 +103,52 @@ type
     qExec: TZQuery;
     cxTextEdit1: TcxTextEdit;
     Label1: TLabel;
+    Masterbayar_tunai: TFloatField;
+    Masterbayar_debit: TFloatField;
+    Masterbayar_qris: TFloatField;
+    Masterbayar_transfer: TFloatField;
+    edtBayarTunai: TcxTextEdit;
+    Label6: TLabel;
+    Label10: TLabel;
+    Label12: TLabel;
+    Label15: TLabel;
+    edtBayarTransfer: TcxTextEdit;
+    Label16: TLabel;
+    Label17: TLabel;
+    edtBayarDebit: TcxTextEdit;
+    Label18: TLabel;
+    Label19: TLabel;
+    edtBayarQRIS: TcxTextEdit;
+    MemMasterBayarTunai: TFloatField;
+    MemMasterBayarTransfer: TFloatField;
+    MemMasterBayarDebit: TFloatField;
+    MemMasterBayarQRIS: TFloatField;
+    Label2: TLabel;
     procedure FormShow(Sender: TObject);
     procedure btnCancelClick(Sender: TObject);
     procedure btnOKClick(Sender: TObject);
     procedure edtBayarEnter(Sender: TObject);
     procedure MemMasterCalcFields(DataSet: TDataSet);
-    procedure edtBankKeyPress(Sender: TObject; var Key: Char);
-    procedure edtBayarKeyUp(Sender: TObject; var Key: Word;
-      Shift: TShiftState);
-    procedure edtBayarKeyPress(Sender: TObject; var Key: Char);
-    procedure edtPembayaranPropertiesCloseUp(Sender: TObject);
-    procedure edtPembayaranKeyPress(Sender: TObject; var Key: Char);
     procedure cxTextEdit1KeyPress(Sender: TObject; var Key: Char);
+    procedure edtBayarTunaiEnter(Sender: TObject);
+    procedure edtBayarTunaiKeyPress(Sender: TObject; var Key: Char);
+    procedure edtBayarTunaiKeyUp(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure edtBayarTransferKeyPress(Sender: TObject; var Key: Char);
+    procedure edtBayarTransferEnter(Sender: TObject);
+    procedure edtBayarDebitEnter(Sender: TObject);
+    procedure edtBayarDebitKeyPress(Sender: TObject; var Key: Char);
+    procedure edtBayarQRISKeyPress(Sender: TObject; var Key: Char);
+    procedure edtBayarQRISEnter(Sender: TObject);
+    procedure edtBayarTransferKeyUp(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure edtBayarDebitKeyUp(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure edtBayarQRISKeyUp(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     { Private declarations }
+    vBayarTunai, vBayarTransfer, vBayarDebit, vBayarQRIS : Currency;
     function FormatBayar(sBayar:String):Real;
 
   public
@@ -136,6 +156,7 @@ type
     vIdNota : Int64;
     vTotal : Double;
     vCopies : Integer;
+    vSKembali2 : Double;
   end;
 
 var
@@ -170,29 +191,37 @@ begin
       MemMaster.Close;
       MemMaster.Open;
       MemMaster.Append;
-      MemMasterdue_type.AsString:= edtPembayaran.Text;
+      //MemMasterdue_type.AsString:= edtPembayaran.Text;
       MemMastercara_bayar.AsString:= 'TUNAI';
       MemMastergrand_total.AsFloat:= vTotal;
       MemMasterdibayar.AsFloat:= 0;
+      MemMasterBayarTunai.AsFloat:= 0;
+      MemMasterBayarTransfer.AsFloat:= 0;
+      MemMasterBayarDebit.AsFloat:= 0;
+      MemMasterBayarQRIS.AsFloat:= 0;
       MemMasterkembali.AsFloat:= Masterkembali.AsFloat;
-      MemMasterbank.AsString:= edtBank.Text;
-      MemMasterno_kartu.AsString:= edtNoKartu.Text;
+      //MemMasterbank.AsString:= edtBank.Text;
+      //MemMasterno_kartu.AsString:= edtNoKartu.Text;
       MemMaster.Post;
 
 
       lblCap.Caption:= 'Pembayaran Nota';
       lblNoNota.Caption:= 'No : ' + Masterno_nota.AsString;
-      //SlblTipe.Caption:= Mastertipe.AsString;
+      lblTipe.Caption:= 'PENJUALAN';
 
 //      edtPembayaran.Properties.ReadOnly:= TRUE;
 //      edtPembayaran.Properties.Buttons[0].Visible:= FALSE;
+      vBayarTunai:= 0;
+      vBayarTransfer:= 0;
+      vBayarDebit:= 0;
+      vBayarQRIS:= 0;
+
       cxTextEdit1.Text:= '1';
-      edtPembayaran.SetFocus;
+      edtBayarTunai.SetFocus;
     except
       on E: Exception do
         DM.MyMsg(mmError,'Error has been encountered !',E.Message);
     end;
-
 
 end;
 
@@ -206,12 +235,15 @@ end;
 procedure TBayarNotaPenjualanFrm.btnOKClick(Sender: TObject);
 var
 s, vKembali, vSKembali, vSKembali1 : String;
-vSKembali2 : Double;
 begin
   if (MemMaster.State=dsBrowse)  then
       MemMaster.Edit;
 
-    MemMasterdibayar.AsFloat:= FormatBayar(edtBayar.Text);
+    MemMasterBayarTunai.AsFloat:= vBayarTunai;
+    MemMasterBayarTransfer.AsFloat:= vBayarTransfer;
+    MemMasterBayarDebit.AsFloat:= vBayarDebit;
+    MemMasterBayarQRIS.AsFloat:= vBayarQRIS;
+    MemMasterdibayar.AsFloat:= vBayarTunai+vBayarTransfer+vBayarDebit+vBayarQRIS;
 
     vKembali:= StringReplace(edtKembali.Caption,'(','',[rfReplaceAll,rfIgnoreCase]);
     vSKembali:= StringReplace(vKembali,',','',[rfReplaceAll,rfIgnoreCase]);
@@ -223,16 +255,18 @@ begin
 
     //MemMasterkembali.AsFloat:= FormatBayar(edtKembali.Caption);
 
-    if MemMasterdibayar.AsFloat<=0 then begin
-       DM.MyMsg(mmInformation,'Dibayar Harus Diisi','');
-       edtBayar.SetFocus;
-       Exit;
+    if (MemMasterBayarTunai.AsFloat<=0) and (MemMasterBayarTransfer.AsFloat<=0)
+        and (MemMasterBayarDebit.AsFloat<=0) and (MemMasterBayarQRIS.AsFloat<=0) then begin
+        DM.MyMsg(mmInformation,'Nilai Pembayaran Harus Diisi','');
+        edtBayarTunai.SetFocus;
+        Exit;
     end;
 
-     if MemMasterdibayar.AsFloat<MemMastergrand_total.AsFloat then begin
-       DM.MyMsg(mmInformation,'Pembayaran Lebih Kecil dari Total tagihan','Jumlah Pembayaran Tidak Boleh Lebih Kecil Dari Total Tagihan');
-       edtBayar.SetFocus;
-       Exit;
+     if (MemMasterBayarTunai.AsFloat+MemMasterBayarTransfer.AsFloat+
+         MemMasterBayarDebit.AsFloat+MemMasterBayarQRIS.AsFloat)<MemMastergrand_total.AsFloat then begin
+        DM.MyMsg(mmInformation,'Pembayaran Lebih Kecil dari Total tagihan','Jumlah Pembayaran Tidak Boleh Lebih Kecil Dari Total Tagihan');
+        edtBayarTunai.SetFocus;
+        Exit;
     end;
 
    if (MemMaster.State<>dsBrowse)  then
@@ -241,7 +275,14 @@ begin
 
     try
         DM.PrepareQuery(qExec);
-        s:= 'update transaksi.nota set dibayar='+FloatToStr(MemMasterdibayar.AsFloat)+', kembali='+FloatToStr(MemMasterdibayar.AsFloat-vTotal)+' where id_nota='+IntToStr(vIdNota);
+        s:= 'update transaksi.nota set bayar_tunai='+FloatToStr(MemMasterBayarTunai.AsFloat-vSKembali2)+', '+
+                                        'bayar_transfer='+FloatToStr(MemMasterBayarTransfer.AsFloat)+', '+
+                                        'bayar_debit='+FloatToStr(MemMasterBayarDebit.AsFloat)+', '+
+                                        'bayar_qris='+FloatToStr(MemMasterBayarQRIS.AsFloat)+', '+
+                                        'dibayar='+FloatToStr((MemMasterBayarTunai.AsFloat+MemMasterBayarTransfer.AsFloat
+                                                  +MemMasterBayarDebit.AsFloat+MemMasterBayarQRIS.AsFloat))+', '+
+                                        'kembali='+FloatToStr(vSKembali2)+
+            ' where id_nota='+IntToStr(vIdNota);
         DM.ExecQuery(qExec, s);
     except
     end;
@@ -253,8 +294,8 @@ begin
 //    except
 //    end;
 
-    if MemMastercara_bayar.IsNull or (Trim(MemMastercara_bayar.AsString)='') then
-       raise Exception.Create('CARA BAYAR harus diisi !');
+//    if MemMastercara_bayar.IsNull or (Trim(MemMastercara_bayar.AsString)='') then
+//       raise Exception.Create('CARA BAYAR harus diisi !');
 
     vCopies:= StrToInt(cxTextEdit1.Text);
 
@@ -270,75 +311,9 @@ end;
 
 procedure TBayarNotaPenjualanFrm.MemMasterCalcFields(DataSet: TDataSet);
 begin
-     MemMasterkembali.AsFloat:= MemMastergrand_total.AsFloat-MemMasterdibayar.AsFloat;
-end;
-
-procedure TBayarNotaPenjualanFrm.edtBankKeyPress(Sender: TObject;
-  var Key: Char);
-begin
-    if Key=#13 then
-      SelectNext(ActiveControl, True, True);
-    if Key=#27 then
-      SelectNext(ActiveControl, False, True);
-
-end;
-
-procedure TBayarNotaPenjualanFrm.edtBayarKeyUp(Sender: TObject;
-  var Key: Word; Shift: TShiftState);
-var
-  sRupiah: string;
-  iRupiah: Currency;
-  fKembali: real;
-begin
-  //ribuan --> currency ( menyesuaikan setting windows )
-  sRupiah := edtBayar.Text;
-  sRupiah := StringReplace(sRupiah,',','',[rfReplaceAll,rfIgnoreCase]); // hilangkan char koma , pemisah //ribuan selain IDR
-  sRupiah := StringReplace(sRupiah,'.','',[rfReplaceAll,rfIgnoreCase]);
-  iRupiah := StrToCurrDef(sRupiah,0); // convert srupiah ke currency
-
-  //currency --> format ribuan
-  edtBayar.Text := FormatCurr('#,###',iRupiah);
-  edtBayar.SelStart := length(edtBayar.text);
-
-  edtKembali.Caption:= FormatCurr('#,###;(#,###)',MemMastergrand_total.AsFloat-iRupiah);
-
-end;
-
-procedure TBayarNotaPenjualanFrm.edtBayarKeyPress(Sender: TObject;
-  var Key: Char);
-begin
-
- //selain angka (0..9)& backspace( #8 ), input dimatikan
-  if not(key in['0'..'9',#8,#13,#27]) then
-    key:=#0;
-
-  if Key=#13 then cxTextEdit1.SetFocus;
-
-//      SelectNext(ActiveControl, True, True);
-  if Key=#27 then
-    SelectNext(ActiveControl, False, True);
-end;
-
-procedure TBayarNotaPenjualanFrm.edtPembayaranPropertiesCloseUp(
-  Sender: TObject);
-begin
-   if edtPembayaran.ItemIndex>1 then begin
-      edtBank.Enabled:= True;
-      edtNoKartu.Enabled:= True;
-   end
-   else begin
-      edtBank.Enabled:= False;
-      edtNoKartu.Enabled:= False;
-   end;
-
-end;
-
-procedure TBayarNotaPenjualanFrm.edtPembayaranKeyPress(Sender: TObject;
-  var Key: Char);
-begin
-  if Key=#13 then
-  edtBayar.SetFocus;
-
+     MemMasterkembali.AsFloat:= MemMastergrand_total.AsFloat-(MemMasterBayarTunai.AsFloat
+                                                              +MemMasterBayarTransfer.AsFloat+MemMasterBayarDebit.AsFloat
+                                                              +MemMasterBayarQRIS.AsFloat);
 end;
 
 procedure TBayarNotaPenjualanFrm.cxTextEdit1KeyPress(Sender: TObject;
@@ -353,6 +328,174 @@ begin
 //      SelectNext(ActiveControl, True, True);
   if Key=#27 then
     SelectNext(ActiveControl, False, True);
+end;
+
+procedure TBayarNotaPenjualanFrm.edtBayarTunaiEnter(Sender: TObject);
+begin
+    if (MemMaster.State=dsInsert) or (MemMaster.State=dsEdit)  then
+      MemMaster.Edit;
+end;
+
+procedure TBayarNotaPenjualanFrm.edtBayarTunaiKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+ //selain angka (0..9)& backspace( #8 ), input dimatikan
+  if not(key in['0'..'9',#8,#13,#27]) then
+    key:=#0;
+
+  if Key=#13 then edtBayarTransfer.SetFocus;
+
+//      SelectNext(ActiveControl, True, True);
+  if Key=#27 then
+    SelectNext(ActiveControl, False, True);
+end;
+
+procedure TBayarNotaPenjualanFrm.edtBayarTunaiKeyUp(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+var
+  sRupiah: string;
+  iRupiah: Currency;
+  fKembali: real;
+begin
+  //ribuan --> currency ( menyesuaikan setting windows )
+  sRupiah := edtBayarTunai.Text;
+  sRupiah := StringReplace(sRupiah,',','',[rfReplaceAll,rfIgnoreCase]); // hilangkan char koma , pemisah //ribuan selain IDR
+  sRupiah := StringReplace(sRupiah,'.','',[rfReplaceAll,rfIgnoreCase]);
+  iRupiah := StrToCurrDef(sRupiah,0); // convert srupiah ke currency
+
+  //currency --> format ribuan
+  edtBayarTunai.Text := FormatCurr('#,###',iRupiah);
+  edtBayarTunai.SelStart := length(edtBayarTunai.text);
+  vBayarTunai:= iRupiah;
+
+  edtKembali.Caption:= FormatCurr('#,###;(#,###)',MemMastergrand_total.AsFloat-(vBayarTunai+vBayarTransfer+vBayarDebit+vBayarQRIS));
+
+end;
+
+procedure TBayarNotaPenjualanFrm.edtBayarTransferKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+ //selain angka (0..9)& backspace( #8 ), input dimatikan
+  if not(key in['0'..'9',#8,#13,#27]) then
+    key:=#0;
+
+  if Key=#13 then edtBayarDebit.SetFocus;
+
+//      SelectNext(ActiveControl, True, True);
+  if Key=#27 then
+    SelectNext(ActiveControl, False, True);
+end;
+
+procedure TBayarNotaPenjualanFrm.edtBayarTransferEnter(Sender: TObject);
+begin
+    if (MemMaster.State=dsInsert) or (MemMaster.State=dsEdit)  then
+      MemMaster.Edit;
+end;
+
+procedure TBayarNotaPenjualanFrm.edtBayarDebitEnter(Sender: TObject);
+begin
+    if (MemMaster.State=dsInsert) or (MemMaster.State=dsEdit)  then
+      MemMaster.Edit;
+end;
+
+procedure TBayarNotaPenjualanFrm.edtBayarDebitKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+ //selain angka (0..9)& backspace( #8 ), input dimatikan
+  if not(key in['0'..'9',#8,#13,#27]) then
+    key:=#0;
+
+  if Key=#13 then edtBayarQRIS.SetFocus;
+
+//      SelectNext(ActiveControl, True, True);
+  if Key=#27 then
+    SelectNext(ActiveControl, False, True);
+end;
+
+procedure TBayarNotaPenjualanFrm.edtBayarQRISKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+ //selain angka (0..9)& backspace( #8 ), input dimatikan
+  if not(key in['0'..'9',#8,#13,#27]) then
+    key:=#0;
+
+  if Key=#13 then cxTextEdit1.SetFocus;
+
+//      SelectNext(ActiveControl, True, True);
+  if Key=#27 then
+    SelectNext(ActiveControl, False, True);
+end;
+
+procedure TBayarNotaPenjualanFrm.edtBayarQRISEnter(Sender: TObject);
+begin
+    if (MemMaster.State=dsInsert) or (MemMaster.State=dsEdit)  then
+      MemMaster.Edit;
+end;
+
+procedure TBayarNotaPenjualanFrm.edtBayarTransferKeyUp(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+var
+  sRupiah: string;
+  iRupiah: Currency;
+  fKembali: real;
+begin
+  //ribuan --> currency ( menyesuaikan setting windows )
+  sRupiah := edtBayarTransfer.Text;
+  sRupiah := StringReplace(sRupiah,',','',[rfReplaceAll,rfIgnoreCase]); // hilangkan char koma , pemisah //ribuan selain IDR
+  sRupiah := StringReplace(sRupiah,'.','',[rfReplaceAll,rfIgnoreCase]);
+  iRupiah := StrToCurrDef(sRupiah,0); // convert srupiah ke currency
+
+  //currency --> format ribuan
+  edtBayarTransfer.Text := FormatCurr('#,###',iRupiah);
+  edtBayarTransfer.SelStart := length(edtBayarTransfer.text);
+  vBayarTransfer:= iRupiah;
+
+  edtKembali.Caption:= FormatCurr('#,###;(#,###)',MemMastergrand_total.AsFloat-(vBayarTunai+vBayarTransfer+vBayarDebit+vBayarQRIS));
+
+end;
+
+procedure TBayarNotaPenjualanFrm.edtBayarDebitKeyUp(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+var
+  sRupiah: string;
+  iRupiah: Currency;
+  fKembali: real;
+begin
+  //ribuan --> currency ( menyesuaikan setting windows )
+  sRupiah := edtBayarDebit.Text;
+  sRupiah := StringReplace(sRupiah,',','',[rfReplaceAll,rfIgnoreCase]); // hilangkan char koma , pemisah //ribuan selain IDR
+  sRupiah := StringReplace(sRupiah,'.','',[rfReplaceAll,rfIgnoreCase]);
+  iRupiah := StrToCurrDef(sRupiah,0); // convert srupiah ke currency
+
+  //currency --> format ribuan
+  edtBayarDebit.Text := FormatCurr('#,###',iRupiah);
+  edtBayarDebit.SelStart := length(edtBayarDebit.text);
+  vBayarDebit:= iRupiah;
+
+  edtKembali.Caption:= FormatCurr('#,###;(#,###)',MemMastergrand_total.AsFloat-(vBayarTunai+vBayarTransfer+vBayarDebit+vBayarQRIS));
+
+end;
+
+procedure TBayarNotaPenjualanFrm.edtBayarQRISKeyUp(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+var
+  sRupiah: string;
+  iRupiah: Currency;
+  fKembali: real;
+begin
+  //ribuan --> currency ( menyesuaikan setting windows )
+  sRupiah := edtBayarQRIS.Text;
+  sRupiah := StringReplace(sRupiah,',','',[rfReplaceAll,rfIgnoreCase]); // hilangkan char koma , pemisah //ribuan selain IDR
+  sRupiah := StringReplace(sRupiah,'.','',[rfReplaceAll,rfIgnoreCase]);
+  iRupiah := StrToCurrDef(sRupiah,0); // convert srupiah ke currency
+
+  //currency --> format ribuan
+  edtBayarQRIS.Text := FormatCurr('#,###',iRupiah);
+  edtBayarQRIS.SelStart := length(edtBayarQRIS.text);
+  vBayarQRIS:= iRupiah;
+
+  edtKembali.Caption:= FormatCurr('#,###;(#,###)',MemMastergrand_total.AsFloat-(vBayarTunai+vBayarTransfer+vBayarDebit+vBayarQRIS));
+
 end;
 
 end.

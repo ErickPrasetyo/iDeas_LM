@@ -1712,7 +1712,7 @@ object NotaHutangFrm: TNotaHutangFrm
               end
               object grddbtvItemColumn2: TcxGridDBColumn
                 Caption = 'Harga'
-                DataBinding.FieldName = 'harga'
+                DataBinding.FieldName = 'hrg_beli'
                 Width = 120
               end
               object grddbtvItemColumn3: TcxGridDBColumn
@@ -8496,6 +8496,10 @@ object NotaHutangFrm: TNotaHutangFrm
     object mITEMqty_order: TIntegerField
       FieldName = 'qty_order'
       ReadOnly = True
+    end
+    object mITEMhrg_beli: TFloatField
+      FieldName = 'hrg_beli'
+      Required = True
     end
   end
   object dsmITEM: TDataSource
